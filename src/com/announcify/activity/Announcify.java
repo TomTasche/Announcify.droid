@@ -11,33 +11,36 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.CheckedTextView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.announcify.R;
 import com.announcify.activity.widget.PluginAdapter;
+import com.announcify.receiver.AnnouncifyReceiver;
 import com.announcify.sql.model.PluginModel;
 
 public class Announcify extends ListActivity {
-	public static final String PERMISSION_IM_A_PLUGIN = "com.announcify.PERMISSION_IM_A_PLUGIN";
-
-	public static final String ACTION_PLUGIN_CONTACT = "com.announcify.ACTION_PLUGIN_CONTACT";
-	public static final String ACTION_PLUGIN_RESPOND = "com.announcify.ACTION_PLUGIN_RESPOND";
-
-	public static final String EXTRA_PLUGIN_NAME = "com.announcify.EXTRA_PLUGIN_NAME";
-	public static final String EXTRA_PLUGIN_ACTION = "com.announcify.EXTRA_PLUGIN_INTENT";
-
-	private CheckedTextView header;
+	private CheckedTextView headerName;
 	private PluginAdapter adapter;
 	private PluginModel model;
-	private PluginReceiver pluginReceiver;
-
-	private boolean registered;
+	private PluginExplorer pluginExplorer;
+	private ProgressBar progressBar;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		final Window window = getWindow();
+		window.requestFeature(Window.FEATURE_CUSTOM_TITLE);
+
 		setContentView(R.layout.list_layout);
+
+		window.setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title_progress);
+		progressBar = (ProgressBar) findViewById(R.id.title_progress_bar);
+		progressBar.setVisibility(View.VISIBLE);
 
 		findViewById(R.id.button_more).setOnClickListener(new OnClickListener() {
 
@@ -46,21 +49,33 @@ public class Announcify extends ListActivity {
 			}
 		});
 
-		pluginReceiver = new PluginReceiver();
-		registerReceiver(pluginReceiver, new IntentFilter(ACTION_PLUGIN_RESPOND));
-		registered = true;
-		sendBroadcast(new Intent(ACTION_PLUGIN_CONTACT));
+		pluginExplorer = new PluginExplorer();
+		registerReceiver(pluginExplorer, new IntentFilter(AnnouncifyReceiver.ACTION_PLUGIN_RESPOND));
+		sendBroadcast(new Intent(AnnouncifyReceiver.ACTION_PLUGIN_CONTACT), AnnouncifyReceiver.PERMISSION_IM_A_PLUGIN);
 
 		model = new PluginModel(this);
 
-		header = (CheckedTextView) getLayoutInflater().inflate(android.R.layout.simple_list_item_checked, null);
-		header.setText("Announcify");
-		header.setChecked(model.getActive("Announcify"));
-
-		getListView().addHeaderView(header);
+		addAnnouncifyHeader();
 
 		adapter = new PluginAdapter(this, model);
 		setListAdapter(adapter);
+	}
+
+	private void addAnnouncifyHeader() {
+		headerName = (CheckedTextView) getLayoutInflater().inflate(android.R.layout.simple_list_item_checked, null);
+		headerName.setText("Announcify");
+		headerName.setChecked(model.getActive("Announcify"));
+		getListView().addHeaderView(headerName);
+
+		final TextView headerSettings = (TextView) getLayoutInflater().inflate(android.R.layout.simple_list_item_1, null);
+		headerSettings.setText("Announcify Settings");
+		headerSettings.setOnClickListener(new OnClickListener() {
+
+			public void onClick(final View v) {
+				startActivity(new Intent(Announcify.this, SettingsActivity.class));
+			}
+		});
+		getListView().addHeaderView(headerSettings);
 	}
 
 	@Override
@@ -68,16 +83,17 @@ public class Announcify extends ListActivity {
 		if (position == 0) {
 			if (model.getActive("Announcify")) {
 				model.togglePlugin(1);
-				header.setChecked(false);
+				headerName.setChecked(false);
 				setListAdapter(null);
 			} else {
 				model.togglePlugin(1);
-				header.setChecked(true);
+				headerName.setChecked(true);
 				setListAdapter(adapter);
 			}
 		}
 
-		switch (adapter.getItemViewType(--position)) {
+		position -= 2;
+		switch (adapter.getItemViewType(position)) {
 			case PluginAdapter.TYPE_INTENT:
 				startActivity(adapter.getIntent(position));
 				break;
@@ -102,23 +118,58 @@ public class Announcify extends ListActivity {
 
 	@Override
 	protected void onPause() {
-		super.onPause();
+		pluginExplorer.unregister();
 
-		if (pluginReceiver != null && registered) {
-			unregisterReceiver(pluginReceiver);
-			registered = false;
-		}
+		super.onPause();
 	}
 
-	private class PluginReceiver extends BroadcastReceiver {
+	@Override
+	protected void onDestroy() {
+		model.close();
+
+		super.onDestroy();
+	}
+
+	private class PluginExplorer extends BroadcastReceiver {
+		private final Thread thread;
+
+		public PluginExplorer() {
+			thread = new Thread() {
+				@Override
+				public void run() {
+					try {
+						sleep(5000);
+					} catch (final InterruptedException e) {} finally {
+						runOnUiThread(new Runnable() {
+
+							public void run() {
+								progressBar.setVisibility(View.INVISIBLE);
+
+								unregisterReceiver(PluginExplorer.this);
+							}
+						});
+					}
+				}
+			};
+			thread.start();
+		}
+
 		@Override
 		public void onReceive(final Context context, final Intent intent) {
-			if (intent != null && intent.getExtras() != null && intent.getStringExtra(EXTRA_PLUGIN_NAME) != null && !"".equals(intent.getStringExtra(EXTRA_PLUGIN_NAME))) {
-				final Intent receivedIntent = new Intent(intent.getStringExtra(EXTRA_PLUGIN_ACTION));
+			Log.e("smn", "receive: " + intent.getExtras().size());
+
+			if (intent != null && intent.getExtras() != null && intent.getStringExtra(AnnouncifyReceiver.EXTRA_PLUGIN_NAME) != null && !"".equals(intent.getStringExtra(AnnouncifyReceiver.EXTRA_PLUGIN_NAME))) {
+				final Intent receivedIntent = new Intent(intent.getStringExtra(AnnouncifyReceiver.EXTRA_PLUGIN_ACTION));
 				// receivedIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-				adapter.add(intent.getStringExtra(EXTRA_PLUGIN_NAME), receivedIntent);
+				adapter.add(intent.getStringExtra(AnnouncifyReceiver.EXTRA_PLUGIN_NAME), receivedIntent);
 			} else {
 				Log.d(Announcify.class.getSimpleName(), "strange intent, sorry!");
+			}
+		}
+
+		public void unregister() {
+			if (thread != null && thread.isAlive()) {
+				thread.interrupt();
 			}
 		}
 	}

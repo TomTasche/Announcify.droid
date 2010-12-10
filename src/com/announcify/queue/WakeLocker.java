@@ -15,7 +15,7 @@ public class WakeLocker {
 	public void lock() {
 		// if service dies, wakelock will release automatically after X
 		// seconds...
-		lock.acquire(1000000);
+		lock.acquire();
 	}
 
 	public void unlock() {

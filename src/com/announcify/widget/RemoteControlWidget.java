@@ -9,7 +9,7 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 
 import com.announcify.R;
-import com.announcify.activity.RemoteControlDialog;
+import com.announcify.activity.control.RemoteControlDialog;
 
 public class RemoteControlWidget extends AppWidgetProvider {
 	@Override

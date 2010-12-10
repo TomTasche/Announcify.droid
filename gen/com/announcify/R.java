@@ -12,27 +12,51 @@ public final class R {
     }
     public static final class drawable {
         public static final int gray_bar=0x7f020000;
-        public static final int icon=0x7f020001;
+        public static final int launcher_icon=0x7f020001;
+        public static final int notification_icon=0x7f020002;
     }
     public static final class id {
-        public static final int button_more=0x7f060000;
-        public static final int menu_about=0x7f060006;
-        public static final int menu_donate=0x7f060005;
-        public static final int menu_help=0x7f060002;
-        public static final int menu_rate=0x7f060004;
-        public static final int menu_share=0x7f060003;
-        public static final int widget_control_button=0x7f060001;
+        public static final int button_more=0x7f070007;
+        public static final int menu_about=0x7f070012;
+        public static final int menu_add=0x7f07000a;
+        public static final int menu_add_all=0x7f07000c;
+        public static final int menu_donate=0x7f070011;
+        public static final int menu_help=0x7f07000e;
+        public static final int menu_rate=0x7f070010;
+        public static final int menu_remove=0x7f07000b;
+        public static final int menu_remove_all=0x7f07000d;
+        public static final int menu_share=0x7f07000f;
+        public static final int replaceEdit=0x7f070000;
+        public static final int speakButton=0x7f070003;
+        public static final int textLeft=0x7f070004;
+        public static final int textMiddle=0x7f070005;
+        public static final int textRight=0x7f070006;
+        public static final int title_progress_bar=0x7f070008;
+        public static final int widget_control_button=0x7f070009;
+        public static final int withEdit=0x7f070002;
+        public static final int withLayout=0x7f070001;
     }
     public static final class layout {
-        public static final int list_header=0x7f030000;
-        public static final int list_layout=0x7f030001;
-        public static final int widget_control=0x7f030002;
+        public static final int choose_layout=0x7f030000;
+        public static final int choose_row=0x7f030001;
+        public static final int list_header=0x7f030002;
+        public static final int list_layout=0x7f030003;
+        public static final int title_progress=0x7f030004;
+        public static final int widget_control=0x7f030005;
     }
     public static final class menu {
-        public static final int menu_main=0x7f050000;
+        public static final int menu_choose=0x7f060000;
+        public static final int menu_main=0x7f060001;
     }
     public static final class string {
-        public static final int app_name=0x7f040001;
-        public static final int hello=0x7f040000;
+        public static final int app_name=0x7f050001;
+        public static final int hello=0x7f050000;
+        public static final int menu_choose_add=0x7f050002;
+        public static final int menu_choose_add_all=0x7f050004;
+        public static final int menu_choose_remove=0x7f050003;
+        public static final int menu_choose_remove_all=0x7f050005;
+    }
+    public static final class xml {
+        public static final int preferences_settings=0x7f040000;
     }
 }

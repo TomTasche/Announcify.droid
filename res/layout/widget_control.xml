@@ -8,7 +8,7 @@
 		android:id="@+id/widget_control_button"
 		android:layout_centerVertical="true"
 		android:layout_centerHorizontal="true"
-		android:src="@drawable/icon"
+		android:src="@drawable/launcher_icon"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content" />
 </RelativeLayout>

@@ -1,162 +1,123 @@
 package com.announcify.service;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.HandlerThread;
 import android.os.IBinder;
-import android.speech.tts.TextToSpeech;
-import android.telephony.TelephonyManager;
+import android.os.Message;
+import android.speech.tts.TextToSpeech.OnInitListener;
+import android.util.Log;
 
-import com.announcify.activity.RemoteControlDialog;
-import com.announcify.queue.Queue;
+import com.announcify.R;
+import com.announcify.activity.control.RemoteControlDialog;
+import com.announcify.error.ExceptionHandler;
+import com.announcify.handler.AnnouncificationHandler;
+import com.announcify.receiver.ControlReceiver;
 import com.announcify.tts.Speaker;
 
 public class ManagerService extends Service {
-	public static final String EXTRA_QUEUE_NAME = "com.announcify.EXTRA_QUEUE_NAME";
-	public static final String EXTRA_QUEUE_START_ACTION = "com.announcify.EXTRA_QUEUE_START_INTENT";
-	public static final String EXTRA_QUEUE_STOP_ACTION = "com.announcify.EXTRA_QUEUE_STOP_INTENT";
-	public static final String EXTRA_QUEUE = "com.announcify.EXTRA_QUEUE";
-
-	private Queue queue;
-	private Speaker speaker;
-	private Boolean paid;
-
-	private ScreenReceiver screenReceiver;
-	private CallReceiver callReceiver;
+	private NotificationManager notificationManager;
+	private ConditionManager conditionManager;
 	private ControlReceiver controlReceiver;
+	private AnnouncificationHandler handler;
+	// private Volume manager;
+	private HandlerThread thread;
+	private Speaker speaker;
 
 	@Override
 	public void onCreate() {
-		screenReceiver = new ScreenReceiver();
-		final IntentFilter screenFilter = new IntentFilter();
-		screenFilter.addAction(Intent.ACTION_SCREEN_ON);
-		screenFilter.addAction(Intent.ACTION_SCREEN_OFF);
-		registerReceiver(screenReceiver, screenFilter);
+		Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
 
-		callReceiver = new CallReceiver();
-		// not sure if this works...
-		registerReceiver(callReceiver, new IntentFilter(TelephonyManager.ACTION_PHONE_STATE_CHANGED));
-		// if not, use this
-		// TelephonyManager telephonyManager = (TelephonyManager)
-		// getSystemService(TELEPHONY_SERVICE);
-		// telephonyManager.listen(listener, TelephonyManager.)
+		// manager = new Volume(this);
 
-		if (isPaid()) {
-			controlReceiver = new ControlReceiver();
-			final IntentFilter controlFilter = new IntentFilter();
-			controlFilter.addAction(RemoteControlDialog.ACTION_CONTINUE);
-			controlFilter.addAction(RemoteControlDialog.ACTION_PAUSE);
-			controlFilter.addAction(RemoteControlDialog.ACTION_SKIP);
-			registerReceiver(controlReceiver, controlFilter);
-		}
+		conditionManager = new ConditionManager(this);
+		// if (conditionManager.isScreenOn()) {
+		// manager.lowerSpeechVolume();
+		// }
 
-		// TODO: run initialization in seperate thread to fill the queue
-		// parallely?
-		speaker = new Speaker(this, new TextToSpeech.OnInitListener() {
+		thread = new HandlerThread("Announcifications");
+		thread.start();
+
+		speaker = new Speaker(ManagerService.this, new OnInitListener() {
 
 			public void onInit(final int status) {
-				if (status == TextToSpeech.SUCCESS) {
-					queue.grant();
-					speaker.setOnUtteranceCompletedListener(queue);
-				} else {
-					// TODO: send log to server
-				}
+				handler.sendEmptyMessage(AnnouncificationHandler.WHAT_START);
 			}
 		});
 
-		queue = new Queue(this, speaker);
+		handler = new AnnouncificationHandler(ManagerService.this, thread.getLooper(), speaker);
+		handler.post(new Runnable() {
+
+			public void run() {
+				Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(ManagerService.this));
+			}
+		});
+
+		controlReceiver = new ControlReceiver(handler);
+		final IntentFilter controlFilter = new IntentFilter();
+		controlFilter.addAction(RemoteControlDialog.ACTION_CONTINUE);
+		controlFilter.addAction(RemoteControlDialog.ACTION_PAUSE);
+		controlFilter.addAction(RemoteControlDialog.ACTION_SKIP);
+		registerReceiver(controlReceiver, controlFilter);
+
+		final PendingIntent pendingIntent = PendingIntent.getActivity(this, 1993, new Intent(this, RemoteControlDialog.class), 0);
+		final Notification notification = new Notification(R.drawable.notification_icon, null, 0);
+		notification.setLatestEventInfo(this, "Important Announcification", "Press here to stop it.", pendingIntent);
+		notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		notificationManager.notify(17, notification);
 	}
 
 	@Override
 	public void onStart(final Intent intent, final int startId) {
-		if (intent != null && intent.getExtras() != null) {
-			// TODO: we have to use Parcelable here!
-			// TODO: make LittleQueue Parcelable
-			// LittleQueue little = new LittleQueue(this,
-			// intent.getStringExtra(EXTRA_QUEUE_NAME),
-			// intent.getStringExtra(EXTRA_QUEUE_START_ACTION),
-			// intent.getStringExtra(EXTRA_QUEUE_STOP_ACTION),
-			// Arrays.asList(intent.getStringArrayExtra(EXTRA_QUEUE)));
-			// queue.putLast(little);
+		if (intent == null || intent.getExtras() == null) {
+			return;
 		}
+		Log.e("Announcify", "receiving intent");
+
+		if (intent.getIntExtra(AnnouncifyService.EXTRA_PRIORITY, -1) > 0 && conditionManager.isScreenOn()) {
+			return;
+		}
+
+		final Message msg = Message.obtain();
+		msg.what = AnnouncificationHandler.WHAT_PUT_QUEUE;
+		msg.setData(intent.getExtras());
+		handler.sendMessage(msg);
 	}
 
 	@Override
 	public void onDestroy() {
-		if (screenReceiver != null) {
-			unregisterReceiver(screenReceiver);
+		Log.e("Announcify", "shutdown");
+
+		if (handler != null) {
+			final Message msg = Message.obtain();
+			msg.what = AnnouncificationHandler.WHAT_SHUTDOWN;
+			handler.sendMessage(msg);
 		}
-		if (callReceiver != null) {
-			unregisterReceiver(callReceiver);
-		}
+
 		if (controlReceiver != null) {
 			unregisterReceiver(controlReceiver);
 		}
-	}
 
-	public boolean isPaid() {
-		if (paid != null) {
-			return paid;
+		conditionManager.quit();
+		if (speaker != null) {
+			speaker.shutdown();
 		}
-		try {
-			// TODO: change package?
-			createPackageContext("com.announcify.paid", 0);
-
-			return true;
-		} catch (final Exception e) {
-			// bad boy... you didn't donate!
-			return false;
+		if (thread != null && thread.isAlive()) {
+			thread.stop();
 		}
+		if (notificationManager != null) {
+			notificationManager.cancel(17);
+		}
+		// manager.quit();
 	}
 
 	@Override
 	public IBinder onBind(final Intent arg0) {
 		return null;
-	}
-
-	private class ScreenReceiver extends BroadcastReceiver {
-		@Override
-		public void onReceive(final Context context, final Intent intent) {
-			if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
-				queue.deny();
-
-				// shut down if user didn't pay, because he's not able to
-				// continue queue.
-				if (isPaid()) {
-					stopSelf();
-				}
-			}
-		}
-	}
-
-	private class CallReceiver extends BroadcastReceiver {
-		@Override
-		public void onReceive(final Context context, final Intent intent) {
-			if (intent.getStringExtra(TelephonyManager.EXTRA_STATE).equals(TelephonyManager.EXTRA_STATE_OFFHOOK)) {
-				queue.deny();
-
-				// shut down if user didn't pay, because he's not able to
-				// continue queue.
-				if (isPaid()) {
-					stopSelf();
-				}
-			}
-		}
-	}
-
-	private class ControlReceiver extends BroadcastReceiver {
-		@Override
-		public void onReceive(final Context context, final Intent intent) {
-			if (RemoteControlDialog.ACTION_CONTINUE.equals(intent.getAction())) {
-				queue.grant();
-			} else if (RemoteControlDialog.ACTION_SKIP.equals(intent.getAction())) {
-				queue.deny();
-				queue.grant();
-			} else if (RemoteControlDialog.ACTION_PAUSE.equals(intent.getAction())) {
-				queue.deny();
-			}
-		}
 	}
 }

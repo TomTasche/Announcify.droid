@@ -48,14 +48,14 @@ public class Queue implements OnUtteranceCompletedListener {
 		}
 
 		if (!queue.isEmpty()) {
-			queue.getFirst().start();
+			context.sendBroadcast(new Intent(queue.getFirst().getStartBroadcast()));
 		}
 		next();
 	}
 
 	public void deny() {
 		if (!queue.isEmpty()) {
-			queue.getFirst().stop();
+			context.sendBroadcast(new Intent(queue.getFirst().getStopBroadcast()));
 		}
 
 		granted = false;
@@ -93,7 +93,7 @@ public class Queue implements OnUtteranceCompletedListener {
 
 		if (queue.getFirst().isEmpty()) {
 			handler.sendEmptyMessage(AnnouncificationHandler.WHAT_REVERT_LOCALE);
-			queue.getFirst().stop();
+			context.sendBroadcast(new Intent(queue.getFirst().getStopBroadcast()));
 			queue.removeFirst();
 
 			if (queue.isEmpty()) {
@@ -102,7 +102,7 @@ public class Queue implements OnUtteranceCompletedListener {
 			}
 
 			if (model.getActive(queue.getFirst().getPluginName())) {
-				queue.getFirst().start();
+				context.sendBroadcast(new Intent(queue.getFirst().getStartBroadcast()));
 				changeLanguage();
 			} else {
 				handler.sendEmptyMessage(AnnouncificationHandler.WHAT_REVERT_LOCALE);
@@ -140,7 +140,6 @@ public class Queue implements OnUtteranceCompletedListener {
 
 		final Message msg = Message.obtain();
 		msg.what = AnnouncificationHandler.WHAT_CHANGE_LOCALE;
-		msg.obj = queue.getFirst().getSpeech();
 		msg.setData(bundle);
 		handler.sendMessage(msg);
 	}

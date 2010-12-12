@@ -51,7 +51,8 @@ public class Announcify extends ListActivity {
 
 		pluginExplorer = new PluginExplorer();
 		registerReceiver(pluginExplorer, new IntentFilter(AnnouncifyReceiver.ACTION_PLUGIN_RESPOND));
-		sendBroadcast(new Intent(AnnouncifyReceiver.ACTION_PLUGIN_CONTACT), AnnouncifyReceiver.PERMISSION_IM_A_PLUGIN);
+		// sendBroadcast(new Intent(AnnouncifyReceiver.ACTION_PLUGIN_CONTACT), AnnouncifyReceiver.PERMISSION_IM_A_PLUGIN);
+		sendBroadcast(new Intent(AnnouncifyReceiver.ACTION_PLUGIN_CONTACT));
 
 		model = new PluginModel(this);
 

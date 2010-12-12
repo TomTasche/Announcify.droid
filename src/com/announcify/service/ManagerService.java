@@ -7,6 +7,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Bundle;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Message;
@@ -17,6 +18,7 @@ import com.announcify.R;
 import com.announcify.activity.control.RemoteControlDialog;
 import com.announcify.error.ExceptionHandler;
 import com.announcify.handler.AnnouncificationHandler;
+import com.announcify.queue.LittleQueue;
 import com.announcify.receiver.ControlReceiver;
 import com.announcify.tts.Speaker;
 
@@ -74,18 +76,16 @@ public class ManagerService extends Service {
 
 	@Override
 	public void onStart(final Intent intent, final int startId) {
-		if (intent == null || intent.getExtras() == null) {
+		if (intent == null || intent.getExtras() == null) return;
+		Bundle bundle = intent.getExtras();
+		if (bundle == null) return;
+		
+		if (bundle.getInt(AnnouncifyService.EXTRA_PRIORITY, -1) > 0 && conditionManager.isScreenOn()) {
 			return;
 		}
-		Log.e("Announcify", "receiving intent");
 
-		if (intent.getIntExtra(AnnouncifyService.EXTRA_PRIORITY, -1) > 0 && conditionManager.isScreenOn()) {
-			return;
-		}
-
-		final Message msg = Message.obtain();
-		msg.what = AnnouncificationHandler.WHAT_PUT_QUEUE;
-		msg.setData(intent.getExtras());
+		final Message msg = handler.obtainMessage(AnnouncificationHandler.WHAT_PUT_QUEUE);
+		msg.setData(bundle);
 		handler.sendMessage(msg);
 	}
 
@@ -94,8 +94,7 @@ public class ManagerService extends Service {
 		Log.e("Announcify", "shutdown");
 
 		if (handler != null) {
-			final Message msg = Message.obtain();
-			msg.what = AnnouncificationHandler.WHAT_SHUTDOWN;
+			final Message msg = handler.obtainMessage(AnnouncificationHandler.WHAT_SHUTDOWN);
 			handler.sendMessage(msg);
 		}
 

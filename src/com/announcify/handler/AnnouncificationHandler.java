@@ -45,9 +45,9 @@ public class AnnouncificationHandler extends Handler {
 	public void handleMessage(final Message msg) {
 		Log.e("smn", "what: " + msg.what);
 
+		// TODO: convert this to a switch
 		if (msg.what == WHAT_PUT_QUEUE) {
 			final LittleQueue little = msg.getData().getParcelable(AnnouncifyService.EXTRA_QUEUE);
-			little.setContext(context);
 
 			// TODO: prohibit in-call speech here!
 			switch (msg.getData().getInt(AnnouncifyService.EXTRA_PRIORITY, -1)) {
@@ -79,17 +79,15 @@ public class AnnouncificationHandler extends Handler {
 			if (!Money.isPaid(context)) {
 				context.stopService(new Intent(context, ManagerService.class));
 			} else {
-				queue.deny();
-				speaker.interrupt();
+				quit();
 			}
 		} else if (msg.what == WHAT_CONTINUE) {
 			queue.grant();
 		} else if (msg.what == WHAT_SHUTDOWN) {
-			queue.deny();
-			getLooper().quit();
+			quit();
 			// TODO: save queue
 		} else if (msg.what == WHAT_CHANGE_LOCALE) {
-			speaker.setLanguage((Speech) msg.obj, msg.getData().getString(Queue.EXTRA_TEXT_SNIPPET));
+			//TODO: speaker.setLanguage((Speech) msg.obj, msg.getData().getString(Queue.EXTRA_TEXT_SNIPPET));
 		} else if (msg.what == WHAT_REVERT_LOCALE) {
 			speaker.revertLanguage();
 		} else if (msg.what == WHAT_START) {

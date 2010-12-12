@@ -40,31 +40,31 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
 		try {
 			Log.e("Announcify", "Caught exception", exception);
 
-			final ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();
-			final PrintStream stream = new PrintStream(byteOutput);
-			exception.printStackTrace(stream);
-			stream.flush();
-			stream.close();
-			byteOutput.flush();
-			final String stackTrace = byteOutput.toString("UTF-8");
-			byteOutput.close();
-
-			formparams.add(new BasicNameValuePair(PACKAGE, context.getPackageName()));
-			formparams.add(new BasicNameValuePair(STACKTRACE, stackTrace));
-			formparams.add(new BasicNameValuePair(MODEL, Build.MODEL));
-			formparams.add(new BasicNameValuePair(VERSION_CODE, Integer.toString(context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode)));
-			formparams.add(new BasicNameValuePair(ANDROID_VERSION, Build.VERSION.SDK));
-			formparams.add(new BasicNameValuePair(INFORMATION, "I"));
-			formparams.add(new BasicNameValuePair(VERSION_NAME, context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName));
-
-			final UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formparams, "UTF-8");
-
-			final HttpPost request = new HttpPost("http://exception-analytics.appspot.com/analydroid/exception");
-			request.setEntity(entity);
-
-			final HttpClient client = new DefaultHttpClient();
-
-			System.out.println(client.execute(request, new BasicResponseHandler()));
+//			final ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();
+//			final PrintStream stream = new PrintStream(byteOutput);
+//			exception.printStackTrace(stream);
+//			stream.flush();
+//			stream.close();
+//			byteOutput.flush();
+//			final String stackTrace = byteOutput.toString("UTF-8");
+//			byteOutput.close();
+//
+//			formparams.add(new BasicNameValuePair(PACKAGE, context.getPackageName()));
+//			formparams.add(new BasicNameValuePair(STACKTRACE, stackTrace));
+//			formparams.add(new BasicNameValuePair(MODEL, Build.MODEL));
+//			formparams.add(new BasicNameValuePair(VERSION_CODE, Integer.toString(context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode)));
+//			formparams.add(new BasicNameValuePair(ANDROID_VERSION, Build.VERSION.SDK));
+//			formparams.add(new BasicNameValuePair(INFORMATION, "I"));
+//			formparams.add(new BasicNameValuePair(VERSION_NAME, context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName));
+//
+//			final UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formparams, "UTF-8");
+//
+//			final HttpPost request = new HttpPost("http://exception-analytics.appspot.com/analydroid/exception");
+//			request.setEntity(entity);
+//
+//			final HttpClient client = new DefaultHttpClient();
+//
+//			System.out.println(client.execute(request, new BasicResponseHandler()));
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}

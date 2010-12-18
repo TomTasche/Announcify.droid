@@ -1,0 +1,23 @@
+package com.announcify.plugin.call.util;
+
+import com.announcify.util.PluginSettings;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+
+public class CallnouncifySettings extends PluginSettings {
+	public CallnouncifySettings(Context context) {
+		super(context);
+	}
+
+	@Override
+	public int getReadingRepeat() {
+		return Integer.parseInt(preferences.getString(KEY_READING_REPEAT, "1"));
+	}
+
+	@Override
+	public String getEventType() {
+		// TODO: localize
+		return "Call";
+	}
+}

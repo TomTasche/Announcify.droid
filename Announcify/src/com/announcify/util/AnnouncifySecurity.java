@@ -53,6 +53,9 @@ public class AnnouncifySecurity {
 				// Don't update UI if Activity is finishing.
 				return;
 			}
+			
+			activity.dismissDialog(1);
+			activity.showDialog(2);
 			// Should allow user access.
 		}
 
@@ -67,6 +70,8 @@ public class AnnouncifySecurity {
 			// and then either shut down the app or limit the user to a
 			// restricted set of features.
 			// In this example, we show a dialog that takes the user to Market.
+			activity.dismissDialog(1);
+			
 			activity.showDialog(0);
 		}
 
@@ -78,6 +83,8 @@ public class AnnouncifySecurity {
 			// This is a polite way of saying the developer made a mistake
 			// while setting up or calling the license checker library.
 			// Please examine the error code and fix the error.
+			
+			activity.dismissDialog(1);
 		}
 	}
 

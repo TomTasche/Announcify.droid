@@ -19,7 +19,7 @@ public class RingtoneReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(final Context context, final Intent intent) {
 		if (ACTION_STOP_RINGTONE.equals(intent.getAction())) {
-			final String s = context.getSharedPreferences("com.announcify.plugin.mail.SETTINGS", Context.MODE_WORLD_READABLE).getString("preference_ringtone", "");
+			final String s = context.getSharedPreferences("com.announcify.plugin.message.SETTINGS", Context.MODE_WORLD_READABLE).getString("preference_ringtone", "");
 			if (s == null || "".equals(s)) {
 				return;
 			}
@@ -29,16 +29,16 @@ public class RingtoneReceiver extends BroadcastReceiver {
 
 			try {
 				player.setDataSource(context, Uri.parse(s));
-				player.prepare();
 				player.setAudioStreamType(new AnnouncifySettings(context).getStream());
 				player.setLooping(false);
-				player.start();
 				player.setOnCompletionListener(new OnCompletionListener() {
 
 					public void onCompletion(final MediaPlayer mp) {
 						mp.release();
 					}
 				});
+				player.prepare();
+				player.start();
 			} catch (final IllegalArgumentException e) {
 				e.printStackTrace();
 			} catch (final SecurityException e) {

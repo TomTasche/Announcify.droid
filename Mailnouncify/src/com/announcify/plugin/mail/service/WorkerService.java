@@ -7,7 +7,9 @@ import android.util.Log;
 
 import com.announcify.contact.Contact;
 import com.announcify.contact.Lookup;
+import com.announcify.contact.Prepare;
 import com.announcify.plugin.mail.receiver.RingtoneReceiver;
+import com.announcify.plugin.mail.util.MailnouncifySettings;
 import com.announcify.queue.LittleQueue;
 import com.announcify.service.AnnouncifyService;
 
@@ -32,17 +34,13 @@ public class WorkerService extends AnnouncifyService {
 			Lookup.getNickname(contact);
 		}
 
-		final String name = contact.getUserPreferredName();
+		MailnouncifySettings settings = new MailnouncifySettings(this);
 
-		Log.e("smn", name);
+		Prepare prepare = new Prepare(this, settings, contact, intent.getStringExtra(EXTRA_SUBJECT));
 		final LinkedList<Object> list = new LinkedList<Object>();
-		list.add(name);
+		prepare.getQueue(list);
 
 		final LittleQueue queue = new LittleQueue("Mailnouncify", list, "", RingtoneReceiver.ACTION_STOP_RINGTONE, this);
-
-		final Intent announceIntent = new Intent("com.announcify.ANNOUNCE");
-		announceIntent.putExtra(EXTRA_QUEUE, queue);
-		announceIntent.putExtra(EXTRA_PRIORITY, 0);
-		startService(announceIntent);
+		queue.sendToService(this, 2);
 	}
 }

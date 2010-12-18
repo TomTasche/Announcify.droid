@@ -13,15 +13,16 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
+import android.util.Log;
 
-import com.announcify.plugin.mail.util.Settings;
+import com.announcify.plugin.mail.util.MailnouncifySettings;
 
 public class MailService extends Service {
 	private LinkedList<MailObserver> observers;
 	private LinkedList<String> addresses;
 	private LinkedList<HandlerThread> threads;
 
-	private Settings settings;
+	private MailnouncifySettings settings;
 
 	@Override
 	public void onCreate() {
@@ -29,7 +30,7 @@ public class MailService extends Service {
 		addresses = new LinkedList<String>();
 		threads = new LinkedList<HandlerThread>();
 
-		settings = new Settings(this);
+		settings = new MailnouncifySettings(this);
 
 		final String temp = settings.getAddress();
 		if (temp.length() == 0) {
@@ -53,6 +54,7 @@ public class MailService extends Service {
 	}
 
 	synchronized private void spawnNewObserver(final String address) {
+		Log.e("smn", ":" + address + ":");
 		if ("".equals(address)) {
 			return;
 		}
@@ -124,6 +126,7 @@ public class MailService extends Service {
 			intent.putExtra(WorkerService.EXTRA_FROM, messages.getString(messages.getColumnIndex("fromAddress")));
 			intent.putExtra(WorkerService.EXTRA_SUBJECT, conversations.getString(conversations.getColumnIndex("subject")));
 			intent.putExtra(WorkerService.EXTRA_SNIPPET, conversations.getString(conversations.getColumnIndex("snippet")));
+			startService(intent);
 
 			messages.close();
 			conversations.close();

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.lang.StringBuffer"/>
+<fullyQualifiedTypeName name="java.lang.StringBuilder"/>
+<fullyQualifiedTypeName name="android.app.AlertDialog.Builder"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="java.lang.Override"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.message.util.MessnouncifySettings"/>
+<fullyQualifiedTypeName name="com.announcify.util.PluginSettings"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.mail.activity.Mailnouncify"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.mail.util.MailnouncifySettings"/>
+<fullyQualifiedTypeName name="java.lang.Thread"/>
+<fullyQualifiedTypeName name="com.announcify.activity.SettingsActivity"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+</qualifiedTypeNameHistroy>

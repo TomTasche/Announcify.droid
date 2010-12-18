@@ -18,7 +18,6 @@ import com.announcify.util.AnnouncifySettings;
 import com.announcify.util.HeadsetFinder;
 
 public class WorkerService extends AnnouncifyService {
-	private CallnouncifySettings settings;
 
 	public WorkerService() {
 		super("Announcify - Call");
@@ -34,10 +33,9 @@ public class WorkerService extends AnnouncifyService {
 			Lookup.getNickname(contact);
 		}
 
-		settings = new CallnouncifySettings(this);
+		CallnouncifySettings settings = new CallnouncifySettings(this);
 		
-		Prepare prepare = new Prepare(this, settings, contact);
-		Log.e("smn", prepare.getName());
+		Prepare prepare = new Prepare(this, settings, contact, "");
 		final LinkedList<Object> list = new LinkedList<Object>();
 		prepare.getQueue(list);
 

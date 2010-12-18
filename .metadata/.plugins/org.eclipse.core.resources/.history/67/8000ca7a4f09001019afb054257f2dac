@@ -1,0 +1,52 @@
+package com.announcify.plugin.message.util;
+
+import com.announcify.util.PluginSettings;
+
+public class MessnouncifySettings implements PluginSettings {
+
+	public String getSharedPreferencesName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getReadingBreak() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getReadingRepeat() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getReadingWait() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getUnknownMode() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getAnnouncementMode() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getDiscreetMode() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public String getCustomAnnouncement() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getEventType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

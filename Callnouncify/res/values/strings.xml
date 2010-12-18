@@ -40,9 +40,8 @@
 		name="preference_list_reading_announcement_names">
 		<item>\"Tom\"</item>
 		<item>\"Tom from Home\"</item>
-		<item>\"Message from Tom\"</item>
-		<item>\"Message from Tom: ...\"</item>
-		<item>\"You have a new mail\"</item>
+		<item>\"Call from Tom\"</item>
+		<item>\"You have a new call\"</item>
 		<item>\"You have a new Announcification!\"</item>
 		<item>Custom...</item>
 	</string-array>
@@ -51,7 +50,9 @@
 		name="preference_list_reading_unknown_names">
 		<item>Nothing.</item>
 		<item>Like Announcement</item>
-		<item>\"You have a new mail\"</item>
+		<item>\"Unknown\"</item>
+		<item>Address</item>
+		<item>\"You have a new call\"</item>
 		<item>\"You have a new Announcification!\"</item>
 		<item>Custom...</item>
 	</string-array>
@@ -61,9 +62,9 @@
 		<item>Like Announcement</item>
 		<item>\"Tom\"</item>
 		<item>\"Tom from Home\"</item>
-		<item>\"Message from Tom\"</item>
-		<item>\"Message from Tom: ...\"</item>
-		<item>\"You have a new mail\"</item>
+		<item>\"Call from Tom\"</item>
+		<item>\"Call from Tom: ...\"</item>
+		<item>\"You have a new call\"</item>
 		<item>\"You have a new Announcification!\"</item>
 		<item>Custom...</item>
 	</string-array>

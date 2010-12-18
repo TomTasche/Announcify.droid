@@ -49,7 +49,11 @@ public class ConditionManager {
 	}
 
 	public boolean isScreenOn() {
-		return screenReceiver.isScreenOn();
+		return screenReceiver != null ? screenReceiver.isScreenOn() : false;
+	}
+	
+	public void setOnCall(boolean onCall) {
+		callReceiver.setOnCall(onCall);
 	}
 
 	public void quit() {

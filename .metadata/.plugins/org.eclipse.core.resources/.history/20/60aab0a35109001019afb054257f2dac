@@ -1,0 +1,147 @@
+package com.announcify.contact;
+
+import java.util.List;
+
+import android.content.Context;
+import android.content.res.Resources;
+import android.util.Log;
+
+import com.announcify.util.HeadsetFinder;
+import com.announcify.util.PluginSettings;
+
+public class Prepare {
+	private PluginSettings settings;
+	private Context context;
+	private Contact contact;
+	private String name;
+	private String message;
+
+	public Prepare(Context context, PluginSettings settings, Contact contact, String message) {
+		this.settings = settings;
+		this.context = context;
+		this.contact = contact;
+		this.message = message;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void getQueue(List<Object> list) {
+		if (!prepareName()) return; 
+		prepareDiscreet();
+		
+		// TODO: wait before sending queue?
+		list.add(settings.getReadingWait());
+		for (int i = 0; i <= settings.getReadingRepeat(); i++) {
+			list.add(name);
+			list.add(new Integer(settings.getReadingBreak()));
+		}
+	}
+
+	private boolean prepareName() {
+		String temp = contact.getUserPreferredName();
+		if ("".equals(temp)) {
+			switch (settings.getUnknownMode()) {
+			case 0:
+				// user requested not to speak if unknown
+				name = "";
+				return false;
+
+			case 1:
+				name = getUnknownString();
+				break;
+
+			case 2:
+				name = getUnknownString();
+				return false;
+
+			case 3:
+				StringBuilder builder = new StringBuilder();
+				for (char c : contact.getAddress().toCharArray()) {
+					builder.append(c + ".");
+				}
+				name = builder.toString();
+				break;
+
+			case 4:
+				name = "You have a new " + settings.getEventType() + "!";
+				return false;
+
+			case 5:
+				name = "You have a new Announcification!";
+				return false;
+
+			case 6:
+				name = settings.getCustomAnnouncement();
+				return false;
+
+			default:
+				name = "";
+				return false;
+			}
+		} else {
+			name = temp;
+		}
+
+		return true;
+	}
+
+	private void prepareDiscreet() {
+		if (HeadsetFinder.isDiscreet(context)) {
+			prepareDiscreetReading();
+		} else {
+			prepareReading();
+		}
+	}
+
+	private void prepareReading() {
+		switch (settings.getAnnouncementMode()) {
+		case 0:
+			break;
+
+		case 1:
+			name += " from " + contact.getAddressType();
+			break;
+
+		case 2:
+			name = settings.getEventType() + " from " + name;
+			break;
+
+		case 3:
+			name = settings.getEventType() + " from " + name + ": " + message;
+			break;
+
+		case 4:
+			name = "You have a new " + settings.getEventType() + "!";
+			break;
+
+		case 5:
+			name = "You have a new Announcification!";
+			break;
+
+		case 6:
+			name = settings.getCustomAnnouncement();
+			break;
+
+		default:
+			name = "";
+			break;
+		}
+	}
+
+	private void prepareDiscreetReading() {
+		switch (settings.getDiscreetMode()) {
+		case 0:
+			prepareReading();
+
+		default:
+			name = "";
+		}
+	}
+
+	private String getUnknownString() {
+		return Resources.getSystem().getString(android.R.string.unknownName);
+		//        UNKNOWN = UNKNOWN.substring(1, UNKNOWN.length() - 1);
+	}
+}

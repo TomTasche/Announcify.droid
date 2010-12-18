@@ -1,13 +1,20 @@
 package com.announcify.activity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 
 import com.announcify.R;
 import com.announcify.activity.chooser.GroupChooser;
@@ -15,16 +22,24 @@ import com.announcify.util.AnnouncifySecurity;
 import com.announcify.util.AnnouncifySettings;
 
 public class SettingsActivity extends PreferenceActivity {
-	private AlertDialog dialog;
+	private AnnouncifySecurity security;
+	private Thread thread;
+
+	private boolean licensed;
+	private boolean started;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		if (getIntent().getBooleanExtra(AnnouncifySecurity.EXTRA_LICENSED, false)) {
-			finish();
-			return;
-		}
+		showDialog(1);
+
+		thread = new Thread() {
+			public void run() {
+				security = new AnnouncifySecurity(SettingsActivity.this);
+			}
+		};
+		thread.start();
 
 		getPreferenceManager().setSharedPreferencesName(AnnouncifySettings.PREFERENCES_NAME);
 		getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
@@ -51,47 +66,55 @@ public class SettingsActivity extends PreferenceActivity {
 		});
 	}
 
-	// Nags user until he finally donates. :P
-	// @Override
-	// public boolean dispatchKeyEvent(final KeyEvent event) {
-	// if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-	// if (dialog != null) dialog.dismiss();
-	// finish();
-	// return false;
-	// }
-	//
-	// return nagUser();
-	// }
-	//
-	// @Override
-	// public boolean dispatchTouchEvent(final MotionEvent ev) {
-	// return nagUser();
-	// }
-	//
-	// @Override
-	// public boolean dispatchTrackballEvent(final MotionEvent ev) {
-	// return nagUser();
-	// }
-	//
-	// private boolean nagUser() {
-	// // if (Money.isPaid(this)) {
-	// // return false;
-	// // } else {
-	// // if (dialog == null) {
-	// // Builder builder = new AlertDialog.Builder(this);
-	// // builder.setTitle("Please upgrade to Pro Version");
-	// //
-	// builder.setMessage("These settings are only available for Pro users, sorry! Please buy the Pro Version from Android Market.");
-	// // dialog = builder.create();
-	// // dialog.show();
-	// // } else {
-	// // if (!dialog.isShowing()) {
-	// // dialog.show();
-	// // }
-	// // }
-	// //
-	// // return true;
-	// // }
-	// return false;
-	// }
+	protected Dialog onCreateDialog(int id) {
+		switch (id) {
+		case 0:
+			return new AlertDialog.Builder(this)
+			.setCancelable(false)
+			.setTitle(R.string.unlicensed_dialog_title)
+			.setMessage(R.string.unlicensed_dialog_body)
+			.setPositiveButton(R.string.buy_button, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(
+							"http://market.android.com/details?id=" + getPackageName()));
+					startActivity(marketIntent);
+				}
+			})
+			.setNegativeButton(R.string.quit_button, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					finish();
+				}
+			})
+			.create();
+
+		case 1:
+			return ProgressDialog.show(this, "Announcify", 
+					"Verifying if you really bought Pro...", true);
+			
+		case 2:
+			started = true;
+		}
+		return null;
+	}
+
+	@Override
+	protected void onPause() {
+		if (security != null) licensed = security.isLicensed();
+
+		super.onPause();
+	}
+
+	@Override
+	protected void onResume() {
+		if (started && !licensed) showDialog(0);
+
+		super.onResume();
+	}
+
+	@Override
+	protected void onDestroy() {
+		if (security != null) security.quit();
+
+		super.onDestroy();
+	}
 }

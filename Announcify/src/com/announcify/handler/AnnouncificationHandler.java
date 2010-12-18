@@ -46,82 +46,86 @@ public class AnnouncificationHandler extends Handler {
 		Log.e("smn", "what: " + msg.what);
 
 		switch (msg.what) {
-			case WHAT_PUT_QUEUE:
-				final LittleQueue little = msg.getData().getParcelable(AnnouncifyService.EXTRA_QUEUE);
+		case WHAT_PUT_QUEUE:
+			final LittleQueue little = msg.getData().getParcelable(AnnouncifyService.EXTRA_QUEUE);
 
-				// TODO: prohibit in-call speech here!
-				switch (msg.getData().getInt(AnnouncifyService.EXTRA_PRIORITY, -1)) {
-					case 0:
-						queue.putFirst(little);
-						break;
-					case 1:
-						queue.putLast(little);
-						break;
-
-						// third party plugins
-					default:
-						queue.putLast(little);
-						break;
-				}
-
+			// TODO: prohibit in-call speech here!
+			switch (msg.getData().getInt(AnnouncifyService.EXTRA_PRIORITY, -1)) {
+			case 0:
+				queue.putFirst(little);
+				break;
+			case 1:
+				queue.putLast(little);
 				break;
 
-			case WHAT_NEXT_ITEM:
-				if (msg.obj instanceof String) {
-					speaker.speak((String) msg.obj);
-				} else if (msg.obj instanceof Integer) {
-					postDelayed(new Runnable() {
-
-						public void run() {
-							speaker.speak("");
-						}
-					}, (Integer) msg.obj);
-				}
-
-				break;
-
-			case WHAT_PAUSE:
-				if (!Money.isPaid(context)) {
-					context.stopService(new Intent(context, ManagerService.class));
-				} else {
-					quit();
-				}
-
-				break;
-
-			case WHAT_CONTINUE:
-				queue.grant();
-				break;
-
-			case WHAT_SHUTDOWN:
-				quit();
-				// TODO: save queue
-				break;
-
-			case WHAT_CHANGE_LOCALE:
-				// TODO:
-				// speaker.applyLanguage((Speech) msg.obj);
-				break;
-
-			case WHAT_REVERT_LOCALE:
-				speaker.revertLanguage();
-				break;
-
-			case WHAT_START:
-				if (speaker.setOnUtteranceCompletedListener(queue) != TextToSpeech.SUCCESS) {
-					// TODO: send log to server
-				}
-
-				queue.start();
-				break;
-
+				// third party plugins
 			default:
+				queue.putLast(little);
 				break;
+			}
+
+			break;
+
+		case WHAT_NEXT_ITEM:
+			if (msg.obj instanceof String) {
+				speaker.speak((String) msg.obj);
+			} else if (msg.obj instanceof Integer) {
+				int i = (Integer) msg.obj;
+				if (i < 1000) i *= 1000;
+
+				postDelayed(new Runnable() {
+
+					public void run() {
+						speaker.speak("");
+					}
+				}, (Integer) msg.obj);
+			}
+
+			break;
+
+		case WHAT_PAUSE:
+			if (!Money.isPaid(context)) {
+				context.stopService(new Intent(context, ManagerService.class));
+			} else {
+				quit();
+			}
+
+			break;
+
+		case WHAT_CONTINUE:
+			queue.grant();
+			break;
+
+		case WHAT_SHUTDOWN:
+			quit();
+			// TODO: save queue
+			break;
+
+		case WHAT_CHANGE_LOCALE:
+			// TODO:
+			// speaker.applyLanguage((Speech) msg.obj);
+			break;
+
+		case WHAT_REVERT_LOCALE:
+			speaker.revertLanguage();
+			break;
+
+		case WHAT_START:
+			if (speaker.setOnUtteranceCompletedListener(queue) != TextToSpeech.SUCCESS) {
+				// TODO: send log to server
+			}
+
+			queue.start();
+			break;
+
+		default:
+			break;
 		}
 	}
 
 	public void quit() {
 		queue.quit();
+		getLooper().getThread().interrupt();
 		getLooper().quit();
 	}
 }

@@ -1,14 +1,10 @@
 package com.announcify.activity;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -25,7 +21,6 @@ import com.announcify.R;
 import com.announcify.activity.widget.PluginAdapter;
 import com.announcify.receiver.AnnouncifyReceiver;
 import com.announcify.sql.model.PluginModel;
-import com.announcify.util.AnnouncifySecurity;
 
 public class Announcify extends ListActivity {
 	private CheckedTextView headerName;
@@ -33,7 +28,6 @@ public class Announcify extends ListActivity {
 	private PluginModel model;
 	private PluginExplorer pluginExplorer;
 	private ProgressBar progressBar;
-	private AnnouncifySecurity security;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -67,8 +61,6 @@ public class Announcify extends ListActivity {
 
 		adapter = new PluginAdapter(this, model);
 		setListAdapter(adapter);
-
-		security = new AnnouncifySecurity(this);
 	}
 
 	private void addAnnouncifyHeader() {
@@ -83,7 +75,6 @@ public class Announcify extends ListActivity {
 
 			public void onClick(final View v) {
 				Intent settingsIntent = new Intent(Announcify.this, SettingsActivity.class);
-				settingsIntent.putExtra(AnnouncifySecurity.EXTRA_LICENSED, security.isLicensed());
 				startActivity(settingsIntent);
 			}
 		});
@@ -106,34 +97,14 @@ public class Announcify extends ListActivity {
 
 		position -= 2;
 		switch (adapter.getItemViewType(position)) {
-			case PluginAdapter.TYPE_INTENT:
-				startActivity(adapter.getIntent(position));
-				break;
-			case PluginAdapter.TYPE_CHECKBOX:
-				model.togglePlugin(model.getId((String) adapter.getItem(position)));
-				adapter.notifyDataSetChanged();
-				break;
+		case PluginAdapter.TYPE_INTENT:
+			startActivity(adapter.getIntent(position));
+			break;
+		case PluginAdapter.TYPE_CHECKBOX:
+			model.togglePlugin(model.getId((String) adapter.getItem(position)));
+			adapter.notifyDataSetChanged();
+			break;
 		}
-	}
-
-	protected Dialog onCreateDialog(int id) {
-		return new AlertDialog.Builder(this)
-		.setCancelable(false)
-		.setTitle(R.string.unlicensed_dialog_title)
-		.setMessage(R.string.unlicensed_dialog_body)
-		.setPositiveButton(R.string.buy_button, new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
-				Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(
-						"http://market.android.com/details?id=" + getPackageName()));
-				startActivity(marketIntent);
-			}
-		})
-		.setNegativeButton(R.string.quit_button, new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
-				finish();
-			}
-		})
-		.create();
 	}
 
 	@Override
@@ -158,7 +129,6 @@ public class Announcify extends ListActivity {
 	@Override
 	protected void onDestroy() {
 		model.close();
-		security.quit();
 
 		super.onDestroy();
 	}
@@ -171,7 +141,7 @@ public class Announcify extends ListActivity {
 				@Override
 				public void run() {
 					try {
-						sleep(5000);
+						sleep(10000);
 					} catch (final InterruptedException e) {} finally {
 						runOnUiThread(new Runnable() {
 

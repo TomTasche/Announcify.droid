@@ -25,21 +25,19 @@ public class RingtoneReceiver extends BroadcastReceiver {
 			}
 
 			final MediaPlayer player = new MediaPlayer();
-			if (player == null) {
-				return;
-			}
+			if (player == null) return;
 
 			try {
 				player.setDataSource(context, Uri.parse(s));
 				player.setAudioStreamType(new AnnouncifySettings(context).getStream());
 				player.setLooping(false);
-				player.prepare();
 				player.setOnCompletionListener(new OnCompletionListener() {
 
 					public void onCompletion(final MediaPlayer mp) {
 						mp.release();
 					}
 				});
+				player.prepare();
 				player.start();
 			} catch (final IllegalArgumentException e) {
 				e.printStackTrace();

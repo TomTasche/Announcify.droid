@@ -1,0 +1,23 @@
+package com.announcify.util;
+
+public interface PluginSettings {
+	public abstract String getSharedPreferencesName();
+	
+	public abstract int getReadingBreak();
+
+	public abstract int getReadingRepeat();
+
+	public abstract int getReadingWait();
+
+	public abstract int getUnknownMode();
+
+	public abstract int getAnnouncementMode();
+	
+	public abstract int getDiscreetMode();
+	
+	public abstract String getAnnouncement();
+	
+	public abstract String getCustomAnnouncement();
+	
+	public abstract String getEventType();
+}

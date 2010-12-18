@@ -8,36 +8,47 @@ import android.util.Log;
 
 import com.announcify.contact.Contact;
 import com.announcify.contact.Lookup;
+import com.announcify.contact.Prepare;
 import com.announcify.plugin.message.receiver.RingtoneReceiver;
+import com.announcify.plugin.message.util.MessnouncifySettings;
 import com.announcify.queue.LittleQueue;
 import com.announcify.service.AnnouncifyService;
 
 public class WorkerService extends AnnouncifyService {
+
 	public WorkerService() {
 		super("Announcify - Message");
 	}
 
 	@Override
 	protected void onHandleIntent(final Intent intent) {
-		final Object[] pdusObj = (Object[]) intent.getExtras().get("pdus");
+		final String message;
+		final String number;
 
-		final SmsMessage[] messages = new SmsMessage[pdusObj.length];
-		for (int i = 0; i < pdusObj.length; i++) {
-			messages[i] = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
-		}
+		if (intent.getExtras().containsKey("pdus")) {
+			final Object[] pdusObj = (Object[]) intent.getExtras().get("pdus");
 
-		String temp = "";
-
-		if (messages.length > 1) {
-			for (final SmsMessage currentMessage : messages) {
-				temp = temp + currentMessage.getDisplayMessageBody() + '\n';
+			final SmsMessage[] messages = new SmsMessage[pdusObj.length];
+			for (int i = 0; i < pdusObj.length; i++) {
+				messages[i] = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
 			}
-		} else {
-			temp = messages[0].getDisplayMessageBody();
-		}
 
-		final String number = messages[0].getDisplayOriginatingAddress();
-		final String message = temp;
+			String temp = "";
+
+			if (messages.length > 1) {
+				for (final SmsMessage currentMessage : messages) {
+					temp = temp + currentMessage.getDisplayMessageBody() + '\n';
+				}
+			} else {
+				temp = messages[0].getDisplayMessageBody();
+			}
+
+			number = messages[0].getDisplayOriginatingAddress();
+			message = temp;
+		} else {
+			message = "No message";
+			number = intent.getStringExtra("com.announcify.EXTRA_TEST");
+		}
 
 		Log.e("smn", number);
 		final Contact contact = new Contact(this, number);
@@ -46,17 +57,13 @@ public class WorkerService extends AnnouncifyService {
 			Lookup.getNickname(contact);
 		}
 
-		final String name = contact.getUserPreferredName();
+		MessnouncifySettings settings = new MessnouncifySettings(this);
 
-		Log.e("smn", name);
+		Prepare prepare = new Prepare(this, settings, contact, message);
 		final LinkedList<Object> list = new LinkedList<Object>();
-		list.add(name);
+		prepare.getQueue(list);
 
 		final LittleQueue queue = new LittleQueue("Messnouncify", list, "", RingtoneReceiver.ACTION_STOP_RINGTONE, this);
-
-		final Intent announceIntent = new Intent(ACTION_ANNOUNCE);
-		announceIntent.putExtra(EXTRA_QUEUE, queue);
-		announceIntent.putExtra(EXTRA_PRIORITY, 1);
-		startService(announceIntent);
+		queue.sendToService(this, 1);
 	}
 }

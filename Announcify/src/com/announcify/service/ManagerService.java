@@ -83,9 +83,9 @@ public class ManagerService extends Service {
 			return;
 		}
 
-		if (bundle.getInt(AnnouncifyService.EXTRA_PRIORITY, -1) > 0 && conditionManager.isScreenOn()) {
-			return;
-		}
+		if (bundle.getInt(AnnouncifyService.EXTRA_PRIORITY, -1) > 0 && conditionManager.isScreenOn()) return;
+
+		if (bundle.getInt(AnnouncifyService.EXTRA_PRIORITY, -1) == 0) conditionManager.setOnCall(true);
 
 		final Message msg = handler.obtainMessage(AnnouncificationHandler.WHAT_PUT_QUEUE);
 		msg.setData(bundle);
@@ -110,7 +110,8 @@ public class ManagerService extends Service {
 			speaker.shutdown();
 		}
 		if (thread != null && thread.isAlive()) {
-			thread.stop();
+			thread.interrupt();
+			thread.getLooper().quit();
 		}
 		if (notificationManager != null) {
 			notificationManager.cancel(17);

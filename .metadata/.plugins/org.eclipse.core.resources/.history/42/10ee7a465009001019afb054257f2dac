@@ -1,0 +1,15 @@
+package com.announcify.plugin.message.util;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import com.announcify.util.PluginSettings;
+
+public class MessnouncifySettings extends PluginSettings {
+	
+	public MessnouncifySettings(Context context) {
+		super(context);
+	}
+	
+	
+}

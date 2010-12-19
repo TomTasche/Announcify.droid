@@ -9,7 +9,19 @@
 <fullyQualifiedTypeName name="com.announcify.util.PluginSettings"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.mail.activity.Mailnouncify"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.mail.util.MailnouncifySettings"/>
-<fullyQualifiedTypeName name="java.lang.Thread"/>
 <fullyQualifiedTypeName name="com.announcify.activity.SettingsActivity"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.talk.R"/>
+<fullyQualifiedTypeName name="android.database.Cursor"/>
+<fullyQualifiedTypeName name="android.provider.ContactsContract.Contacts"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.talk.service.WorkerService"/>
+<fullyQualifiedTypeName name="android.test.IsolatedContext"/>
+<fullyQualifiedTypeName name="android.os.HandlerThread"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.talk.service.TalkService.TalkObserver"/>
+<fullyQualifiedTypeName name="android.net.Uri"/>
+<fullyQualifiedTypeName name="java.lang.StrictMath"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.talk.service.TalkService"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.talk.util.TalknouncifySettings"/>
+<fullyQualifiedTypeName name="java.lang.Thread"/>
 </qualifiedTypeNameHistroy>

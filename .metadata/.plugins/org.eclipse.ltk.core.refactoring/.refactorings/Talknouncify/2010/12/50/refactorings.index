@@ -1,0 +1,7 @@
+1292686447269	Rename type 'Messnouncify'
+1292686569842	Rename type 'MessnouncifyReceiver'
+1292686575394	Delete element
+1292781189649	Rename local variable 'message'
+1292782146664	Rename local variable 'conversation'
+1292784034530	Rename type 'MailObserver'
+1292784870377	Rename type 'MessnouncifySettings'

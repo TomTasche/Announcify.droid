@@ -1,6 +1,7 @@
-#Sat Dec 18 15:51:21 CET 2010
+#Sun Dec 19 20:49:46 CET 2010
 emulatorControl.track.first=146
 emulatorControl.track.count=42
+lastImageSaveDir=/home/tom/Dropbox/Announcify
 threadPanel.stack.col4=190
 threadPanel.stack.col3=50
 threadPanel.Col5=678
@@ -21,9 +22,9 @@ com.android.ide.eclipse.ddms.logcat.level=18
 com.android.ide.eclipse.ddms.logcat.tag=74
 emulatorControl.waypoint.desc=130
 devicePanel.Col4=157
-com.android.ide.eclipse.ddms.logcat.message=653
+com.android.ide.eclipse.ddms.logcat.message=1028
 devicePanel.Col1=57
-devicePanel.Col0=138
+devicePanel.Col0=185
 emulatorControl.waypoint.elevation=62
 emulatorControl.track.name=152
 com.android.ide.eclipse.ddms.logcat.time=122

@@ -8,10 +8,10 @@ import android.util.Log;
 
 import com.announcify.contact.Contact;
 import com.announcify.contact.Lookup;
-import com.announcify.contact.Prepare;
 import com.announcify.plugin.message.receiver.RingtoneReceiver;
 import com.announcify.plugin.message.util.MessnouncifySettings;
 import com.announcify.queue.LittleQueue;
+import com.announcify.queue.Prepare;
 import com.announcify.service.AnnouncifyService;
 
 public class WorkerService extends AnnouncifyService {
@@ -62,6 +62,8 @@ public class WorkerService extends AnnouncifyService {
 		Prepare prepare = new Prepare(this, settings, contact, message);
 		final LinkedList<Object> list = new LinkedList<Object>();
 		prepare.getQueue(list);
+
+		if (list.isEmpty()) return;
 
 		final LittleQueue queue = new LittleQueue("Messnouncify", list, "", RingtoneReceiver.ACTION_STOP_RINGTONE, this);
 		queue.sendToService(this, 1);

@@ -51,9 +51,8 @@ public class Announcify extends ListActivity {
 
 		pluginExplorer = new PluginExplorer();
 		registerReceiver(pluginExplorer, new IntentFilter(AnnouncifyReceiver.ACTION_PLUGIN_RESPOND));
-		// sendBroadcast(new Intent(AnnouncifyReceiver.ACTION_PLUGIN_CONTACT),
-		// AnnouncifyReceiver.PERMISSION_IM_A_PLUGIN);
-		sendBroadcast(new Intent(AnnouncifyReceiver.ACTION_PLUGIN_CONTACT));
+		sendBroadcast(new Intent(AnnouncifyReceiver.ACTION_PLUGIN_CONTACT), AnnouncifyReceiver.PERMISSION_IM_A_PLUGIN);
+		//		sendBroadcast(new Intent(AnnouncifyReceiver.ACTION_PLUGIN_CONTACT));
 
 		model = new PluginModel(this);
 
@@ -74,7 +73,7 @@ public class Announcify extends ListActivity {
 		headerSettings.setOnClickListener(new OnClickListener() {
 
 			public void onClick(final View v) {
-				Intent settingsIntent = new Intent(Announcify.this, SettingsActivity.class);
+				final Intent settingsIntent = new Intent(Announcify.this, SettingsActivity.class);
 				startActivity(settingsIntent);
 			}
 		});
@@ -97,13 +96,13 @@ public class Announcify extends ListActivity {
 
 		position -= 2;
 		switch (adapter.getItemViewType(position)) {
-		case PluginAdapter.TYPE_INTENT:
-			startActivity(adapter.getIntent(position));
-			break;
-		case PluginAdapter.TYPE_CHECKBOX:
-			model.togglePlugin(model.getId((String) adapter.getItem(position)));
-			adapter.notifyDataSetChanged();
-			break;
+			case PluginAdapter.TYPE_INTENT:
+				startActivity(adapter.getIntent(position));
+				break;
+			case PluginAdapter.TYPE_CHECKBOX:
+				model.togglePlugin(model.getId((String) adapter.getItem(position)));
+				adapter.notifyDataSetChanged();
+				break;
 		}
 	}
 
@@ -152,7 +151,8 @@ public class Announcify extends ListActivity {
 									progressBar.setVisibility(View.INVISIBLE);
 
 									if (adapter.getCount() == 0) {
-										// TODO: start initial setup: advertise plugins, show instructions, ...
+										// TODO: start initial setup: advertise
+										// plugins, show instructions, ...
 									}
 								}
 							}

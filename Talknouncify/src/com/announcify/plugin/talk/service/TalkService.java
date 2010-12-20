@@ -30,26 +30,26 @@ public class TalkService extends WorkerService {
 	}
 
 	private class TalkObserver extends ContentObserver {
-		public TalkObserver(Handler handler) {
+		public TalkObserver(final Handler handler) {
 			super(handler);
 		}
 
 		@Override
 		public void onChange(final boolean selfChange) {
-			String[] messageProjection = new String[] {"body"};
-			Cursor message = getContentResolver().query(Uri.withAppendedPath(Uri.parse("content://com.google.android.providers.talk/"), "messages"), messageProjection, "err_code = 0", null, "date DESC");
+			final String[] messageProjection = new String[] {"body"};
+			final Cursor message = getContentResolver().query(Uri.withAppendedPath(Uri.parse("content://com.google.android.providers.talk/"), "messages"), messageProjection, "err_code = 0", null, "date DESC");
 			message.moveToFirst();
 
 			// body
 
-			String[] conversationProjection = new String[] {"last_unread_message"};
-			Cursor conversation = getContentResolver().query(Uri.withAppendedPath(Uri.parse("content://com.google.android.providers.talk/"), "chats"), conversationProjection, null, null, "last_message_date DESC");
+			final String[] conversationProjection = new String[] {"last_unread_message"};
+			final Cursor conversation = getContentResolver().query(Uri.withAppendedPath(Uri.parse("content://com.google.android.providers.talk/"), "chats"), conversationProjection, null, null, "last_message_date DESC");
 			conversation.moveToFirst();
 
 			// last_unread_message
 
-			String[] contactProjection = new String[] {"username"};
-			Cursor contact = getContentResolver().query(Uri.withAppendedPath(Uri.parse("content://com.google.android.providers.talk/contacts"), "1"), contactProjection, "last_message_date = " + conversation.getLong(conversation.getColumnIndex("last_message_date")), null, null);
+			final String[] contactProjection = new String[] {"username"};
+			final Cursor contact = getContentResolver().query(Uri.withAppendedPath(Uri.parse("content://com.google.android.providers.talk/contacts"), "1"), contactProjection, "last_message_date = " + conversation.getLong(conversation.getColumnIndex("last_message_date")), null, null);
 			contact.moveToFirst();
 
 			// nickname / username
@@ -66,7 +66,7 @@ public class TalkService extends WorkerService {
 	}
 
 	@Override
-	public IBinder onBind(Intent arg0) {
+	public IBinder onBind(final Intent arg0) {
 		return null;
 	}
 }

@@ -10,33 +10,27 @@ import com.android.vending.licensing.ServerManagedPolicy;
 
 public class AnnouncifySecurity {
 	public static final String EXTRA_LICENSED = "com.announcify.LICENSED";
-	
+
 	private static final String BASE64_PUBLIC_KEY = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDsdGybFkj9/26Fpu2mNASpAC8xQDRYocvVkxbpN6mF8k4a9L5ocnyUAY7sfKb0wjEc5e+vxL21kFKvvW0zEZX8a5wSXUfD5oiaXaiMPrp7cC1YbPPAelZvFEAzriA6pyk7PPKuqtAN2tcTiJED+kpiVAyEVU42lDUqE70xlRE6dQIDAQAB";
 
 	// Generate your own 20 random bytes, and put them here.
-	private static final byte[] SALT = new byte[] {
-		-46, 65, 30, -128, -103, -57, 74, -64, 51, 88, -95, -45, 77, -117, -36, -113, -11, 32, -64,
-		89
-	};
+	private static final byte[] SALT = new byte[] {-46, 65, 30, -128, -103, -57, 74, -64, 51, 88, -95, -45, 77, -117, -36, -113, -11, 32, -64, 89};
 
 	private boolean licensed;
 
-	private Activity activity;
-	private LicenseChecker checker;
-	private AnnouncifyLicenseCheckerCallback callback;
+	private final Activity activity;
+	private final LicenseChecker checker;
+	private final AnnouncifyLicenseCheckerCallback callback;
 
-	public AnnouncifySecurity(Activity activity) {
+	public AnnouncifySecurity(final Activity activity) {
 		this.activity = activity;
 
 		// Try to use more data here. ANDROID_ID is a single point of attack.
-		String deviceId = Secure.getString(activity.getContentResolver(), Secure.ANDROID_ID);
+		final String deviceId = Secure.getString(activity.getContentResolver(), Secure.ANDROID_ID);
 		// Library calls this when it's done.
 		callback = new AnnouncifyLicenseCheckerCallback();
 		// Construct the LicenseChecker with a policy.
-		checker = new LicenseChecker(
-				activity, new ServerManagedPolicy(activity,
-						new AESObfuscator(SALT, activity.getPackageName(), deviceId)),
-						BASE64_PUBLIC_KEY);
+		checker = new LicenseChecker(activity, new ServerManagedPolicy(activity, new AESObfuscator(SALT, activity.getPackageName(), deviceId)), BASE64_PUBLIC_KEY);
 
 		checker.checkAccess(callback);
 	}
@@ -53,7 +47,7 @@ public class AnnouncifySecurity {
 				// Don't update UI if Activity is finishing.
 				return;
 			}
-			
+
 			activity.dismissDialog(1);
 			activity.showDialog(2);
 			// Should allow user access.
@@ -71,11 +65,11 @@ public class AnnouncifySecurity {
 			// restricted set of features.
 			// In this example, we show a dialog that takes the user to Market.
 			activity.dismissDialog(1);
-			
+
 			activity.showDialog(0);
 		}
 
-		public void applicationError(ApplicationErrorCode errorCode) {
+		public void applicationError(final ApplicationErrorCode errorCode) {
 			if (activity.isFinishing()) {
 				// Don't update UI if Activity is finishing.
 				return;
@@ -83,7 +77,7 @@ public class AnnouncifySecurity {
 			// This is a polite way of saying the developer made a mistake
 			// while setting up or calling the license checker library.
 			// Please examine the error code and fix the error.
-			
+
 			activity.dismissDialog(1);
 		}
 	}

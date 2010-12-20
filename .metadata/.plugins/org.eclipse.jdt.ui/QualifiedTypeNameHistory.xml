@@ -3,7 +3,6 @@
 <fullyQualifiedTypeName name="java.lang.StringBuffer"/>
 <fullyQualifiedTypeName name="java.lang.StringBuilder"/>
 <fullyQualifiedTypeName name="android.app.AlertDialog.Builder"/>
-<fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="java.lang.Override"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.message.util.MessnouncifySettings"/>
 <fullyQualifiedTypeName name="com.announcify.util.PluginSettings"/>
@@ -21,7 +20,14 @@
 <fullyQualifiedTypeName name="android.net.Uri"/>
 <fullyQualifiedTypeName name="java.lang.StrictMath"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
-<fullyQualifiedTypeName name="com.announcify.plugin.talk.service.TalkService"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.talk.util.TalknouncifySettings"/>
 <fullyQualifiedTypeName name="java.lang.Thread"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.talk.service.TalkService"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.call.receiver.RingtoneReceiver"/>
+<fullyQualifiedTypeName name="android.content.Intent"/>
+<fullyQualifiedTypeName name="com.announcify.error.ExceptionService"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="java.io.Serializable"/>
+<fullyQualifiedTypeName name="com.announcify.error.ExceptionHandler"/>
 </qualifiedTypeNameHistroy>

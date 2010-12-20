@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="21" version="2.0">
+<workbench progressCount="36" version="2.0">
 <workbenchAdvisor/>
 <window height="717" maximized="true" width="1026" x="0" y="25">
 <fastViewData fastViewLocation="1024"/>
@@ -57,8 +57,6 @@
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
 <category IMemento.internal.id="Errors"/>
-<category IMemento.internal.id="Warnings"/>
-<category IMemento.internal.id="Warnings (79 items)"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="0" org.eclipse.ui.ide.markerType="0" org.eclipse.ui.ide.pathField="0" org.eclipse.ui.ide.resourceField="0" org.eclipse.ui.ide.severityAndDescriptionField="0"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -385,50 +383,50 @@
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="Astridouncify/AndroidManifest.xml">
-<persistable path="/Astridouncify/AndroidManifest.xml"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="launcher_icon.png" tooltip="Announcify/res/drawable/launcher_icon.png">
-<persistable path="/Announcify/res/drawable/launcher_icon.png"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="Talknouncify/AndroidManifest.xml">
-<persistable path="/Talknouncify/AndroidManifest.xml"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="WorkerService.java" tooltip="Talknouncify/src/com/announcify/plugin/talk/service/WorkerService.java">
-<persistable path="/Talknouncify/src/com/announcify/plugin/talk/service/WorkerService.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="WorkerService.java" tooltip="Messnouncify/src/com/announcify/plugin/message/service/WorkerService.java">
-<persistable path="/Messnouncify/src/com/announcify/plugin/message/service/WorkerService.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="WorkerService.java" tooltip="Mailnouncify/src/com/announcify/plugin/mail/service/WorkerService.java">
-<persistable path="/Mailnouncify/src/com/announcify/plugin/mail/service/WorkerService.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="WorkerService.java" tooltip="Callnouncify/src/com/announcify/plugin/call/service/WorkerService.java">
-<persistable path="/Callnouncify/src/com/announcify/plugin/call/service/WorkerService.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Prepare.java" tooltip="Announcify-API/src/com/announcify/queue/Prepare.java">
-<persistable path="/Announcify-API/src/com/announcify/queue/Prepare.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ExceptionHandler.java" tooltip="Announcify-API/src/com/announcify/error/ExceptionHandler.java">
+<persistable path="/Announcify-API/src/com/announcify/error/ExceptionHandler.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="Announcify/AndroidManifest.xml">
 <persistable path="/Announcify/AndroidManifest.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TalknouncifySettings.java" tooltip="Talknouncify/src/com/announcify/plugin/talk/util/TalknouncifySettings.java">
-<persistable path="/Talknouncify/src/com/announcify/plugin/talk/util/TalknouncifySettings.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ExceptionService.java" tooltip="Announcify/src/com/announcify/error/ExceptionService.java">
+<persistable path="/Announcify/src/com/announcify/error/ExceptionService.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MailService.java" tooltip="Mailnouncify/src/com/announcify/plugin/mail/service/MailService.java">
-<persistable path="/Mailnouncify/src/com/announcify/plugin/mail/service/MailService.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Snippet.java" tooltip="Announcify-API/src/com/announcify/error/Snippet.java">
+<persistable path="/Announcify-API/src/com/announcify/error/Snippet.java"/>
 </file>
-<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="IntentService.class" tooltip="android.app.IntentService">
-<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=Talknouncify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.app(IntentService.class"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ExceptionHandler.java" tooltip="Announcify/src/com/announcify/error/ExceptionHandler.java">
+<persistable path="/Announcify/src/com/announcify/error/ExceptionHandler.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AnnouncifyService.java" tooltip="Mailnouncify/Announcify-API_src/com/announcify/service/AnnouncifyService.java">
-<persistable path="/Mailnouncify/Announcify-API_src/com/announcify/service/AnnouncifyService.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ExpectedException.java" tooltip="Announcify/src/com/announcify/error/ExpectedException.java">
+<persistable path="/Announcify/src/com/announcify/error/ExpectedException.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CallReceiver.java" tooltip="Announcify/src/com/announcify/receiver/CallReceiver.java">
-<persistable path="/Announcify/src/com/announcify/receiver/CallReceiver.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ExceptionReceiver.java" tooltip="Announcify/src/com/announcify/error/ExceptionReceiver.java">
+<persistable path="/Announcify/src/com/announcify/error/ExceptionReceiver.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TalkService.java" tooltip="Talknouncify/src/com/announcify/plugin/talk/service/TalkService.java">
-<persistable path="/Talknouncify/src/com/announcify/plugin/talk/service/TalkService.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Announcify.java" tooltip="Announcify/src/com/announcify/activity/Announcify.java">
+<persistable path="/Announcify/src/com/announcify/activity/Announcify.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TalknouncifyReceiver.java" tooltip="Talknouncify/src/com/announcify/plugin/talk/receiver/TalknouncifyReceiver.java">
+<persistable path="/Talknouncify/src/com/announcify/plugin/talk/receiver/TalknouncifyReceiver.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="RingtoneReceiver.java" tooltip="Messnouncify/src/com/announcify/plugin/message/receiver/RingtoneReceiver.java">
+<persistable path="/Messnouncify/src/com/announcify/plugin/message/receiver/RingtoneReceiver.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MessnouncifyReceiver.java" tooltip="Messnouncify/src/com/announcify/plugin/message/receiver/MessnouncifyReceiver.java">
+<persistable path="/Messnouncify/src/com/announcify/plugin/message/receiver/MessnouncifyReceiver.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MessageReceiver.java" tooltip="Messnouncify/src/com/announcify/plugin/message/receiver/MessageReceiver.java">
+<persistable path="/Messnouncify/src/com/announcify/plugin/message/receiver/MessageReceiver.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MailnouncifyReceiver.java" tooltip="Mailnouncify/src/com/announcify/plugin/mail/receiver/MailnouncifyReceiver.java">
+<persistable path="/Mailnouncify/src/com/announcify/plugin/mail/receiver/MailnouncifyReceiver.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CallnouncifyReceiver.java" tooltip="Callnouncify/src/com/announcify/plugin/call/receiver/CallnouncifyReceiver.java">
+<persistable path="/Callnouncify/src/com/announcify/plugin/call/receiver/CallnouncifyReceiver.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CallReceiver.java" tooltip="Callnouncify/src/com/announcify/plugin/call/receiver/CallReceiver.java">
+<persistable path="/Callnouncify/src/com/announcify/plugin/call/receiver/CallReceiver.java"/>
 </file>
 </mruList>
 </workbench>

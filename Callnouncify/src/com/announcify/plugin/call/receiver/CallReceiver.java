@@ -14,12 +14,9 @@ public class CallReceiver extends BroadcastReceiver {
 			final Intent serviceIntent = new Intent(context, WorkerService.class);
 			serviceIntent.putExtras(intent.getExtras());
 			context.startService(serviceIntent);
-		} else if (TelephonyManager.EXTRA_STATE_OFFHOOK.equals(intent.getStringExtra(TelephonyManager.EXTRA_STATE))) {
-
-		} else if (TelephonyManager.EXTRA_STATE_IDLE.equals(intent.getStringExtra(TelephonyManager.EXTRA_STATE))) {
-
 		} else {
-
+			final Intent ringtoneIntent = new Intent(RingtoneReceiver.ACTION_STOP_RINGTONE);
+			context.sendBroadcast(ringtoneIntent);
 		}
 	}
 }

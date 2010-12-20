@@ -25,7 +25,9 @@ public class RingtoneReceiver extends BroadcastReceiver {
 			final RingtoneManager manager = new RingtoneManager(context);
 			manager.setType(RingtoneManager.TYPE_RINGTONE);
 			ringtone = manager.getRingtone(manager.getRingtonePosition(Uri.parse(s)));
-			if (ringtone == null) return;
+			if (ringtone == null) {
+				return;
+			}
 			ringtone.setStreamType(new AnnouncifySettings(context).getStream());
 			ringtone.play();
 		} else if (ACTION_STOP_RINGTONE.equals(intent.getAction())) {

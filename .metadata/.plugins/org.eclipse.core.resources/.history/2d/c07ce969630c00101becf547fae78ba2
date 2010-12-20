@@ -1,0 +1,7 @@
+package com.announcify.error;
+
+public class Snippet {
+	Exception exception = (Exception) intent.getSerializableExtra(STACKTRACE);
+				Log.e("Announcify", "Caught exception", exception);
+}
+

@@ -17,6 +17,8 @@
 		android:name="android.permission.READ_CONTACTS" />
 	<uses-permission
 		android:name="android.permission.WRITE_SETTINGS" />
+	<uses-permission
+		android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
 	<application
 		android:icon="@drawable/icon"
@@ -57,7 +59,12 @@
 		</receiver>
 
 		<service
-			android:name=".service.WorkerService" />
+			android:name=".service.WorkerService">
+			<intent-filter>
+				<action
+					android:name="android.intent.action.BOOT_COMPLETED" />
+			</intent-filter>
+		</service>
 	</application>
 
 	<supports-screens

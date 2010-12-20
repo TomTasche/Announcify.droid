@@ -30,17 +30,19 @@ public class WorkerService extends AnnouncifyService {
 			Lookup.getNickname(contact);
 		}
 
-		CallnouncifySettings settings = new CallnouncifySettings(this);
-		
-		Prepare prepare = new Prepare(this, settings, contact, "");
+		final CallnouncifySettings settings = new CallnouncifySettings(this);
+
+		final Prepare prepare = new Prepare(this, settings, contact, "");
 		final LinkedList<Object> list = new LinkedList<Object>();
 		prepare.getQueue(list);
-		
-		if (list.isEmpty()) return;
-		
+
+		if (list.isEmpty()) {
+			return;
+		}
+
 		// TODO: wait
 
-		final LittleQueue queue = new LittleQueue("Callnouncify", list, RingtoneReceiver.ACTION_START_RINGTONE, RingtoneReceiver.ACTION_STOP_RINGTONE, this);
+		final LittleQueue queue = new LittleQueue("Callnouncify", list, RingtoneReceiver.ACTION_START_RINGTONE, "", this);
 		queue.sendToService(this, 0);
 	}
 }

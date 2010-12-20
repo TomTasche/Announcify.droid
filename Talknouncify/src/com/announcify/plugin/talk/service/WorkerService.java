@@ -31,13 +31,15 @@ public class WorkerService extends AnnouncifyService {
 			Lookup.getNickname(contact);
 		}
 
-		TalknouncifySettings settings = new TalknouncifySettings(this);
+		final TalknouncifySettings settings = new TalknouncifySettings(this);
 
-		Prepare prepare = new Prepare(this, settings, contact, intent.getStringExtra(EXTRA_SUBJECT));
+		final Prepare prepare = new Prepare(this, settings, contact, intent.getStringExtra(EXTRA_SUBJECT));
 		final LinkedList<Object> list = new LinkedList<Object>();
 		prepare.getQueue(list);
 
-		if (list.isEmpty()) return;
+		if (list.isEmpty()) {
+			return;
+		}
 
 		final LittleQueue queue = new LittleQueue("Talknouncify", list, "", RingtoneReceiver.ACTION_STOP_RINGTONE, this);
 		queue.sendToService(this, 2);

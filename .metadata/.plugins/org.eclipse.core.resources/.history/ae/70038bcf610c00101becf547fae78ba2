@@ -1,0 +1,38 @@
+package com.announcify.error;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.lang.Thread.UncaughtExceptionHandler;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+import android.util.Log;
+
+public class ExceptionHandler implements UncaughtExceptionHandler {
+	private final Context context;
+	private final UncaughtExceptionHandler defaultHandler;
+
+	public ExceptionHandler(final Context context, final UncaughtExceptionHandler defaultHandler) {
+		this.context = context;
+		this.defaultHandler = defaultHandler;
+	}
+
+	public void uncaughtException(final Thread thread, final Throwable exception) {
+		Intent serviceIntent = new Intent(context, ExceptionService.class);
+		
+		context.startService(serviceIntent);
+
+		defaultHandler.uncaughtException(thread, exception);
+	}
+}

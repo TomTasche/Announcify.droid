@@ -24,7 +24,7 @@ public class ConditionManager {
 	public ConditionManager(final Context context) {
 		this.context = context;
 
-		AnnouncifySettings settings = new AnnouncifySettings(context);
+		final AnnouncifySettings settings = new AnnouncifySettings(context);
 		if (settings.isGravityCondition()) {
 			gravityReceiver = new GravityReceiver(context);
 			gravityReceiver.setAccuracy(2f);
@@ -40,8 +40,7 @@ public class ConditionManager {
 
 		if (settings.isDiscreetCondition()) {
 			headsetReceiver = new HeadsetReceiver();
-			context.registerReceiver(headsetReceiver, new IntentFilter(
-					Intent.ACTION_HEADSET_PLUG));
+			context.registerReceiver(headsetReceiver, new IntentFilter(Intent.ACTION_HEADSET_PLUG));
 		}
 
 		callReceiver = new CallReceiver(context);
@@ -51,8 +50,8 @@ public class ConditionManager {
 	public boolean isScreenOn() {
 		return screenReceiver != null ? screenReceiver.isScreenOn() : false;
 	}
-	
-	public void setOnCall(boolean onCall) {
+
+	public void setOnCall(final boolean onCall) {
 		callReceiver.setOnCall(onCall);
 	}
 

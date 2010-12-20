@@ -6,8 +6,8 @@ import com.announcify.util.PluginSettings;
 
 public class TalknouncifySettings extends PluginSettings {
 	public static final String PREFERENCES_NAME = "com.announcify.plugin.talk.SETTINGS";
-	
-	public TalknouncifySettings(Context context) {
+
+	public TalknouncifySettings(final Context context) {
 		super(context, PREFERENCES_NAME);
 	}
 

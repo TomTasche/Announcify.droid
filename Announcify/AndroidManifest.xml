@@ -73,15 +73,30 @@
 			</intent-filter>
 		</activity>
 
+		<receiver
+			android:name="error.ExceptionReceiver"
+			android:label="@string/app_name"
+			android:permission="com.announcify.PERMISSION_IM_A_PLUGIN">
+			<intent-filter>
+				<action
+					android:name="com.announcify.EXCEPTION" />
+			</intent-filter>
+		</receiver>
+
 		<service
 			android:name=".service.ManagerService"
-			android:label="@string/app_name">
-			<!-- android:permission="com.announcify.PERMISSION_IM_A_PLUGIN"> -->
+			android:label="@string/app_name"
+			android:permission="com.announcify.PERMISSION_IM_A_PLUGIN">
 			<intent-filter>
 				<action
 					android:name="com.announcify.ANNOUNCE" />
 			</intent-filter>
 		</service>
+		
+		<service
+			android:name=".error.ExceptionService"
+			android:label="@string/app_name"
+			android:permission="com.announcify.PERMISSION_IM_A_PLUGIN" />
 	</application>
 
 	<supports-screens

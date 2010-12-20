@@ -57,13 +57,15 @@ public class WorkerService extends AnnouncifyService {
 			Lookup.getNickname(contact);
 		}
 
-		MessnouncifySettings settings = new MessnouncifySettings(this);
+		final MessnouncifySettings settings = new MessnouncifySettings(this);
 
-		Prepare prepare = new Prepare(this, settings, contact, message);
+		final Prepare prepare = new Prepare(this, settings, contact, message);
 		final LinkedList<Object> list = new LinkedList<Object>();
 		prepare.getQueue(list);
 
-		if (list.isEmpty()) return;
+		if (list.isEmpty()) {
+			return;
+		}
 
 		final LittleQueue queue = new LittleQueue("Messnouncify", list, "", RingtoneReceiver.ACTION_STOP_RINGTONE, this);
 		queue.sendToService(this, 1);

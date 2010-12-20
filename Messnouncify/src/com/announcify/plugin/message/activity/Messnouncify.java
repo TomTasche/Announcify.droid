@@ -21,14 +21,14 @@ public class Messnouncify extends AnnouncifyActivity {
 		getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
 		addPreferencesFromResource(R.xml.preferences_settings);
 
-		Cursor message = getContentResolver().query(Uri.withAppendedPath(Uri.parse("content://mms-sms/"), "conversations"), null, null, null, null);
+		final Cursor message = getContentResolver().query(Uri.withAppendedPath(Uri.parse("content://mms-sms/"), "conversations"), null, null, null, null);
 		message.moveToFirst();
 
-		for (String s : message.getColumnNames()) {
+		for (final String s : message.getColumnNames()) {
 			try {
 				Log.e("SayMyName", s);
 				Log.e("SayMyName", message.getString(message.getColumnIndex(s)));
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				e.printStackTrace();
 				Log.e("SayMyName", "ERROR");
 			}

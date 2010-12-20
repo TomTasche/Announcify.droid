@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
-import android.test.IsolatedContext;
-import android.util.Log;
 
 import com.announcify.activity.control.RemoteControlDialog;
 
@@ -28,8 +26,8 @@ public class CallReceiver extends PhoneStateListener {
 			context.sendBroadcast(new Intent(RemoteControlDialog.ACTION_PAUSE));
 		}
 	}
-	
-	public void setOnCall(boolean onCall) {
-		this.stickyBroadcastReceived = onCall;
+
+	public void setOnCall(final boolean onCall) {
+		stickyBroadcastReceived = onCall;
 	}
 }

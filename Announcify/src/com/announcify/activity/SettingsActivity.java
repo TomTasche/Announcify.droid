@@ -12,9 +12,6 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 
 import com.announcify.R;
 import com.announcify.activity.chooser.GroupChooser;
@@ -35,6 +32,7 @@ public class SettingsActivity extends PreferenceActivity {
 		showDialog(1);
 
 		thread = new Thread() {
+			@Override
 			public void run() {
 				security = new AnnouncifySecurity(SettingsActivity.this);
 			}
@@ -47,7 +45,7 @@ public class SettingsActivity extends PreferenceActivity {
 
 		getPreferenceScreen().findPreference("preference_tts_settings").setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
-			public boolean onPreferenceClick(Preference preference) {
+			public boolean onPreferenceClick(final Preference preference) {
 				final Intent intentTTS = new Intent();
 				intentTTS.setComponent(new ComponentName("com.android.settings", "com.android.settings.TextToSpeechSettings"));
 				startActivity(intentTTS);
@@ -58,7 +56,7 @@ public class SettingsActivity extends PreferenceActivity {
 
 		getPreferenceScreen().findPreference("preference_choose_group").setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
-			public boolean onPreferenceClick(Preference preference) {
+			public boolean onPreferenceClick(final Preference preference) {
 				startActivity(new Intent(SettingsActivity.this, GroupChooser.class));
 
 				return false;
@@ -66,54 +64,53 @@ public class SettingsActivity extends PreferenceActivity {
 		});
 	}
 
-	protected Dialog onCreateDialog(int id) {
+	@Override
+	protected Dialog onCreateDialog(final int id) {
 		switch (id) {
-		case 0:
-			return new AlertDialog.Builder(this)
-			.setCancelable(false)
-			.setTitle(R.string.unlicensed_dialog_title)
-			.setMessage(R.string.unlicensed_dialog_body)
-			.setPositiveButton(R.string.buy_button, new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int which) {
-					Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(
-							"http://market.android.com/details?id=" + getPackageName()));
-					startActivity(marketIntent);
-				}
-			})
-			.setNegativeButton(R.string.quit_button, new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int which) {
-					finish();
-				}
-			})
-			.create();
+			case 0:
+				return new AlertDialog.Builder(this).setCancelable(false).setTitle(R.string.unlicensed_dialog_title).setMessage(R.string.unlicensed_dialog_body).setPositiveButton(R.string.buy_button, new DialogInterface.OnClickListener() {
+					public void onClick(final DialogInterface dialog, final int which) {
+						final Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://market.android.com/details?id=" + getPackageName()));
+						startActivity(marketIntent);
+					}
+				}).setNegativeButton(R.string.quit_button, new DialogInterface.OnClickListener() {
+					public void onClick(final DialogInterface dialog, final int which) {
+						finish();
+					}
+				}).create();
 
-		case 1:
-			return ProgressDialog.show(this, "Announcify", 
-					"Verifying if you really bought Pro...", true);
-			
-		case 2:
-			started = true;
+			case 1:
+				return ProgressDialog.show(this, "Announcify", "Verifying if you really bought Pro...", true);
+
+			case 2:
+				started = true;
 		}
 		return null;
 	}
 
 	@Override
 	protected void onPause() {
-		if (security != null) licensed = security.isLicensed();
+		if (security != null) {
+			licensed = security.isLicensed();
+		}
 
 		super.onPause();
 	}
 
 	@Override
 	protected void onResume() {
-		if (started && !licensed) showDialog(0);
+		if (started && !licensed) {
+			showDialog(0);
+		}
 
 		super.onResume();
 	}
 
 	@Override
 	protected void onDestroy() {
-		if (security != null) security.quit();
+		if (security != null) {
+			security.quit();
+		}
 
 		super.onDestroy();
 	}

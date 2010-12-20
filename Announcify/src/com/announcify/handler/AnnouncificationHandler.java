@@ -13,7 +13,6 @@ import com.announcify.queue.Queue;
 import com.announcify.service.AnnouncifyService;
 import com.announcify.service.ManagerService;
 import com.announcify.tts.Speaker;
-import com.announcify.tts.Speech;
 import com.announcify.util.Money;
 
 public class AnnouncificationHandler extends Handler {
@@ -46,80 +45,82 @@ public class AnnouncificationHandler extends Handler {
 		Log.e("smn", "what: " + msg.what);
 
 		switch (msg.what) {
-		case WHAT_PUT_QUEUE:
-			final LittleQueue little = msg.getData().getParcelable(AnnouncifyService.EXTRA_QUEUE);
+			case WHAT_PUT_QUEUE:
+				final LittleQueue little = msg.getData().getParcelable(AnnouncifyService.EXTRA_QUEUE);
 
-			// TODO: prohibit in-call speech here!
-			switch (msg.getData().getInt(AnnouncifyService.EXTRA_PRIORITY, -1)) {
-			case 0:
-				queue.putFirst(little);
+				// TODO: prohibit in-call speech here!
+				switch (msg.getData().getInt(AnnouncifyService.EXTRA_PRIORITY, -1)) {
+					case 0:
+						queue.putFirst(little);
+						break;
+					case 1:
+						queue.putLast(little);
+						break;
+
+					// third party plugins
+					default:
+						queue.putLast(little);
+						break;
+				}
+
 				break;
-			case 1:
-				queue.putLast(little);
-				break;
 
-				// third party plugins
-			default:
-				queue.putLast(little);
-				break;
-			}
-
-			break;
-
-		case WHAT_NEXT_ITEM:
-			if (msg.obj instanceof String) {
-				speaker.speak((String) msg.obj);
-			} else if (msg.obj instanceof Integer) {
-				int i = (Integer) msg.obj;
-				if (i < 1000) i *= 1000;
-
-				postDelayed(new Runnable() {
-
-					public void run() {
-						speaker.speak("");
+			case WHAT_NEXT_ITEM:
+				if (msg.obj instanceof String) {
+					speaker.speak((String) msg.obj);
+				} else if (msg.obj instanceof Integer) {
+					int i = (Integer) msg.obj;
+					if (i < 1000) {
+						i *= 1000;
 					}
-				}, (Integer) msg.obj);
-			}
 
-			break;
+					postDelayed(new Runnable() {
 
-		case WHAT_PAUSE:
-			if (!Money.isPaid(context)) {
-				context.stopService(new Intent(context, ManagerService.class));
-			} else {
+						public void run() {
+							speaker.speak("");
+						}
+					}, (Integer) msg.obj);
+				}
+
+				break;
+
+			case WHAT_PAUSE:
+				if (!Money.isPaid(context)) {
+					context.stopService(new Intent(context, ManagerService.class));
+				} else {
+					quit();
+				}
+
+				break;
+
+			case WHAT_CONTINUE:
+				queue.grant();
+				break;
+
+			case WHAT_SHUTDOWN:
 				quit();
-			}
+				// TODO: save queue
+				break;
 
-			break;
+			case WHAT_CHANGE_LOCALE:
+				// TODO:
+				// speaker.applyLanguage((Speech) msg.obj);
+				break;
 
-		case WHAT_CONTINUE:
-			queue.grant();
-			break;
+			case WHAT_REVERT_LOCALE:
+				speaker.revertLanguage();
+				break;
 
-		case WHAT_SHUTDOWN:
-			quit();
-			// TODO: save queue
-			break;
+			case WHAT_START:
+				if (speaker.setOnUtteranceCompletedListener(queue) != TextToSpeech.SUCCESS) {
+					// TODO: send log to server
+				}
 
-		case WHAT_CHANGE_LOCALE:
-			// TODO:
-			// speaker.applyLanguage((Speech) msg.obj);
-			break;
+				queue.start();
+				break;
 
-		case WHAT_REVERT_LOCALE:
-			speaker.revertLanguage();
-			break;
-
-		case WHAT_START:
-			if (speaker.setOnUtteranceCompletedListener(queue) != TextToSpeech.SUCCESS) {
-				// TODO: send log to server
-			}
-
-			queue.start();
-			break;
-
-		default:
-			break;
+			default:
+				break;
 		}
 	}
 

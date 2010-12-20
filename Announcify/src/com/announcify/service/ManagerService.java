@@ -83,9 +83,13 @@ public class ManagerService extends Service {
 			return;
 		}
 
-		if (bundle.getInt(AnnouncifyService.EXTRA_PRIORITY, -1) > 0 && conditionManager.isScreenOn()) return;
+		if (bundle.getInt(AnnouncifyService.EXTRA_PRIORITY, -1) > 0 && conditionManager.isScreenOn()) {
+			return;
+		}
 
-		if (bundle.getInt(AnnouncifyService.EXTRA_PRIORITY, -1) == 0) conditionManager.setOnCall(true);
+		if (bundle.getInt(AnnouncifyService.EXTRA_PRIORITY, -1) == 0) {
+			conditionManager.setOnCall(true);
+		}
 
 		final Message msg = handler.obtainMessage(AnnouncificationHandler.WHAT_PUT_QUEUE);
 		msg.setData(bundle);

@@ -25,6 +25,7 @@ public class Mailnouncify extends AnnouncifyActivity {
 		final Intent serviceIntent = new Intent(this, MailService.class);
 		stopService(serviceIntent);
 		startService(serviceIntent);
+		
 		super.onPause();
 	}
 

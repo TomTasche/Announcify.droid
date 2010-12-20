@@ -1,4 +1,4 @@
-#Sun Dec 19 20:49:46 CET 2010
+#Mon Dec 20 19:07:28 CET 2010
 emulatorControl.track.first=146
 emulatorControl.track.count=42
 lastImageSaveDir=/home/tom/Dropbox/Announcify
@@ -19,7 +19,7 @@ emulatorControl.waypoint.longitude=90
 emulatorControl.track.last=146
 eclipse.preferences.version=1
 com.android.ide.eclipse.ddms.logcat.level=18
-com.android.ide.eclipse.ddms.logcat.tag=74
+com.android.ide.eclipse.ddms.logcat.tag=121
 emulatorControl.waypoint.desc=130
 devicePanel.Col4=157
 com.android.ide.eclipse.ddms.logcat.message=1028

@@ -1,0 +1,16 @@
+package com.announcify.error;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+
+public class ExceptionReceiver extends BroadcastReceiver {
+	public static final String EXTRA_EXCEPTION = "com.announcify.EXTRA_EXCEPTION";
+
+	@Override
+	public void onReceive(Context context, Intent intent) {
+		if (!intent.getExtras().containsKey(EXTRA_EXCEPTION)) return;
+
+
+	}
+}

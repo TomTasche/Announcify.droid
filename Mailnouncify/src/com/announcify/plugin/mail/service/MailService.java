@@ -13,7 +13,6 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
-import android.util.Log;
 
 import com.announcify.plugin.mail.util.MailnouncifySettings;
 
@@ -54,7 +53,6 @@ public class MailService extends Service {
 	}
 
 	synchronized private void spawnNewObserver(final String address) {
-		Log.e("smn", ":" + address + ":");
 		if ("".equals(address)) {
 			return;
 		}
@@ -82,6 +80,7 @@ public class MailService extends Service {
 
 	private class MailObserver extends ContentObserver {
 		private final String address;
+		private int maxMessageIdSeen;
 
 		public MailObserver(final Handler handler, final String address) {
 			super(handler);
@@ -91,48 +90,39 @@ public class MailService extends Service {
 
 		@Override
 		public void onChange(final boolean selfChange) {
-			String[] projection = new String[] {"conversation_id"};
-			final Cursor conversations = getContentResolver().query(Uri.parse("content://gmail-ls/conversations/" + Uri.encode(address)), projection, null, null, null);
-			conversations.moveToFirst();
+			Cursor conversations = null;
+			Cursor messages = null;
 
-			final long conversationId = Long.valueOf(conversations.getString(conversations.getColumnIndex(projection[0])));
+			try {
+				String[] projection = new String[] {"conversation_id", "maxMessageId"};
+				conversations = getContentResolver().query(Uri.parse("content://gmail-ls/conversations/" + Uri.encode(address)), projection, null, null, null);
+				conversations.moveToFirst();
 
-			// for (String s : conversations.getColumnNames()) {
-			// try {
-			// Log.e("smn", ":" + s);
-			// Log.e("smn",
-			// conversations.getString(conversations.getColumnIndex(s)));
-			// } catch (Exception e) {
-			// }
-			// }
-			//
-			// Log.e("smn", "------------");
+				final long conversationId = Long.valueOf(conversations.getString(conversations.getColumnIndex(projection[0])));
 
-			projection = new String[] {"fromAddress", "subject", "snippet"};
+				final long maxMessageId = Long.valueOf(conversations.getString(conversations.getColumnIndex(projection[1])));
+				if (maxMessageId < maxMessageIdSeen) {
+					return;
+				}
 
-			final Cursor messages = getContentResolver().query(Uri.parse("content://gmail-ls/conversations/" + address + "/" + Uri.parse(String.valueOf(conversationId)) + "/messages"), projection, null, null, null);
-			messages.moveToLast();
+				projection = new String[] {"fromAddress", "subject", "snippet"};
 
-			// for (String s : messages.getColumnNames()) {
-			// try {
-			// Log.e("smn", ":" + s);
-			// Log.e("smn", messages.getString(messages.getColumnIndex(s)));
-			// } catch (Exception e) {
-			// }
-			// }
+				messages = getContentResolver().query(Uri.parse("content://gmail-ls/conversations/" + address + "/" + Uri.parse(String.valueOf(conversationId)) + "/messages"), projection, null, null, null);
+				messages.moveToLast();
 
-			if (!settings.getReadOwn() && address.equals(messages.getString(messages.getColumnIndex(projection[0])))) {
-				return;
+				if (!settings.getReadOwn() && address.equals(messages.getString(messages.getColumnIndex(projection[0])))) {
+					return;
+				}
+
+				final Intent intent = new Intent(MailService.this, WorkerService.class);
+				intent.putExtra(WorkerService.EXTRA_FROM, messages.getString(messages.getColumnIndex(projection[0])));
+				intent.putExtra(WorkerService.EXTRA_SUBJECT, conversations.getString(conversations.getColumnIndex(projection[1])));
+				intent.putExtra(WorkerService.EXTRA_SNIPPET, conversations.getString(conversations.getColumnIndex(projection[2])));
+				startService(intent);
+			} finally {
+				messages.close();
+				conversations.close();
 			}
-
-			final Intent intent = new Intent(MailService.this, WorkerService.class);
-			intent.putExtra(WorkerService.EXTRA_FROM, messages.getString(messages.getColumnIndex(projection[0])));
-			intent.putExtra(WorkerService.EXTRA_SUBJECT, conversations.getString(conversations.getColumnIndex(projection[1])));
-			intent.putExtra(WorkerService.EXTRA_SNIPPET, conversations.getString(conversations.getColumnIndex(projection[2])));
-			startService(intent);
-
-			messages.close();
-			conversations.close();
 		}
 	}
 

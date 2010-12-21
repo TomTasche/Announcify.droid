@@ -6,8 +6,8 @@ import android.content.Intent;
 
 public class ExceptionReceiver extends BroadcastReceiver {
 	@Override
-	public void onReceive(Context context, Intent intent) {
-		Intent serviceIntent = new Intent(context, ExceptionService.class);
+	public void onReceive(final Context context, final Intent intent) {
+		final Intent serviceIntent = new Intent(context, ExceptionService.class);
 		serviceIntent.putExtras(intent.getExtras());
 		context.startService(serviceIntent);
 	}

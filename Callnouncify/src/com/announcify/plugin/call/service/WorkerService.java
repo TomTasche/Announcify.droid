@@ -40,7 +40,11 @@ public class WorkerService extends AnnouncifyService {
 			return;
 		}
 
-		// TODO: wait
+		if (settings.getReadingWait() > 1000) {
+			try {
+				Thread.sleep(settings.getReadingWait());
+			} catch (final InterruptedException e) {}
+		}
 
 		final LittleQueue queue = new LittleQueue("Callnouncify", list, RingtoneReceiver.ACTION_START_RINGTONE, "", this);
 		queue.sendToService(this, 0);

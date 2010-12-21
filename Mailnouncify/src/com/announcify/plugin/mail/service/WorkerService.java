@@ -32,13 +32,21 @@ public class WorkerService extends AnnouncifyService {
 			Lookup.getNickname(contact);
 		}
 
-		MailnouncifySettings settings = new MailnouncifySettings(this);
+		final MailnouncifySettings settings = new MailnouncifySettings(this);
 
-		Prepare prepare = new Prepare(this, settings, contact, intent.getStringExtra(EXTRA_SUBJECT));
+		final Prepare prepare = new Prepare(this, settings, contact, intent.getStringExtra(EXTRA_SUBJECT));
 		final LinkedList<Object> list = new LinkedList<Object>();
 		prepare.getQueue(list);
 
-		if (list.isEmpty()) return;
+		if (list.isEmpty()) {
+			return;
+		}
+
+		if (settings.getReadingWait() > 1000) {
+			try {
+				Thread.sleep(settings.getReadingWait());
+			} catch (final InterruptedException e) {}
+		}
 
 		final LittleQueue queue = new LittleQueue("Mailnouncify", list, "", RingtoneReceiver.ACTION_STOP_RINGTONE, this);
 		queue.sendToService(this, 2);

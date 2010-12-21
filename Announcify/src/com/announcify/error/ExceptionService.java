@@ -32,7 +32,7 @@ public class ExceptionService extends IntentService {
 				@Override
 				public void run() {
 					try {
-						Exception exception = (Exception) intent.getSerializableExtra(ExceptionHandler.STACKTRACE);
+						final Exception exception = (Exception) intent.getSerializableExtra(ExceptionHandler.STACKTRACE);
 						Log.e("Announcify", "Caught exception", exception);
 
 						final ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();

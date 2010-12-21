@@ -59,6 +59,9 @@
 		</receiver>
 
 		<service
+			android:name=".service.TalkService" />
+
+		<service
 			android:name=".service.WorkerService">
 			<intent-filter>
 				<action

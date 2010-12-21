@@ -1,5 +1,7 @@
 package com.announcify.handler;
 
+import java.util.LinkedList;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
@@ -12,6 +14,7 @@ import com.announcify.queue.LittleQueue;
 import com.announcify.queue.Queue;
 import com.announcify.service.AnnouncifyService;
 import com.announcify.service.ManagerService;
+import com.announcify.sql.model.PluginModel;
 import com.announcify.tts.Speaker;
 import com.announcify.util.Money;
 
@@ -31,6 +34,7 @@ public class AnnouncificationHandler extends Handler {
 	private final Context context;
 	private final Queue queue;
 	private final Speaker speaker;
+	private final PluginModel model;
 
 	public AnnouncificationHandler(final Context context, final Looper looper, final Speaker speaker) {
 		super(looper);
@@ -38,6 +42,7 @@ public class AnnouncificationHandler extends Handler {
 		this.speaker = speaker;
 
 		queue = new Queue(context, this);
+		model = new PluginModel(context);
 	}
 
 	@Override
@@ -46,15 +51,17 @@ public class AnnouncificationHandler extends Handler {
 
 		switch (msg.what) {
 			case WHAT_PUT_QUEUE:
-				final LittleQueue little = msg.getData().getParcelable(AnnouncifyService.EXTRA_QUEUE);
+				LittleQueue little = msg.getData().getParcelable(AnnouncifyService.EXTRA_QUEUE);
 
-				// TODO: prohibit in-call speech here!
+				if (!model.getActive(little.getPluginName())) {
+					little = new LittleQueue("Empty", new LinkedList<Object>(), context);
+					msg.getData().putInt(AnnouncifyService.EXTRA_PRIORITY, 9);
+				}
+
 				switch (msg.getData().getInt(AnnouncifyService.EXTRA_PRIORITY, -1)) {
+					// call only!
 					case 0:
 						queue.putFirst(little);
-						break;
-					case 1:
-						queue.putLast(little);
 						break;
 
 					// third party plugins
@@ -69,11 +76,6 @@ public class AnnouncificationHandler extends Handler {
 				if (msg.obj instanceof String) {
 					speaker.speak((String) msg.obj);
 				} else if (msg.obj instanceof Integer) {
-					int i = (Integer) msg.obj;
-					if (i < 1000) {
-						i *= 1000;
-					}
-
 					postDelayed(new Runnable() {
 
 						public void run() {

@@ -25,7 +25,9 @@ public class RingtoneReceiver extends BroadcastReceiver {
 			}
 
 			final MediaPlayer player = new MediaPlayer();
-			if (player == null) return;
+			if (player == null) {
+				return;
+			}
 
 			try {
 				player.setDataSource(context, Uri.parse(s));

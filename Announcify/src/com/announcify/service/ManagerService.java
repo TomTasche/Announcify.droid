@@ -7,7 +7,6 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Bundle;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Message;
@@ -26,15 +25,12 @@ public class ManagerService extends Service {
 	private ConditionManager conditionManager;
 	private ControlReceiver controlReceiver;
 	private AnnouncificationHandler handler;
-	// private Volume manager;
 	private HandlerThread thread;
 	private Speaker speaker;
 
 	@Override
 	public void onCreate() {
 		Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this, Thread.getDefaultUncaughtExceptionHandler()));
-
-		// manager = new Volume(this);
 
 		conditionManager = new ConditionManager(this);
 		// if (conditionManager.isScreenOn()) {
@@ -78,21 +74,17 @@ public class ManagerService extends Service {
 		if (intent == null || intent.getExtras() == null) {
 			return;
 		}
-		final Bundle bundle = intent.getExtras();
-		if (bundle == null) {
+
+		if (intent.getExtras().getInt(AnnouncifyService.EXTRA_PRIORITY, -1) > 0 && conditionManager.isScreenOn()) {
 			return;
 		}
 
-		if (bundle.getInt(AnnouncifyService.EXTRA_PRIORITY, -1) > 0 && conditionManager.isScreenOn()) {
-			return;
-		}
-
-		if (bundle.getInt(AnnouncifyService.EXTRA_PRIORITY, -1) == 0) {
+		if (intent.getExtras().getInt(AnnouncifyService.EXTRA_PRIORITY, -1) == 0) {
 			conditionManager.setOnCall(true);
 		}
 
 		final Message msg = handler.obtainMessage(AnnouncificationHandler.WHAT_PUT_QUEUE);
-		msg.setData(bundle);
+		msg.setData(intent.getExtras());
 		handler.sendMessage(msg);
 	}
 
@@ -120,7 +112,6 @@ public class ManagerService extends Service {
 		if (notificationManager != null) {
 			notificationManager.cancel(17);
 		}
-		// manager.quit();
 	}
 
 	@Override

@@ -1,0 +1,9 @@
+package com.announcify.util;
+
+import android.content.Context;
+
+public class Money {
+	public static boolean isPaid(final Context context) {
+		
+	}
+}

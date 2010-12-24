@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.announcify.activity.AnnouncifyActivity;
 import com.announcify.plugin.call.R;
+import com.announcify.plugin.call.util.CallnouncifySettings;
 
 public class Callnouncify extends AnnouncifyActivity {
 	public static final String ACTION_SETTINGS = "com.announcify.plugin.call.SETTINGS";
@@ -17,6 +18,8 @@ public class Callnouncify extends AnnouncifyActivity {
 		getPreferenceManager().setSharedPreferencesName(ACTION_SETTINGS);
 		getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
 		addPreferencesFromResource(R.xml.preferences_settings);
+
+		setCustomListeners(new CallnouncifySettings(this));
 	}
 
 	@Override

@@ -1,0 +1,15 @@
+package com.announcify.text;
+
+import java.util.Map;
+
+public class Formatter {
+	
+	
+	public Formatter() {
+		
+	}
+	
+	public Formatter(Map<String, String> replace) {
+		
+	}
+}

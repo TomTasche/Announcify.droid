@@ -8,10 +8,11 @@ import android.util.Log;
 
 import com.announcify.contact.Contact;
 import com.announcify.contact.Lookup;
+import com.announcify.error.ExceptionHandler;
 import com.announcify.plugin.call.receiver.RingtoneReceiver;
 import com.announcify.plugin.call.util.CallnouncifySettings;
 import com.announcify.queue.LittleQueue;
-import com.announcify.queue.Prepare;
+import com.announcify.queue.PrepareMachine;
 import com.announcify.service.AnnouncifyService;
 
 public class WorkerService extends AnnouncifyService {
@@ -22,6 +23,8 @@ public class WorkerService extends AnnouncifyService {
 
 	@Override
 	protected void onHandleIntent(final Intent intent) {
+		Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this, Thread.getDefaultUncaughtExceptionHandler()));
+
 		final String number = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
 		Log.e("smn", number);
 		final Contact contact = new Contact(this, number);
@@ -32,9 +35,8 @@ public class WorkerService extends AnnouncifyService {
 
 		final CallnouncifySettings settings = new CallnouncifySettings(this);
 
-		final Prepare prepare = new Prepare(this, settings, contact, "");
-		final LinkedList<Object> list = new LinkedList<Object>();
-		prepare.getQueue(list);
+		final PrepareMachine prepare = new PrepareMachine(this, settings, contact, "");
+		final LinkedList<Object> list = prepare.prepare();
 
 		if (list.isEmpty()) {
 			return;

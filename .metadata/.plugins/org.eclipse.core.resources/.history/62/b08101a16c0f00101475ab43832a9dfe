@@ -1,0 +1,12 @@
+package com.announcify.text;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Formatter {
+	private void replaceExpressions(Map<String, String> expressions) {
+		for (String s : expressions.keySet()) {
+			
+		}
+	}
+}

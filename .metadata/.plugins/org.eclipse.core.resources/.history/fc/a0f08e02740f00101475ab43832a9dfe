@@ -1,0 +1,143 @@
+package com.announcify.queue;
+
+import java.util.LinkedList;
+import java.util.List;
+
+import android.content.Context;
+import android.content.res.Resources;
+
+import com.announcify.contact.Contact;
+import com.announcify.text.Formatter;
+import com.announcify.util.HeadsetFinder;
+import com.announcify.util.PluginSettings;
+
+public class PrepareMachine {
+	public static final String MODE_CUSTOM = "com.announcify.CUSTOM";
+	public static final String MODE_UNKNOWN = "com.announcify.UNKNOWN";
+
+	private final PluginSettings settings;
+	private final Context context;
+	private final Contact contact;
+	private String text;
+	private final String message;
+
+	public PrepareMachine(final Context context, final PluginSettings settings, final Contact contact, final String message) {
+		this.settings = settings;
+		this.context = context;
+		this.contact = contact;
+		this.message = message;
+	}
+
+	public String getName() {
+		return text;
+	}
+
+	public List<Object> prepare() {
+		List<Object> list = new LinkedList<Object>();
+
+		prepareName();
+
+		if ("".equals(text) || text == null) {
+			return list;
+		}
+
+		for (int i = 0; i < settings.getReadingRepeat(); i++) {
+			list.add(text);
+			list.add(new Integer(settings.getReadingBreak()));
+		}
+
+		return list;
+	}
+
+	private void prepareName() {
+		final String temp = contact.getUserPreferredName();
+		if ("".equals(temp)) {
+			String mode = settings.getUnknownMode();
+
+			if ("".equals(mode)) return;
+
+			if (MODE_UNKNOWN.equals(mode)) {
+				text = getUnknownString();
+				return;
+			}
+
+			if (MODE_CUSTOM.equals(mode)) {
+				// TODO: get custom
+				text = settings.getCustomUnknownAnnouncement();
+			} else {
+				text = mode;
+			}
+			
+			applyFormat();
+		} else {
+			text = temp;
+			
+			prepareAnnouncement();
+		}
+	}
+	
+	private void applyFormat() {
+		// Formatter.replaceExpressions(expressions, text);
+	}
+
+	private void prepareAnnouncement() {
+		String format;
+		if (HeadsetFinder.isDiscreet(context)) {
+			format = settings.getDiscreetMode();
+		} else {
+			format = settings.getAnnouncementMode();
+		}
+		
+		applyFormat();
+	}
+
+	private void prepareReading() {
+		switch () {
+			case 0:
+				break;
+
+			case 1:
+				text += " from " + contact.getAddressType();
+				break;
+
+			case 2:
+				text = settings.getEventType() + " from " + text;
+				break;
+
+			case 3:
+				text = settings.getEventType() + " from " + text + ": " + message;
+				break;
+
+			case 4:
+				text = "You have a new " + settings.getEventType() + "!";
+				break;
+
+			case 5:
+				text = "You have a new Announcification!";
+				break;
+
+			case 6:
+				text = settings.getCustomAnnouncement();
+				break;
+
+			default:
+				text = "";
+				break;
+		}
+	}
+
+	private void prepareDiscreetReading() {
+		switch () {
+			case 0:
+				prepareReading();
+
+			default:
+				text = "";
+		}
+	}
+
+	private String getUnknownString() {
+		return Resources.getSystem().getString(android.R.string.unknownName);
+		// UNKNOWN = UNKNOWN.substring(1, UNKNOWN.length() - 1);
+	}
+}

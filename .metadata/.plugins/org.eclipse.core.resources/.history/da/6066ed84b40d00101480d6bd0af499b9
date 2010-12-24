@@ -1,0 +1,24 @@
+package com.announcify.error;
+
+import android.content.Context;
+import android.content.Intent;
+
+public class ExceptionParser {
+	private Context context;
+	private Exception exception;
+	
+	public ExceptionParser(Context context, Exception exception) {
+		this.context = context;
+		this.exception = exception;
+	}
+	
+	public void sendException() {
+		final Intent exceptionIntent = new Intent("com.announcify.EXCEPTION");
+		exceptionIntent.putExtra(ExceptionHandler.STACKTRACE, exception);
+		exceptionIntent.putExtra(ExceptionHandler.PACKAGE, getPackageName());
+		exceptionIntent.putExtra(ExceptionHandler.VERSION_CODE, getVersionCode());
+		exceptionIntent.putExtra(ExceptionHandler.VERSION_NAME, getVersionName());
+
+		context.sendBroadcast(exceptionIntent);
+	}
+}

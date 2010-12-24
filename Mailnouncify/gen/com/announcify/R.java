@@ -13,6 +13,7 @@ public final class R {
         public static final int preference_list_reading_announcement_names=0x7f050003;
         public static final int preference_list_reading_break_ids=0x7f050006;
         public static final int preference_list_reading_break_names=0x7f050000;
+        public static final int preference_list_reading_discreet_ids=0x7f05000b;
         public static final int preference_list_reading_discreet_names=0x7f050005;
         public static final int preference_list_reading_repeat_ids=0x7f050007;
         public static final int preference_list_reading_repeat_names=0x7f050001;
@@ -27,8 +28,7 @@ public final class R {
         public static final int icon=0x7f020000;
     }
     public static final class string {
-        public static final int app_name=0x7f040001;
-        public static final int hello=0x7f040000;
+        public static final int app_name=0x7f040000;
     }
     public static final class xml {
         public static final int preferences_settings=0x7f030000;

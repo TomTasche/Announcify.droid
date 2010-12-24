@@ -7,10 +7,11 @@ import android.util.Log;
 
 import com.announcify.contact.Contact;
 import com.announcify.contact.Lookup;
+import com.announcify.error.ExceptionHandler;
 import com.announcify.plugin.mail.receiver.RingtoneReceiver;
 import com.announcify.plugin.mail.util.MailnouncifySettings;
 import com.announcify.queue.LittleQueue;
-import com.announcify.queue.Prepare;
+import com.announcify.queue.PrepareMachine;
 import com.announcify.service.AnnouncifyService;
 
 public class WorkerService extends AnnouncifyService {
@@ -24,6 +25,8 @@ public class WorkerService extends AnnouncifyService {
 
 	@Override
 	protected void onHandleIntent(final Intent intent) {
+		Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this, Thread.getDefaultUncaughtExceptionHandler()));
+
 		final String address = intent.getStringExtra(EXTRA_FROM);
 		Log.e("smn", address);
 		final Contact contact = new Contact(this, address);
@@ -34,9 +37,8 @@ public class WorkerService extends AnnouncifyService {
 
 		final MailnouncifySettings settings = new MailnouncifySettings(this);
 
-		final Prepare prepare = new Prepare(this, settings, contact, intent.getStringExtra(EXTRA_SUBJECT));
-		final LinkedList<Object> list = new LinkedList<Object>();
-		prepare.getQueue(list);
+		final PrepareMachine prepare = new PrepareMachine(this, settings, contact, intent.getStringExtra(EXTRA_SUBJECT));
+		final LinkedList<Object> list = prepare.prepare();
 
 		if (list.isEmpty()) {
 			return;

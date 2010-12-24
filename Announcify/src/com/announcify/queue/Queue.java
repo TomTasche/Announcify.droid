@@ -8,7 +8,6 @@ import android.os.Message;
 import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
 
 import com.announcify.handler.AnnouncificationHandler;
-import com.announcify.service.ManagerService;
 import com.announcify.sql.model.PluginModel;
 
 public class Queue implements OnUtteranceCompletedListener {
@@ -111,6 +110,7 @@ public class Queue implements OnUtteranceCompletedListener {
 
 		if (queue.isEmpty()) {
 			quit();
+			return;
 		}
 	}
 
@@ -147,6 +147,6 @@ public class Queue implements OnUtteranceCompletedListener {
 
 		deny();
 
-		context.stopService(new Intent(context, ManagerService.class));
+		handler.sendEmptyMessage(AnnouncificationHandler.WHAT_SHUTDOWN);
 	}
 }

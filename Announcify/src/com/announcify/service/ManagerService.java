@@ -19,6 +19,7 @@ import com.announcify.error.ExceptionHandler;
 import com.announcify.handler.AnnouncificationHandler;
 import com.announcify.receiver.ControlReceiver;
 import com.announcify.tts.Speaker;
+import com.announcify.util.AnnouncifySettings;
 
 public class ManagerService extends Service {
 	private NotificationManager notificationManager;
@@ -32,7 +33,8 @@ public class ManagerService extends Service {
 	public void onCreate() {
 		Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this, Thread.getDefaultUncaughtExceptionHandler()));
 
-		conditionManager = new ConditionManager(this);
+		final AnnouncifySettings settings = new AnnouncifySettings(this);
+		conditionManager = new ConditionManager(this, settings);
 		// if (conditionManager.isScreenOn()) {
 		// manager.lowerSpeechVolume();
 		// }
@@ -62,11 +64,15 @@ public class ManagerService extends Service {
 		controlFilter.addAction(RemoteControlDialog.ACTION_SKIP);
 		registerReceiver(controlReceiver, controlFilter);
 
-		final PendingIntent pendingIntent = PendingIntent.getActivity(this, 1993, new Intent(this, RemoteControlDialog.class), 0);
-		final Notification notification = new Notification(R.drawable.notification_icon, null, 0);
-		notification.setLatestEventInfo(this, "Important Announcification", "Press here to stop it.", pendingIntent);
-		notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-		notificationManager.notify(17, notification);
+		if (settings.isShowNotification()) {
+			final PendingIntent pendingIntent = PendingIntent.getActivity(this, 1993, new Intent(this, RemoteControlDialog.class), 0);
+			final Notification notification = new Notification(R.drawable.notification_icon, null, 0);
+			notification.setLatestEventInfo(this, "Important Announcification", "Press here to stop it.", pendingIntent);
+			notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+			notificationManager.notify(17, notification);
+		}
+
+		super.onCreate();
 	}
 
 	@Override
@@ -86,6 +92,8 @@ public class ManagerService extends Service {
 		final Message msg = handler.obtainMessage(AnnouncificationHandler.WHAT_PUT_QUEUE);
 		msg.setData(intent.getExtras());
 		handler.sendMessage(msg);
+
+		super.onStart(intent, startId);
 	}
 
 	@Override
@@ -102,16 +110,21 @@ public class ManagerService extends Service {
 		}
 
 		conditionManager.quit();
+
 		if (speaker != null) {
 			speaker.shutdown();
 		}
+
 		if (thread != null && thread.isAlive()) {
 			thread.interrupt();
 			thread.getLooper().quit();
 		}
+
 		if (notificationManager != null) {
 			notificationManager.cancel(17);
 		}
+
+		super.onDestroy();
 	}
 
 	@Override

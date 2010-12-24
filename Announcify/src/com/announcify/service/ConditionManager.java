@@ -21,10 +21,9 @@ public class ConditionManager {
 	private final CallReceiver callReceiver;
 	private HeadsetReceiver headsetReceiver;
 
-	public ConditionManager(final Context context) {
+	public ConditionManager(final Context context, final AnnouncifySettings settings) {
 		this.context = context;
 
-		final AnnouncifySettings settings = new AnnouncifySettings(context);
 		if (settings.isGravityCondition()) {
 			gravityReceiver = new GravityReceiver(context);
 			gravityReceiver.setAccuracy(2f);

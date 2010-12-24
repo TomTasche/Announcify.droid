@@ -17,7 +17,7 @@
 	</PreferenceScreen>
 
 	<PreferenceScreen
-		android:title="Behaviour Settings">
+		android:title="Behavior Settings">
 		<CheckBoxPreference
 			android:key="preference_condition_screen"
 			android:title="Screen Condition"
@@ -31,6 +31,11 @@
 		<CheckBoxPreference
 			android:key="preference_condition_gravity"
 			android:title="Gravity Condition"
+			android:defaultValue="true" />
+
+		<CheckBoxPreference
+			android:key="preference_behavior_notification"
+			android:title="Show Notification"
 			android:defaultValue="true" />
 	</PreferenceScreen>
 

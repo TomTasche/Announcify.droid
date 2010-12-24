@@ -1,6 +1,8 @@
 package com.announcify.util;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences.Editor;
 import android.provider.Settings.Secure;
 
 import com.android.vending.licensing.AESObfuscator;
@@ -51,6 +53,10 @@ public class AnnouncifySecurity {
 			activity.dismissDialog(1);
 			activity.showDialog(2);
 			// Should allow user access.
+
+			final Editor editor = activity.getSharedPreferences(AnnouncifySettings.PREFERENCES_NAME, Context.MODE_WORLD_READABLE).edit();
+			editor.putBoolean("test", false);
+			editor.commit();
 		}
 
 		public void dontAllow() {
@@ -67,6 +73,10 @@ public class AnnouncifySecurity {
 			activity.dismissDialog(1);
 
 			activity.showDialog(0);
+
+			final Editor editor = activity.getSharedPreferences(AnnouncifySettings.PREFERENCES_NAME, Context.MODE_WORLD_READABLE).edit();
+			editor.putBoolean("test", true);
+			editor.commit();
 		}
 
 		public void applicationError(final ApplicationErrorCode errorCode) {

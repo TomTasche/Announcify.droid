@@ -10,13 +10,13 @@ import android.os.Message;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 
+import com.announcify.error.ExceptionParser;
 import com.announcify.queue.LittleQueue;
 import com.announcify.queue.Queue;
 import com.announcify.service.AnnouncifyService;
 import com.announcify.service.ManagerService;
 import com.announcify.sql.model.PluginModel;
 import com.announcify.tts.Speaker;
-import com.announcify.util.Money;
 
 public class AnnouncificationHandler extends Handler {
 	public static final int WHAT_START = 40;
@@ -87,12 +87,7 @@ public class AnnouncificationHandler extends Handler {
 				break;
 
 			case WHAT_PAUSE:
-				if (!Money.isPaid(context)) {
-					context.stopService(new Intent(context, ManagerService.class));
-				} else {
-					quit();
-				}
-
+				quit(null);
 				break;
 
 			case WHAT_CONTINUE:
@@ -100,8 +95,7 @@ public class AnnouncificationHandler extends Handler {
 				break;
 
 			case WHAT_SHUTDOWN:
-				quit();
-				// TODO: save queue
+				quit(null);
 				break;
 
 			case WHAT_CHANGE_LOCALE:
@@ -115,7 +109,7 @@ public class AnnouncificationHandler extends Handler {
 
 			case WHAT_START:
 				if (speaker.setOnUtteranceCompletedListener(queue) != TextToSpeech.SUCCESS) {
-					// TODO: send log to server
+					quit(new RuntimeException("Couldn't set UtteranceListener for TextToSpeech"));
 				}
 
 				queue.start();
@@ -126,9 +120,18 @@ public class AnnouncificationHandler extends Handler {
 		}
 	}
 
-	public void quit() {
+	/**
+	 * 
+	 * @param exception
+	 *            Exception to send to Server.
+	 */
+	public void quit(final Exception exception) {
 		queue.quit();
-		getLooper().getThread().interrupt();
-		getLooper().quit();
+
+		if (exception != null) {
+			new ExceptionParser(context, exception).sendException();
+		}
+
+		context.stopService(new Intent(context, ManagerService.class));
 	}
 }

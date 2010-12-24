@@ -54,7 +54,7 @@ public class ExceptionService extends IntentService {
 
 						final UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formparams, "UTF-8");
 
-						final HttpPost request = new HttpPost("http://exception-analytics.appspot.com/analydroid/exception");
+						final HttpPost request = new HttpPost("http://announcify.appspot.com/exception/put");
 						request.setEntity(entity);
 
 						final HttpClient client = new DefaultHttpClient();

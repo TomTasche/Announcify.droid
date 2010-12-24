@@ -3,6 +3,7 @@ package com.announcify.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.announcify.activity.control.RemoteControlDialog;
 import com.announcify.util.HeadsetFinder;
@@ -14,6 +15,7 @@ public class HeadsetReceiver extends BroadcastReceiver {
 			context.sendBroadcast(new Intent(RemoteControlDialog.ACTION_CONTINUE));
 		} else {
 			context.sendBroadcast(new Intent(RemoteControlDialog.ACTION_PAUSE));
+			Log.e("Announcify", "Shutdown because: Headset");
 		}
 	}
 }

@@ -1,0 +1,5 @@
+package com.announcify.api.contact.lookup;
+
+public class Chat {
+
+}

@@ -25,56 +25,56 @@ import android.util.Log;
  */
 public class PreferenceObfuscator {
 
-	private static final String TAG = "PreferenceObfuscator";
+    private static final String TAG = "PreferenceObfuscator";
 
-	private final SharedPreferences mPreferences;
-	private final Obfuscator mObfuscator;
-	private SharedPreferences.Editor mEditor;
+    private final SharedPreferences mPreferences;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param sp
-	 *            A SharedPreferences instance provided by the system.
-	 * @param o
-	 *            The Obfuscator to use when reading or writing data.
-	 */
-	public PreferenceObfuscator(final SharedPreferences sp, final Obfuscator o) {
-		mPreferences = sp;
-		mObfuscator = o;
-		mEditor = null;
-	}
+    private final Obfuscator mObfuscator;
 
-	public void putString(final String key, final String value) {
-		if (mEditor == null) {
-			mEditor = mPreferences.edit();
-		}
-		final String obfuscatedValue = mObfuscator.obfuscate(value);
-		mEditor.putString(key, obfuscatedValue);
-	}
+    private SharedPreferences.Editor mEditor;
 
-	public String getString(final String key, final String defValue) {
-		String result;
-		final String value = mPreferences.getString(key, null);
-		if (value != null) {
-			try {
-				result = mObfuscator.unobfuscate(value);
-			} catch (final ValidationException e) {
-				// Unable to unobfuscate, data corrupt or tampered
-				Log.w(TAG, "Validation error while reading preference: " + key);
-				result = defValue;
-			}
-		} else {
-			// Preference not found
-			result = defValue;
-		}
-		return result;
-	}
+    /**
+     * Constructor.
+     * 
+     * @param sp A SharedPreferences instance provided by the system.
+     * @param o The Obfuscator to use when reading or writing data.
+     */
+    public PreferenceObfuscator(final SharedPreferences sp, final Obfuscator o) {
+        mPreferences = sp;
+        mObfuscator = o;
+        mEditor = null;
+    }
 
-	public void commit() {
-		if (mEditor != null) {
-			mEditor.commit();
-			mEditor = null;
-		}
-	}
+    public void putString(final String key, final String value) {
+        if (mEditor == null) {
+            mEditor = mPreferences.edit();
+        }
+        final String obfuscatedValue = mObfuscator.obfuscate(value);
+        mEditor.putString(key, obfuscatedValue);
+    }
+
+    public String getString(final String key, final String defValue) {
+        String result;
+        final String value = mPreferences.getString(key, null);
+        if (value != null) {
+            try {
+                result = mObfuscator.unobfuscate(value);
+            } catch (final ValidationException e) {
+                // Unable to unobfuscate, data corrupt or tampered
+                Log.w(TAG, "Validation error while reading preference: " + key);
+                result = defValue;
+            }
+        } else {
+            // Preference not found
+            result = defValue;
+        }
+        return result;
+    }
+
+    public void commit() {
+        if (mEditor != null) {
+            mEditor.commit();
+            mEditor = null;
+        }
+    }
 }

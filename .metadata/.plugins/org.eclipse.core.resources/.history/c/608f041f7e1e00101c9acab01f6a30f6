@@ -1,0 +1,15 @@
+package com.announcify.api.contact.lookup;
+
+import android.content.Context;
+
+import com.announcify.api.contact.Contact;
+
+public interface Lookup {
+    Context context;
+    
+    public void getLookup();
+
+    public void getType();
+
+    public void getAddress();
+}

@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<item value="/home/tom/Dropbox/Dokumente/Sonstiges/Backup" key="org.eclipse.jdt.ui.cleanup.loadpath"/>
+	<item value="718" key="org.eclipse.jdt.uicleanup_pagemodify_dialog.preferred_height"/>
+	<item value="0" key="org.eclipse.jdt.uicleanup_pagemodify_dialog.last_focus"/>
+	<item value="0" key="org.eclipse.jdt.uiformatter_page.white_space.java_view.inner"/>
+	<item value="false" key="org.eclipse.jdt.ui.formatter_page.show_invisible_characters"/>
+	<item value="718" key="org.eclipse.jdt.uiformatter_pagemodify_dialog.preferred_height"/>
+	<item value="307" key="org.eclipse.jdt.uicleanup_pagemodify_dialog.preferred_x"/>
+	<item value="25" key="org.eclipse.jdt.uicleanup_pagemodify_dialog.preferred_y"/>
+	<item value="0" key="org.eclipse.jdt.uiformatter_page.white_space_tab_page.node"/>
+	<item value="0" key="org.eclipse.jdt.uiformatter_page.modify_dialog_tab_page.last_focus_index"/>
 	<item value="false" key="SortMembers.sort_all"/>
-	<item value="/home/tom/Dropbox/Dokumente/Sonstiges/Backup" key="org.eclipse.jdt.ui.codeformatter.loadpath"/>
+	<item value="/home/tom/Dropbox/Dokumente/Sonstiges/Backup" key="org.eclipse.jdt.ui.cleanup.loadpath"/>
+	<item value="1059" key="org.eclipse.jdt.uicleanup_pagemodify_dialog.preferred_width"/>
+	<item value="/home/tom/Android/workspace/Announcify" key="org.eclipse.jdt.ui.codeformatter.loadpath"/>
+	<item value="191" key="org.eclipse.jdt.uiformatter_pagemodify_dialog.preferred_x"/>
+	<item value="25" key="org.eclipse.jdt.uiformatter_pagemodify_dialog.preferred_y"/>
+	<item value="1175" key="org.eclipse.jdt.uiformatter_pagemodify_dialog.preferred_width"/>
+	<item value="1" key="org.eclipse.jdt.uiformatter_page.line_wrapping_tab_page.last_category_index"/>
+	<item value="7" key="org.eclipse.jdt.uiformatter_pagemodify_dialog.last_focus"/>
 	<section name="OptionalMessageDialog.hide.">
 		<item value="true" key="org.eclipse.jdt.ui.typecomment.deprecated"/>
 		<item value="false" key="SortMembersMessageDialog.optionalDialog.id"/>
@@ -21,8 +36,16 @@
 	<section name="SourceActionDialog.methods">
 		<item value="false" key="Comments"/>
 		<item value="1" key="VisibilityModifier"/>
+		<item value="1" key="InsertPosition.v2"/>
 		<item value="false" key="SynchronizedModifier"/>
 		<item value="false" key="FinalModifier"/>
+	</section>
+	<section name="org.eclipse.jdt.internal.ui.preferences.EditTemplateDialog_dialogBounds">
+		<item value="705" key="DIALOG_WIDTH"/>
+		<item value="143" key="DIALOG_Y_ORIGIN"/>
+		<item value="324" key="DIALOG_HEIGHT"/>
+		<item value="3" key="DIALOG_X_ORIGIN"/>
+		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.jdt.internal.ui.dialogs.OpenTypeSelectionDialog2">
 		<item value="true" key="ShowStatusLine"/>
@@ -53,6 +76,7 @@
 	<section name="RenameInformationPopup">
 	</section>
 	<section name="org.eclipse.ltk.ui.refactoring.settings">
+		<item value="true" key="renameSubpackages"/>
 		<item value="*" key="patterns"/>
 		<item value="false" key="updateQualifiedNames"/>
 		<item value="1" key="updateSimilarElementsMatchStrategy"/>

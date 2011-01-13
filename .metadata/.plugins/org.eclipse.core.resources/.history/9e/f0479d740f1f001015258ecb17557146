@@ -1,0 +1,15 @@
+package com.announcify.api.contact;
+
+public enum ContactEnum {
+    FIRSTNAME() {
+        
+    }
+
+    FULLNAME() {
+        
+    }
+    
+    public abstract String getExpression();
+    
+    public abstract String getSubstitution();
+}

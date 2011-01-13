@@ -1,0 +1,37 @@
+package com.announcify.api.contact;
+
+public enum ContactEnum {
+    FIRSTNAME() {
+        @Override
+        public String getExpression() {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        @Override
+        public String getSubstitution() {
+            // TODO Auto-generated method stub
+            return null;
+        }
+    },
+
+    FULLNAME() {
+        @Override
+        public String getExpression() {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        @Override
+        public String getSubstitution() {
+            // TODO Auto-generated method stub
+            return null;
+        }
+    }
+    
+    
+
+    public abstract String getExpression();
+
+    public abstract String getSubstitution();
+}

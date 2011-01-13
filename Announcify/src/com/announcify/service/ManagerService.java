@@ -1,3 +1,4 @@
+
 package com.announcify.service;
 
 import android.app.Notification;
@@ -15,120 +16,132 @@ import android.util.Log;
 
 import com.announcify.R;
 import com.announcify.activity.control.RemoteControlDialog;
-import com.announcify.error.ExceptionHandler;
+import com.announcify.api.error.ExceptionHandler;
+import com.announcify.api.service.PluginService;
+import com.announcify.api.util.AnnouncifySettings;
 import com.announcify.handler.AnnouncificationHandler;
 import com.announcify.receiver.ControlReceiver;
 import com.announcify.tts.Speaker;
-import com.announcify.util.AnnouncifySettings;
 
 public class ManagerService extends Service {
-	private NotificationManager notificationManager;
-	private ConditionManager conditionManager;
-	private ControlReceiver controlReceiver;
-	private AnnouncificationHandler handler;
-	private HandlerThread thread;
-	private Speaker speaker;
+    private NotificationManager notificationManager;
 
-	@Override
-	public void onCreate() {
-		Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this, Thread.getDefaultUncaughtExceptionHandler()));
+    private ConditionManager conditionManager;
 
-		final AnnouncifySettings settings = new AnnouncifySettings(this);
-		conditionManager = new ConditionManager(this, settings);
-		// if (conditionManager.isScreenOn()) {
-		// manager.lowerSpeechVolume();
-		// }
+    private ControlReceiver controlReceiver;
 
-		thread = new HandlerThread("Announcifications");
-		thread.start();
+    private AnnouncificationHandler handler;
 
-		speaker = new Speaker(ManagerService.this, new OnInitListener() {
+    private HandlerThread thread;
 
-			public void onInit(final int status) {
-				handler.sendEmptyMessage(AnnouncificationHandler.WHAT_START);
-			}
-		});
+    private Speaker speaker;
 
-		handler = new AnnouncificationHandler(ManagerService.this, thread.getLooper(), speaker);
-		handler.post(new Runnable() {
+    @Override
+    public void onCreate() {
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this, Thread
+                .getDefaultUncaughtExceptionHandler()));
 
-			public void run() {
-				Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(ManagerService.this, Thread.getDefaultUncaughtExceptionHandler()));
-			}
-		});
+        final AnnouncifySettings settings = new AnnouncifySettings(this);
+        conditionManager = new ConditionManager(this, settings);
+        // if (conditionManager.isScreenOn()) {
+        // manager.lowerSpeechVolume();
+        // }
 
-		controlReceiver = new ControlReceiver(handler);
-		final IntentFilter controlFilter = new IntentFilter();
-		controlFilter.addAction(RemoteControlDialog.ACTION_CONTINUE);
-		controlFilter.addAction(RemoteControlDialog.ACTION_PAUSE);
-		controlFilter.addAction(RemoteControlDialog.ACTION_SKIP);
-		registerReceiver(controlReceiver, controlFilter);
+        thread = new HandlerThread("Announcifications");
+        thread.start();
 
-		if (settings.isShowNotification()) {
-			final PendingIntent pendingIntent = PendingIntent.getActivity(this, 1993, new Intent(this, RemoteControlDialog.class), 0);
-			final Notification notification = new Notification(R.drawable.notification_icon, null, 0);
-			notification.setLatestEventInfo(this, "Important Announcification", "Press here to stop it.", pendingIntent);
-			notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-			notificationManager.notify(17, notification);
-		}
+        speaker = new Speaker(ManagerService.this, new OnInitListener() {
 
-		super.onCreate();
-	}
+            public void onInit(final int status) {
+                handler.sendEmptyMessage(AnnouncificationHandler.WHAT_START);
+            }
+        });
 
-	@Override
-	public void onStart(final Intent intent, final int startId) {
-		if (intent == null || intent.getExtras() == null) {
-			return;
-		}
+        handler = new AnnouncificationHandler(ManagerService.this, thread.getLooper(), speaker);
+        handler.post(new Runnable() {
 
-		if (intent.getExtras().getInt(AnnouncifyService.EXTRA_PRIORITY, -1) > 0 && conditionManager.isScreenOn()) {
-			return;
-		}
+            public void run() {
+                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(ManagerService.this,
+                        Thread.getDefaultUncaughtExceptionHandler()));
+            }
+        });
 
-		if (intent.getExtras().getInt(AnnouncifyService.EXTRA_PRIORITY, -1) == 0) {
-			conditionManager.setOnCall(true);
-		}
+        controlReceiver = new ControlReceiver(handler);
+        final IntentFilter controlFilter = new IntentFilter();
+        controlFilter.addAction(RemoteControlDialog.ACTION_CONTINUE);
+        controlFilter.addAction(RemoteControlDialog.ACTION_PAUSE);
+        controlFilter.addAction(RemoteControlDialog.ACTION_SKIP);
+        registerReceiver(controlReceiver, controlFilter);
 
-		final Message msg = handler.obtainMessage(AnnouncificationHandler.WHAT_PUT_QUEUE);
-		msg.setData(intent.getExtras());
-		handler.sendMessage(msg);
+        if (settings.isShowNotification()) {
+            final PendingIntent pendingIntent = PendingIntent.getActivity(this, 1993, new Intent(
+                    this, RemoteControlDialog.class), 0);
+            final Notification notification = new Notification(R.drawable.notification_icon, null,
+                    0);
+            notification.setLatestEventInfo(this, "Important Announcification",
+                    "Press here to stop it.", pendingIntent);
+            notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.notify(17, notification);
+        }
 
-		super.onStart(intent, startId);
-	}
+        super.onCreate();
+    }
 
-	@Override
-	public void onDestroy() {
-		Log.e("Announcify", "shutdown");
+    @Override
+    public void onStart(final Intent intent, final int startId) {
+        if (intent == null || intent.getExtras() == null) {
+            return;
+        }
 
-		if (handler != null) {
-			final Message msg = handler.obtainMessage(AnnouncificationHandler.WHAT_SHUTDOWN);
-			handler.sendMessage(msg);
-		}
+        if (intent.getExtras().getInt(PluginService.EXTRA_PRIORITY, -1) > 0
+                && conditionManager.isScreenOn()) {
+            return;
+        }
 
-		if (controlReceiver != null) {
-			unregisterReceiver(controlReceiver);
-		}
+        if (intent.getExtras().getInt(PluginService.EXTRA_PRIORITY, -1) == 0) {
+            conditionManager.setOnCall(true);
+        }
 
-		conditionManager.quit();
+        final Message msg = handler.obtainMessage(AnnouncificationHandler.WHAT_PUT_QUEUE);
+        msg.setData(intent.getExtras());
+        handler.sendMessage(msg);
 
-		if (speaker != null) {
-			speaker.shutdown();
-		}
+        super.onStart(intent, startId);
+    }
 
-		if (thread != null && thread.isAlive()) {
-			thread.interrupt();
-			thread.getLooper().quit();
-		}
+    @Override
+    public void onDestroy() {
+        Log.e("Announcify", "shutdown");
 
-		if (notificationManager != null) {
-			notificationManager.cancel(17);
-		}
+        if (handler != null) {
+            final Message msg = handler.obtainMessage(AnnouncificationHandler.WHAT_SHUTDOWN);
+            handler.sendMessage(msg);
+        }
 
-		super.onDestroy();
-	}
+        if (controlReceiver != null) {
+            unregisterReceiver(controlReceiver);
+        }
 
-	@Override
-	public IBinder onBind(final Intent arg0) {
-		return null;
-	}
+        conditionManager.quit();
+
+        if (speaker != null) {
+            speaker.shutdown();
+        }
+
+        if (thread != null && thread.isAlive()) {
+            thread.interrupt();
+            thread.getLooper().quit();
+        }
+
+        if (notificationManager != null) {
+            notificationManager.cancel(17);
+        }
+
+        super.onDestroy();
+    }
+
+    @Override
+    public IBinder onBind(final Intent arg0) {
+        return null;
+    }
 }

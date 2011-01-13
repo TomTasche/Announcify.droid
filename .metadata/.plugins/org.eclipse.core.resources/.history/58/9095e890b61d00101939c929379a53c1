@@ -1,0 +1,75 @@
+package com.announcify.api.contact.lookup;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+
+import android.content.ContentUris;
+import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.ContactsContract;
+import android.provider.Contacts.People;
+import android.provider.ContactsContract.Contacts;
+
+import com.announcify.api.contact.Contact;
+
+public class LittleLookup {
+    public static void getDisplayName(Context context, Contact contact) {
+        Cursor cursor = context.getContentResolver().query(ContentUris.withAppendedId(Contacts.CONTENT_URI, contact.getId()), null, null, null, null);
+        cursor.moveToFirst();
+        
+        for (String s : )
+    }
+    
+    public static void getFirstname(Context context, Contact contact) {
+        contact.getId();
+    }
+    
+    public static void getLastname(Context context, Contact contact) {
+        contact.getId();
+    }
+    
+    public static void getNickname(Context context, Contact contact) {
+        InputStream stream = null;
+        try {
+            final Uri uri = Uri.withAppendedPath(Contacts.CONTENT_VCARD_URI,
+                    Uri.encode(contact.getLookupString()));
+            stream = context.getContentResolver().openInputStream(uri);
+
+            final int length = stream.available();
+            if (length <= 0) {
+                return;
+            }
+
+            final byte[] vcard = new byte[length];
+            final int bytesRead = stream.read(vcard, 0, length);
+            if (bytesRead < length) {
+                return;
+            }
+
+            String vcardString = new String(vcard, 0, bytesRead, "UTF-8");
+
+            final String SPLIT = "X-ANDROID-CUSTOM:vnd.android.cursor.item/nickname;";
+            if (vcardString.contains(SPLIT)) {
+                vcardString = vcardString.substring(vcardString.indexOf(SPLIT) + SPLIT.length());
+                vcardString = vcardString.substring(0, vcardString.indexOf(';'));
+
+                contact.setNickname(vcardString);
+            }
+        } catch (final FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (final IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (stream != null) {
+                try {
+                    stream.close();
+                } catch (final IOException e) {
+                }
+            }
+        }
+    }
+    
+    
+}

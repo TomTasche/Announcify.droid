@@ -1,0 +1,99 @@
+package com.announcify.api.contact;
+
+import com.announcify.api.contact.lookup.Lookup;
+
+public enum ContactEnum {
+    FIRSTNAME() {
+        @Override
+        public String getExpression() {
+            return Formatter.FIRSTNAME;
+        }
+
+        @Override
+        public String getSubstitution(Contact contact) {
+            return 
+        }
+    },
+    
+    LASTNAME() {
+        @Override
+        public String getExpression() {
+            return Formatter.LASTNAME;
+        }
+        
+        @Override
+        public String getSubstitution(Contact contact) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+    },
+    
+    NICKNAME() {
+        @Override
+        public String getExpression() {
+            return Formatter.NICKNAME;
+        }
+        
+        @Override
+        public String getSubstitution(Contact contact) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+    },
+    
+    TITLE() {
+        @Override
+        public String getExpression() {
+            return Formatter.TITLE;
+        }
+        
+        @Override
+        public String getSubstitution(Contact contact) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+    },
+
+    FULLNAME() {
+        @Override
+        public String getExpression() {
+            return Formatter.FULLNAME;
+        }
+
+        @Override
+        public String getSubstitution(Contact contact) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+    },
+    
+    ADDRESS() {
+        @Override
+        public String getExpression() {
+            return Formatter.ADDRESS;
+        }
+        
+        @Override
+        public String getSubstitution(Contact contact) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+    },
+    
+    ADDRESS_TYPE() {
+        @Override
+        public String getExpression() {
+            return Formatter.ADDRESS_TYPE;
+        }
+        
+        @Override
+        public String getSubstitution(Contact contact) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+    };
+
+    public abstract String getExpression();
+
+    public abstract String getSubstitution(Contact contact);
+}

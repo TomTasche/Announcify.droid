@@ -25,10 +25,12 @@
 		android:name="android.permission.READ_CONTACTS" />
 
 	<application
+		android:theme="@style/Theme.Announcify"
 		android:icon="@drawable/launcher_icon"
-		android:label="@string/app_name">
+		android:label="@string/app_name"
+		android:name=".activity.AnnouncifyApplication">
 		<activity
-			android:name=".activity.Announcify"
+			android:name=".activity.AnnouncifyActivity"
 			android:label="@string/app_name"
 			android:configChanges="orientation|keyboardHidden">
 			<intent-filter>
@@ -42,12 +44,14 @@
 		<activity
 			android:name=".activity.SettingsActivity"
 			android:label="@string/app_name"
-			android:configChanges="orientation|keyboardHidden" />
-
-		<activity
-			android:name=".activity.chooser.GroupChooser"
-			android:label="@string/app_name"
-			android:configChanges="orientation|keyboardHidden" />
+			android:configChanges="orientation|keyboardHidden">
+			<intent-filter>
+				<action
+					android:name="com.announcify.SETTINGS" />
+				<category
+					android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
 
 		<activity
 			android:name=".activity.RemoteControlDialog"
@@ -74,7 +78,7 @@
 		</activity>
 
 		<receiver
-			android:name="error.ExceptionReceiver"
+			android:name=".error.ExceptionReceiver"
 			android:label="@string/app_name"
 			android:permission="com.announcify.PERMISSION_IM_A_PLUGIN">
 			<intent-filter>
@@ -92,7 +96,7 @@
 					android:name="com.announcify.ANNOUNCE" />
 			</intent-filter>
 		</service>
-		
+
 		<service
 			android:name=".error.ExceptionService"
 			android:label="@string/app_name"

@@ -1,52 +1,54 @@
+
 package com.announcify.tts;
 
 import android.content.Context;
 import android.media.AudioManager;
 
-import com.announcify.util.AnnouncifySettings;
+import com.announcify.api.util.AnnouncifySettings;
 
 public class Volume {
-	private final AudioManager manager;
+    private final AudioManager manager;
 
-	private int previousVolume;
-	private final int STREAM;
+    private int previousVolume;
 
-	public Volume(final Context context) {
-		manager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+    private final int STREAM;
 
-		STREAM = new AnnouncifySettings(context).getStream();
-	}
+    public Volume(final Context context) {
+        manager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
 
-	private boolean isSilent() {
-		return manager.getStreamVolume(STREAM) == 0 ? true : false;
-	}
+        STREAM = new AnnouncifySettings(context).getStream();
+    }
 
-	public void lowerVolume() {
-		if (isSilent()) {
-			return;
-		}
-		previousVolume = manager.getStreamVolume(STREAM);
-		manager.setStreamVolume(STREAM, 5, 0);
-	}
+    private boolean isSilent() {
+        return manager.getStreamVolume(STREAM) == 0 ? true : false;
+    }
 
-	public void upperVolume() {
-		if (previousVolume > 0) {
-			manager.setStreamVolume(STREAM, previousVolume, 0);
-		}
-	}
+    public void lowerVolume() {
+        if (isSilent()) {
+            return;
+        }
+        previousVolume = manager.getStreamVolume(STREAM);
+        manager.setStreamVolume(STREAM, 5, 0);
+    }
 
-	public void muteStreams() {
-		if (isSilent()) {
-			return;
-		}
-		manager.setStreamSolo(STREAM, true);
-	}
+    public void upperVolume() {
+        if (previousVolume > 0) {
+            manager.setStreamVolume(STREAM, previousVolume, 0);
+        }
+    }
 
-	public void unmuteStreams() {
-		manager.setStreamSolo(STREAM, false);
-	}
+    public void muteStreams() {
+        if (isSilent()) {
+            return;
+        }
+        manager.setStreamSolo(STREAM, true);
+    }
 
-	public void quit() {
-		// TODO Auto-generated method stub
-	}
+    public void unmuteStreams() {
+        manager.setStreamSolo(STREAM, false);
+    }
+
+    public void quit() {
+        // TODO Auto-generated method stub
+    }
 }

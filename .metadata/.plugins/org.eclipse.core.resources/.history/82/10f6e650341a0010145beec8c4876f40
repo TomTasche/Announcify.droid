@@ -1,0 +1,40 @@
+package com.announcify.activity.widget;
+
+import greendroid.widget.item.TextItem;
+import greendroid.widget.itemview.ItemView;
+
+import java.io.IOException;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.util.AttributeSet;
+import android.view.ViewGroup;
+
+import com.announcify.R;
+
+public class AnnouncificationItem extends TextItem {
+
+	/**
+	 * The resource identifier for the drawable.
+	 */
+	public int drawableId;
+
+	public String action;
+	public boolean broadcast;
+
+	public AnnouncificationItem(final String text, final int drawableId, final String action, final boolean broadcast) {
+		super(text);
+		this.drawableId = drawableId;
+		this.action = action;
+		this.broadcast = broadcast;
+	}
+
+	@Override
+	public ItemView newView(final Context context, final ViewGroup parent) {
+		return createCellFromXml(context, R.layout.list_item_announcification, parent);
+	}
+}

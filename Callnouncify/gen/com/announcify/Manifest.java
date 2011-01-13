@@ -9,6 +9,6 @@ package com.announcify;
 
 public final class Manifest {
     public static final class permission {
-        public static final String PERMISSION_IM_A_PLUGIN="com.announcify.PERMISSION_IM_A_PLUGIN";
+        public static final String PERMISSION_IM_A_PLUGIN = "com.announcify.PERMISSION_IM_A_PLUGIN";
     }
 }

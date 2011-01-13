@@ -5,11 +5,11 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.os.Bundle;
 
-import com.announcify.activity.AnnouncifyActivity;
+import com.announcify.api.activity.PluginActivity;
 import com.announcify.plugin.mail.R;
 import com.announcify.plugin.mail.service.MailService;
 
-public class Mailnouncify extends AnnouncifyActivity {
+public class Mailnouncify extends PluginActivity {
 	public static final String ACTION_SETTINGS = "com.announcify.plugin.mail.SETTINGS";
 
 	@Override

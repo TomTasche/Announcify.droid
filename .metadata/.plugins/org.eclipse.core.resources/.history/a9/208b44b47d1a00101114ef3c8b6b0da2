@@ -1,0 +1,6 @@
+package com.announcify.sql;
+
+
+public class PluginCursor {
+
+}

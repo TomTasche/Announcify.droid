@@ -1,3 +1,4 @@
+
 package com.announcify.activity;
 
 import android.app.AlertDialog;
@@ -12,106 +13,144 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 
 import com.announcify.R;
-import com.announcify.activity.chooser.GroupChooser;
+import com.announcify.api.util.AnnouncifySettings;
 import com.announcify.util.AnnouncifySecurity;
-import com.announcify.util.AnnouncifySettings;
 
 public class SettingsActivity extends PreferenceActivity {
-	private AnnouncifySecurity security;
-	private Thread thread;
+    private AnnouncifySecurity security;
 
-	private boolean licensed;
-	private boolean started;
+    private Thread thread;
 
-	@Override
-	protected void onCreate(final Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    private boolean licensed;
 
-		showDialog(1);
+    private boolean started;
 
-		thread = new Thread() {
-			@Override
-			public void run() {
-				security = new AnnouncifySecurity(SettingsActivity.this);
-			}
-		};
-		thread.start();
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		getPreferenceManager().setSharedPreferencesName(AnnouncifySettings.PREFERENCES_NAME);
-		getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
-		addPreferencesFromResource(R.xml.preferences_settings);
+        getPreferenceManager().setSharedPreferencesName(AnnouncifySettings.PREFERENCES_NAME);
+        getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
+        addPreferencesFromResource(R.xml.preferences_settings);
 
-		getPreferenceScreen().findPreference("preference_tts_settings").setOnPreferenceClickListener(new OnPreferenceClickListener() {
+        try {
+            createPackageContext("com.announcify.paid", 0);
 
-			public boolean onPreferenceClick(final Preference preference) {
-				final Intent intentTTS = new Intent();
-				intentTTS.setComponent(new ComponentName("com.android.settings", "com.android.settings.TextToSpeechSettings"));
-				startActivity(intentTTS);
+            showDialog(1);
 
-				return false;
-			}
-		});
+            thread = new Thread() {
+                @Override
+                public void run() {
+                    security = new AnnouncifySecurity(SettingsActivity.this);
+                }
+            };
+            thread.start();
 
-		getPreferenceScreen().findPreference("preference_choose_group").setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            getPreferenceScreen().findPreference("preference_tts_settings")
+                    .setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
-			public boolean onPreferenceClick(final Preference preference) {
-				startActivity(new Intent(SettingsActivity.this, GroupChooser.class));
+                        public boolean onPreferenceClick(final Preference preference) {
+                            final Intent intentTTS = new Intent();
+                            intentTTS.setComponent(new ComponentName("com.android.settings",
+                                    "com.android.settings.TextToSpeechSettings"));
+                            startActivity(intentTTS);
 
-				return false;
-			}
-		});
-	}
+                            return false;
+                        }
+                    });
 
-	@Override
-	protected Dialog onCreateDialog(final int id) {
-		switch (id) {
-			case 0:
-				return new AlertDialog.Builder(this).setCancelable(false).setTitle(R.string.unlicensed_dialog_title).setMessage(R.string.unlicensed_dialog_body).setPositiveButton(R.string.buy_button, new DialogInterface.OnClickListener() {
-					public void onClick(final DialogInterface dialog, final int which) {
-						final Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://market.android.com/details?id=" + getPackageName()));
-						startActivity(marketIntent);
-					}
-				}).setNegativeButton(R.string.quit_button, new DialogInterface.OnClickListener() {
-					public void onClick(final DialogInterface dialog, final int which) {
-						finish();
-					}
-				}).create();
+            getPreferenceScreen().findPreference("preference_choose_group")
+                    .setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
-			case 1:
-				return ProgressDialog.show(this, "Announcify", "Verifying if you really bought Pro...", true);
+                        public boolean onPreferenceClick(final Preference preference) {
+                            // startActivity(new Intent(SettingsActivity.this,
+                            // GroupChooser.class));
 
-			case 2:
-				started = true;
-		}
-		return null;
-	}
+                            return false;
+                        }
+                    });
+        } catch (final Exception e) {
+            licensed = false;
+        }
+    }
 
-	@Override
-	protected void onPause() {
-		if (security != null) {
-			licensed = security.isLicensed();
-		}
+    @Override
+    protected Dialog onCreateDialog(final int id) {
+        switch (id) {
+            case 0:
+                return new AlertDialog.Builder(this)
+                        .setCancelable(false)
+                        .setTitle(R.string.unlicensed_dialog_title)
+                        .setMessage(R.string.unlicensed_dialog_body)
+                        .setPositiveButton(R.string.buy_button,
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(final DialogInterface dialog,
+                                            final int which) {
+                                        final Intent marketIntent = new Intent(Intent.ACTION_VIEW,
+                                                Uri.parse("http://market.android.com/details?id="
+                                                        + getPackageName()));
+                                        startActivity(marketIntent);
+                                    }
+                                })
+                        .setNegativeButton(R.string.quit_button,
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(final DialogInterface dialog,
+                                            final int which) {
+                                        finish();
+                                    }
+                                }).create();
 
-		super.onPause();
-	}
+            case 1:
+                return ProgressDialog.show(this, "Announcify",
+                        "Verifying if you really bought Pro...", true);
 
-	@Override
-	protected void onResume() {
-		if (started && !licensed) {
-			showDialog(0);
-		}
+            case 2:
+                started = true;
+        }
+        return null;
+    }
 
-		super.onResume();
-	}
+    @Override
+    public boolean onTouchEvent(final MotionEvent event) {
+        return !licensed;
+    }
 
-	@Override
-	protected void onDestroy() {
-		if (security != null) {
-			security.quit();
-		}
+    @Override
+    public boolean onKeyDown(final int keyCode, final KeyEvent event) {
+        return !licensed;
+    }
 
-		super.onDestroy();
-	}
+    @Override
+    protected void onPause() {
+        if (security != null) {
+            licensed = security.isLicensed();
+            security.quit();
+        } else {
+            licensed = false;
+        }
+
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        if (started && !licensed) {
+            showDialog(0);
+        }
+
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (security != null) {
+            security.quit();
+        }
+
+        super.onDestroy();
+    }
 }

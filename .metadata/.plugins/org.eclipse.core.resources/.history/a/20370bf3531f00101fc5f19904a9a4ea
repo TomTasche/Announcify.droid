@@ -1,0 +1,11 @@
+package com.announcify.api.text;
+
+import android.content.Context;
+
+import com.announcify.api.contact.Contact;
+
+public interface FormatEnum {
+    public abstract String getExpression();
+
+    public abstract String getSubstitution(Context context, Contact contact);
+}

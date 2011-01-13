@@ -1,0 +1,115 @@
+package com.announcify.api.text;
+
+import com.announcify.api.contact.Contact;
+import com.announcify.api.util.AnnouncifySettings;
+
+/**
+ * Used to format the informations about a {@link Contact} like the user demands
+ * to.
+ * 
+ * @author tom
+ * 
+ */
+public class Formatter {
+	private final Contact contact;
+	private final AnnouncifySettings settings;
+
+	public Formatter(final Contact contact) {
+		this.contact = contact;
+		settings = contact.getSettings();
+	}
+
+	public String getRawUserPreferredName() {
+		switch (settings.getReadingMode()) {
+			case 0: // user requested to read full name
+				return contact.getFullname();
+
+			case 1: // user requested to read only first name
+				if (contact.getFullname().contains(" ")) {
+					return contact.getFullname().split(" ")[0];
+				} else {
+					return "";
+				}
+
+			case 2: // user requested to read only family name
+				if (contact.getFullname().contains(" ")) {
+					return contact.getFullname().split(" ")[1];
+				} else {
+					return "";
+				}
+
+			case 3: // user requested to read nickname (if available)
+				return contact.getNickname();
+
+			case 4: // user requested to read the number
+				return contact.getAddress();
+
+			default:
+				return "";
+		}
+	}
+
+	public String getUserPreferredName() {
+		switch (settings.getReadingMode()) {
+			case 0: // user requested to read full name
+				return getFullname();
+
+			case 1: // user requested to read only first name
+				return getFirstname();
+
+			case 2: // user requested to read only family name
+				return getLastname();
+
+			case 3: // user requested to read nickname (if available)
+				return getNickname();
+
+			case 4: // user requested to read the number
+				return getAddress();
+
+			default:
+				return "";
+		}
+	}
+
+	public String getFullname() {
+		if ("".equals(contact.getFullname())) {
+			// plugin should decide wether to read the address, "unknown" or a
+			// custom text
+			return "";
+		} else {
+			return contact.getFullname();
+		}
+	}
+
+	public String getNickname() {
+		if ("".equals(contact.getNickname())) {
+			return getFirstname();
+		} else {
+			return contact.getNickname();
+		}
+	}
+
+	public String getFirstname() {
+		if (contact.getFullname().contains(" ")) {
+			return contact.getFullname().split(" ")[0];
+		} else {
+			return getFullname();
+		}
+	}
+
+	public String getLastname() {
+		if (contact.getFullname().contains(" ")) {
+			return contact.getFullname().split(" ")[1];
+		} else {
+			return getFullname();
+		}
+	}
+
+	public String getAddress() {
+		final StringBuilder builder = new StringBuilder();
+		for (final char c : contact.getAddress().toCharArray()) {
+			builder.append(c + ".");
+		}
+		return builder.toString();
+	}
+}

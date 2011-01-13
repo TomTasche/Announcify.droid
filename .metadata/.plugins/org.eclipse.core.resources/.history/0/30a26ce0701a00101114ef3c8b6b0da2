@@ -1,0 +1,54 @@
+package com.announcify.activity.widget;
+
+import greendroid.widget.item.Item;
+import greendroid.widget.itemview.ItemView;
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.announcify.R;
+
+public class PluginItemView extends LinearLayout implements ItemView {
+	protected final Context context;
+
+	protected ImageView icon;
+	protected TextView settings;
+	protected ImageView check;
+
+	public PluginItemView(final Context context) {
+		this(context, null);
+	}
+
+	public PluginItemView(final Context context, final AttributeSet attrs) {
+		super(context, attrs);
+		
+		this.context = context;
+	}
+
+	public void prepareItemView() {
+		super.prepareItemView();
+		
+		check = (ImageView) findViewById(R.id.check);
+	}
+
+	public void setObject(final Item object) {
+		super.setObject(object);
+
+		final PluginItem item = (PluginItem) object;
+
+		check.setImageDrawable(getResources().getDrawable(item.active ? R.drawable.btn_check_buttonless_on : R.drawable.btn_check_buttonless_off));
+		check.setOnClickListener(new OnClickListener() {
+
+			public void onClick(final View v) {
+				// TODO: toggle plugin
+
+				item.active = !item.active;
+
+				check.setImageDrawable(getResources().getDrawable(item.active ? R.drawable.btn_check_buttonless_on : R.drawable.btn_check_buttonless_off));
+			}
+		});
+	}
+}

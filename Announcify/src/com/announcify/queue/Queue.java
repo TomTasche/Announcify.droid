@@ -1,3 +1,4 @@
+
 package com.announcify.queue;
 
 import java.util.LinkedList;
@@ -7,146 +8,146 @@ import android.content.Intent;
 import android.os.Message;
 import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
 
+import com.announcify.api.queue.PluginQueue;
+import com.announcify.api.sql.model.PluginModel;
 import com.announcify.handler.AnnouncificationHandler;
-import com.announcify.sql.model.PluginModel;
 
 public class Queue implements OnUtteranceCompletedListener {
-	public static final String EXTRA_TEXT_SNIPPET = "com.announcify.EXTRA_TEXT_SNIPPET";
+    public static final String EXTRA_TEXT_SNIPPET = "com.announcify.EXTRA_TEXT_SNIPPET";
 
-	private final Context context;
-	private final AnnouncificationHandler handler;
-	private final WakeLocker wakeLocker;
-	private final PluginModel model;
-	private final LinkedList<LittleQueue> queue;
+    private final Context context;
 
-	private boolean started;
-	private boolean granted;
+    private final AnnouncificationHandler handler;
 
-	public Queue(final Context context, final AnnouncificationHandler handler) {
-		queue = new LinkedList<LittleQueue>();
-		this.context = context;
-		wakeLocker = new WakeLocker(context);
-		model = new PluginModel(context);
-		this.handler = handler;
-	}
+    private final WakeLocker wakeLocker;
 
-	public void start() {
-		started = true;
-		grant();
-	}
+    private final PluginModel model;
 
-	public void grant() {
-		if (!started) {
-			return;
-		}
+    private final LinkedList<PluginQueue> queue;
 
-		granted = true;
-		if (!wakeLocker.isLocked()) {
-			wakeLocker.lock();
-		}
+    private boolean started;
 
-		if (!queue.isEmpty()) {
-			context.sendBroadcast(new Intent(queue.getFirst().getStartBroadcast()));
-		}
-		next();
-	}
+    private boolean granted;
 
-	public void deny() {
-		if (!queue.isEmpty()) {
-			context.sendBroadcast(new Intent(queue.getFirst().getStopBroadcast()));
-		}
+    public Queue(final Context context, final AnnouncificationHandler handler) {
+        queue = new LinkedList<PluginQueue>();
+        this.context = context;
+        wakeLocker = new WakeLocker(context);
+        model = new PluginModel(context);
+        this.handler = handler;
+    }
 
-		granted = false;
+    public void start() {
+        started = true;
+        grant();
+    }
 
-		if (wakeLocker.isLocked()) {
-			wakeLocker.unlock();
-		}
-	}
+    public void grant() {
+        if (!started) {
+            return;
+        }
 
-	public void next() {
-		if (!granted) {
-			return;
-		}
+        granted = true;
+        if (!wakeLocker.isLocked()) {
+            wakeLocker.lock();
+        }
 
-		checkNext();
+        if (!queue.isEmpty()) {
+            context.sendBroadcast(new Intent(queue.getFirst().getStartBroadcast()));
+        }
+        next();
+    }
 
-		if (!granted) {
-			return;
-		}
+    public void deny() {
+        if (!queue.isEmpty()) {
+            context.sendBroadcast(new Intent(queue.getFirst().getStopBroadcast()));
+        }
 
-		changeLanguage();
+        granted = false;
 
-		final Message message = Message.obtain();
-		message.what = AnnouncificationHandler.WHAT_NEXT_ITEM;
-		message.obj = queue.getFirst().getNext();
-		handler.sendMessage(message);
-	}
+        if (wakeLocker.isLocked()) {
+            wakeLocker.unlock();
+        }
+    }
 
-	private void checkNext() {
-		if (queue.isEmpty()) {
-			quit();
-			return;
-		}
+    public void next() {
+        if (!granted) {
+            return;
+        }
 
-		if (queue.getFirst().isEmpty()) {
-			handler.sendEmptyMessage(AnnouncificationHandler.WHAT_REVERT_LOCALE);
-			context.sendBroadcast(new Intent(queue.getFirst().getStopBroadcast()));
-			queue.removeFirst();
+        checkNext();
 
-			if (queue.isEmpty()) {
-				quit();
-				return;
-			}
+        if (!granted) {
+            return;
+        }
 
-			if (model.getActive(queue.getFirst().getPluginName())) {
-				context.sendBroadcast(new Intent(queue.getFirst().getStartBroadcast()));
-				changeLanguage();
-			} else {
-				handler.sendEmptyMessage(AnnouncificationHandler.WHAT_REVERT_LOCALE);
-				queue.removeFirst();
-				checkNext();
-			}
-		}
+        changeLanguage();
 
-		if (queue.isEmpty()) {
-			quit();
-			return;
-		}
-	}
+        final Message message = Message.obtain();
+        message.what = AnnouncificationHandler.WHAT_NEXT_ITEM;
+        message.obj = queue.getFirst().getNext();
+        handler.sendMessage(message);
+    }
 
-	public void onUtteranceCompleted(final String utteranceId) {
-		next();
-	}
+    private void checkNext() {
+        if (queue.isEmpty()) {
+            quit();
+            return;
+        }
 
-	public void putLast(final LittleQueue little) {
-		queue.add(little);
+        if (queue.getFirst().isEmpty()) {
+            handler.sendEmptyMessage(AnnouncificationHandler.WHAT_REVERT_LOCALE);
+            context.sendBroadcast(new Intent(queue.getFirst().getStopBroadcast()));
+            queue.removeFirst();
 
-		if (!granted) {
-			next();
-		}
-	}
+            if (queue.isEmpty()) {
+                quit();
+                return;
+            }
 
-	public void putFirst(final LittleQueue little) {
-		queue.add(0, little);
-		// TODO: if (grant) ?
-		grant();
-	}
+            context.sendBroadcast(new Intent(queue.getFirst().getStartBroadcast()));
+            changeLanguage();
+        }
 
-	private void changeLanguage() {
-		final Message msg = Message.obtain();
-		msg.what = AnnouncificationHandler.WHAT_CHANGE_LOCALE;
-		handler.sendMessage(msg);
-	}
+        if (queue.isEmpty()) {
+            quit();
+            return;
+        }
+    }
 
-	public void quit() {
-		model.close();
+    public void onUtteranceCompleted(final String utteranceId) {
+        next();
+    }
 
-		if (wakeLocker.isLocked()) {
-			wakeLocker.unlock();
-		}
+    public void putLast(final PluginQueue little) {
+        queue.add(little);
 
-		deny();
+        if (!granted) {
+            next();
+        }
+    }
 
-		handler.sendEmptyMessage(AnnouncificationHandler.WHAT_SHUTDOWN);
-	}
+    public void putFirst(final PluginQueue little) {
+        queue.add(0, little);
+        // TODO: if (grant) ?
+        grant();
+    }
+
+    private void changeLanguage() {
+        final Message msg = Message.obtain();
+        msg.what = AnnouncificationHandler.WHAT_CHANGE_LOCALE;
+        handler.sendMessage(msg);
+    }
+
+    public void quit() {
+        model.close();
+
+        if (wakeLocker.isLocked()) {
+            wakeLocker.unlock();
+        }
+
+        deny();
+
+        handler.sendEmptyMessage(AnnouncificationHandler.WHAT_SHUTDOWN);
+    }
 }

@@ -5,11 +5,11 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.os.Bundle;
 
-import com.announcify.activity.AnnouncifyActivity;
+import com.announcify.api.activity.PluginActivity;
 import com.announcify.plugin.talk.R;
 import com.announcify.plugin.talk.service.TalkService;
 
-public class Talknouncify extends AnnouncifyActivity {
+public class Talknouncify extends PluginActivity {
 	public static final String ACTION_SETTINGS = "com.announcify.plugin.talk.SETTINGS";
 
 	@Override

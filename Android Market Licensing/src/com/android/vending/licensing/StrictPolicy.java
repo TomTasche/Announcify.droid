@@ -31,39 +31,36 @@ package com.android.vending.licensing;
  */
 public class StrictPolicy implements Policy {
 
-	private static final String TAG = "StrictPolicy";
+    private static final String TAG = "StrictPolicy";
 
-	private LicenseResponse mLastResponse;
-	private PreferenceObfuscator mPreferences;
+    private LicenseResponse mLastResponse;
 
-	public StrictPolicy() {
-		// Set default policy. This will force the application to check the
-		// policy on launch.
-		mLastResponse = LicenseResponse.RETRY;
-	}
+    private PreferenceObfuscator mPreferences;
 
-	/**
-	 * Process a new response from the license server. Since we aren't
-	 * performing any caching, this equates to reading the LicenseResponse. Any
-	 * ResponseData provided is ignored.
-	 * 
-	 * @param response
-	 *            the result from validating the server response
-	 * @param rawData
-	 *            the raw server response data
-	 */
-	public void processServerResponse(final LicenseResponse response, final ResponseData rawData) {
-		mLastResponse = response;
-	}
+    public StrictPolicy() {
+        // Set default policy. This will force the application to check the
+        // policy on launch.
+        mLastResponse = LicenseResponse.RETRY;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * This implementation allows access if and only if a LICENSED response was
-	 * received the last time the server was contacted.
-	 */
-	public boolean allowAccess() {
-		return mLastResponse == LicenseResponse.LICENSED;
-	}
+    /**
+     * Process a new response from the license server. Since we aren't
+     * performing any caching, this equates to reading the LicenseResponse. Any
+     * ResponseData provided is ignored.
+     * 
+     * @param response the result from validating the server response
+     * @param rawData the raw server response data
+     */
+    public void processServerResponse(final LicenseResponse response, final ResponseData rawData) {
+        mLastResponse = response;
+    }
+
+    /**
+     * {@inheritDoc} This implementation allows access if and only if a LICENSED
+     * response was received the last time the server was contacted.
+     */
+    public boolean allowAccess() {
+        return mLastResponse == LicenseResponse.LICENSED;
+    }
 
 }

@@ -21,13 +21,13 @@ package com.android.vending.licensing;
  * managed by an {@link Obfuscator}.}
  */
 public class ValidationException extends Exception {
-	public ValidationException() {
-		super();
-	}
+    public ValidationException() {
+        super();
+    }
 
-	public ValidationException(final String s) {
-		super(s);
-	}
+    public ValidationException(final String s) {
+        super(s);
+    }
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 }

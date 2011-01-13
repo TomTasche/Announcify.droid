@@ -1,81 +1,82 @@
-package com.announcify.plugin.message.service;
 
-import java.util.LinkedList;
+package com.announcify.plugin.message.service;
 
 import android.content.Intent;
 import android.telephony.SmsMessage;
-import android.util.Log;
 
-import com.announcify.contact.Contact;
-import com.announcify.contact.Lookup;
-import com.announcify.error.ExceptionHandler;
+import com.announcify.api.contact.Contact;
+import com.announcify.api.contact.Formatter;
+import com.announcify.api.contact.lookup.Call;
+import com.announcify.api.error.ExceptionHandler;
+import com.announcify.api.queue.PluginQueue;
+import com.announcify.api.service.PluginService;
 import com.announcify.plugin.message.receiver.RingtoneReceiver;
 import com.announcify.plugin.message.util.MessnouncifySettings;
-import com.announcify.queue.LittleQueue;
-import com.announcify.queue.PrepareMachine;
-import com.announcify.service.AnnouncifyService;
 
-public class WorkerService extends AnnouncifyService {
+public class WorkerService extends PluginService {
 
-	public WorkerService() {
-		super("Announcify - Message");
-	}
+    public WorkerService() {
+        super("Announcify - Message");
+    }
 
-	@Override
-	protected void onHandleIntent(final Intent intent) {
-		Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this, Thread.getDefaultUncaughtExceptionHandler()));
+    @Override
+    protected void onHandleIntent(final Intent intent) {
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this, Thread
+                .getDefaultUncaughtExceptionHandler()));
 
-		final String message;
-		final String number;
+        final String message;
+        final String number;
 
-		if (intent.getExtras().containsKey("pdus")) {
-			final Object[] pdusObj = (Object[]) intent.getExtras().get("pdus");
+        if (intent.getExtras().containsKey("pdus")) {
+            final Object[] pdusObj = (Object[])intent.getExtras().get("pdus");
 
-			final SmsMessage[] messages = new SmsMessage[pdusObj.length];
-			for (int i = 0; i < pdusObj.length; i++) {
-				messages[i] = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
-			}
+            final SmsMessage[] messages = new SmsMessage[pdusObj.length];
+            for (int i = 0; i < pdusObj.length; i++) {
+                messages[i] = SmsMessage.createFromPdu((byte[])pdusObj[i]);
+            }
 
-			String temp = "";
+            String temp = "";
 
-			if (messages.length > 1) {
-				for (final SmsMessage currentMessage : messages) {
-					temp = temp + currentMessage.getDisplayMessageBody() + '\n';
-				}
-			} else {
-				temp = messages[0].getDisplayMessageBody();
-			}
+            if (messages.length > 1) {
+                for (final SmsMessage currentMessage : messages) {
+                    temp = temp + currentMessage.getDisplayMessageBody() + '\n';
+                }
+            } else {
+                temp = messages[0].getDisplayMessageBody();
+            }
 
-			number = messages[0].getDisplayOriginatingAddress();
-			message = temp;
-		} else {
-			message = "No message";
-			number = intent.getStringExtra("com.announcify.EXTRA_TEST");
-		}
+            number = messages[0].getDisplayOriginatingAddress();
+            message = temp;
+        } else {
+            message = "Please spread the word about Announcify";
+            number = intent.getStringExtra("com.announcify.EXTRA_TEST");
+        }
 
-		Log.e("smn", number);
-		final Contact contact = new Contact(this, number);
-		if (number != null && !"".equals(number)) {
-			Lookup.lookupNumber(contact);
-			Lookup.getNickname(contact);
-		}
+        final PluginQueue queue;
 
-		final MessnouncifySettings settings = new MessnouncifySettings(this);
+        final MessnouncifySettings settings = new MessnouncifySettings(this);
 
-		final PrepareMachine prepare = new PrepareMachine(this, settings, contact, message);
-		final LinkedList<Object> list = prepare.prepare();
+        final Contact contact = new Contact(this, new Call(this), number);
+        if (number == null && "".equals(number)) {
+            return;
+        }
 
-		if (list.isEmpty()) {
-			return;
-		}
+        final Formatter formatter = new Formatter(this, contact, settings);
 
-		if (settings.getReadingWait() > 1000) {
-			try {
-				Thread.sleep(settings.getReadingWait());
-			} catch (final InterruptedException e) {}
-		}
+        queue = new PluginQueue("Messnouncify", PluginQueue.buildList(settings,
+                formatter.format(message)), "", RingtoneReceiver.ACTION_STOP_RINGTONE, this);
 
-		final LittleQueue queue = new LittleQueue("Messnouncify", list, "", RingtoneReceiver.ACTION_STOP_RINGTONE, this);
-		queue.sendToService(this, 1);
-	}
+        if (queue.isEmpty()) {
+            return;
+        }
+
+        if (settings.getReadingWait() > 1000) {
+            try {
+                Thread.sleep(settings.getReadingWait());
+            } catch (final InterruptedException e) {
+            }
+        }
+
+        queue.sendToService(this, 1);
+    }
 }

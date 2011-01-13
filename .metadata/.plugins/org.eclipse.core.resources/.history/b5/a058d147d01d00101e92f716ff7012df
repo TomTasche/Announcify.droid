@@ -1,0 +1,57 @@
+package com.announcify.api.contact.lookup;
+
+public class Chat {
+    public void getLookup(Context context, Contact contact) {
+        Cursor cursor = null;
+
+        try {
+            cursor = context.getContentResolver().query(Uri.withAppendedPath(Email.CONTENT_LOOKUP_URI, contact.getAddress()), new String[] {Email.LOOKUP_KEY}, null, null, null);
+            if (!cursor.moveToFirst()) return;
+
+            contact.setLookupString(cursor.getString(0));
+        } finally {
+            if (cursor != null) cursor.close();
+        }
+    }
+
+    public static void getAddress(Context context, Contact contact) {
+        Cursor cursor = null;
+
+        try {
+            cursor = context.getContentResolver().query(Email.CONTENT_URI, new String[] {Email.DATA1}, Contacts.LOOKUP_KEY + " = '?'", new String[] {contact.getLookupString()}, null);
+            if (!cursor.moveToFirst()) return;
+
+            // TODO: implement?
+        } finally {
+            if (cursor != null) cursor.close();
+        }
+    }
+
+    public static void getType(Context context, Contact contact) {
+        Cursor cursor = null;
+
+        try {
+            cursor = context.getContentResolver().query(Email.CONTENT_URI, new String[] {Email.TYPE}, Contacts.LOOKUP_KEY + " = '?'" + " AND " + Email.DATA1 + " = '?'", new String[] {contact.getLookupString(), contact.getAddress()}, null);
+            if (!cursor.moveToFirst()) return;
+
+            contact.setType(Resources.getSystem().getStringArray(
+                    android.R.array.emailAddressTypes)[Integer.parseInt(cursor
+                            .getString(0)) - 1]);
+        } finally {
+            if (cursor != null) cursor.close();
+        }
+    }
+
+    public static void getLabel(Context context, Contact contact) {
+        Cursor cursor = null;
+
+        try {
+            cursor = context.getContentResolver().query(Email.CONTENT_URI, new String[] {Email.LABEL}, Contacts.LOOKUP_KEY + " = '?'" + " AND " + Email.DATA1 + " = '?'", new String[] {contact.getLookupString(), contact.getAddress()}, null);
+            if (!cursor.moveToFirst()) return;
+
+            contact.setLabel(cursor.getString(0));
+        } finally {
+            if (cursor != null) cursor.close();
+        }
+    }
+}

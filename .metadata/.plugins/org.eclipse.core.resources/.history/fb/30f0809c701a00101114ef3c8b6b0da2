@@ -1,0 +1,22 @@
+package com.announcify.activity.widget;
+
+import greendroid.widget.item.Item;
+import greendroid.widget.itemview.ItemView;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.view.ViewGroup;
+
+import com.announcify.R;
+
+public class PluginItem extends Item {
+	private int id;
+	
+	public PluginItem(final int id) {
+		this.id = id;
+	}
+
+	@Override
+	public ItemView newView(final Context context, final ViewGroup parent) {
+		return createCellFromXml(context, R.layout.list_item_plugin, parent);
+	}
+}

@@ -55,251 +55,257 @@ import com.android.vending.licensing.util.Base64DecoderException;
  * developer account. The public key is obtainable from the publisher site.
  */
 public class LicenseChecker implements ServiceConnection {
-	private static final String TAG = "LicenseChecker";
+    private static final String TAG = "LicenseChecker";
 
-	private static final String KEY_FACTORY_ALGORITHM = "RSA";
+    private static final String KEY_FACTORY_ALGORITHM = "RSA";
 
-	// Timeout value (in milliseconds) for calls to service.
-	private static final int TIMEOUT_MS = 10 * 1000;
+    // Timeout value (in milliseconds) for calls to service.
+    private static final int TIMEOUT_MS = 10 * 1000;
 
-	private static final SecureRandom RANDOM = new SecureRandom();
+    private static final SecureRandom RANDOM = new SecureRandom();
 
-	private ILicensingService mService;
+    private ILicensingService mService;
 
-	private final PublicKey mPublicKey;
-	private final Context mContext;
-	private final Policy mPolicy;
-	/**
-	 * A handler for running tasks on a background thread. We don't want license
-	 * processing to block the UI thread.
-	 */
-	private final Handler mHandler;
-	private final String mPackageName;
-	private final String mVersionCode;
-	private final Set<LicenseValidator> mChecksInProgress = new HashSet<LicenseValidator>();
-	private final Queue<LicenseValidator> mPendingChecks = new LinkedList<LicenseValidator>();
+    private final PublicKey mPublicKey;
 
-	/**
-	 * @param context
-	 *            a Context
-	 * @param policy
-	 *            implementation of Policy
-	 * @param encodedPublicKey
-	 *            Base64-encoded RSA public key
-	 * @throws IllegalArgumentException
-	 *             if encodedPublicKey is invalid
-	 */
-	public LicenseChecker(final Context context, final Policy policy, final String encodedPublicKey) {
-		mContext = context;
-		mPolicy = policy;
-		mPublicKey = generatePublicKey(encodedPublicKey);
-		mPackageName = mContext.getPackageName();
-		mVersionCode = getVersionCode(context, mPackageName);
-		final HandlerThread handlerThread = new HandlerThread("background thread");
-		handlerThread.start();
-		mHandler = new Handler(handlerThread.getLooper());
-	}
+    private final Context mContext;
 
-	/**
-	 * Generates a PublicKey instance from a string containing the
-	 * Base64-encoded public key.
-	 * 
-	 * @param encodedPublicKey
-	 *            Base64-encoded public key
-	 * @throws IllegalArgumentException
-	 *             if encodedPublicKey is invalid
-	 */
-	private static PublicKey generatePublicKey(final String encodedPublicKey) {
-		try {
-			final byte[] decodedKey = Base64.decode(encodedPublicKey);
-			final KeyFactory keyFactory = KeyFactory.getInstance(KEY_FACTORY_ALGORITHM);
+    private final Policy mPolicy;
 
-			return keyFactory.generatePublic(new X509EncodedKeySpec(decodedKey));
-		} catch (final NoSuchAlgorithmException e) {
-			// This won't happen in an Android-compatible environment.
-			throw new RuntimeException(e);
-		} catch (final Base64DecoderException e) {
-			Log.e(TAG, "Could not decode from Base64.");
-			throw new IllegalArgumentException(e);
-		} catch (final InvalidKeySpecException e) {
-			Log.e(TAG, "Invalid key specification.");
-			throw new IllegalArgumentException(e);
-		}
-	}
+    /**
+     * A handler for running tasks on a background thread. We don't want license
+     * processing to block the UI thread.
+     */
+    private final Handler mHandler;
 
-	/**
-	 * Checks if the user should have access to the app.
-	 * 
-	 * @param callback
-	 */
-	public synchronized void checkAccess(final LicenseCheckerCallback callback) {
-		// If we have a valid recent LICENSED response, we can skip asking
-		// Market.
-		if (mPolicy.allowAccess()) {
-			Log.i(TAG, "Using cached license response");
-			callback.allow();
-		} else {
-			final LicenseValidator validator = new LicenseValidator(mPolicy, new NullDeviceLimiter(), callback, generateNonce(), mPackageName, mVersionCode);
+    private final String mPackageName;
 
-			if (mService == null) {
-				Log.i(TAG, "Binding to licensing service.");
-				try {
-					final boolean bindResult = mContext.bindService(new Intent(ILicensingService.class.getName()), this, // ServiceConnection.
-					Context.BIND_AUTO_CREATE);
+    private final String mVersionCode;
 
-					if (bindResult) {
-						mPendingChecks.offer(validator);
-					} else {
-						Log.e(TAG, "Could not bind to service.");
-						handleServiceConnectionError(validator);
-					}
-				} catch (final SecurityException e) {
-					callback.applicationError(ApplicationErrorCode.MISSING_PERMISSION);
-				}
-			} else {
-				mPendingChecks.offer(validator);
-				runChecks();
-			}
-		}
-	}
+    private final Set<LicenseValidator> mChecksInProgress = new HashSet<LicenseValidator>();
 
-	private void runChecks() {
-		LicenseValidator validator;
-		while ((validator = mPendingChecks.poll()) != null) {
-			try {
-				Log.i(TAG, "Calling checkLicense on service for " + validator.getPackageName());
-				mService.checkLicense(validator.getNonce(), validator.getPackageName(), new ResultListener(validator));
-				mChecksInProgress.add(validator);
-			} catch (final RemoteException e) {
-				Log.w(TAG, "RemoteException in checkLicense call.", e);
-				handleServiceConnectionError(validator);
-			}
-		}
-	}
+    private final Queue<LicenseValidator> mPendingChecks = new LinkedList<LicenseValidator>();
 
-	private synchronized void finishCheck(final LicenseValidator validator) {
-		mChecksInProgress.remove(validator);
-		if (mChecksInProgress.isEmpty()) {
-			cleanupService();
-		}
-	}
+    /**
+     * @param context a Context
+     * @param policy implementation of Policy
+     * @param encodedPublicKey Base64-encoded RSA public key
+     * @throws IllegalArgumentException if encodedPublicKey is invalid
+     */
+    public LicenseChecker(final Context context, final Policy policy, final String encodedPublicKey) {
+        mContext = context;
+        mPolicy = policy;
+        mPublicKey = generatePublicKey(encodedPublicKey);
+        mPackageName = mContext.getPackageName();
+        mVersionCode = getVersionCode(context, mPackageName);
+        final HandlerThread handlerThread = new HandlerThread("background thread");
+        handlerThread.start();
+        mHandler = new Handler(handlerThread.getLooper());
+    }
 
-	private class ResultListener extends ILicenseResultListener.Stub {
-		private final LicenseValidator mValidator;
-		private final Runnable mOnTimeout;
+    /**
+     * Generates a PublicKey instance from a string containing the
+     * Base64-encoded public key.
+     * 
+     * @param encodedPublicKey Base64-encoded public key
+     * @throws IllegalArgumentException if encodedPublicKey is invalid
+     */
+    private static PublicKey generatePublicKey(final String encodedPublicKey) {
+        try {
+            final byte[] decodedKey = Base64.decode(encodedPublicKey);
+            final KeyFactory keyFactory = KeyFactory.getInstance(KEY_FACTORY_ALGORITHM);
 
-		public ResultListener(final LicenseValidator validator) {
-			mValidator = validator;
-			mOnTimeout = new Runnable() {
-				public void run() {
-					Log.i(TAG, "Check timed out.");
-					handleServiceConnectionError(mValidator);
-					finishCheck(mValidator);
-				}
-			};
-			startTimeout();
-		}
+            return keyFactory.generatePublic(new X509EncodedKeySpec(decodedKey));
+        } catch (final NoSuchAlgorithmException e) {
+            // This won't happen in an Android-compatible environment.
+            throw new RuntimeException(e);
+        } catch (final Base64DecoderException e) {
+            Log.e(TAG, "Could not decode from Base64.");
+            throw new IllegalArgumentException(e);
+        } catch (final InvalidKeySpecException e) {
+            Log.e(TAG, "Invalid key specification.");
+            throw new IllegalArgumentException(e);
+        }
+    }
 
-		// Runs in IPC thread pool. Post it to the Handler, so we can guarantee
-		// either this or the timeout runs.
-		public void verifyLicense(final int responseCode, final String signedData, final String signature) {
-			mHandler.post(new Runnable() {
-				public void run() {
-					Log.i(TAG, "Received response.");
-					// Make sure it hasn't already timed out.
-					if (mChecksInProgress.contains(mValidator)) {
-						clearTimeout();
-						mValidator.verify(mPublicKey, responseCode, signedData, signature);
-						finishCheck(mValidator);
-					}
-				}
-			});
-		}
+    /**
+     * Checks if the user should have access to the app.
+     * 
+     * @param callback
+     */
+    public synchronized void checkAccess(final LicenseCheckerCallback callback) {
+        // If we have a valid recent LICENSED response, we can skip asking
+        // Market.
+        if (mPolicy.allowAccess()) {
+            Log.i(TAG, "Using cached license response");
+            callback.allow();
+        } else {
+            final LicenseValidator validator = new LicenseValidator(mPolicy,
+                    new NullDeviceLimiter(), callback, generateNonce(), mPackageName, mVersionCode);
 
-		private void startTimeout() {
-			Log.i(TAG, "Start monitoring timeout.");
-			mHandler.postDelayed(mOnTimeout, TIMEOUT_MS);
-		}
+            if (mService == null) {
+                Log.i(TAG, "Binding to licensing service.");
+                try {
+                    final boolean bindResult = mContext.bindService(new Intent(
+                            ILicensingService.class.getName()), this, // ServiceConnection.
+                            Context.BIND_AUTO_CREATE);
 
-		private void clearTimeout() {
-			Log.i(TAG, "Clearing timeout.");
-			mHandler.removeCallbacks(mOnTimeout);
-		}
-	}
+                    if (bindResult) {
+                        mPendingChecks.offer(validator);
+                    } else {
+                        Log.e(TAG, "Could not bind to service.");
+                        handleServiceConnectionError(validator);
+                    }
+                } catch (final SecurityException e) {
+                    callback.applicationError(ApplicationErrorCode.MISSING_PERMISSION);
+                }
+            } else {
+                mPendingChecks.offer(validator);
+                runChecks();
+            }
+        }
+    }
 
-	public synchronized void onServiceConnected(final ComponentName name, final IBinder service) {
-		mService = ILicensingService.Stub.asInterface(service);
-		runChecks();
-	}
+    private void runChecks() {
+        LicenseValidator validator;
+        while ((validator = mPendingChecks.poll()) != null) {
+            try {
+                Log.i(TAG, "Calling checkLicense on service for " + validator.getPackageName());
+                mService.checkLicense(validator.getNonce(), validator.getPackageName(),
+                        new ResultListener(validator));
+                mChecksInProgress.add(validator);
+            } catch (final RemoteException e) {
+                Log.w(TAG, "RemoteException in checkLicense call.", e);
+                handleServiceConnectionError(validator);
+            }
+        }
+    }
 
-	public synchronized void onServiceDisconnected(final ComponentName name) {
-		// Called when the connection with the service has been
-		// unexpectedly disconnected. That is, Market crashed.
-		// If there are any checks in progress, the timeouts will handle them.
-		Log.w(TAG, "Service unexpectedly disconnected.");
-		mService = null;
-	}
+    private synchronized void finishCheck(final LicenseValidator validator) {
+        mChecksInProgress.remove(validator);
+        if (mChecksInProgress.isEmpty()) {
+            cleanupService();
+        }
+    }
 
-	/**
-	 * Generates policy response for service connection errors, as a result of
-	 * disconnections or timeouts.
-	 */
-	private synchronized void handleServiceConnectionError(final LicenseValidator validator) {
-		mPolicy.processServerResponse(LicenseResponse.RETRY, null);
+    private class ResultListener extends ILicenseResultListener.Stub {
+        private final LicenseValidator mValidator;
 
-		if (mPolicy.allowAccess()) {
-			validator.getCallback().allow();
-		} else {
-			validator.getCallback().dontAllow();
-		}
-	}
+        private final Runnable mOnTimeout;
 
-	/** Unbinds service if necessary and removes reference to it. */
-	private void cleanupService() {
-		if (mService != null) {
-			try {
-				mContext.unbindService(this);
-			} catch (final IllegalArgumentException e) {
-				// Somehow we've already been unbound. This is a non-fatal
-				// error.
-				Log.e(TAG, "Unable to unbind from licensing service (already unbound)");
-			}
-			mService = null;
-		}
-	}
+        public ResultListener(final LicenseValidator validator) {
+            mValidator = validator;
+            mOnTimeout = new Runnable() {
+                public void run() {
+                    Log.i(TAG, "Check timed out.");
+                    handleServiceConnectionError(mValidator);
+                    finishCheck(mValidator);
+                }
+            };
+            startTimeout();
+        }
 
-	/**
-	 * Inform the library that the context is about to be destroyed, so that any
-	 * open connections can be cleaned up.
-	 * <p>
-	 * Failure to call this method can result in a crash under certain
-	 * circumstances, such as during screen rotation if an Activity requests the
-	 * license check or when the user exits the application.
-	 */
-	public synchronized void onDestroy() {
-		cleanupService();
-		mHandler.getLooper().quit();
-	}
+        // Runs in IPC thread pool. Post it to the Handler, so we can guarantee
+        // either this or the timeout runs.
+        public void verifyLicense(final int responseCode, final String signedData,
+                final String signature) {
+            mHandler.post(new Runnable() {
+                public void run() {
+                    Log.i(TAG, "Received response.");
+                    // Make sure it hasn't already timed out.
+                    if (mChecksInProgress.contains(mValidator)) {
+                        clearTimeout();
+                        mValidator.verify(mPublicKey, responseCode, signedData, signature);
+                        finishCheck(mValidator);
+                    }
+                }
+            });
+        }
 
-	/** Generates a nonce (number used once). */
-	private int generateNonce() {
-		return RANDOM.nextInt();
-	}
+        private void startTimeout() {
+            Log.i(TAG, "Start monitoring timeout.");
+            mHandler.postDelayed(mOnTimeout, TIMEOUT_MS);
+        }
 
-	/**
-	 * Get version code for the application package name.
-	 * 
-	 * @param context
-	 * @param packageName
-	 *            application package name
-	 * @return the version code or empty string if package not found
-	 */
-	private static String getVersionCode(final Context context, final String packageName) {
-		try {
-			return String.valueOf(context.getPackageManager().getPackageInfo(packageName, 0).versionCode);
-		} catch (final NameNotFoundException e) {
-			Log.e(TAG, "Package not found. could not get version code.");
-			return "";
-		}
-	}
+        private void clearTimeout() {
+            Log.i(TAG, "Clearing timeout.");
+            mHandler.removeCallbacks(mOnTimeout);
+        }
+    }
+
+    public synchronized void onServiceConnected(final ComponentName name, final IBinder service) {
+        mService = ILicensingService.Stub.asInterface(service);
+        runChecks();
+    }
+
+    public synchronized void onServiceDisconnected(final ComponentName name) {
+        // Called when the connection with the service has been
+        // unexpectedly disconnected. That is, Market crashed.
+        // If there are any checks in progress, the timeouts will handle them.
+        Log.w(TAG, "Service unexpectedly disconnected.");
+        mService = null;
+    }
+
+    /**
+     * Generates policy response for service connection errors, as a result of
+     * disconnections or timeouts.
+     */
+    private synchronized void handleServiceConnectionError(final LicenseValidator validator) {
+        mPolicy.processServerResponse(LicenseResponse.RETRY, null);
+
+        if (mPolicy.allowAccess()) {
+            validator.getCallback().allow();
+        } else {
+            validator.getCallback().dontAllow();
+        }
+    }
+
+    /** Unbinds service if necessary and removes reference to it. */
+    private void cleanupService() {
+        if (mService != null) {
+            try {
+                mContext.unbindService(this);
+            } catch (final IllegalArgumentException e) {
+                // Somehow we've already been unbound. This is a non-fatal
+                // error.
+                Log.e(TAG, "Unable to unbind from licensing service (already unbound)");
+            }
+            mService = null;
+        }
+    }
+
+    /**
+     * Inform the library that the context is about to be destroyed, so that any
+     * open connections can be cleaned up.
+     * <p>
+     * Failure to call this method can result in a crash under certain
+     * circumstances, such as during screen rotation if an Activity requests the
+     * license check or when the user exits the application.
+     */
+    public synchronized void onDestroy() {
+        cleanupService();
+        mHandler.getLooper().quit();
+    }
+
+    /** Generates a nonce (number used once). */
+    private int generateNonce() {
+        return RANDOM.nextInt();
+    }
+
+    /**
+     * Get version code for the application package name.
+     * 
+     * @param context
+     * @param packageName application package name
+     * @return the version code or empty string if package not found
+     */
+    private static String getVersionCode(final Context context, final String packageName) {
+        try {
+            return String
+                    .valueOf(context.getPackageManager().getPackageInfo(packageName, 0).versionCode);
+        } catch (final NameNotFoundException e) {
+            Log.e(TAG, "Package not found. could not get version code.");
+            return "";
+        }
+    }
 }

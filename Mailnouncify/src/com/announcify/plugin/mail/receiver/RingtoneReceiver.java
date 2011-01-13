@@ -9,7 +9,7 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.net.Uri;
 
-import com.announcify.util.AnnouncifySettings;
+import com.announcify.api.util.AnnouncifySettings;
 
 public class RingtoneReceiver extends BroadcastReceiver {
 	public static final String ACTION_START_RINGTONE = "com.announcify.plugin.mail.ACTION_START_RINGTONE";

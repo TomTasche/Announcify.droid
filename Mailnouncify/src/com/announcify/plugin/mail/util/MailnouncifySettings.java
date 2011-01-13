@@ -2,7 +2,7 @@ package com.announcify.plugin.mail.util;
 
 import android.content.Context;
 
-import com.announcify.util.PluginSettings;
+import com.announcify.api.util.PluginSettings;
 
 public class MailnouncifySettings extends PluginSettings {
 	public static final String PREFERENCES_NAME = "com.announcify.plugin.mail.SETTINGS";

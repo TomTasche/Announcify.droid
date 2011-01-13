@@ -3,4 +3,6 @@
 <typeInfo handle="=Talknouncify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.app(Service.class[Service" modifiers="1057" timestamp="1292523349000"/>
 <typeInfo handle="=Announcify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.content(BroadcastReceiver.class[BroadcastReceiver" modifiers="1057" timestamp="1292523349000"/>
 <typeInfo handle="=Announcify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.app(IntentService.class[IntentService" modifiers="1057" timestamp="1292523349000"/>
+<typeInfo handle="=Announcify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.preference(Preference.class[Preference" modifiers="33" timestamp="1292523349000"/>
+<typeInfo handle="=Announcify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.preference(PreferenceActivity.class[PreferenceActivity" modifiers="1057" timestamp="1292523349000"/>
 </typeInfoHistroy>

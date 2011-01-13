@@ -1,0 +1,46 @@
+package com.announcify.activity.widget;
+
+import greendroid.widget.item.Item;
+import greendroid.widget.itemview.ItemView;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.view.ViewGroup;
+
+import com.announcify.R;
+import com.announcify.api.sql.model.PluginModel;
+
+public class PluginItem extends Item {
+	private int id;
+	
+	private Context context;
+	private PluginModel model;
+
+	public PluginItem(Context context, final int id) {
+		this.id = id;
+		this.context = context;
+		
+		model = new PluginModel(context);
+	}
+
+	@Override
+	public ItemView newView(final Context context, final ViewGroup parent) {
+		return createCellFromXml(context, R.layout.list_item_plugin, parent);
+	}
+	
+	public boolean getActive() {
+		return model.getActive(id);
+	}
+	
+	public void toggle() {
+		model.togglePlugin(id);
+	}
+	
+	public String getName() {
+		return model.getName(id);
+	}
+	
+	public Drawable getDrawable() {
+		Drawable drawable = context.getPackageManager().getActivityIcon(new Intent(getAction()));
+	}
+}

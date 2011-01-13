@@ -1,0 +1,120 @@
+package com.announcify.api.contact;
+
+import android.content.Context;
+
+import com.announcify.api.util.AnnouncifySettings;
+
+/**
+ * Used to store information, such as name, number, etc about a contact.
+ * 
+ * @author tom
+ * 
+ */
+public class Contact {
+	private final Context context;
+	private final AnnouncifySettings settings;
+
+	private String fullname = "";
+	private String address = ""; // number, mail, twitter, ...
+	private String nickname = "";
+	private String addressType = "";
+	private String lookupString = "";
+	private int groupId = -1;
+
+	public Contact(final Context context, final String address) {
+		this.address = address;
+		this.context = context;
+
+		settings = new AnnouncifySettings(context);
+	}
+
+	/**
+	 * 
+	 * @return Returns true if you shouldn't announce this contact. Be sure to
+	 *         really do so! Otherwise the user might get angry and throw birds
+	 *         at your house!
+	 */
+	private boolean announcable() {
+		if (settings.getFilterByGroup() && !Filter.checkGroup(context, groupId)) {
+			return true;
+		}
+
+		// TODO: check for null, empty, etc...
+
+		return false;
+	}
+
+	public void setFullname(final String name) {
+		if (name == null || name.trim().length() == 0) {
+			return;
+		}
+		fullname = name;
+	}
+
+	public void setAddressType(final String addressType) {
+		if (addressType == null || addressType.trim().length() == 0) {
+			return;
+		}
+		this.addressType = addressType;
+	}
+
+	public void setLookupString(final String lookupString) {
+		if (lookupString == null || lookupString.trim().length() == 0) {
+			return;
+		}
+		this.lookupString = lookupString;
+	}
+
+	public void setGroupId(final int groupId) {
+		if (groupId < 0) {
+			return;
+		}
+		this.groupId = groupId;
+	}
+
+	public void setNickname(final String nickname) {
+		if (nickname == null || nickname.trim().length() == 0) {
+			return;
+		}
+		this.nickname = nickname;
+	}
+
+	public void setAddress(final String address) {
+		if (address == null || address.trim().length() == 0) {
+			return;
+		}
+		this.address = address;
+	}
+
+	public Context getContext() {
+		return context;
+	}
+
+	public AnnouncifySettings getSettings() {
+		return settings;
+	}
+
+	public String getFullname() {
+		return fullname;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public String getAddressType() {
+		return addressType;
+	}
+
+	public String getLookupString() {
+		return lookupString;
+	}
+
+	public int getGroupId() {
+		return groupId;
+	}
+}

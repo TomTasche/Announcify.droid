@@ -1,0 +1,45 @@
+package com.announcify.activity.widget;
+
+import greendroid.widget.ItemAdapter;
+import greendroid.widget.item.Item;
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AlphabetIndexer;
+import android.widget.SectionIndexer;
+
+public class SectionedItemAdapter extends ItemAdapter implements SectionIndexer {
+
+    private AlphabetIndexer mIndexer;
+
+    public SectionedItemAdapter(Context context, Item[] items, String sections) {
+        super(context, items);
+        mIndexer = new AlphabetIndexer(new FakeCursor(this), 0, sections);
+    }
+
+    public int getPositionForSection(int sectionIndex) {
+        return mIndexer.getPositionForSection(sectionIndex);
+    }
+
+    public int getSectionForPosition(int position) {
+        return mIndexer.getSectionForPosition(position);
+    }
+
+    public Object[] getSections() {
+        return mIndexer.getSections();
+    }
+
+    public View getView(int position, View convertView, ViewGroup parent) {
+        final PluginItem item = (PluginItem) getItem(position);
+        final int section = getSectionForPosition(position);
+
+        if (getPositionForSection(section) == position) {
+            String title = mIndexer.getSections()[section].toString().trim();
+            item.headerText = title;
+        } else {
+            item.headerText = null;
+        }
+
+        return super.getView(position, convertView, parent);
+    }
+}

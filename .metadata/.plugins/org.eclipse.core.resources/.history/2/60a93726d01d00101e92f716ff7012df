@@ -1,0 +1,84 @@
+package com.announcify.api.contact.lookup;
+
+import android.content.Context;
+import android.content.res.Resources;
+import android.database.Cursor;
+import android.net.MailTo;
+import android.net.Uri;
+import android.provider.ContactsContract.CommonDataKinds;
+import android.provider.ContactsContract.CommonDataKinds.Email;
+import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Data;
+import android.provider.ContactsContract.PhoneLookup;
+import android.provider.ContactsContract.CommonDataKinds.StructuredName;
+
+import com.announcify.api.contact.Contact;
+
+public class Mail {
+    public static void prepareAddress(Contact contact) {
+        if (contact.getAddress().contains("\"")) {
+            // TODO: setGuessedName / setProbablyName / ... ?
+            contact.setFullname(contact.getAddress().substring(1,
+                    contact.getAddress().lastIndexOf("\"")));
+        }
+
+        if (contact.getAddress().contains("<")) {
+            contact.setAddress(contact.getAddress().substring(
+                    contact.getAddress().indexOf('<') + 1, contact.getAddress().indexOf('>')));
+        }
+    }
+    
+    public void getLookup(Context context, Contact contact) {
+        Cursor cursor = null;
+
+        try {
+            cursor = context.getContentResolver().query(Uri.withAppendedPath(Email.CONTENT_LOOKUP_URI, contact.getAddress()), new String[] {Email.LOOKUP_KEY}, null, null, null);
+            if (!cursor.moveToFirst()) return;
+
+            contact.setLookupString(cursor.getString(0));
+        } finally {
+            if (cursor != null) cursor.close();
+        }
+    }
+    
+    public static void getAddress(Context context, Contact contact) {
+        Cursor cursor = null;
+
+        try {
+            cursor = context.getContentResolver().query(Email.CONTENT_URI, new String[] {Email.DATA1}, Contacts.LOOKUP_KEY + " = '?'", new String[] {contact.getLookupString()}, null);
+            if (!cursor.moveToFirst()) return;
+
+            // TODO: implement?
+        } finally {
+            if (cursor != null) cursor.close();
+        }
+    }
+
+    public static void getType(Context context, Contact contact) {
+        Cursor cursor = null;
+
+        try {
+            cursor = context.getContentResolver().query(Email.CONTENT_URI, new String[] {Email.TYPE}, Contacts.LOOKUP_KEY + " = '?'" + " AND " + Email.DATA1 + " = '?'", new String[] {contact.getLookupString(), contact.getAddress()}, null);
+            if (!cursor.moveToFirst()) return;
+
+            contact.setType(Resources.getSystem().getStringArray(
+                    android.R.array.phoneTypes)[Integer.parseInt(cursor
+                            .getString(0)) - 1]);
+        } finally {
+            if (cursor != null) cursor.close();
+        }
+    }
+
+    public static void getLabel(Context context, Contact contact) {
+        Cursor cursor = null;
+
+        try {
+            cursor = context.getContentResolver().query(Data.CONTENT_URI, new String[] {CommonDataKinds.Phone.LABEL}, Contacts.LOOKUP_KEY + " = '?'" + " AND " + CommonDataKinds.Phone.NUMBER + " = '?'", new String[] {contact.getLookupString(), contact.getAddress()}, null);
+            if (!cursor.moveToFirst()) return;
+
+            contact.setLabel(cursor.getString(0));
+        } finally {
+            if (cursor != null) cursor.close();
+        }
+    }
+}

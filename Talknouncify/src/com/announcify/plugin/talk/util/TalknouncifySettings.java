@@ -2,7 +2,7 @@ package com.announcify.plugin.talk.util;
 
 import android.content.Context;
 
-import com.announcify.util.PluginSettings;
+import com.announcify.api.util.PluginSettings;
 
 public class TalknouncifySettings extends PluginSettings {
 	public static final String PREFERENCES_NAME = "com.announcify.plugin.talk.SETTINGS";

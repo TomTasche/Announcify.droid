@@ -1,0 +1,21 @@
+package com.announcify.api.contact.lookup;
+
+import com.announcify.api.contact.Contact;
+
+public class Phone {
+    public static void getId(Contact contact) {
+        contact.getId();
+    }
+    
+    public static void getNumber(Contact contact) {
+        contact.getId();
+    }
+    
+    public static void getType(Contact contact) {
+        contact.getId();
+    }
+    
+    public static void getLabel(Contact contact) {
+        contact.getId();
+    }
+}

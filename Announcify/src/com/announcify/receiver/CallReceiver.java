@@ -1,3 +1,4 @@
+
 package com.announcify.receiver;
 
 import android.content.Context;
@@ -8,26 +9,27 @@ import android.telephony.TelephonyManager;
 import com.announcify.activity.control.RemoteControlDialog;
 
 public class CallReceiver extends PhoneStateListener {
-	private final Context context;
-	private boolean stickyBroadcastReceived;
+    private final Context context;
 
-	public CallReceiver(final Context context) {
-		this.context = context;
-	}
+    private boolean stickyBroadcastReceived;
 
-	@Override
-	public void onCallStateChanged(final int state, final String incomingNumber) {
-		if (state != TelephonyManager.CALL_STATE_RINGING) {
-			if (!stickyBroadcastReceived) {
-				stickyBroadcastReceived = true;
-				return;
-			}
+    public CallReceiver(final Context context) {
+        this.context = context;
+    }
 
-			context.sendBroadcast(new Intent(RemoteControlDialog.ACTION_PAUSE));
-		}
-	}
+    @Override
+    public void onCallStateChanged(final int state, final String incomingNumber) {
+        if (state != TelephonyManager.CALL_STATE_RINGING) {
+            if (!stickyBroadcastReceived) {
+                stickyBroadcastReceived = true;
+                return;
+            }
 
-	public void setOnCall(final boolean onCall) {
-		stickyBroadcastReceived = onCall;
-	}
+            context.sendBroadcast(new Intent(RemoteControlDialog.ACTION_PAUSE));
+        }
+    }
+
+    public void setOnCall(final boolean onCall) {
+        stickyBroadcastReceived = onCall;
+    }
 }

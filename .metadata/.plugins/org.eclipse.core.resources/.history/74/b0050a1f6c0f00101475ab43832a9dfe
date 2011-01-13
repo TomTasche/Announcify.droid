@@ -1,9 +1,0 @@
-package com.announcify.text;
-
-public class Formatter {
-	
-	
-	public Formatter() {
-		// TODO Auto-generated constructor stub
-	}
-}

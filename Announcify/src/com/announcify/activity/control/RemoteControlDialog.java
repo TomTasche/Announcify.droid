@@ -1,3 +1,4 @@
+
 package com.announcify.activity.control;
 
 import android.app.Activity;
@@ -13,52 +14,57 @@ import com.announcify.R;
 import com.announcify.service.ManagerService;
 
 public class RemoteControlDialog extends Activity {
-	public static final String ACTION_CONTINUE = "com.announcify.ACTION_CONTINUE";
-	public static final String ACTION_PAUSE = "com.announcify.ACTION_PAUSE";
-	public static final String ACTION_SKIP = "com.announcify.ACTION_SKIP";
+    public static final String ACTION_CONTINUE = "com.announcify.ACTION_CONTINUE";
 
-	private final String[] controls = new String[] {"Pause", "Continue", "Skip", "Kill"};
+    public static final String ACTION_PAUSE = "com.announcify.ACTION_PAUSE";
 
-	@Override
-	protected void onCreate(final Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    public static final String ACTION_SKIP = "com.announcify.ACTION_SKIP";
 
-		final Builder bob = new AlertDialog.Builder(this);
-		bob.setIcon(R.drawable.launcher_icon).setTitle("Control Announcify");
-		// TODO: use strings.xml array
-		bob.setItems(controls, new OnClickListener() {
+    private final String[] controls = new String[] {
+            "Pause", "Continue", "Skip", "Kill"
+    };
 
-			public void onClick(final DialogInterface dialog, final int which) {
-				switch (which) {
-					case 0:
-						fireBroadcast(ACTION_PAUSE);
-						break;
-					case 1:
-						fireBroadcast(ACTION_CONTINUE);
-						break;
-					case 2:
-						fireBroadcast(ACTION_SKIP);
-						break;
-					case 3:
-						RemoteControlDialog.this.stopService(new Intent(RemoteControlDialog.this, ManagerService.class));
-						break;
-				}
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-				dialog.dismiss();
-				finish();
-			}
-		});
-		bob.setOnCancelListener(new OnCancelListener() {
+        final Builder bob = new AlertDialog.Builder(this);
+        bob.setIcon(R.drawable.launcher_icon).setTitle("Control Announcify");
+        // TODO: use strings.xml array
+        bob.setItems(controls, new OnClickListener() {
 
-			public void onCancel(final DialogInterface dialog) {
-				dialog.dismiss();
-				finish();
-			}
-		});
-		bob.create().show();
-	}
+            public void onClick(final DialogInterface dialog, final int which) {
+                switch (which) {
+                    case 0:
+                        fireBroadcast(ACTION_PAUSE);
+                        break;
+                    case 1:
+                        fireBroadcast(ACTION_CONTINUE);
+                        break;
+                    case 2:
+                        fireBroadcast(ACTION_SKIP);
+                        break;
+                    case 3:
+                        RemoteControlDialog.this.stopService(new Intent(RemoteControlDialog.this,
+                                ManagerService.class));
+                        break;
+                }
 
-	private void fireBroadcast(final String action) {
-		sendBroadcast(new Intent(action));
-	}
+                dialog.dismiss();
+                finish();
+            }
+        });
+        bob.setOnCancelListener(new OnCancelListener() {
+
+            public void onCancel(final DialogInterface dialog) {
+                dialog.dismiss();
+                finish();
+            }
+        });
+        bob.create().show();
+    }
+
+    private void fireBroadcast(final String action) {
+        sendBroadcast(new Intent(action));
+    }
 }

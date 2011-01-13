@@ -35,195 +35,207 @@ import com.android.vending.licensing.util.Base64DecoderException;
  * process the response.
  */
 class LicenseValidator {
-	private static final String TAG = "LicenseValidator";
+    private static final String TAG = "LicenseValidator";
 
-	// Server response codes.
-	private static final int LICENSED = 0x0;
-	private static final int NOT_LICENSED = 0x1;
-	private static final int LICENSED_OLD_KEY = 0x2;
-	private static final int ERROR_NOT_MARKET_MANAGED = 0x3;
-	private static final int ERROR_SERVER_FAILURE = 0x4;
-	private static final int ERROR_OVER_QUOTA = 0x5;
+    // Server response codes.
+    private static final int LICENSED = 0x0;
 
-	private static final int ERROR_CONTACTING_SERVER = 0x101;
-	private static final int ERROR_INVALID_PACKAGE_NAME = 0x102;
-	private static final int ERROR_NON_MATCHING_UID = 0x103;
+    private static final int NOT_LICENSED = 0x1;
 
-	private final Policy mPolicy;
-	private final LicenseCheckerCallback mCallback;
-	private final int mNonce;
-	private final String mPackageName;
-	private final String mVersionCode;
-	private final DeviceLimiter mDeviceLimiter;
+    private static final int LICENSED_OLD_KEY = 0x2;
 
-	LicenseValidator(final Policy policy, final DeviceLimiter deviceLimiter, final LicenseCheckerCallback callback, final int nonce, final String packageName, final String versionCode) {
-		mPolicy = policy;
-		mDeviceLimiter = deviceLimiter;
-		mCallback = callback;
-		mNonce = nonce;
-		mPackageName = packageName;
-		mVersionCode = versionCode;
-	}
+    private static final int ERROR_NOT_MARKET_MANAGED = 0x3;
 
-	public LicenseCheckerCallback getCallback() {
-		return mCallback;
-	}
+    private static final int ERROR_SERVER_FAILURE = 0x4;
 
-	public int getNonce() {
-		return mNonce;
-	}
+    private static final int ERROR_OVER_QUOTA = 0x5;
 
-	public String getPackageName() {
-		return mPackageName;
-	}
+    private static final int ERROR_CONTACTING_SERVER = 0x101;
 
-	private static final String SIGNATURE_ALGORITHM = "SHA1withRSA";
+    private static final int ERROR_INVALID_PACKAGE_NAME = 0x102;
 
-	/**
-	 * Verifies the response from server and calls appropriate callback method.
-	 * 
-	 * @param publicKey
-	 *            public key associated with the developer account
-	 * @param responseCode
-	 *            server response code
-	 * @param signedData
-	 *            signed data from server
-	 * @param signature
-	 *            server signature
-	 */
-	public void verify(final PublicKey publicKey, final int responseCode, final String signedData, final String signature) {
-		String userId = null;
-		// Skip signature check for unsuccessful requests
-		ResponseData data = null;
-		if (responseCode == LICENSED || responseCode == NOT_LICENSED || responseCode == LICENSED_OLD_KEY) {
-			// Verify signature.
-			try {
-				final Signature sig = Signature.getInstance(SIGNATURE_ALGORITHM);
-				sig.initVerify(publicKey);
-				sig.update(signedData.getBytes());
+    private static final int ERROR_NON_MATCHING_UID = 0x103;
 
-				if (!sig.verify(Base64.decode(signature))) {
-					Log.e(TAG, "Signature verification failed.");
-					handleInvalidResponse();
-					return;
-				}
-			} catch (final NoSuchAlgorithmException e) {
-				// This can't happen on an Android compatible device.
-				throw new RuntimeException(e);
-			} catch (final InvalidKeyException e) {
-				handleApplicationError(ApplicationErrorCode.INVALID_PUBLIC_KEY);
-				return;
-			} catch (final SignatureException e) {
-				throw new RuntimeException(e);
-			} catch (final Base64DecoderException e) {
-				Log.e(TAG, "Could not Base64-decode signature.");
-				handleInvalidResponse();
-				return;
-			}
+    private final Policy mPolicy;
 
-			// Parse and validate response.
-			try {
-				data = ResponseData.parse(signedData);
-			} catch (final IllegalArgumentException e) {
-				Log.e(TAG, "Could not parse response.");
-				handleInvalidResponse();
-				return;
-			}
+    private final LicenseCheckerCallback mCallback;
 
-			if (data.responseCode != responseCode) {
-				Log.e(TAG, "Response codes don't match.");
-				handleInvalidResponse();
-				return;
-			}
+    private final int mNonce;
 
-			if (data.nonce != mNonce) {
-				Log.e(TAG, "Nonce doesn't match.");
-				handleInvalidResponse();
-				return;
-			}
+    private final String mPackageName;
 
-			if (!data.packageName.equals(mPackageName)) {
-				Log.e(TAG, "Package name doesn't match.");
-				handleInvalidResponse();
-				return;
-			}
+    private final String mVersionCode;
 
-			if (!data.versionCode.equals(mVersionCode)) {
-				Log.e(TAG, "Version codes don't match.");
-				handleInvalidResponse();
-				return;
-			}
+    private final DeviceLimiter mDeviceLimiter;
 
-			// Application-specific user identifier.
-			userId = data.userId;
-			if (TextUtils.isEmpty(userId)) {
-				Log.e(TAG, "User identifier is empty.");
-				handleInvalidResponse();
-				return;
-			}
-		}
+    LicenseValidator(final Policy policy, final DeviceLimiter deviceLimiter,
+            final LicenseCheckerCallback callback, final int nonce, final String packageName,
+            final String versionCode) {
+        mPolicy = policy;
+        mDeviceLimiter = deviceLimiter;
+        mCallback = callback;
+        mNonce = nonce;
+        mPackageName = packageName;
+        mVersionCode = versionCode;
+    }
 
-		switch (responseCode) {
-			case LICENSED:
-			case LICENSED_OLD_KEY:
-				final LicenseResponse limiterResponse = mDeviceLimiter.isDeviceAllowed(userId);
-				handleResponse(limiterResponse, data);
-				break;
-			case NOT_LICENSED:
-				handleResponse(LicenseResponse.NOT_LICENSED, data);
-				break;
-			case ERROR_CONTACTING_SERVER:
-				Log.w(TAG, "Error contacting licensing server.");
-				handleResponse(LicenseResponse.RETRY, data);
-				break;
-			case ERROR_SERVER_FAILURE:
-				Log.w(TAG, "An error has occurred on the licensing server.");
-				handleResponse(LicenseResponse.RETRY, data);
-				break;
-			case ERROR_OVER_QUOTA:
-				Log.w(TAG, "Licensing server is refusing to talk to this device, over quota.");
-				handleResponse(LicenseResponse.RETRY, data);
-				break;
-			case ERROR_INVALID_PACKAGE_NAME:
-				handleApplicationError(ApplicationErrorCode.INVALID_PACKAGE_NAME);
-				break;
-			case ERROR_NON_MATCHING_UID:
-				handleApplicationError(ApplicationErrorCode.NON_MATCHING_UID);
-				break;
-			case ERROR_NOT_MARKET_MANAGED:
-				handleApplicationError(ApplicationErrorCode.NOT_MARKET_MANAGED);
-				break;
-			default:
-				Log.e(TAG, "Unknown response code for license check.");
-				handleInvalidResponse();
-		}
-	}
+    public LicenseCheckerCallback getCallback() {
+        return mCallback;
+    }
 
-	/**
-	 * Confers with policy and calls appropriate callback method.
-	 * 
-	 * @param response
-	 * @param rawData
-	 */
-	private void handleResponse(final LicenseResponse response, final ResponseData rawData) {
-		// Update policy data and increment retry counter (if needed)
-		mPolicy.processServerResponse(response, rawData);
+    public int getNonce() {
+        return mNonce;
+    }
 
-		// Given everything we know, including cached data, ask the policy if we
-		// should grant
-		// access.
-		if (mPolicy.allowAccess()) {
-			mCallback.allow();
-		} else {
-			mCallback.dontAllow();
-		}
-	}
+    public String getPackageName() {
+        return mPackageName;
+    }
 
-	private void handleApplicationError(final ApplicationErrorCode code) {
-		mCallback.applicationError(code);
-	}
+    private static final String SIGNATURE_ALGORITHM = "SHA1withRSA";
 
-	private void handleInvalidResponse() {
-		mCallback.dontAllow();
-	}
+    /**
+     * Verifies the response from server and calls appropriate callback method.
+     * 
+     * @param publicKey public key associated with the developer account
+     * @param responseCode server response code
+     * @param signedData signed data from server
+     * @param signature server signature
+     */
+    public void verify(final PublicKey publicKey, final int responseCode, final String signedData,
+            final String signature) {
+        String userId = null;
+        // Skip signature check for unsuccessful requests
+        ResponseData data = null;
+        if (responseCode == LICENSED || responseCode == NOT_LICENSED
+                || responseCode == LICENSED_OLD_KEY) {
+            // Verify signature.
+            try {
+                final Signature sig = Signature.getInstance(SIGNATURE_ALGORITHM);
+                sig.initVerify(publicKey);
+                sig.update(signedData.getBytes());
+
+                if (!sig.verify(Base64.decode(signature))) {
+                    Log.e(TAG, "Signature verification failed.");
+                    handleInvalidResponse();
+                    return;
+                }
+            } catch (final NoSuchAlgorithmException e) {
+                // This can't happen on an Android compatible device.
+                throw new RuntimeException(e);
+            } catch (final InvalidKeyException e) {
+                handleApplicationError(ApplicationErrorCode.INVALID_PUBLIC_KEY);
+                return;
+            } catch (final SignatureException e) {
+                throw new RuntimeException(e);
+            } catch (final Base64DecoderException e) {
+                Log.e(TAG, "Could not Base64-decode signature.");
+                handleInvalidResponse();
+                return;
+            }
+
+            // Parse and validate response.
+            try {
+                data = ResponseData.parse(signedData);
+            } catch (final IllegalArgumentException e) {
+                Log.e(TAG, "Could not parse response.");
+                handleInvalidResponse();
+                return;
+            }
+
+            if (data.responseCode != responseCode) {
+                Log.e(TAG, "Response codes don't match.");
+                handleInvalidResponse();
+                return;
+            }
+
+            if (data.nonce != mNonce) {
+                Log.e(TAG, "Nonce doesn't match.");
+                handleInvalidResponse();
+                return;
+            }
+
+            if (!data.packageName.equals(mPackageName)) {
+                Log.e(TAG, "Package name doesn't match.");
+                handleInvalidResponse();
+                return;
+            }
+
+            if (!data.versionCode.equals(mVersionCode)) {
+                Log.e(TAG, "Version codes don't match.");
+                handleInvalidResponse();
+                return;
+            }
+
+            // Application-specific user identifier.
+            userId = data.userId;
+            if (TextUtils.isEmpty(userId)) {
+                Log.e(TAG, "User identifier is empty.");
+                handleInvalidResponse();
+                return;
+            }
+        }
+
+        switch (responseCode) {
+            case LICENSED:
+            case LICENSED_OLD_KEY:
+                final LicenseResponse limiterResponse = mDeviceLimiter.isDeviceAllowed(userId);
+                handleResponse(limiterResponse, data);
+                break;
+            case NOT_LICENSED:
+                handleResponse(LicenseResponse.NOT_LICENSED, data);
+                break;
+            case ERROR_CONTACTING_SERVER:
+                Log.w(TAG, "Error contacting licensing server.");
+                handleResponse(LicenseResponse.RETRY, data);
+                break;
+            case ERROR_SERVER_FAILURE:
+                Log.w(TAG, "An error has occurred on the licensing server.");
+                handleResponse(LicenseResponse.RETRY, data);
+                break;
+            case ERROR_OVER_QUOTA:
+                Log.w(TAG, "Licensing server is refusing to talk to this device, over quota.");
+                handleResponse(LicenseResponse.RETRY, data);
+                break;
+            case ERROR_INVALID_PACKAGE_NAME:
+                handleApplicationError(ApplicationErrorCode.INVALID_PACKAGE_NAME);
+                break;
+            case ERROR_NON_MATCHING_UID:
+                handleApplicationError(ApplicationErrorCode.NON_MATCHING_UID);
+                break;
+            case ERROR_NOT_MARKET_MANAGED:
+                handleApplicationError(ApplicationErrorCode.NOT_MARKET_MANAGED);
+                break;
+            default:
+                Log.e(TAG, "Unknown response code for license check.");
+                handleInvalidResponse();
+        }
+    }
+
+    /**
+     * Confers with policy and calls appropriate callback method.
+     * 
+     * @param response
+     * @param rawData
+     */
+    private void handleResponse(final LicenseResponse response, final ResponseData rawData) {
+        // Update policy data and increment retry counter (if needed)
+        mPolicy.processServerResponse(response, rawData);
+
+        // Given everything we know, including cached data, ask the policy if we
+        // should grant
+        // access.
+        if (mPolicy.allowAccess()) {
+            mCallback.allow();
+        } else {
+            mCallback.dontAllow();
+        }
+    }
+
+    private void handleApplicationError(final ApplicationErrorCode code) {
+        mCallback.applicationError(code);
+    }
+
+    private void handleInvalidResponse() {
+        mCallback.dontAllow();
+    }
 }

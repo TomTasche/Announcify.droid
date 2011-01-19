@@ -1,0 +1,8 @@
+<h1>Announcify &#8211; API<br />
+Welcome to an early glimpse at the API for <a href="http://announcify.com/">Announcify</a> !</h1>
+
+<p>Basically, all you have to do is to get the text you want Announcify to announce (current time, battery status, social event, whatever), create an <em>AnnouncifyIntent</em> and put the text into it. <em>AnnouncifyIntent</em> will do the rest for you and send the text over to Announcify.</p>
+
+<p>Take a look at <a href="https://github.com/TomTasche/Announcify-Call">Announcify-Call</a> if you want to see an example.</p>
+
+<p>written using <a href="http://www.textism.com/tools/textile/">Textism</a></p>

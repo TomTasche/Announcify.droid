@@ -1,0 +1,34 @@
+package com.announcify.ui.activity;
+
+import com.announcify.R;
+
+import android.os.Bundle;
+import android.provider.ContactsContract.Groups;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+
+public class GroupActivity extends BaseActivity {
+    
+    private ListView list;
+    
+    private SimpleCursorAdapter adapter;
+    
+    @Override
+    protected void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+        
+        setActionBarContentView(R.layout.list);
+        
+        adapter = new SimpleCursorAdapter(this, R.layout.list_item_choose, null, new String[] {Groups._ID}, new int[] {R.id.textLeft});
+        
+        list = (ListView)findViewById(android.R.id.list);
+        list.setAdapter(adapter);
+    }
+    
+    @Override
+    protected void onStart() {
+        super.onStart();
+        
+        
+    }
+}

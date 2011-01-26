@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename field &apos;EXTRA_SUBJECT&apos; in &apos;com.announcify.plugin.talk.service.WorkerService&apos; to &apos;EXTRA_MESSAGE&apos;&#x0A;- Original project: &apos;Talknouncify&apos;&#x0A;- Original element: &apos;com.announcify.plugin.talk.service.WorkerService.EXTRA_SUBJECT&apos;&#x0A;- Renamed element: &apos;com.announcify.plugin.talk.service.WorkerService.EXTRA_MESSAGE&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;EXTRA_SUBJECT&apos;" flags="589830" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src&lt;com.announcify.plugin.talk.service{WorkerService.java[WorkerService^EXTRA_SUBJECT" name="EXTRA_MESSAGE" references="true" setter="false" stamp="1295201503690" textual="false" version="1.0"/>
+</session>

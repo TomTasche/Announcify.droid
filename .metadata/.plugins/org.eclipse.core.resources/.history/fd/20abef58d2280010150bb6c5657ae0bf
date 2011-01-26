@@ -1,0 +1,45 @@
+
+package com.announcify.plugin.voice.call.service;
+
+import android.content.Intent;
+import android.telephony.TelephonyManager;
+
+import com.announcify.api.AnnouncifyIntent;
+import com.announcify.api.background.contact.Contact;
+import com.announcify.api.background.error.ExceptionHandler;
+import com.announcify.api.background.service.PluginService;
+import com.announcify.plugin.voice.call.receiver.RingtoneReceiver;
+import com.announcify.plugin.voice.call.util.Settings;
+
+public class WorkerService extends PluginService {
+    
+    public static final String ACTION_START_RINGTONE = "com.announcify.plugin.voice.call.ACTION_START_RINGTONE";
+
+    public static final String ACTION_STOP_RINGTONE = "com.announcify.plugin.voice.call.ACTION_STOP_RINGTONE";
+
+    public WorkerService() {
+        super("Announcify - Call", ACTION_START_RINGTONE, ACTION_STOP_RINGTONE);
+    }
+
+    @Override
+    protected void onHandleIntent(final Intent intent) {
+        final Settings settings = new Settings(this);
+
+        final String number = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+        if (number == null && "".equals(number)) {
+            return;
+        }
+        final Contact contact = new Contact(this, new Number(this), number);
+        
+        if (!Filter.announcable(this, contact)) return;
+
+        final Formatter formatter = new Formatter(this, contact, settings);
+
+        final AnnouncifyIntent announcify = new AnnouncifyIntent(this, settings);
+        announcify.setStartBroadcast(RingtoneReceiver.ACTION_START_RINGTONE);
+        announcify.setStopBroadcast(RingtoneReceiver.ACTION_STOP_RINGTONE);
+        announcify.announce(formatter.format(null));
+        
+        super.onHandleIntent(intent);
+    }
+}

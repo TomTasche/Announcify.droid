@@ -1,0 +1,16 @@
+package com.announcify.ui.activity;
+
+import com.announcify.R;
+
+import android.os.Bundle;
+import android.widget.ListView;
+
+public class GroupActivity extends BaseActivity {
+    
+    @Override
+    protected void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+        
+        setActionBarContentView(R.layout.list);
+    }
+}

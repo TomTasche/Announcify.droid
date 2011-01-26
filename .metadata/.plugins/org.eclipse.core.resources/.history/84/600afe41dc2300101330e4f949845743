@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<RingtonePreference
+		android:key="preference_ringtone"
+		android:title="Select a Ringtone to be played"
+		android:ringtoneType="ringtone"
+		android:showSilent="true"
+		android:showDefault="true" />
+
+	<ListPreference
+		android:dialogTitle="Break between Readings"
+		android:entryValues="@array/preference_list_reading_break_ids"
+		android:entries="@array/preference_list_reading_break_names"
+		android:title="Break between Readings"
+		android:key="preference_reading_break"
+		android:defaultValue="2" />
+
+	<ListPreference
+		android:dialogTitle="Repeat Readings"
+		android:entryValues="@array/preference_list_reading_repeat_ids"
+		android:entries="@array/preference_list_reading_repeat_names"
+		android:title="Repeat Readings"
+		android:key="preference_reading_repeat"
+		android:defaultValue="1" />
+
+	<ListPreference
+		android:dialogTitle="Wait before Reading"
+		android:entryValues="@array/preference_list_reading_wait_ids"
+		android:entries="@array/preference_list_reading_wait_names"
+		android:title="Wait before Reading"
+		android:key="preference_reading_wait"
+		android:defaultValue="0" />
+
+	<ListPreference
+		android:dialogTitle="Unknown Announcement"
+		android:entryValues="@array/preference_list_reading_unknown_ids"
+		android:entries="@array/preference_list_reading_unknown_names"
+		android:title="Unknown Announcement"
+		android:key="preference_reading_unknown"
+		android:defaultValue="0" />
+
+	<ListPreference
+		android:dialogTitle="Announcement"
+		android:entryValues="@array/preference_list_reading_announcement_ids"
+		android:entries="@array/preference_list_reading_announcement_names"
+		android:title="Announcement"
+		android:key="preference_reading_announcement"
+		android:defaultValue="0" />
+
+	<ListPreference
+		android:dialogTitle="Discreet Announcement"
+		android:entryValues="@array/preference_list_reading_announcement_ids"
+		android:entries="@array/preference_list_reading_announcement_names"
+		android:title="Discreet Announcement"
+		android:key="preference_reading_discreet"
+		android:defaultValue="2" />
+</PreferenceScreen>

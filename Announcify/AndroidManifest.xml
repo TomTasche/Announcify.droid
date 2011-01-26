@@ -21,16 +21,17 @@
 		android:name="android.permission.INTERNET" />
 	<uses-permission
 		android:name="android.permission.VIBRATE" />
+
 	<uses-permission
 		android:name="android.permission.READ_CONTACTS" />
 
 	<application
-		android:theme="@style/Theme.Announcify"
 		android:icon="@drawable/launcher_icon"
 		android:label="@string/app_name"
-		android:name=".activity.AnnouncifyApplication">
+		android:name=".AnnouncifyApplication">
+
 		<activity
-			android:name=".activity.AnnouncifyActivity"
+			android:name=".ui.activity.AnnouncifyActivity"
 			android:label="@string/app_name"
 			android:configChanges="orientation|keyboardHidden">
 			<intent-filter>
@@ -39,10 +40,29 @@
 				<category
 					android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
+
+			<intent-filter>
+				<action
+					android:name="com.announcify" />
+				<category
+					android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
 		</activity>
 
 		<activity
-			android:name=".activity.SettingsActivity"
+			android:name=".ui.activity.HelpActivity"
+			android:label="@string/app_name"
+			android:configChanges="orientation|keyboardHidden">
+			<intent-filter>
+				<action
+					android:name="com.announcify.HELP" />
+				<category
+					android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+
+		<activity
+			android:name=".ui.activity.SettingsActivity"
 			android:label="@string/app_name"
 			android:configChanges="orientation|keyboardHidden">
 			<intent-filter>
@@ -54,7 +74,17 @@
 		</activity>
 
 		<activity
-			android:name=".activity.RemoteControlDialog"
+			android:name=".ui.activity.FormatActivity"
+			android:label="@string/app_name"
+			android:configChanges="orientation|keyboardHidden" />
+
+		<activity
+			android:name=".ui.activity.ReplaceActivity"
+			android:label="@string/app_name"
+			android:configChanges="orientation|keyboardHidden" />
+
+		<activity
+			android:name=".ui.control.RemoteControlDialog"
 			android:label="@string/app_name"
 			android:theme="@android:style/Theme.Translucent.NoTitleBar"
 			android:configChanges="orientation|keyboardHidden">
@@ -65,7 +95,7 @@
 		</activity>
 
 		<activity
-			android:name=".activity.RemoteControlDialogInstaller"
+			android:name=".ui.control.RemoteControlDialogInstaller"
 			android:label="@string/app_name"
 			android:theme="@android:style/Theme.Translucent.NoTitleBar"
 			android:configChanges="orientation|keyboardHidden">
@@ -78,7 +108,7 @@
 		</activity>
 
 		<receiver
-			android:name=".error.ExceptionReceiver"
+			android:name=".background.error.ExceptionReceiver"
 			android:label="@string/app_name"
 			android:permission="com.announcify.PERMISSION_IM_A_PLUGIN">
 			<intent-filter>
@@ -88,7 +118,7 @@
 		</receiver>
 
 		<service
-			android:name=".service.ManagerService"
+			android:name=".background.service.ManagerService"
 			android:label="@string/app_name"
 			android:permission="com.announcify.PERMISSION_IM_A_PLUGIN">
 			<intent-filter>
@@ -98,9 +128,13 @@
 		</service>
 
 		<service
-			android:name=".error.ExceptionService"
+			android:name=".background.error.ExceptionService"
 			android:label="@string/app_name"
 			android:permission="com.announcify.PERMISSION_IM_A_PLUGIN" />
+
+		<provider
+			android:name=".background.sql.AnnouncifyProvider"
+			android:authorities="com.announcify" />
 	</application>
 
 	<supports-screens

@@ -1,0 +1,40 @@
+
+package com.announcify.plugin.voice.call.activity;
+
+import android.content.Context;
+import android.content.Intent;
+import android.media.RingtoneManager;
+import android.os.Bundle;
+import android.preference.RingtonePreference;
+
+import com.announcify.api.activity.PluginActivity;
+import com.announcify.api.util.PluginSettings;
+import com.announcify.plugin.voice.call.R;
+import com.announcify.plugin.voice.call.util.Settings;
+
+public class SettingsActivity extends PluginActivity {
+
+    public static final String ACTION_SETTINGS = "com.announcify.plugin.voice.call.SETTINGS";
+
+
+    @Override
+    public void onCreate(final Bundle savedInstanceState) {
+        addPreferencesFromResource(R.xml.preferences_settings);
+        
+        super.onCreate(savedInstanceState);
+        
+        getPreferenceManager().setSharedPreferencesName(Settings.PREFERENCES_NAME);
+        getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
+
+        setCustomListeners(new Settings(this));
+
+        ((RingtonePreference) getPreferenceScreen().findPreference(PluginSettings.KEY_RINGTONE)).setRingtoneType(RingtoneManager.TYPE_ALL);
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        parseRingtone(requestCode, resultCode, data, RingtoneManager.TYPE_RINGTONE);
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+}

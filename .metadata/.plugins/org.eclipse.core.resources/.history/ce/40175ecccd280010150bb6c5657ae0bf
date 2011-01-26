@@ -1,0 +1,7 @@
+package com.announcify.api.simple;
+
+import com.announcify.api.background.sql.model.PluginModel;
+
+public class SimplePluginModel extends PluginModel {
+
+}

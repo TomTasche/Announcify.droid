@@ -1,0 +1,17 @@
+
+package com.announcify.api.contact;
+
+import java.util.List;
+
+public class Filter {
+    /**
+     * @return Returns true if you shouldn't announce this contact. Be sure to
+     *         really do so! Otherwise the user might get angry and throw birds
+     *         at your house!
+     */
+    public static boolean announcable(Contact contact) {
+        List<Long> groups = contact.getGroups();
+        groups.contains(object)
+        return false;
+    }
+}

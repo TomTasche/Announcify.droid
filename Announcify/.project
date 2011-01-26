@@ -32,14 +32,14 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>API - Announcify_src</name>
+			<type>2</type>
+			<locationURI>_android_API_Announcify_a6905859/src</locationURI>
+		</link>
+		<link>
 			<name>Android Market Licensing_src</name>
 			<type>2</type>
 			<locationURI>_android_Android_Market_Licensing_aa180f8b/src</locationURI>
-		</link>
-		<link>
-			<name>Announcify-API_src</name>
-			<type>2</type>
-			<locationURI>_android_Announcify_API_a16378cd/src</locationURI>
 		</link>
 		<link>
 			<name>GreenDroid_src</name>

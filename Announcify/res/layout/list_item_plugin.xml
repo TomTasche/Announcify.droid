@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.announcify.activity.widget.PluginItemView
+<com.announcify.ui.widget.PluginItemView
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	style="?attr/gdDrawableItemViewStyle"
 
@@ -72,4 +72,4 @@
 
 			android:nextFocusLeft="@id/settings" />
 	</LinearLayout>
-</com.announcify.activity.widget.PluginItemView>
+</com.announcify.ui.widget.PluginItemView>

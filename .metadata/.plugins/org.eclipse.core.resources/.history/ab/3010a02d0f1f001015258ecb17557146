@@ -1,9 +1,0 @@
-package com.announcify.api.contact;
-
-public enum ContactEnum {
-    FIRSTNAME() {
-        
-    }
-
-    
-}

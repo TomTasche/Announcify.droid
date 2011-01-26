@@ -1,0 +1,59 @@
+package com.announcify.background.sql;
+
+import com.announcify.api.sql.model.GroupModel;
+import com.announcify.api.sql.model.PluginModel;
+import com.announcify.api.sql.model.TranslationModel;
+
+import android.content.ContentProvider;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
+
+public class AnnouncifyProvider extends ContentProvider {
+    
+    private AnnouncifyDatabase announcify;
+    
+
+    @Override
+    public boolean onCreate() {
+        announcify = new AnnouncifyDatabase(getContext());
+        
+        return false;
+    }
+
+    @Override
+    public int delete(Uri arg0, String arg1, String[] arg2) {
+        SQLiteDatabase database = announcify.getWritableDatabase();
+        
+        return 0;
+    }
+
+    @Override
+    public String getType(Uri uri) {
+        return "announcify";
+    }
+
+    @Override
+    public Uri insert(Uri uri, ContentValues values) {
+        SQLiteDatabase database = announcify.getWritableDatabase();
+        database.insert(uri.getLastPathSegment(), null, values);
+        database.close();
+        
+        return null;
+    }
+
+    @Override
+    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
+            String sortOrder) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+}

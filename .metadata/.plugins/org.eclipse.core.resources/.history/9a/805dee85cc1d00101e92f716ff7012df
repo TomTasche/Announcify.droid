@@ -1,7 +1,0 @@
-package com.announcify.api.contact.lookup;
-
-public class Mail {
-    public static void prepareAddress(String address) {
-        // substring...
-    }
-}

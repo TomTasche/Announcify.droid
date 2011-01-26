@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
 	xmlns:android="http://schemas.android.com/apk/res/android">
-	
+
 	<item
-		android:title="Plugins"
-		android:icon="@android:drawable/ic_menu_help"
-		android:id="@+id/menu_help" />
-	
+		android:title="Toggle Plugins"
+		android:icon="@android:drawable/ic_menu_close_clear_cancel"
+		android:id="@+id/menu_toggle" />
+
 	<item
 		android:title="Help"
 		android:icon="@android:drawable/ic_menu_help"
 		android:id="@+id/menu_help" />
 
 	<item
-		android:title="Share"
-		android:icon="@android:drawable/ic_menu_share"
-		android:id="@+id/menu_share" />
+		android:title="More Plugins"
+		android:icon="@android:drawable/ic_menu_add"
+		android:id="@+id/menu_plugins" />
 
 	<item
 		android:title="Rate"
@@ -23,9 +23,9 @@
 		android:id="@+id/menu_rate" />
 
 	<item
-		android:title="Donate"
-		android:icon="@android:drawable/ic_menu_send"
-		android:id="@+id/menu_donate" />
+		android:title="Share"
+		android:icon="@android:drawable/ic_menu_share"
+		android:id="@+id/menu_share" />
 
 	<item
 		android:title="About"

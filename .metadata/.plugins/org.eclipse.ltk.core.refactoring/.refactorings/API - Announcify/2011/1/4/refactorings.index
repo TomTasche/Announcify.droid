@@ -1,0 +1,16 @@
+1295862105547	Move compilation unit
+1295862173097	Move compilation unit
+1295862176981	Delete element
+1295985168233	Move compilation unit
+1295990080964	Rename package 'com.announcify.api.activity'
+1295990097835	Rename package 'com.announcify.api.audio'
+1295990104395	Rename package 'com.announcify.api.contact'
+1295990109808	Rename package 'com.announcify.api.error'
+1295990114022	Rename package 'com.announcify.api.queue'
+1295990117927	Rename package 'com.announcify.api.receiver'
+1295990122043	Rename package 'com.announcify.api.service'
+1295990132527	Rename package 'com.announcify.api.sql.model'
+1295990137441	Rename package 'com.announcify.api.text'
+1295990141747	Rename package 'com.announcify.api.tts'
+1295990147401	Rename package 'com.announcify.api.util'
+1295992491211	Move compilation unit

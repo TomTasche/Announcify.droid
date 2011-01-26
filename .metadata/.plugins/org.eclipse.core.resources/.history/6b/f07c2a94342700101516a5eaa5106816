@@ -1,0 +1,36 @@
+
+package com.announcify.api.contact;
+
+import java.util.List;
+
+import android.content.Context;
+import android.database.Cursor;
+
+import com.announcify.api.sql.model.GroupModel;
+
+public class Filter {
+    /**
+     * @return Returns true if you shouldn't announce this contact. Be sure to
+     *         really do so! Otherwise the user might get angry and throw yellow birds
+     *         at your house!
+     */
+    public static boolean announcable(Context context, Contact contact) {
+        List<Long> groups = contact.getGroups();
+
+        GroupModel model = new GroupModel(context);
+        Cursor cursor = model.getAll();
+
+        try {
+            int index = cursor.getColumnIndex(GroupModel.KEY_GROUP_ID);
+            
+            while (cursor.moveToNext()) {
+                if (groups.contains(cursor.getLong(index))) return false;
+            }
+        } finally {
+            cursor.close();
+            model.close();
+        }
+
+        return true;
+    }
+}

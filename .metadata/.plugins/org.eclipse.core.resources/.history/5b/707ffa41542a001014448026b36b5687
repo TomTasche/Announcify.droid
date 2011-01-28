@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<CheckedTextView
+		android:minHeight="?attr/gdItemViewPreferredHeight"
+		android:text="BLOCK CHOSEN GROUPS"
+		android:id="@+id/check_block_groups"
+		android:textColor="#000"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:checkMark="?android:attr/listChoiceIndicatorMultiple" />
+
+	<AutoCompleteTextView
+		android:hint="TYPE HERE"
+		android:id="@+id/auto_edit_chooser"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" />
+
+	<ListView
+		android:id="@android:id/list"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" />
+
+</LinearLayout>

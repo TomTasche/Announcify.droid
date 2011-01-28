@@ -43,6 +43,8 @@ public class SectionedItemAdapter extends ItemAdapter implements SectionIndexer 
     public void toggleSort() {
         byPriority = !byPriority;
 
+        // change Comparator in sort() ?
+        // http://www.java-blog-buch.de/d-objekte-sortieren-comparator-und-comparable/
         notifyDataSetChanged();
     }
 

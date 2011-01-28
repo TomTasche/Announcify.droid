@@ -20,7 +20,7 @@ import com.announcify.background.service.ManagerService;
 import com.announcify.background.tts.Speaker;
 
 public class AnnouncificationHandler extends Handler {
-    
+
     public static final int WHAT_START = 40;
 
     public static final int WHAT_CONTINUE = 44;
@@ -37,7 +37,6 @@ public class AnnouncificationHandler extends Handler {
 
     public static final int WHAT_REVERT_LOCALE = 47;
 
-    
     private final Context context;
 
     private final Queue queue;
@@ -47,7 +46,6 @@ public class AnnouncificationHandler extends Handler {
     private final PluginModel model;
 
     private boolean shutUp;
-    
 
     public AnnouncificationHandler(final Context context, final Looper looper, final Speaker speaker) {
         super(looper);
@@ -58,10 +56,9 @@ public class AnnouncificationHandler extends Handler {
         model = new PluginModel(context);
     }
 
-    
     @Override
     public void handleMessage(final Message msg) {
-        Log.e("smn", "what: " + msg.what);
+        Log.d("Announcify", "what: " + msg.what);
 
         switch (msg.what) {
             case WHAT_PUT_QUEUE:

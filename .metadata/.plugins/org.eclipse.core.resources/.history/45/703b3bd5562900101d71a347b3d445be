@@ -1,0 +1,5 @@
+package com.announcify.plugin.voice.call.receiver;
+
+public class AnnouncifyReceiver {
+
+}

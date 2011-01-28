@@ -30,6 +30,7 @@
 		<activity
 			android:name=".activity.SettingsActivity"
 			android:label="@string/app_name">
+			
 			<intent-filter>
 				<action
 					android:name="com.announcify.plugin.voice.mail.SETTINGS" />
@@ -37,10 +38,21 @@
 					android:name="android.intent.category.DEFAULT" />
 			</intent-filter>
 		</activity>
+		
+		<receiver
+			android:name=".receiver.BootReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="android.intent.action.BOOT_COMPLETED" />
+			</intent-filter>
+		</receiver>
 
 		<receiver
-			android:name=".receiver.ExplorerReceiver"
+			android:name=".receiver.AnnouncifyReceiver"
 			android:label="@string/app_name">
+			
 			<intent-filter>
 				<action
 					android:name="com.announcify.ACTION_PLUGIN_CONTACT" />
@@ -50,6 +62,7 @@
 		<receiver
 			android:name=".receiver.RingtoneReceiver"
 			android:label="@string/app_name">
+			
 			<intent-filter>
 				<action
 					android:name="com.announcify.plugin.voice.mail.ACTION_START_RINGTONE" />
@@ -62,12 +75,7 @@
 		</receiver>
 
 		<service
-			android:name=".service.VoicemailService">
-			<intent-filter>
-				<action
-					android:name="android.intent.action.BOOT_COMPLETED" />
-			</intent-filter>
-		</service>
+			android:name=".service.VoicemailService" />
 
 		<service
 			android:name=".service.WorkerService" />

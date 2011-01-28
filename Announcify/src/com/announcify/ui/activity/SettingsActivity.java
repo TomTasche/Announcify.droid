@@ -30,7 +30,6 @@ public class SettingsActivity extends PluginActivity {
 
     private boolean started;
 
-
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,16 +64,27 @@ public class SettingsActivity extends PluginActivity {
         getPreferenceManager().setSharedPreferencesName(AnnouncifySettings.PREFERENCES_NAME);
         getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
         addPreferencesFromResource(R.xml.preferences_main_settings);
-        
-        getPreferenceScreen().findPreference("preference_replace_chooser").setOnPreferenceClickListener(new OnPreferenceClickListener() {
-            
-            public boolean onPreferenceClick(Preference preference) {
-                startActivity(new Intent(SettingsActivity.this, ReplaceActivity.class));
-                
-                return false;
-            }
-        });
-        
+
+        getPreferenceScreen().findPreference("preference_replace_chooser")
+                .setOnPreferenceClickListener(new OnPreferenceClickListener() {
+
+                    public boolean onPreferenceClick(final Preference preference) {
+                        startActivity(new Intent(SettingsActivity.this, ReplaceActivity.class));
+
+                        return false;
+                    }
+                });
+
+        getPreferenceScreen().findPreference("preference_choose_group")
+                .setOnPreferenceClickListener(new OnPreferenceClickListener() {
+
+                    public boolean onPreferenceClick(final Preference preference) {
+                        startActivity(new Intent(SettingsActivity.this, GroupActivity.class));
+
+                        return false;
+                    }
+                });
+
         // ugly fix for bug #4611
         // https://code.google.com/p/android/issues/detail?id=4611
         for (int i = 1; i < 5; i++) {
@@ -87,26 +97,26 @@ public class SettingsActivity extends PluginActivity {
         switch (id) {
             case 0:
                 return new AlertDialog.Builder(this)
-                .setCancelable(false)
-                .setTitle(R.string.unlicensed_dialog_title)
-                .setMessage(R.string.unlicensed_dialog_body)
-                .setPositiveButton(R.string.buy_button,
-                        new DialogInterface.OnClickListener() {
-                    public void onClick(final DialogInterface dialog,
-                            final int which) {
-                        final Intent marketIntent = new Intent(Intent.ACTION_VIEW,
-                                Uri.parse("http://market.android.com/details?id="
-                                        + getPackageName()));
-                        startActivity(marketIntent);
-                    }
-                })
-                .setNegativeButton(R.string.quit_button,
-                        new DialogInterface.OnClickListener() {
-                    public void onClick(final DialogInterface dialog,
-                            final int which) {
-                        finish();
-                    }
-                }).create();
+                        .setCancelable(false)
+                        .setTitle(R.string.unlicensed_dialog_title)
+                        .setMessage(R.string.unlicensed_dialog_body)
+                        .setPositiveButton(R.string.buy_button,
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(final DialogInterface dialog,
+                                            final int which) {
+                                        final Intent marketIntent = new Intent(Intent.ACTION_VIEW,
+                                                Uri.parse("http://market.android.com/details?id="
+                                                        + getPackageName()));
+                                        startActivity(marketIntent);
+                                    }
+                                })
+                        .setNegativeButton(R.string.quit_button,
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(final DialogInterface dialog,
+                                            final int which) {
+                                        finish();
+                                    }
+                                }).create();
 
             case 1:
                 return ProgressDialog.show(this, "Announcify",

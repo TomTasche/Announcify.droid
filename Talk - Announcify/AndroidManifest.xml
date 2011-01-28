@@ -23,9 +23,11 @@
 	<application
 		android:icon="@drawable/icon"
 		android:label="@string/app_name">
+		
 		<activity
 			android:name=".activity.SettingsActivity"
 			android:label="@string/app_name">
+			
 			<intent-filter>
 				<action
 					android:name="com.announcify.plugin.talk.google.SETTINGS" />
@@ -33,10 +35,21 @@
 					android:name="android.intent.category.DEFAULT" />
 			</intent-filter>
 		</activity>
+		
+		<receiver
+			android:name=".receiver.BootReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="android.intent.action.BOOT_COMPLETED" />
+			</intent-filter>
+		</receiver>
 
 		<receiver
-			android:name=".receiver.ExplorerReceiver"
+			android:name=".receiver.AnnouncifyReceiver"
 			android:label="@string/app_name">
+			
 			<intent-filter>
 				<action
 					android:name="com.announcify.ACTION_PLUGIN_CONTACT" />
@@ -61,12 +74,7 @@
 			android:name=".service.TalkService" />
 
 		<service
-			android:name=".service.WorkerService">
-			<intent-filter>
-				<action
-					android:name="android.intent.action.BOOT_COMPLETED" />
-			</intent-filter>
-		</service>
+			android:name=".service.WorkerService" />
 	</application>
 
 	<supports-screens

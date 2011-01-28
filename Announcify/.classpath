@@ -4,7 +4,7 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="src" path="Android Market Licensing_src"/>
-	<classpathentry kind="src" path="GreenDroid_src"/>
 	<classpathentry kind="src" path="API - Announcify_src"/>
+	<classpathentry kind="src" path="GreenDroid_src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

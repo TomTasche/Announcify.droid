@@ -38,6 +38,8 @@ public class ManagerService extends Service {
 
     @Override
     public void onCreate() {
+        super.onCreate();
+
         Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this, Thread
                 .getDefaultUncaughtExceptionHandler()));
 
@@ -83,12 +85,12 @@ public class ManagerService extends Service {
             notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.notify(17, notification);
         }
-
-        super.onCreate();
     }
 
     @Override
     public void onStart(final Intent intent, final int startId) {
+        super.onStart(intent, startId);
+
         if (intent == null || intent.getExtras() == null) {
             return;
         }
@@ -105,8 +107,6 @@ public class ManagerService extends Service {
         final Message msg = handler.obtainMessage(AnnouncificationHandler.WHAT_PUT_QUEUE);
         msg.setData(intent.getExtras());
         handler.sendMessage(msg);
-
-        super.onStart(intent, startId);
     }
 
     @Override

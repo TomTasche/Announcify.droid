@@ -18,13 +18,15 @@ public class SettingsActivity extends PluginActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getPreferenceManager().setSharedPreferencesName(Settings.PREFERENCES_NAME);
+        getPreferenceManager().setSharedPreferencesName(PluginSettings.PREFERENCES_NAME);
         getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
+
         addPreferencesFromResource(R.xml.preferences_settings);
 
         setCustomListeners(new Settings(this));
 
-        ((RingtonePreference) getPreferenceScreen().findPreference(PluginSettings.KEY_RINGTONE)).setRingtoneType(RingtoneManager.TYPE_ALL);
+        ((RingtonePreference)getPreferenceScreen().findPreference(PluginSettings.KEY_RINGTONE))
+                .setRingtoneType(RingtoneManager.TYPE_RINGTONE);
     }
 
     @Override

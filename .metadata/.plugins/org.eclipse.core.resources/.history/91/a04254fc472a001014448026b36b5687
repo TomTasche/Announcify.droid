@@ -1,0 +1,40 @@
+
+package com.announcify.api.background.sql.model;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.util.Log;
+import android.widget.CursorAdapter;
+
+public class GroupModel extends BaseModel {
+
+    public final static String TABLE_NAME = "Contact_Group";
+
+    public static final String KEY_GROUP_ID = "group_id";
+
+    public GroupModel(final Context context) {
+        super(context, TABLE_NAME);
+    }
+
+    public boolean getEnabled(long groupId) {
+        Cursor cursor = getResolver().query(buildUri(), null, KEY_GROUP_ID + " = ?", new String[] {String.valueOf(groupId)}, null);
+
+        try {
+            Log.e("smn", ":" + cursor.moveToFirst());
+            return cursor.moveToFirst();
+        } finally {
+            cursor.close();
+        }
+    }
+
+    public void setEnabled(long groupId) {
+        if (getEnabled(groupId)) {
+            getResolver().delete(buildUri(), KEY_GROUP_ID + " = ?", new String[] {String.valueOf(groupId)});
+        } else {
+            ContentValues values = new ContentValues();
+            values.put(KEY_GROUP_ID, groupId);
+            getResolver().insert(buildUri(), values);
+        }
+    }
+}

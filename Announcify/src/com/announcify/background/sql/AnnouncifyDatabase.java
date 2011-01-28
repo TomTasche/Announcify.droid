@@ -12,13 +12,11 @@ import com.announcify.api.background.sql.model.GroupModel;
 import com.announcify.api.background.sql.model.PluginModel;
 import com.announcify.api.background.sql.model.TranslationModel;
 
-
 public class AnnouncifyDatabase extends SQLiteOpenHelper {
 
     public AnnouncifyDatabase(final Context context) {
         super(context, "announcify.db", null, 1);
     }
-
 
     @Override
     public void onCreate(final SQLiteDatabase db) {
@@ -26,8 +24,7 @@ public class AnnouncifyDatabase extends SQLiteOpenHelper {
                 + " INTEGER PRIMARY KEY AUTOINCREMENT," + PluginModel.KEY_PLUGIN_PACKAGE
                 + " TEXT NOT NULL," + PluginModel.KEY_PLUGIN_NAME + " TEXT UNIQUE NOT NULL,"
                 + PluginModel.KEY_PLUGIN_PRIORITY + " INTEGER," + PluginModel.KEY_PLUGIN_ACTION
-                + " TEXT NOT NULL," + PluginModel.KEY_PLUGIN_BROADCAST + " INTEGER," + PluginModel.KEY_PLUGIN_ACTIVE
-                + " INTEGER);");
+                + " TEXT NOT NULL," + PluginModel.KEY_PLUGIN_ACTIVE + " INTEGER);");
 
         db.execSQL("CREATE TABLE " + TranslationModel.TABLE_NAME + " (" + BaseColumns._ID
                 + " INTEGER PRIMARY KEY AUTOINCREMENT," + TranslationModel.KEY_TRANSLATION_FROM
@@ -37,7 +34,7 @@ public class AnnouncifyDatabase extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + GroupModel.TABLE_NAME + " (" + BaseColumns._ID
                 + " INTEGER PRIMARY KEY AUTOINCREMENT," + GroupModel.KEY_GROUP_ID
-                + " INTEGER UNIQUE NOT NULL);");
+                + " INTEGER UNIQUE NOT NULL," + GroupModel.KEY_GROUP_TITLE + " TEXT NOT NULL);");
 
         final ContentValues values = new ContentValues();
         values.put(PluginModel.KEY_PLUGIN_NAME, "Announcify++");

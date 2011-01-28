@@ -22,24 +22,27 @@ public class WorkerService extends PluginService {
 
     public final static String ACTION_STOP_RINGTONE = "com.announcify.plugin.voice.call.ACTION_STOP_RINGTONE";
 
-
     public WorkerService() {
         super("Announcify - Call", ACTION_START_RINGTONE, ACTION_STOP_RINGTONE);
     }
 
-
     @Override
     protected void onHandleIntent(final Intent intent) {
-        if (ACTION_ANNOUNCE.equals(intent.getAction())) {
-            final Settings settings = new Settings(this);
+        if (settings == null) {
+            settings = new Settings(this);
+        }
 
+        if (ACTION_ANNOUNCE.equals(intent.getAction())) {
             final String number = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
             if (number == null && "".equals(number)) {
                 return;
             }
-            final Contact contact = new Contact(this, new com.announcify.api.background.contact.lookup.Number(this), number);
+            final Contact contact = new Contact(this,
+                    new com.announcify.api.background.contact.lookup.Number(this), number);
 
-            if (!Filter.announcable(this, contact)) return;
+            if (!Filter.announcableContact(this, contact)) {
+                return;
+            }
 
             final Formatter formatter = new Formatter(this, contact, settings);
 
@@ -48,7 +51,7 @@ public class WorkerService extends PluginService {
             announcify.setStopBroadcast(ACTION_STOP_RINGTONE);
             announcify.announce(formatter.format(null));
         } else if (ACTION_START_RINGTONE.equals(intent.getAction())) {
-            final String s = getSharedPreferences(Settings.PREFERENCES_NAME,
+            final String s = getSharedPreferences(PluginSettings.PREFERENCES_NAME,
                     Context.MODE_WORLD_READABLE).getString(PluginSettings.KEY_RINGTONE, "");
             if (s == null || "".equals(s)) {
                 return;

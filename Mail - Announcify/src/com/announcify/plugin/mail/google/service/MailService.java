@@ -15,6 +15,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 
+import com.announcify.api.background.service.PluginService;
 import com.announcify.plugin.mail.google.util.Settings;
 
 public class MailService extends Service {
@@ -134,14 +135,15 @@ public class MailService extends Service {
                 }
 
                 final Intent intent = new Intent(MailService.this, WorkerService.class);
+                intent.setAction(PluginService.ACTION_ANNOUNCE);
                 intent.putExtra(WorkerService.EXTRA_FROM,
                         messages.getString(messages.getColumnIndex(projection[0])));
                 intent.putExtra(WorkerService.EXTRA_SUBJECT,
-                        conversations.getString(conversations.getColumnIndex(projection[1])));
+                        messages.getString(messages.getColumnIndex(projection[1])));
                 intent.putExtra(WorkerService.EXTRA_SNIPPET,
-                        conversations.getString(conversations.getColumnIndex(projection[2])));
+                        messages.getString(messages.getColumnIndex(projection[2])));
                 intent.putExtra(WorkerService.EXTRA_MESSAGE,
-                        conversations.getString(conversations.getColumnIndex(projection[3])));
+                        messages.getString(messages.getColumnIndex(projection[3])));
                 startService(intent);
             } finally {
                 messages.close();

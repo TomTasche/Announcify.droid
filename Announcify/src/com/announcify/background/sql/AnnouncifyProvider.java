@@ -1,3 +1,4 @@
+
 package com.announcify.background.sql;
 
 import android.content.ContentProvider;
@@ -8,57 +9,66 @@ import android.net.Uri;
 
 public class AnnouncifyProvider extends ContentProvider {
 
-    private AnnouncifyDatabase announcify;
+    public static final Uri PROVIDER_URI = Uri.parse("content://com.announcify");
 
+    private AnnouncifyDatabase announcify;
 
     @Override
     public boolean onCreate() {
         announcify = new AnnouncifyDatabase(getContext());
 
-        return false;
+        return true;
     }
 
     @Override
-    public int delete(Uri arg0, String arg1, String[] arg2) {
-        SQLiteDatabase database = announcify.getWritableDatabase();
-        database.delete(arg0.getLastPathSegment(), arg1, arg2);
-        database.close();
+    public int delete(final Uri uri, final String selection, final String[] selectionArgs) {
+        final SQLiteDatabase database = announcify.getWritableDatabase();
 
-        return 0;
+        final int i = database.delete(uri.getLastPathSegment(), selection, selectionArgs);
+        if (i > 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        return i;
     }
 
     @Override
-    public String getType(Uri uri) {
+    public String getType(final Uri uri) {
         return "announcify";
     }
 
     @Override
-    public Uri insert(Uri uri, ContentValues values) {
-        SQLiteDatabase database = announcify.getWritableDatabase();
+    public Uri insert(final Uri uri, final ContentValues values) {
+        final SQLiteDatabase database = announcify.getWritableDatabase();
+
         database.insert(uri.getLastPathSegment(), null, values);
-        database.close();
+
+        getContext().getContentResolver().notifyChange(uri, null);
 
         return null;
     }
 
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
-            String sortOrder) {
-        SQLiteDatabase database = announcify.getReadableDatabase();
+    public Cursor query(final Uri uri, final String[] projection, final String selection,
+            final String[] selectionArgs, final String sortOrder) {
+        final SQLiteDatabase database = announcify.getReadableDatabase();
 
-        try {
-            return database.query(uri.getLastPathSegment(), projection, selection, selectionArgs, null, null, sortOrder);
-        } finally {
-            database.close();
-        }
+        return database.query(uri.getLastPathSegment(), projection, selection, selectionArgs, null,
+                null, sortOrder);
     }
 
     @Override
-    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        SQLiteDatabase database = announcify.getWritableDatabase();
-        database.update(uri.getLastPathSegment(), values, selection, selectionArgs);
-        database.close();
+    public int update(final Uri uri, final ContentValues values, final String selection,
+            final String[] selectionArgs) {
+        final SQLiteDatabase database = announcify.getWritableDatabase();
 
-        return 0;
+        final int i = database.update(uri.getLastPathSegment(), values, selection, selectionArgs);
+        if (i > 0) {
+            // don't notify observers, because this would cause the UI to
+            // unnecessarily refresh the whole list
+            // getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        return i;
     }
 }

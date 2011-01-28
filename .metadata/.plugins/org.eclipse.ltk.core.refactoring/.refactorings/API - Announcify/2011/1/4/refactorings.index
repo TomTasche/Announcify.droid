@@ -14,3 +14,5 @@
 1295990141747	Rename package 'com.announcify.api.tts'
 1295990147401	Rename package 'com.announcify.api.util'
 1295992491211	Move compilation unit
+1296158860487	Rename field 'KEY_FILTER_BY_GROUP'
+1296161797563	Delete element

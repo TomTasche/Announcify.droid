@@ -8,8 +8,8 @@ import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.Contacts;
 
-import com.announcify.api.contact.Contact;
-import com.announcify.api.contact.lookup.LookupMethod;
+import com.announcify.api.background.contact.Contact;
+import com.announcify.api.background.contact.lookup.LookupMethod;
 
 public class Mail implements LookupMethod {
     private final Context context;
@@ -66,9 +66,9 @@ public class Mail implements LookupMethod {
 
         try {
             cursor = context.getContentResolver().query(Email.CONTENT_URI, new String[] {
-                    Email.DATA1
+                Email.DATA1
             }, Contacts.LOOKUP_KEY + " = ?", new String[] {
-                    contact.getLookupString()
+                contact.getLookupString()
             }, null);
             if (!cursor.moveToFirst()) {
                 return;
@@ -98,7 +98,7 @@ public class Mail implements LookupMethod {
             String label = cursor.getString(cursor.getColumnIndex(Email.LABEL));
             if (label == null) {
                 label = Resources.getSystem().getStringArray(android.R.array.emailAddressTypes)[cursor
-                                                                                                .getInt(cursor.getColumnIndex(Email.TYPE)) - 1];
+                        .getInt(cursor.getColumnIndex(Email.TYPE)) - 1];
             }
             contact.setType(label);
         } finally {

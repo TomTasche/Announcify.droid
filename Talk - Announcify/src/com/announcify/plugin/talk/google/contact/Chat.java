@@ -7,8 +7,8 @@ import android.database.Cursor;
 import android.provider.ContactsContract.CommonDataKinds.Im;
 import android.provider.ContactsContract.Data;
 
-import com.announcify.api.contact.Contact;
-import com.announcify.api.contact.lookup.LookupMethod;
+import com.announcify.api.background.contact.Contact;
+import com.announcify.api.background.contact.lookup.LookupMethod;
 
 public class Chat implements LookupMethod {
     private final Context context;

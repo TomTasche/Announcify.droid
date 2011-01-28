@@ -3,13 +3,14 @@ package com.announcify.plugin.talk.google.util;
 
 import android.content.Context;
 
-import com.announcify.api.util.PluginSettings;
+import com.announcify.api.background.util.PluginSettings;
 
 public class Settings extends PluginSettings {
-    public static final String PREFERENCES_NAME = "com.announcify.plugin.talk.google.SETTINGS";
+
+    public static final String ACTION_SETTINGS = "com.announcify.plugin.talk.google.SETTINGS";
 
     public Settings(final Context context) {
-        super(context, PREFERENCES_NAME);
+        super(context);
     }
 
     @Override
@@ -20,5 +21,10 @@ public class Settings extends PluginSettings {
     @Override
     public int getPriority() {
         return 6;
+    }
+
+    @Override
+    public String getSettingsAction() {
+        return ACTION_SETTINGS;
     }
 }

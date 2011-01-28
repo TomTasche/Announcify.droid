@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.announcify.R;
 
 public class PluginItemView extends LinearLayout implements ItemView {
-    
+
     protected final Context context;
 
     protected TextView headerView;
@@ -26,7 +26,6 @@ public class PluginItemView extends LinearLayout implements ItemView {
     protected TextView settings;
 
     protected ImageView check;
-    
 
     public PluginItemView(final Context context) {
         this(context, null);
@@ -38,7 +37,6 @@ public class PluginItemView extends LinearLayout implements ItemView {
         this.context = context;
     }
 
-    
     public void prepareItemView() {
         headerView = (TextView)findViewById(R.id.gd_separator_text);
         headerView.setBackgroundColor(Color.parseColor("#AD0000"));

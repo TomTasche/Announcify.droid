@@ -1,0 +1,8 @@
+package com.announcify.plugin.talk.google.receiver;
+
+public class Snippet {
+    public static void main(String[] args) {
+        BootReceiver.java
+    }
+}
+

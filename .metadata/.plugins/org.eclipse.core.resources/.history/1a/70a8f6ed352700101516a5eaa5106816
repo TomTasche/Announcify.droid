@@ -1,5 +1,0 @@
-package com.announcify.ui.activity;
-
-public class GroupActivity extends BaseActivity {
-
-}

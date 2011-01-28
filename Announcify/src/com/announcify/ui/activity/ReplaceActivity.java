@@ -1,3 +1,4 @@
+
 package com.announcify.ui.activity;
 
 import android.database.Cursor;
@@ -33,9 +34,8 @@ public class ReplaceActivity extends BaseActivity {
 
     private Speaker speaker;
 
-
     @Override
-    protected void onCreate(Bundle bundle) {
+    protected void onCreate(final Bundle bundle) {
         super.onCreate(bundle);
 
         setActionBarContentView(R.layout.activity_replace);
@@ -44,7 +44,11 @@ public class ReplaceActivity extends BaseActivity {
         replace = (EditText)findViewById(R.id.edit_replace);
         list = (ListView)findViewById(android.R.id.list);
 
-        adapter = new SimpleCursorAdapter(this, R.layout.list_item_replace, null, new String[] {TranslationModel.KEY_TRANSLATION_FROM, TranslationModel.KEY_TRANSLATION_TO}, new int[] {R.id.textLeft, R.id.textRight});
+        adapter = new SimpleCursorAdapter(this, R.layout.list_item_replace, null, new String[] {
+                TranslationModel.KEY_TRANSLATION_FROM, TranslationModel.KEY_TRANSLATION_TO
+        }, new int[] {
+                R.id.textLeft, R.id.textRight
+        });
 
         list.setBackgroundColor(Color.WHITE);
         list.setCacheColorHint(Color.TRANSPARENT);
@@ -85,30 +89,33 @@ public class ReplaceActivity extends BaseActivity {
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+    public void onCreateContextMenu(final ContextMenu menu, final View v,
+            final ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
 
         getMenuInflater().inflate(R.menu.context_replace, menu);
     }
 
     @Override
-    public boolean onContextItemSelected(MenuItem item) {
+    public boolean onContextItemSelected(final MenuItem item) {
         final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item
-        .getMenuInfo();
+                .getMenuInfo();
 
         switch (item.getItemId()) {
             case R.id.menu_edit:
-                
-                Cursor text = model.get(info.id);
+
+                final Cursor text = model.get(info.id);
                 text.moveToFirst();
-                
-                replace.setText(text.getString(text.getColumnIndex(TranslationModel.KEY_TRANSLATION_FROM)));
-                with.setText(text.getString(text.getColumnIndex(TranslationModel.KEY_TRANSLATION_TO)));
-                
+
+                replace.setText(text.getString(text
+                        .getColumnIndex(TranslationModel.KEY_TRANSLATION_FROM)));
+                with.setText(text.getString(text
+                        .getColumnIndex(TranslationModel.KEY_TRANSLATION_TO)));
+
                 text.close();
 
             case R.id.menu_remove:
-                
+
                 model.remove(info.id);
 
                 break;

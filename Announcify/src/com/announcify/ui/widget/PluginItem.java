@@ -13,7 +13,7 @@ import com.announcify.R;
 import com.announcify.api.background.sql.model.PluginModel;
 
 public class PluginItem extends Item {
-    
+
     private final long id;
 
     private final Context context;
@@ -22,18 +22,21 @@ public class PluginItem extends Item {
 
     public String header;
 
-    
-    public PluginItem(final Context context, PluginModel model, final long id) {
+    public PluginItem(final Context context, final PluginModel model, final long id) {
         this.id = id;
         this.context = context;
 
         this.model = model;
     }
 
-    
     @Override
     public ItemView newView(final Context context, final ViewGroup parent) {
         return createCellFromXml(context, R.layout.list_item_plugin, parent);
+    }
+
+    @Override
+    public Object getTag() {
+        return id;
     }
 
     public boolean getActive() {
@@ -60,19 +63,9 @@ public class PluginItem extends Item {
         return model.getAction(id);
     }
 
-    public boolean getBroadcast() {
-        return model.getBroadcast(id);
-    }
-
     public boolean fireAction() {
         try {
-            final Intent intent = new Intent(getAction());
-
-            if (getBroadcast()) {
-                context.sendBroadcast(intent);
-            } else {
-                context.startActivity(intent);
-            }
+            context.startActivity(new Intent(getAction()));
 
             return true;
         } catch (final Exception e) {

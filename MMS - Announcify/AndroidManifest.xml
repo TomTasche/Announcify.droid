@@ -25,20 +25,23 @@
 	<application
 		android:icon="@drawable/icon"
 		android:label="@string/app_name">
+
 		<activity
 			android:name=".activity.SettingsActivity"
 			android:label="@string/app_name">
+
 			<intent-filter>
 				<action
-					android:name="com.announcify.plugin.message.sms.SETTINGS" />
+					android:name="com.announcify.plugin.message.mms.SETTINGS" />
 				<category
 					android:name="android.intent.category.DEFAULT" />
 			</intent-filter>
 		</activity>
 
 		<receiver
-			android:name=".receiver.ExplorerReceiver"
+			android:name=".receiver.AnnouncifyReceiver"
 			android:label="@string/app_name">
+
 			<intent-filter>
 				<action
 					android:name="com.announcify.ACTION_PLUGIN_CONTACT" />
@@ -48,10 +51,6 @@
 		<receiver
 			android:name=".receiver.MessageReceiver"
 			android:label="@string/app_name">
-			<intent-filter>
-				<action
-					android:name="android.provider.Telephony.SMS_RECEIVED" />
-			</intent-filter>
 
 			<intent-filter>
 				<action
@@ -64,14 +63,15 @@
 		<receiver
 			android:name=".receiver.RingtoneReceiver"
 			android:label="@string/app_name">
+
 			<intent-filter>
 				<action
-					android:name="com.announcify.plugin.message.sms.ACTION_START_RINGTONE" />
+					android:name="com.announcify.plugin.message.mms.ACTION_START_RINGTONE" />
 			</intent-filter>
 
 			<intent-filter>
 				<action
-					android:name="com.announcify.plugin.message.sms.ACTION_STOP_RINGTONE" />
+					android:name="com.announcify.plugin.message.mms.ACTION_STOP_RINGTONE" />
 			</intent-filter>
 		</receiver>
 

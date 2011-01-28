@@ -25,9 +25,11 @@
 	<application
 		android:icon="@drawable/icon"
 		android:label="@string/app_name">
+
 		<activity
 			android:name=".activity.SettingsActivity"
 			android:label="@string/app_name">
+
 			<intent-filter>
 				<action
 					android:name="com.announcify.plugin.voice.call.SETTINGS" />
@@ -37,8 +39,19 @@
 		</activity>
 
 		<receiver
-			android:name=".receiver.ExplorerReceiver"
+			android:name=".receiver.CallReceiver"
 			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="android.intent.action.PHONE_STATE" />
+			</intent-filter>
+		</receiver>
+
+		<receiver
+			android:name=".receiver.AnnouncifyReceiver"
+			android:label="@string/app_name">
+
 			<intent-filter>
 				<action
 					android:name="com.announcify.ACTION_PLUGIN_CONTACT" />
@@ -46,16 +59,9 @@
 		</receiver>
 
 		<receiver
-			android:name=".receiver.CallReceiver"
+			android:name=".receiver.RingtoneReceiver"
 			android:label="@string/app_name">
-			<intent-filter>
-				<action
-					android:name="android.intent.action.PHONE_STATE" />
-			</intent-filter>
-		</receiver>
 
-		<service
-			android:name=".service.WorkerService">
 			<intent-filter>
 				<action
 					android:name="com.announcify.plugin.voice.call.ACTION_START_RINGTONE" />
@@ -65,7 +71,10 @@
 				<action
 					android:name="com.announcify.plugin.voice.call.ACTION_STOP_RINGTONE" />
 			</intent-filter>
-		</service>
+		</receiver>
+
+		<service
+			android:name=".service.WorkerService" />
 	</application>
 
 	<supports-screens
@@ -79,4 +88,4 @@
 	<uses-sdk
 		android:minSdkVersion="7"
 		android:targetSdkVersion="9" />
-</manifest> 
+</manifest>

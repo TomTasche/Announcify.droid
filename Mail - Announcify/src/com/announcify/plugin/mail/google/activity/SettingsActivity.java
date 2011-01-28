@@ -3,31 +3,28 @@ package com.announcify.plugin.mail.google.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 
-import com.announcify.api.activity.PluginActivity;
+import com.announcify.api.background.util.PluginSettings;
+import com.announcify.api.ui.activity.PluginActivity;
 import com.announcify.plugin.mail.google.R;
 import com.announcify.plugin.mail.google.service.MailService;
 import com.announcify.plugin.mail.google.util.Settings;
 
 public class SettingsActivity extends PluginActivity {
-    
-    public static final String ACTION_SETTINGS = "com.announcify.plugin.mail.google.SETTINGS";
 
-    
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        getPreferenceManager().setSharedPreferencesName(Settings.PREFERENCES_NAME);
+
+        getPreferenceManager().setSharedPreferencesName(PluginSettings.PREFERENCES_NAME);
         getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
-        
+
         addPreferencesFromResource(R.xml.preferences_mail_settings);
         addPreferencesFromResource(R.xml.preferences_settings);
+
+        setCustomListeners(new Settings(this));
     }
 
     @Override

@@ -4,6 +4,7 @@ package com.announcify.plugin.voice.call.util;
 import android.content.Context;
 
 import com.announcify.api.background.util.PluginSettings;
+import com.announcify.plugin.voice.call.R;
 
 public class Settings extends PluginSettings {
 
@@ -20,8 +21,7 @@ public class Settings extends PluginSettings {
 
     @Override
     public String getEventType() {
-        // TODO: localize
-        return "Call";
+        return context.getString(R.string.event);
     }
 
     @Override

@@ -4,6 +4,7 @@ package com.announcify.plugin.voice.mail.util;
 import android.content.Context;
 
 import com.announcify.api.background.util.PluginSettings;
+import com.announcify.plugin.voice.mail.R;
 
 public class Settings extends PluginSettings {
 
@@ -15,8 +16,7 @@ public class Settings extends PluginSettings {
 
     @Override
     public String getEventType() {
-        // TODO: localize
-        return "Voicemail";
+        return context.getString(R.string.event);
     }
 
     @Override

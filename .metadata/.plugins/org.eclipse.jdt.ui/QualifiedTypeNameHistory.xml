@@ -1,24 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.lang.String"/>
-<fullyQualifiedTypeName name="com.announcify.api.R"/>
-<fullyQualifiedTypeName name="com.announcify.api.R.array"/>
-<fullyQualifiedTypeName name="android.media.RingtoneManager"/>
-<fullyQualifiedTypeName name="android.content.Context"/>
-<fullyQualifiedTypeName name="com.announcify.background.sql.AnnouncifyProvider"/>
-<fullyQualifiedTypeName name="android.database.ContentObserver"/>
-<fullyQualifiedTypeName name="com.announcify.ui.activity.AnnouncifyActivity.AnnouncifyObserver"/>
-<fullyQualifiedTypeName name="android.os.Handler"/>
-<fullyQualifiedTypeName name="com.announcify.plugin.voice.call.service.WorkerService"/>
-<fullyQualifiedTypeName name="android.content.Intent"/>
-<fullyQualifiedTypeName name="com.announcify.plugin.voice.call.util.Settings"/>
-<fullyQualifiedTypeName name="com.announcify.ui.widget.PluginItem"/>
-<fullyQualifiedTypeName name="java.util.LinkedList"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.sql.model.PluginModel"/>
 <fullyQualifiedTypeName name="java.lang.Long"/>
 <fullyQualifiedTypeName name="com.announcify.ui.activity.GroupActivity"/>
 <fullyQualifiedTypeName name="android.graphics.Color"/>
-<fullyQualifiedTypeName name="android.R"/>
 <fullyQualifiedTypeName name="android.widget.CursorAdapter"/>
 <fullyQualifiedTypeName name="android.content.ContentValues"/>
 <fullyQualifiedTypeName name="android.widget.CheckBox"/>
@@ -26,7 +11,6 @@
 <fullyQualifiedTypeName name="android.widget.AutoCompleteTextView"/>
 <fullyQualifiedTypeName name="android.widget.SimpleCursorAdapter"/>
 <fullyQualifiedTypeName name="android.R.layout"/>
-<fullyQualifiedTypeName name="android.R.id"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.sql.model.GroupModel"/>
 <fullyQualifiedTypeName name="android.widget.SimpleCursorAdapter.CursorToStringConverter"/>
 <fullyQualifiedTypeName name="com.announcify.ui.activity.GroupActivity.SimpleWhiteCursorAdapter"/>
@@ -60,4 +44,20 @@
 <fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="android.database.Cursor"/>
 <fullyQualifiedTypeName name="android.net.Uri"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.mail.k9.R"/>
+<fullyQualifiedTypeName name="android.database.ContentObserver"/>
+<fullyQualifiedTypeName name="android.os.HandlerThread"/>
+<fullyQualifiedTypeName name="android.provider.BaseColumns"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="android.R"/>
+<fullyQualifiedTypeName name="android.R.id"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.voice.call.R"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.message.mms.R"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.message.mms.R.string"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.message.sms.R"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.message.sms.R.string"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.talk.google.R"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.talk.google.R.string"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.voice.mail.R"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.voice.mail.R.string"/>
 </qualifiedTypeNameHistroy>

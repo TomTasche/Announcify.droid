@@ -2,6 +2,9 @@
 <resources>
 	<string
 		name="app_name">Mail - Announcify</string>
+		
+	<string
+		name="event">Mail</string>	
 
 	<string-array
 		name="preference_list_read_message">

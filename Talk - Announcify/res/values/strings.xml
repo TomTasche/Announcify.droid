@@ -3,6 +3,9 @@
 	<string
 		name="app_name">Talk - Announcify</string>
 		
+	<string
+		name="event">Chat</string>
+		
 	<string-array
 		name="preference_list_reading_announcement_names">
 		<item>\"Tom\"</item>

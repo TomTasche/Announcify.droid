@@ -28,9 +28,13 @@ public final class R {
         public static final int icon=0x7f020000;
     }
     public static final class string {
-        public static final int app_name=0x7f04000a;
+        public static final int app_name=0x7f04000e;
         public static final int preference_break_summary=0x7f040003;
         public static final int preference_break_title=0x7f040002;
+        public static final int preference_discreet_summary=0x7f04000d;
+        public static final int preference_discreet_title=0x7f04000c;
+        public static final int preference_known_summary=0x7f04000b;
+        public static final int preference_known_title=0x7f04000a;
         public static final int preference_repeat_summary=0x7f040005;
         public static final int preference_repeat_title=0x7f040004;
         public static final int preference_ringtone_summary=0x7f040001;

@@ -4,6 +4,7 @@ package com.announcify.plugin.message.sms.util;
 import android.content.Context;
 
 import com.announcify.api.background.util.PluginSettings;
+import com.announcify.plugin.message.sms.R;
 
 public class Settings extends PluginSettings {
 
@@ -15,7 +16,7 @@ public class Settings extends PluginSettings {
 
     @Override
     public String getEventType() {
-        return "SMS";
+        return context.getString(R.string.event);
     }
 
     @Override

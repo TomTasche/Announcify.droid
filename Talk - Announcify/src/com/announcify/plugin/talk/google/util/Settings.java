@@ -4,6 +4,7 @@ package com.announcify.plugin.talk.google.util;
 import android.content.Context;
 
 import com.announcify.api.background.util.PluginSettings;
+import com.announcify.plugin.talk.google.R;
 
 public class Settings extends PluginSettings {
 
@@ -15,7 +16,7 @@ public class Settings extends PluginSettings {
 
     @Override
     public String getEventType() {
-        return "Chat";
+        return context.getString(R.string.event);
     }
 
     @Override

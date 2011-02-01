@@ -2,4 +2,7 @@
 <resources>
 	<string
 		name="app_name">SMS - Announcify</string>
+
+	<string
+		name="event">SMS</string>
 </resources>

@@ -5,8 +5,6 @@
 <typeInfo handle="=Announcify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.preference(Preference.class[Preference" modifiers="33" timestamp="1292523349000"/>
 <typeInfo handle="=Announcify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.preference(PreferenceActivity.class[PreferenceActivity" modifiers="1057" timestamp="1292523349000"/>
 <typeInfo handle="=Voicemail - Announcify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.app(Service.class[Service" modifiers="1057" timestamp="1292523349000"/>
-<typeInfo handle="=Announcify/src&lt;com.announcify.ui.activity{BaseActivity.java[BaseActivity" modifiers="1" timestamp="1295350861000"/>
+<typeInfo handle="=Announcify/src&lt;com.announcify.ui.activity{BaseActivity.java[BaseActivity" modifiers="1" timestamp="1296567854000"/>
 <typeInfo handle="=Announcify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.content(ContentProvider.class[ContentProvider" modifiers="1057" timestamp="1292523349000"/>
-<typeInfo handle="=API - Announcify/src&lt;com.announcify.api{AnnouncifyIntent.java[AnnouncifyIntent" modifiers="1" timestamp="1296047119000"/>
-<typeInfo handle="=API - Announcify/src&lt;com.announcify.api.background.sql.model{PluginModel.java[PluginModel" modifiers="1" timestamp="1296161171000"/>
 </typeInfoHistroy>

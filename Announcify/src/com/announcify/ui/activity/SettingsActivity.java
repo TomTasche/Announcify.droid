@@ -46,7 +46,7 @@ public class SettingsActivity extends PluginActivity {
                     // security = new AnnouncifySecurity(SettingsActivity.this);
                 }
             };
-            thread.start();
+            // thread.start();
         } catch (final Exception e) {
             final AlertDialog.Builder builder = new Builder(this);
             builder.setTitle("VIP only");
@@ -59,7 +59,7 @@ public class SettingsActivity extends PluginActivity {
                     // TODO: appbrain.com/Announcify++
                 }
             });
-            builder.create().show();
+            // builder.create().show();
         }
 
         getPreferenceManager().setSharedPreferencesName(AnnouncifySettings.PREFERENCES_NAME);

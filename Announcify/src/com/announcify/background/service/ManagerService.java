@@ -5,7 +5,6 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.HandlerThread;
@@ -40,10 +39,18 @@ public class ManagerService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this, Thread
-                .getDefaultUncaughtExceptionHandler()));
-
         final AnnouncifySettings settings = new AnnouncifySettings(this);
+
+        if (settings.isShowNotification()) {
+            final PendingIntent pendingIntent = PendingIntent.getActivity(this, 1993, new Intent(
+                    this, RemoteControlDialog.class), 0);
+            final Notification notification = new Notification(R.drawable.notification_icon, null,
+                    0);
+            notification.setLatestEventInfo(this, "Important Announcification",
+                    "Press here to stop it.", pendingIntent);
+            startForeground(17, notification);
+        }
+
         conditionManager = new ConditionManager(this, settings);
         // if (conditionManager.isScreenOn()) {
         // manager.lowerSpeechVolume();
@@ -74,17 +81,6 @@ public class ManagerService extends Service {
         controlFilter.addAction(RemoteControlDialog.ACTION_PAUSE);
         controlFilter.addAction(RemoteControlDialog.ACTION_SKIP);
         registerReceiver(controlReceiver, controlFilter);
-
-        if (settings.isShowNotification()) {
-            final PendingIntent pendingIntent = PendingIntent.getActivity(this, 1993, new Intent(
-                    this, RemoteControlDialog.class), 0);
-            final Notification notification = new Notification(R.drawable.notification_icon, null,
-                    0);
-            notification.setLatestEventInfo(this, "Important Announcification",
-                    "Press here to stop it.", pendingIntent);
-            notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.notify(17, notification);
-        }
     }
 
     @Override

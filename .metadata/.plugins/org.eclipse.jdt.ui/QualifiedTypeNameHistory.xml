@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.announcify.api.background.sql.model.PluginModel"/>
-<fullyQualifiedTypeName name="java.lang.Long"/>
-<fullyQualifiedTypeName name="com.announcify.ui.activity.GroupActivity"/>
-<fullyQualifiedTypeName name="android.graphics.Color"/>
-<fullyQualifiedTypeName name="android.widget.CursorAdapter"/>
-<fullyQualifiedTypeName name="android.content.ContentValues"/>
 <fullyQualifiedTypeName name="android.widget.CheckBox"/>
 <fullyQualifiedTypeName name="android.widget.EditText"/>
 <fullyQualifiedTypeName name="android.widget.AutoCompleteTextView"/>
@@ -60,4 +54,10 @@
 <fullyQualifiedTypeName name="com.announcify.plugin.talk.google.R.string"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.voice.mail.R"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.voice.mail.R.string"/>
+<fullyQualifiedTypeName name="org.acra.annotation.ReportsCrashes"/>
+<fullyQualifiedTypeName name="org.acra.ACRA"/>
+<fullyQualifiedTypeName name="android.content.Intent"/>
+<fullyQualifiedTypeName name="com.announcify.ui.activity.AnnouncifyActivity"/>
+<fullyQualifiedTypeName name="com.announcify.api.background.error.ExceptionHandler"/>
+<fullyQualifiedTypeName name="org.acra.ErrorReporter"/>
 </qualifiedTypeNameHistroy>

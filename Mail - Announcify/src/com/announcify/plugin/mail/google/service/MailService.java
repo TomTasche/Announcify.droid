@@ -87,12 +87,24 @@ public class MailService extends Service {
     private class MailObserver extends ContentObserver {
         private final String address;
 
-        private int maxMessageIdSeen;
+        private long maxMessageIdSeen;
 
         public MailObserver(final Handler handler, final String address) {
             super(handler);
 
-            this.address = address;
+            this.address = Uri.encode(address);
+
+            final String[] projection = new String[] {
+                "maxMessageId"
+            };
+            final Cursor cursor = getContentResolver().query(
+                    Uri.parse("content://gmail-ls/conversations/" + Uri.encode(address)),
+                    projection, null, null, null);
+            cursor.moveToFirst();
+
+            maxMessageIdSeen = Long.valueOf(cursor.getString(cursor.getColumnIndex(projection[0])));
+
+            cursor.close();
         }
 
         @Override
@@ -106,17 +118,16 @@ public class MailService extends Service {
                 };
                 conversations = getContentResolver().query(
                         Uri.parse("content://gmail-ls/conversations/" + Uri.encode(address)),
-                        projection, null, null, null);
-                conversations.moveToFirst();
+                        projection, projection[1] + " > " + maxMessageIdSeen, null, null);
+                if (!conversations.moveToFirst()) {
+                    return;
+                }
 
                 final long conversationId = Long.valueOf(conversations.getString(conversations
                         .getColumnIndex(projection[0])));
 
-                final long maxMessageId = Long.valueOf(conversations.getString(conversations
+                maxMessageIdSeen = Long.valueOf(conversations.getString(conversations
                         .getColumnIndex(projection[1])));
-                if (maxMessageId < maxMessageIdSeen) {
-                    return;
-                }
 
                 projection = new String[] {
                         "fromAddress", "subject", "snippet", "body"
@@ -126,7 +137,9 @@ public class MailService extends Service {
                         Uri.parse("content://gmail-ls/conversations/" + Uri.encode(address) + "/"
                                 + Uri.parse(String.valueOf(conversationId)) + "/messages"),
                         projection, null, null, null);
-                messages.moveToLast();
+                if (messages.moveToLast()) {
+                    return;
+                }
 
                 if (!settings.getReadOwn()
                         && address
@@ -146,8 +159,12 @@ public class MailService extends Service {
                         messages.getString(messages.getColumnIndex(projection[3])));
                 startService(intent);
             } finally {
-                messages.close();
-                conversations.close();
+                if (messages != null) {
+                    messages.close();
+                }
+                if (conversations != null) {
+                    conversations.close();
+                }
             }
         }
     }

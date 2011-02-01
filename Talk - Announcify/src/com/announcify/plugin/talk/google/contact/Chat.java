@@ -27,7 +27,7 @@ public class Chat implements LookupMethod {
         try {
             cursor = context.getContentResolver().query(Data.CONTENT_URI, new String[] {
                 Im.LOOKUP_KEY
-            }, Im.DATA1 + " = ? AND " + Data.MIMETYPE + " = ?", new String[] {
+            }, Im.DATA1 + " = ? AND " + Im.MIMETYPE + " = ?", new String[] {
                     contact.getAddress(), Im.CONTENT_ITEM_TYPE
             }, null);
             if (!cursor.moveToFirst()) {
@@ -48,7 +48,7 @@ public class Chat implements LookupMethod {
         try {
             cursor = context.getContentResolver().query(Data.CONTENT_URI, new String[] {
                 Im.DATA1
-            }, Im.LOOKUP_KEY + " = ? AND " + Data.MIMETYPE + " = ?", new String[] {
+            }, Im.LOOKUP_KEY + " = ? AND " + Im.MIMETYPE + " = ?", new String[] {
                     contact.getLookupString(), Im.CONTENT_ITEM_TYPE
             }, null);
             if (!cursor.moveToFirst()) {

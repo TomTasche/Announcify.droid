@@ -571,10 +571,9 @@ containing a value of this type.
         public static final int gd_tab_indicator_pressed=0x7f020042;
         public static final int gd_tab_indicator_selected=0x7f020043;
         public static final int gd_tab_indicator_unselected=0x7f020044;
-        public static final int icon=0x7f020045;
-        public static final int launcher_icon=0x7f020046;
-        public static final int list_vertical_divider=0x7f020047;
-        public static final int notification_icon=0x7f020048;
+        public static final int launcher_icon=0x7f020045;
+        public static final int list_vertical_divider=0x7f020046;
+        public static final int notification_icon=0x7f020047;
     }
     public static final class id {
         public static final int auto_edit_chooser=0x7f060008;
@@ -673,8 +672,7 @@ containing a value of this type.
         public static final int list_item_choose=0x7f03001c;
         public static final int list_item_plugin=0x7f03001d;
         public static final int list_item_replace=0x7f03001e;
-        public static final int main=0x7f03001f;
-        public static final int widget_control=0x7f030020;
+        public static final int widget_control=0x7f03001f;
     }
     public static final class menu {
         public static final int context_choose=0x7f0c0000;
@@ -683,15 +681,15 @@ containing a value of this type.
         public static final int menu_main=0x7f0c0003;
     }
     public static final class string {
-        public static final int allow=0x7f090014;
-        public static final int app_name=0x7f090010;
-        public static final int application_error=0x7f090015;
-        public static final int buy_button=0x7f090018;
+        public static final int allow=0x7f09003e;
+        public static final int app_name=0x7f09001d;
+        public static final int application_error=0x7f09003f;
+        public static final int buy_button=0x7f090042;
         /**  License checking status messages 
          */
-        public static final int check_license=0x7f090011;
-        public static final int checking_license=0x7f090012;
-        public static final int dont_allow=0x7f090013;
+        public static final int check_license=0x7f09003b;
+        public static final int checking_license=0x7f09003c;
+        public static final int dont_allow=0x7f09003d;
         public static final int gd_add=0x7f09000b;
         public static final int gd_compose=0x7f090003;
         public static final int gd_edit=0x7f09000a;
@@ -707,12 +705,54 @@ containing a value of this type.
         public static final int gd_star=0x7f09000c;
         public static final int gd_take_photo=0x7f090007;
         public static final int gd_talk=0x7f090002;
-        public static final int hello=0x7f09000f;
-        public static final int quit_button=0x7f090019;
-        public static final int unlicensed_dialog_body=0x7f090017;
+        public static final int preference_behavior_title=0x7f090023;
+        public static final int preference_break_summary=0x7f090012;
+        public static final int preference_break_title=0x7f090011;
+        public static final int preference_cache_summary=0x7f090038;
+        public static final int preference_cache_title=0x7f090037;
+        public static final int preference_choose_group_summary=0x7f090032;
+        public static final int preference_choose_group_title=0x7f090031;
+        public static final int preference_contact_title=0x7f09002c;
+        public static final int preference_default_title=0x7f090033;
+        public static final int preference_discreet_condition_summary=0x7f090027;
+        public static final int preference_discreet_condition_title=0x7f090026;
+        public static final int preference_discreet_summary=0x7f09001c;
+        public static final int preference_discreet_title=0x7f09001b;
+        public static final int preference_filter_group_summary=0x7f090030;
+        public static final int preference_filter_group_title=0x7f09002f;
+        public static final int preference_general_title=0x7f090034;
+        public static final int preference_gravity_condition_summary=0x7f090029;
+        public static final int preference_gravity_condition_title=0x7f090028;
+        public static final int preference_known_summary=0x7f09001a;
+        public static final int preference_known_title=0x7f090019;
+        public static final int preference_notification_summary=0x7f09002b;
+        public static final int preference_notification_title=0x7f09002a;
+        public static final int preference_reading_mode_summary=0x7f09002e;
+        public static final int preference_reading_mode_title=0x7f09002d;
+        public static final int preference_repeat_summary=0x7f090014;
+        public static final int preference_repeat_title=0x7f090013;
+        public static final int preference_ringtone_summary=0x7f090010;
+        public static final int preference_ringtone_title=0x7f09000f;
+        public static final int preference_screen_condition_summary=0x7f090025;
+        public static final int preference_screen_condition_title=0x7f090024;
+        public static final int preference_spam_summary=0x7f09003a;
+        public static final int preference_spam_title=0x7f090039;
+        public static final int preference_specific_title=0x7f09001e;
+        public static final int preference_speech_title=0x7f09001f;
+        public static final int preference_stream_summary=0x7f090021;
+        public static final int preference_stream_title=0x7f090020;
+        public static final int preference_translate_summary=0x7f090036;
+        public static final int preference_translate_title=0x7f090035;
+        public static final int preference_tts_title=0x7f090022;
+        public static final int preference_unknown_summary=0x7f090018;
+        public static final int preference_unknown_title=0x7f090017;
+        public static final int preference_wait_summary=0x7f090016;
+        public static final int preference_wait_title=0x7f090015;
+        public static final int quit_button=0x7f090043;
+        public static final int unlicensed_dialog_body=0x7f090041;
         /**  Unlicensed dialog messages 
          */
-        public static final int unlicensed_dialog_title=0x7f090016;
+        public static final int unlicensed_dialog_title=0x7f090040;
     }
     public static final class style {
         public static final int GreenDroid=0x7f0a0006;

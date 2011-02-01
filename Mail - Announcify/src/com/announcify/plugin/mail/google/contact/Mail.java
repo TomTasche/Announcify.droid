@@ -88,7 +88,7 @@ public class Mail implements LookupMethod {
         try {
             cursor = context.getContentResolver().query(Email.CONTENT_URI, new String[] {
                     Email.LABEL, Email.TYPE
-            }, Contacts.LOOKUP_KEY + " = ? AND " + Email.DATA1 + " = ?", new String[] {
+            }, Email.LOOKUP_KEY + " = ? AND " + Email.DATA1 + " = ?", new String[] {
                     contact.getLookupString(), contact.getAddress()
             }, null);
             if (!cursor.moveToFirst()) {

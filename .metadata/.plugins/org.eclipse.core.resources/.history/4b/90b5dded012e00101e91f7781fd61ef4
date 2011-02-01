@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="preference_ringtone_title">Choose Ringtone</string>
+	<string name="preference_ringtone_summary">Ringtone to be played after announcement</string>
+	
+	<string name="preference_break_title">Break between Readings</string>
+	<string name="preference_break_summary">How long to pause before repeating announcement</string>
+	
+	<string name="preference_repeat_title">Repeat Readings</string>
+	<string name="preference_repeat_summary">How long to pause before repeating announcement</string>
+	
+	<string name="preference_wait_title">Delay Announcification</string>
+	<string name="preference_wait_summary">How long to wait before starting announcement</string>
+	
+	<string name="preference_unknown_title">Choose Unknown Announcement</string>
+	<string name="preference_unknown_summary">How to announce unknown contacts</string>
+	
+	<string name="preference_unknown_title">Choose Announcement</string>
+	<string name="preference_unknown_summary">How to announce known contacts</string>
+
+	<string-array
+		name="preference_list_reading_break_names">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>Custom...</item>
+	</string-array>
+
+	<string-array
+		name="preference_list_reading_repeat_names">
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+		<item>5</item>
+		<item>6</item>
+		<item>7</item>
+		<item>Custom...</item>
+	</string-array>
+
+	<string-array
+		name="preference_list_reading_wait_names">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+		<item>4</item>
+		<item>6</item>
+		<item>8</item>
+		<item>10</item>
+		<item>Custom...</item>
+	</string-array>
+
+	<string-array
+		name="preference_list_reading_announcement_names">
+		<item>\"Tom\"</item>
+		<item>\"Tom from Home\"</item>
+		<item>\"Message from Tom\"</item>
+		<item>\"You have a new message\"</item>
+		<item>\"You have a new Announcification!\"</item>
+		<item>Custom...</item>
+	</string-array>
+
+	<string-array
+		name="preference_list_reading_unknown_names">
+		<item>Nothing.</item>
+		<item>\"Unknown\"</item>
+		<item>Address</item>
+		<item>\"You have a new message\"</item>
+		<item>\"You have a new Announcification!\"</item>
+		<item>Custom...</item>
+	</string-array>
+
+	<string-array
+		name="preference_list_reading_discreet_names">
+		<item>\"Tom\"</item>
+		<item>\"Tom from Home\"</item>
+		<item>\"Message from Tom\"</item>
+		<item>\"Message from Tom: ...\"</item>
+		<item>\"You have a new message\"</item>
+		<item>\"You have a new Announcification!\"</item>
+		<item>Custom...</item>
+	</string-array>
+</resources>

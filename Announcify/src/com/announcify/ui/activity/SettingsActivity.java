@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.widget.Toast;
 
 import com.announcify.R;
 import com.announcify.api.background.util.AnnouncifySettings;
@@ -42,7 +43,7 @@ public class SettingsActivity extends PluginActivity {
             thread = new Thread() {
                 @Override
                 public void run() {
-                    security = new AnnouncifySecurity(SettingsActivity.this);
+                    // security = new AnnouncifySecurity(SettingsActivity.this);
                 }
             };
             thread.start();
@@ -80,6 +81,17 @@ public class SettingsActivity extends PluginActivity {
 
                     public boolean onPreferenceClick(final Preference preference) {
                         startActivity(new Intent(SettingsActivity.this, GroupActivity.class));
+
+                        return false;
+                    }
+                });
+
+        getPreferenceScreen().findPreference("preference_spam_filter")
+                .setOnPreferenceClickListener(new OnPreferenceClickListener() {
+
+                    public boolean onPreferenceClick(final Preference preference) {
+                        Toast.makeText(SettingsActivity.this, "Not yet implemented, sorry!",
+                                Toast.LENGTH_LONG).show();
 
                         return false;
                     }
@@ -131,8 +143,8 @@ public class SettingsActivity extends PluginActivity {
     @Override
     protected void onPause() {
         if (security != null) {
-            licensed = security.isLicensed();
-            security.quit();
+            // licensed = security.isLicensed();
+            // security.quit();
         } else {
             licensed = false;
         }
@@ -158,7 +170,7 @@ public class SettingsActivity extends PluginActivity {
     @Override
     protected void onDestroy() {
         if (security != null) {
-            security.quit();
+            // security.quit();
         }
 
         super.onDestroy();

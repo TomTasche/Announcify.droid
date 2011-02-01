@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Announcify</string>
+	
+	<string name="preference_specific_title">Specific Settings</string>
+	
+	<string name="preference_speech_title">Speech Settings</string>
+	
+	<string name="preference_stream_title">Choose Stream</string>
+	<string name="preference_stream_summary">What stream to speak on?</string>
+	
+	<string name="preference_tts_title">Change voice, speed, ...</string>
+	
+	<string name="preference_behavior_title">Behavior Settings</string>
+	
+	<string name="preference_screen_condition_title">Screen Condition</string>
+	<string name="preference_screen_condition_summary">Stop speaking if screen is on</string>
+	
+	<string name="preference_discreet_condition_title">Discreet Condition</string>
+	<string name="preference_discreet_condition_summary">Stop speaking if not discreet</string>
+	
+	<string name="preference_gravity_condition_title">Gravity Condition</string>
+	<string name="preference_gravity_condition_summary">Stop speaking if phone is face-down</string>
+	
+	<string name="preference_notification_title">Show Notification</string>
+	<string name="preference_notification_summary">Show Notification in Notification Bar when speaking</string>
+	
+	<string name="preference_contact_title">Contact Settings</string>
+	
+	<string name="preference_reading_mode_title">Show Notification</string>
+	<string name="preference_reading_mode_summary">Show Notification in Notification Bar when speaking</string>
+	
+	<string-array name="preference_list_stream_names">
+		
+		<item>Ringtone</item>
+		
+		<item>Notification</item>
+		
+		<item>Music</item>
+		
+		<item>Alarm</item>
+		
+		<item>Text-To-Speech</item>
+		
+		<item>System</item>
+	</string-array>
+
+	<string-array name="preference_list_reading_mode_names">
+		
+		<item>Fullname</item>
+		
+		<item>Firstname</item>
+		
+		<item>Lastname</item>
+		
+		<item>Nickname</item>
+		
+		<item>Number / Address</item>
+	</string-array>
+
+	<!-- License checking status messages -->
+	<string name="check_license">Check license</string>
+	
+	<string name="checking_license">Checking license...</string>
+	
+	<string name="dont_allow">Don\'t allow the user access</string>
+	
+	<string name="allow">Allow the user access</string>
+	
+	<string name="application_error">Application error: %1$s</string>
+
+	<!-- Unlicensed dialog messages -->
+	<string name="unlicensed_dialog_title">Application not licensed</string>
+	
+	<string name="unlicensed_dialog_body">This application is not licensed. Please purchase it from Android Market.</string>
+	
+	<string name="buy_button">Buy app</string>
+	
+	<string name="quit_button">Exit</string>
+</resources>

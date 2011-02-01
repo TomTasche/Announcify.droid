@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.announcify.api.sql.model.PluginModel"/>
-<fullyQualifiedTypeName name="com.announcify.api.background.sql.model.BaseModel"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="com.announcify.api.R"/>
 <fullyQualifiedTypeName name="com.announcify.api.R.array"/>
 <fullyQualifiedTypeName name="android.media.RingtoneManager"/>
 <fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="com.announcify.background.sql.AnnouncifyProvider"/>
-<fullyQualifiedTypeName name="android.net.Uri"/>
 <fullyQualifiedTypeName name="android.database.ContentObserver"/>
 <fullyQualifiedTypeName name="com.announcify.ui.activity.AnnouncifyActivity.AnnouncifyObserver"/>
 <fullyQualifiedTypeName name="android.os.Handler"/>
@@ -40,7 +37,6 @@
 <fullyQualifiedTypeName name="android.provider.ContactsContract.Groups"/>
 <fullyQualifiedTypeName name="android.widget.TextView"/>
 <fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
-<fullyQualifiedTypeName name="android.database.Cursor"/>
 <fullyQualifiedTypeName name="com.announcify.api.AnnouncifyIntent"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.util.AnnouncifySettings"/>
 <fullyQualifiedTypeName name="com.announcify.R.id"/>
@@ -49,7 +45,6 @@
 <fullyQualifiedTypeName name="com.announcify.api.background.contact.lookup.Number"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.message.mms.util.Settings"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.mail.google.util.Settings"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.service.PluginService"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.talk.google.service.TalkService"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.mail.google.service.MailService"/>
@@ -60,4 +55,9 @@
 <fullyQualifiedTypeName name="com.announcify.plugin.voice.mail.service.WorkerService"/>
 <fullyQualifiedTypeName name="com.announcify.api.simple.SimpleAnnouncifyIntent"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.voice.mail.util.Settings"/>
+<fullyQualifiedTypeName name="android.provider.ContactsContract.CommonDataKinds.Email"/>
+<fullyQualifiedTypeName name="android.provider.ContactsContract.CommonDataKinds.Im"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="android.database.Cursor"/>
+<fullyQualifiedTypeName name="android.net.Uri"/>
 </qualifiedTypeNameHistroy>

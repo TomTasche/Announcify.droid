@@ -1,0 +1,372 @@
+com.announcify.Manifest
+com.announcify.Manifest$permission
+com.announcify.R
+com.announcify.R$anim
+com.announcify.R$array
+com.announcify.R$attr
+com.announcify.R$color
+com.announcify.R$dimen
+com.announcify.R$drawable
+com.announcify.R$id
+com.announcify.R$layout
+com.announcify.R$menu
+com.announcify.R$string
+com.announcify.R$style
+com.announcify.R$styleable
+com.announcify.R$xml
+com.announcify.api.AnnouncifyIntent
+com.announcify.api.Manifest
+com.announcify.api.Manifest$permission
+com.announcify.api.R
+com.announcify.api.R$anim
+com.announcify.api.R$array
+com.announcify.api.R$attr
+com.announcify.api.R$color
+com.announcify.api.R$dimen
+com.announcify.api.R$drawable
+com.announcify.api.R$id
+com.announcify.api.R$layout
+com.announcify.api.R$menu
+com.announcify.api.R$string
+com.announcify.api.R$style
+com.announcify.api.R$styleable
+com.announcify.api.R$xml
+com.announcify.api.background.audio.HeadsetFinder:
+    34:34:public static boolean isDiscreet(android.content.Context)
+com.announcify.api.background.contact.Contact
+com.announcify.api.background.contact.Contact$1
+com.announcify.api.background.contact.ContactEnum
+com.announcify.api.background.contact.ContactEnum$1
+com.announcify.api.background.contact.ContactEnum$2
+com.announcify.api.background.contact.ContactEnum$3
+com.announcify.api.background.contact.ContactEnum$4
+com.announcify.api.background.contact.ContactEnum$5
+com.announcify.api.background.contact.ContactEnum$6
+com.announcify.api.background.contact.ContactEnum$7
+com.announcify.api.background.contact.ContactEnum$8
+com.announcify.api.background.contact.Filter
+com.announcify.api.background.contact.lookup.Group
+com.announcify.api.background.contact.lookup.LookupMethod
+com.announcify.api.background.contact.lookup.Name
+com.announcify.api.background.contact.lookup.Number
+com.announcify.api.background.error.ExceptionHandler:
+    public static final java.lang.String PACKAGE
+    public static final java.lang.String ANDROID_VERSION
+    public static final java.lang.String VERSION_CODE
+    public static final java.lang.String VERSION_NAME
+    public static final java.lang.String STACKTRACE
+    public static final java.lang.String MODEL
+    public static final java.lang.String INFORMATION
+com.announcify.api.background.error.ExpectedException
+com.announcify.api.background.queue.PluginQueue:
+    43:50:public PluginQueue(java.lang.String,java.util.LinkedList,java.lang.String,java.lang.String,android.content.Context)
+    52:59:public PluginQueue(java.lang.String,java.util.LinkedList,java.lang.String,java.lang.String,com.announcify.api.background.tts.Speech)
+    61:65:public PluginQueue(java.lang.String,java.util.LinkedList,com.announcify.api.background.tts.Speech)
+    82:87:public java.lang.String sniffNextString()
+    125:125:public com.announcify.api.background.tts.Speech getSpeech()
+    129:130:public void setSpeech(com.announcify.api.background.tts.Speech)
+com.announcify.api.background.service.PluginService:
+    public static final java.lang.String ACTION_PLUGIN_CONTACT
+    public static final java.lang.String ACTION_ANNOUNCE
+    public static final java.lang.String EXTRA_PRIORITY
+    public static final java.lang.String EXTRA_QUEUE
+    public static final java.lang.String EXTRA_PLUGIN_NAME
+    public static final java.lang.String EXTRA_PLUGIN_PACKAGE
+    public static final java.lang.String EXTRA_PLUGIN_ACTION
+    public static final java.lang.String EXTRA_PLUGIN_BROADCAST
+    public static final java.lang.String EXTRA_PLUGIN_PRIORITY
+    protected static android.media.Ringtone ringtone
+    public final java.lang.String ACTION_START_RINGTONE
+    public final java.lang.String ACTION_STOP_RINGTONE
+    protected com.announcify.api.background.util.PluginSettings settings
+    45:49:public PluginService(java.lang.String)
+    53:60:public PluginService(java.lang.String,java.lang.String,java.lang.String)
+    64:97:protected void onHandleIntent(android.content.Intent)
+com.announcify.api.background.sql.model.GroupModel:
+    public static final java.lang.String TABLE_NAME
+    public static final java.lang.String KEY_GROUP_ID
+    public static final java.lang.String KEY_GROUP_TITLE
+    21:30:public boolean getEnabled(long)
+com.announcify.api.background.sql.model.PluginModel:
+    public static final java.lang.String TABLE_NAME
+    public static final java.lang.String KEY_PLUGIN_NAME
+    public static final java.lang.String KEY_PLUGIN_PACKAGE
+    public static final java.lang.String KEY_PLUGIN_ACTION
+    public static final java.lang.String KEY_PLUGIN_ACTIVE
+    public static final java.lang.String KEY_PLUGIN_PRIORITY
+    162:170:public void add(java.lang.String,int,java.lang.String,java.lang.String,boolean)
+    174:184:public void update(long,java.lang.String,int,java.lang.String,java.lang.String,boolean)
+com.announcify.api.background.sql.model.TranslationModel:
+    public static final java.lang.String TABLE_NAME
+    public static final java.lang.String KEY_TRANSLATION_FROM
+    public static final java.lang.String KEY_TRANSLATION_TO
+    public static final java.lang.String KEY_TRANSLATION_SOURCE
+    public static final java.lang.String KEY_TRANSLATION_DESTINATION
+com.announcify.api.background.text.FormatEnum
+com.announcify.api.background.text.Formatter
+com.announcify.api.background.tts.Speech:
+    34:35:public Speech(float,float,android.content.Context)
+    42:43:public Speech(java.util.Locale,android.content.Context)
+    91:91:public java.util.Locale getLanguage()
+    95:96:public void setLanguage(java.util.Locale)
+    99:99:public float getPitch()
+    103:103:public float getSpeechRate()
+com.announcify.api.background.tts.Translator
+com.announcify.api.background.util.AnnouncifySettings:
+    public static final java.lang.String PREFERENCES_NAME
+    public static final java.lang.String KEY_READING_MODE
+    public static final java.lang.String KEY_GROUP_FILTER
+    public static final java.lang.String KEY_GROUP_BLOCK
+    public static final java.lang.String KEY_TRANSLATE_TEXT
+    public static final java.lang.String KEY_STREAM
+    public static final java.lang.String KEY_DISCREET
+    public static final java.lang.String KEY_SCREEN
+    public static final java.lang.String KEY_GRAVITY
+    public static final java.lang.String KEY_NOTIFICATION
+    46:46:public int getReadingMode()
+    50:50:public boolean getFilterByGroup()
+    64:64:public boolean getTranslateText()
+    88:88:public int getDefaultReadingBreak()
+    92:92:public int getDefaultReadingRepeat()
+    96:96:public int getDefaultReadingWait()
+    100:100:public java.lang.String getDefaultUnknownMode()
+    104:104:public java.lang.String getDefaultDefaultMode()
+    108:108:public java.lang.String getDefaultDiscreetMode()
+com.announcify.api.background.util.PluginSettings
+com.announcify.api.simple.SimpleAnnouncifyIntent
+com.announcify.api.simple.SimpleAnnouncifyIntent$SimpleSettings
+com.announcify.api.simple.SimplePluginModel
+com.announcify.api.ui.activity.PluginActivity:
+    private static final java.lang.String CUSTOM_VALUE
+    52:60:protected void setCustomListeners(com.announcify.api.background.util.PluginSettings)
+    64:100:private void setCustomNumberListener(java.lang.String,com.announcify.api.background.util.PluginSettings,java.lang.String)
+    104:145:private void setCustomAnnouncementListener(java.lang.String,com.announcify.api.background.util.PluginSettings,java.lang.String)
+    149:178:protected void parseRingtone(int,int,android.content.Intent,int)
+com.announcify.api.ui.activity.PluginActivity$2
+com.announcify.api.ui.activity.PluginActivity$2$1
+com.announcify.api.ui.activity.PluginActivity$2$2
+com.announcify.api.ui.activity.PluginActivity$3
+com.announcify.api.ui.activity.PluginActivity$3$1
+com.announcify.api.ui.activity.PluginActivity$3$2
+com.announcify.background.handler.AnnouncificationHandler:
+    public static final int WHAT_START
+    public static final int WHAT_CONTINUE
+    public static final int WHAT_PAUSE
+    public static final int WHAT_SHUTDOWN
+    public static final int WHAT_PUT_QUEUE
+    public static final int WHAT_NEXT_ITEM
+    public static final int WHAT_CHANGE_LOCALE
+    public static final int WHAT_REVERT_LOCALE
+com.announcify.background.queue.Queue:
+    public static final java.lang.String EXTRA_TEXT_SNIPPET
+com.announcify.background.receiver.NotificationReceiver:
+    public static final java.lang.String NOTIFICATION_BROADCAST
+com.announcify.background.receiver.gravity.GravityListener:
+    70:70:public float getAccuracy()
+    78:79:public void resumeAccelerometer()
+com.announcify.background.tts.Speaker:
+    43:46:public void applyLanguage(com.announcify.api.background.tts.Speech)
+com.announcify.background.tts.Volume
+com.announcify.ui.control.RemoteControlDialog:
+    public static final java.lang.String ACTION_CONTINUE
+    public static final java.lang.String ACTION_PAUSE
+    public static final java.lang.String ACTION_SKIP
+com.announcify.ui.widget.PluginItem:
+    39:39:public java.lang.Object getTag()
+com.announcify.ui.widget.SectionedItemAdapter:
+    private static final java.lang.String SECTIONS
+    44:49:public void toggleSort()
+com.cyrilmottier.android.greendroid.Manifest
+com.cyrilmottier.android.greendroid.Manifest$permission
+com.cyrilmottier.android.greendroid.R$anim
+com.cyrilmottier.android.greendroid.R$array
+com.cyrilmottier.android.greendroid.R$attr
+com.cyrilmottier.android.greendroid.R$color
+com.cyrilmottier.android.greendroid.R$dimen
+com.cyrilmottier.android.greendroid.R$drawable
+com.cyrilmottier.android.greendroid.R$id
+com.cyrilmottier.android.greendroid.R$layout
+com.cyrilmottier.android.greendroid.R$menu
+com.cyrilmottier.android.greendroid.R$string
+com.cyrilmottier.android.greendroid.R$style
+com.cyrilmottier.android.greendroid.R$styleable:
+    public static final int ActionBar_dividerDrawable
+    public static final int ActionBar_dividerWidth
+    public static final int ActionBar_homeDrawable
+    public static final int ActionBar_title
+    public static final int ActionBar_type
+    public static final int DrawableItem_drawable
+    public static final int Item_enabled
+    public static final int ProgressItem_isInProgress
+    public static final int SegmentedBar_dividerDrawable
+    public static final int SegmentedBar_dividerWidth
+    public static final int SegmentedHost_segmentedBar
+    public static final int SegmentedHost_segmentedContentView
+    public static final int SubtextItem_subtext
+    public static final int SubtitleItem_subtitle
+    public static final int TextItem_text
+    public static final int ThumbnailItem_thumbnail
+com.cyrilmottier.android.greendroid.R$xml
+greendroid.app.ActionBarActivity
+greendroid.app.GDActivity:
+    139:139:public greendroid.widget.ActionBar$Type getActionBarType()
+    227:228:public void addActionBarItem(greendroid.widget.ActionBarItem)
+    244:245:public void setActionBarContentView(android.view.View,android.view.ViewGroup$LayoutParams)
+    248:249:public void setActionBarContentView(android.view.View)
+greendroid.app.GDListActivity:
+    93:94:public void setSelection(int)
+    100:100:public int getSelectedItemPosition()
+    107:107:public long getSelectedItemId()
+    114:115:public android.widget.ListView getListView()
+    122:122:public android.widget.ListAdapter getListAdapter()
+greendroid.app.GDTabActivity:
+    127:128:public void addActionBarItem(greendroid.widget.ActionBarItem)
+    131:132:public void addActionBarItem(greendroid.widget.ActionBarItem$Type)
+    135:135:public android.widget.FrameLayout getContentView()
+    172:173:public void addTab(java.lang.String,int,android.content.Intent)
+    176:187:public void addTab(java.lang.String,java.lang.CharSequence,android.content.Intent)
+    190:190:protected android.view.View createTabIndicator(java.lang.CharSequence)
+greendroid.util.Config
+greendroid.widget.ActionBar:
+    private static final int MAX_ITEMS_COUNT
+    219:227:public void removeItem(int)
+    233:258:public void setType(greendroid.widget.ActionBar$Type)
+greendroid.widget.ActionBar$OnActionBarListener:
+    public static final int HOME_ITEM
+greendroid.widget.ActionBarItem:
+    protected int mDrawableId
+    87:87:public android.graphics.drawable.Drawable getDrawable()
+    91:91:public greendroid.widget.ActionBarItem setDrawable(int)
+    105:105:public java.lang.CharSequence getContentDescription()
+greendroid.widget.ItemAdapter:
+    private static final int DEFAULT_MAX_VIEW_TYPE_COUNT
+    private boolean mNotifyOnChange
+    99:100:public ItemAdapter(android.content.Context)
+    115:116:public ItemAdapter(android.content.Context,greendroid.widget.item.Item[])
+    151:152:public ItemAdapter(android.content.Context,greendroid.widget.item.Item[],int)
+    202:213:private void removeItem(greendroid.widget.item.Item)
+    222:222:public android.content.Context getContext()
+    235:235:public int getActualViewTypeCount()
+    244:249:public void add(greendroid.widget.item.Item)
+    258:263:public void insert(greendroid.widget.item.Item,int)
+    271:277:public void remove(greendroid.widget.item.Item)
+    283:288:public void clear()
+    297:301:public void sort(java.util.Comparator)
+    315:316:public void setNotifyOnChange(boolean)
+    331:331:public static greendroid.widget.ItemAdapter createFromXml(android.content.Context,int)
+    349:416:public static greendroid.widget.ItemAdapter createFromXml(android.content.Context,org.xmlpull.v1.XmlPullParser)
+greendroid.widget.QuickAction
+greendroid.widget.QuickActionBar
+greendroid.widget.QuickActionBar$1
+greendroid.widget.QuickActionBar$2
+greendroid.widget.QuickActionGrid
+greendroid.widget.QuickActionGrid$1
+greendroid.widget.QuickActionGrid$2
+greendroid.widget.QuickActionWidget
+greendroid.widget.QuickActionWidget$OnQuickActionClickListener
+greendroid.widget.SegmentedAdapter
+greendroid.widget.SegmentedBar
+greendroid.widget.SegmentedBar$OnSegmentChangeListener
+greendroid.widget.SegmentedBar$SegmentCheckedListener
+greendroid.widget.SegmentedBar$SegmentClickedListener
+greendroid.widget.SegmentedHost
+greendroid.widget.SegmentedHost$1
+greendroid.widget.SegmentedHost$SegmentSwitcher
+greendroid.widget.item.DescriptionItem
+greendroid.widget.item.DrawableItem
+greendroid.widget.item.Item:
+    private android.util.SparseArray mTags
+    private java.lang.Object mTag
+    69:69:public java.lang.Object getTag()
+    79:80:public void setTag(java.lang.Object)
+    90:90:public java.lang.Object getTag(int)
+    101:105:public void setTag(int,java.lang.Object)
+    132:135:public void inflate(android.content.res.Resources,org.xmlpull.v1.XmlPullParser,android.util.AttributeSet)
+greendroid.widget.item.LongTextItem
+greendroid.widget.item.ProgressItem
+greendroid.widget.item.SeparatorItem
+greendroid.widget.item.SubtextItem
+greendroid.widget.item.SubtitleItem
+greendroid.widget.item.TextItem
+greendroid.widget.item.ThumbnailItem
+greendroid.widget.itemview.DescriptionItemView
+greendroid.widget.itemview.DrawableItemView
+greendroid.widget.itemview.LongTextItemView
+greendroid.widget.itemview.ProgressItemView
+greendroid.widget.itemview.SeparatorItemView
+greendroid.widget.itemview.SubtextItemView
+greendroid.widget.itemview.SubtitleItemView
+greendroid.widget.itemview.TextItemView
+greendroid.widget.itemview.ThumbnailItemView
+org.acra.ACRA:
+    static final java.lang.String RES_NOTIF_ICON
+    static final java.lang.String RES_NOTIF_TICKER_TEXT
+    static final java.lang.String RES_NOTIF_TITLE
+    static final java.lang.String RES_NOTIF_TEXT
+    static final java.lang.String RES_DIALOG_ICON
+    static final java.lang.String RES_DIALOG_TITLE
+    static final java.lang.String RES_DIALOG_TEXT
+    static final java.lang.String RES_DIALOG_COMMENT_PROMPT
+    static final java.lang.String RES_DIALOG_OK_TOAST
+    static final java.lang.String RES_TOAST_TEXT
+    static final int NOTIF_CRASH_ID
+    public static final java.lang.String PREF_DISABLE_ACRA
+    public static final java.lang.String PREF_ENABLE_ACRA
+org.acra.ACRAConfigurationException:
+    private static final long serialVersionUID
+org.acra.ConfigurationInspector:
+    private static final java.lang.String SUFFIX_MASK
+    private static final java.lang.String FIELD_SCREENLAYOUT
+    private static final java.lang.String FIELD_UIMODE
+    private static final java.lang.String FIELD_MNC
+    private static final java.lang.String FIELD_MCC
+    private static final java.lang.String PREFIX_UI_MODE
+    private static final java.lang.String PREFIX_TOUCHSCREEN
+    private static final java.lang.String PREFIX_SCREENLAYOUT
+    private static final java.lang.String PREFIX_ORIENTATION
+    private static final java.lang.String PREFIX_NAVIGATIONHIDDEN
+    private static final java.lang.String PREFIX_NAVIGATION
+    private static final java.lang.String PREFIX_KEYBOARDHIDDEN
+    private static final java.lang.String PREFIX_KEYBOARD
+    private static final java.lang.String PREFIX_HARDKEYBOARDHIDDEN
+org.acra.CrashReportDialog:
+    private static final int CRASH_DIALOG_LEFT_ICON
+org.acra.ErrorReporter:
+    private static final int MAX_SEND_REPORTS
+    private static final java.lang.String VERSION_NAME_KEY
+    private static final java.lang.String PACKAGE_NAME_KEY
+    private static final java.lang.String FILE_PATH_KEY
+    private static final java.lang.String PHONE_MODEL_KEY
+    private static final java.lang.String ANDROID_VERSION_KEY
+    private static final java.lang.String BOARD_KEY
+    private static final java.lang.String BRAND_KEY
+    private static final java.lang.String DEVICE_KEY
+    private static final java.lang.String BUILD_DISPLAY_KEY
+    private static final java.lang.String FINGERPRINT_KEY
+    private static final java.lang.String HOST_KEY
+    private static final java.lang.String ID_KEY
+    private static final java.lang.String MODEL_KEY
+    private static final java.lang.String PRODUCT_KEY
+    private static final java.lang.String TAGS_KEY
+    private static final java.lang.String TIME_KEY
+    private static final java.lang.String TYPE_KEY
+    private static final java.lang.String USER_KEY
+    private static final java.lang.String TOTAL_MEM_SIZE_KEY
+    private static final java.lang.String AVAILABLE_MEM_SIZE_KEY
+    private static final java.lang.String CUSTOM_DATA_KEY
+    private static final java.lang.String STACK_TRACE_KEY
+    private static final java.lang.String INITIAL_CONFIGURATION_KEY
+    private static final java.lang.String CRASH_CONFIGURATION_KEY
+    private static final java.lang.String DISPLAY_KEY
+    private static final java.lang.String USER_COMMENT_KEY
+    private static final java.lang.String USER_CRASH_DATE_KEY
+    static final java.lang.String IS_SILENT_KEY
+    static final java.lang.String SILENT_SUFFIX
+    static final java.lang.String EXTRA_REPORT_FILE_NAME
+    212:213:public void addCustomData(java.lang.String,java.lang.String)
+    263:263:public java.lang.String getCustomData(java.lang.String)
+    582:583:public org.acra.ErrorReporter$ReportsSenderWorker handleSilentException(java.lang.Throwable)
+    845:846:public void deletePendingSilentReports()
+    852:853:public void deletePendingNonSilentReports()
+org.acra.HttpUtils:
+    private static final int SOCKET_TIMEOUT

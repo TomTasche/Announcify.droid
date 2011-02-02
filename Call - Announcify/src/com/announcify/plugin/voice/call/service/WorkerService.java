@@ -51,7 +51,7 @@ public class WorkerService extends PluginService {
             announcify.setStopBroadcast(ACTION_STOP_RINGTONE);
             announcify.announce(formatter.format(null));
         } else if (ACTION_START_RINGTONE.equals(intent.getAction())) {
-            final String s = getSharedPreferences(PluginSettings.PREFERENCES_NAME,
+            final String s = getSharedPreferences(Settings.PREFERENCES_NAME,
                     Context.MODE_WORLD_READABLE).getString(PluginSettings.KEY_RINGTONE, "");
             if (s == null || "".equals(s)) {
                 return;

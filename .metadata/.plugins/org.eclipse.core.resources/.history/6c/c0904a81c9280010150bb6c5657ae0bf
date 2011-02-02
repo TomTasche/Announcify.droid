@@ -1,5 +1,0 @@
-package com.announcify.api;
-
-public class SimpleAnnouncifyIntent extends AnnouncifyIntent {
-
-}

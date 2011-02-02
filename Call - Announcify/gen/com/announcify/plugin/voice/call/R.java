@@ -29,7 +29,7 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f04000e;
-        public static final int event=0x7f04000f;
+        public static final int event_call=0x7f04000f;
         public static final int preference_break_summary=0x7f040003;
         public static final int preference_break_title=0x7f040002;
         public static final int preference_discreet_summary=0x7f04000d;

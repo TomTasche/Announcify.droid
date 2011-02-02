@@ -2,7 +2,7 @@
 <resources>
 	<string
 		name="app_name">MMS - Announcify</string>
-		
+
 	<string
-		name="event">MMS</string>
+		name="event_mms">MMS</string>
 </resources>

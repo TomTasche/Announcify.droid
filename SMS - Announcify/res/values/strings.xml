@@ -4,5 +4,5 @@
 		name="app_name">SMS - Announcify</string>
 
 	<string
-		name="event">SMS</string>
+		name="event_sms">SMS</string>
 </resources>

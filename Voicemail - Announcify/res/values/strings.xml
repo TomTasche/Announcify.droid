@@ -4,5 +4,5 @@
 		name="app_name">Voicemail - Announcify</string>
 
 	<string
-		name="event">Voicemail</string>
+		name="event_voicemail">Voicemail</string>
 </resources>

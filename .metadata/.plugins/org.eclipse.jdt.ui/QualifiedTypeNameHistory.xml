@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="android.widget.CheckBox"/>
-<fullyQualifiedTypeName name="android.widget.EditText"/>
-<fullyQualifiedTypeName name="android.widget.AutoCompleteTextView"/>
-<fullyQualifiedTypeName name="android.widget.SimpleCursorAdapter"/>
 <fullyQualifiedTypeName name="android.R.layout"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.sql.model.GroupModel"/>
 <fullyQualifiedTypeName name="android.widget.SimpleCursorAdapter.CursorToStringConverter"/>
@@ -35,14 +31,12 @@
 <fullyQualifiedTypeName name="com.announcify.plugin.voice.mail.util.Settings"/>
 <fullyQualifiedTypeName name="android.provider.ContactsContract.CommonDataKinds.Email"/>
 <fullyQualifiedTypeName name="android.provider.ContactsContract.CommonDataKinds.Im"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="android.database.Cursor"/>
 <fullyQualifiedTypeName name="android.net.Uri"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.mail.k9.R"/>
 <fullyQualifiedTypeName name="android.database.ContentObserver"/>
 <fullyQualifiedTypeName name="android.os.HandlerThread"/>
 <fullyQualifiedTypeName name="android.provider.BaseColumns"/>
-<fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="android.R"/>
 <fullyQualifiedTypeName name="android.R.id"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.voice.call.R"/>
@@ -60,4 +54,10 @@
 <fullyQualifiedTypeName name="com.announcify.ui.activity.AnnouncifyActivity"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.error.ExceptionHandler"/>
 <fullyQualifiedTypeName name="org.acra.ErrorReporter"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.message.sms.util.Settings"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.talk.google.util.Settings"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.mail.google.R"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.mail.google.R.string"/>
 </qualifiedTypeNameHistroy>

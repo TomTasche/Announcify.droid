@@ -18,7 +18,7 @@ public class SettingsActivity extends PluginActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getPreferenceManager().setSharedPreferencesName(PluginSettings.PREFERENCES_NAME);
+        getPreferenceManager().setSharedPreferencesName(Settings.PREFERENCES_NAME);
         getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
 
         addPreferencesFromResource(R.xml.preferences_settings);

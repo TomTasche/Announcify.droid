@@ -4,5 +4,5 @@
 		name="app_name">Call - Announcify</string>
 
 	<string
-		name="event">Call</string>
+		name="event_call">Call</string>
 </resources>

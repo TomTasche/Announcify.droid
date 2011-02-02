@@ -6,10 +6,10 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.os.Bundle;
 
-import com.announcify.api.background.util.PluginSettings;
 import com.announcify.api.ui.activity.PluginActivity;
 import com.announcify.plugin.talk.google.R;
 import com.announcify.plugin.talk.google.service.TalkService;
+import com.announcify.plugin.talk.google.util.Settings;
 
 public class SettingsActivity extends PluginActivity {
 
@@ -17,7 +17,7 @@ public class SettingsActivity extends PluginActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getPreferenceManager().setSharedPreferencesName(PluginSettings.PREFERENCES_NAME);
+        getPreferenceManager().setSharedPreferencesName(Settings.PREFERENCES_NAME);
         getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
 
         addPreferencesFromResource(R.xml.preferences_settings);

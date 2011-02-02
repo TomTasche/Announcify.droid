@@ -1,0 +1,40 @@
+
+package com.announcify.plugin.message.mms.util;
+
+import android.content.Context;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.util.Log;
+
+import com.announcify.api.background.util.PluginSettings;
+import com.announcify.plugin.message.mms.R;
+
+public class Settings extends PluginSettings {
+
+    public static final String ACTION_SETTINGS = "com.announcify.plugin.message.mms.SETTINGS";
+
+    public Settings(final Context context) {
+        super(context);
+    }
+
+    @Override
+    public String getEventType() {
+        try {
+            context = context.createPackageContext("com.announcify.plugin.message.mms", 0);
+        } catch (NameNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        Log.e("smn", context.getString(com.announcify.plugin.message.mms.R.string.event));
+        return context.getString(com.announcify.plugin.message.mms.R.string.event);
+    }
+
+    @Override
+    public int getPriority() {
+        return 2;
+    }
+
+    @Override
+    public String getSettingsAction() {
+        return ACTION_SETTINGS;
+    }
+}

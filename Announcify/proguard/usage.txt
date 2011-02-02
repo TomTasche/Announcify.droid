@@ -287,13 +287,14 @@ greendroid.widget.item.ProgressItem
 greendroid.widget.item.SeparatorItem
 greendroid.widget.item.SubtextItem
 greendroid.widget.item.SubtitleItem
-greendroid.widget.item.TextItem
+greendroid.widget.item.TextItem:
+    55:57:public TextItem(java.lang.String)
+    67:72:public void inflate(android.content.res.Resources,org.xmlpull.v1.XmlPullParser,android.util.AttributeSet)
 greendroid.widget.item.ThumbnailItem
 greendroid.widget.itemview.DescriptionItemView
 greendroid.widget.itemview.DrawableItemView
 greendroid.widget.itemview.LongTextItemView
 greendroid.widget.itemview.ProgressItemView
-greendroid.widget.itemview.SeparatorItemView
 greendroid.widget.itemview.SubtextItemView
 greendroid.widget.itemview.SubtitleItemView
 greendroid.widget.itemview.TextItemView

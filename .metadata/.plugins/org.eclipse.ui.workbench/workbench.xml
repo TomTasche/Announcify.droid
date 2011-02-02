@@ -18,10 +18,11 @@
 <coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="76" y="30"/>
 <coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="68" y="30"/>
 <coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="68" y="30"/>
+<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="184" y="30"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.jdt.ui.PropertiesFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.ui.browser.editor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
@@ -294,31 +295,43 @@
 <view id="org.eclipse.ui.console.ConsoleView"/>
 <view id="com.android.ide.eclipse.ddms.views.EmulatorControlView"/>
 <fastViewBars/>
-<layout>&#x0A;<mainWindow>&#x0A;<info folder="true" part="devices">&#x0A;<folder activePageID="com.android.ide.eclipse.ddms.views.DeviceView" appearance="2" expanded="2">&#x0A;<page content="com.android.ide.eclipse.ddms.views.DeviceView" label="Devices"/>
+<layout>
+<mainWindow>
+<info folder="true" part="devices">
+<folder activePageID="com.android.ide.eclipse.ddms.views.DeviceView" appearance="2" expanded="2">
+<page content="com.android.ide.eclipse.ddms.views.DeviceView" label="Devices"/>
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="com.android.ide.eclipse.ddms.views.DeviceView:*" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
 <part id="1"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="stickyFolderRight" ratio="0.7496318" ratioLeft="1018" ratioRight="340" relationship="2" relative="devices">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<info folder="true" part="stickyFolderRight" ratio="0.7496318" ratioLeft="1018" ratioRight="340" relationship="2" relative="devices">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
 </folder>
 </info>
-<info folder="true" part="logcat" ratio="0.7986464" ratioLeft="472" ratioRight="119" relationship="4" relative="devices">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="com.android.ide.eclipse.ddms.views.LogCatView:*" label="LabelNotFound"/>
+<info folder="true" part="logcat" ratio="0.7986464" ratioLeft="472" ratioRight="119" relationship="4" relative="devices">
+<folder appearance="2" expanded="2">
+<page content="com.android.ide.eclipse.ddms.views.LogCatView:*" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.29970545" ratioLeft="407" ratioRight="951" relationship="2" relative="devices"/>
-<info folder="true" part="ddms-detail" ratio="0.49947423" ratioLeft="475" ratioRight="476" relationship="2" relative="org.eclipse.ui.editorss">&#x0A;<folder activePageID="com.android.ide.eclipse.ddms.views.LogCatView" appearance="2" expanded="2">&#x0A;<page content="com.android.ide.eclipse.ddms.views.ThreadView" label="Threads"/>
+<info folder="true" part="ddms-detail" ratio="0.49947423" ratioLeft="475" ratioRight="476" relationship="2" relative="org.eclipse.ui.editorss">
+<folder activePageID="com.android.ide.eclipse.ddms.views.LogCatView" appearance="2" expanded="2">
+<page content="com.android.ide.eclipse.ddms.views.ThreadView" label="Threads"/>
 <page content="com.android.ide.eclipse.ddms.views.HeapView" label="Heap"/>
 <page content="com.android.ide.eclipse.ddms.views.AllocTrackerView" label="Allocation Tracker"/>
 <page content="com.android.ide.eclipse.ddms.views.FileExplorerView" label="File Explorer"/>
 <page content="com.android.ide.eclipse.ddms.views.LogCatView" label="LogCat"/>
 <page content="com.android.ide.eclipse.ddms.views.ThreadView:*" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
@@ -326,9 +339,12 @@
 </presentation>
 </folder>
 </info>
-<info folder="true" part="emulator" ratio="0.5" ratioLeft="236" ratioRight="236" relationship="4" relative="devices">&#x0A;<folder activePageID="com.android.ide.eclipse.ddms.views.EmulatorControlView" appearance="2" expanded="2">&#x0A;<page content="com.android.ide.eclipse.ddms.views.EmulatorControlView" label="Emulator Control"/>
+<info folder="true" part="emulator" ratio="0.5" ratioLeft="236" ratioRight="236" relationship="4" relative="devices">
+<folder activePageID="com.android.ide.eclipse.ddms.views.EmulatorControlView" appearance="2" expanded="2">
+<page content="com.android.ide.eclipse.ddms.views.EmulatorControlView" label="Emulator Control"/>
 <page content="com.android.ide.eclipse.ddms.views.EmulatorControlView:*" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
 </presentation>
 </folder>
 </info>
@@ -453,50 +469,50 @@
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="BaseActivity.java" tooltip="Announcify/src/com/announcify/ui/activity/BaseActivity.java">
-<persistable path="/Announcify/src/com/announcify/ui/activity/BaseActivity.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SettingsActivity.java" tooltip="Announcify/src/com/announcify/ui/activity/SettingsActivity.java">
+<persistable path="/Announcify/src/com/announcify/ui/activity/SettingsActivity.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AnnouncifyActivity.java" tooltip="Announcify/src/com/announcify/ui/activity/AnnouncifyActivity.java">
-<persistable path="/Announcify/src/com/announcify/ui/activity/AnnouncifyActivity.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SeparatorItemView.java" tooltip="GreenDroid/src/greendroid/widget/itemview/SeparatorItemView.java">
+<persistable path="/GreenDroid/src/greendroid/widget/itemview/SeparatorItemView.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AnnouncifyProvider.java" tooltip="Announcify/src/com/announcify/background/sql/AnnouncifyProvider.java">
-<persistable path="/Announcify/src/com/announcify/background/sql/AnnouncifyProvider.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PluginItem.java" tooltip="Announcify/src/com/announcify/ui/widget/PluginItem.java">
+<persistable path="/Announcify/src/com/announcify/ui/widget/PluginItem.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AnnouncifyDatabase.java" tooltip="Announcify/src/com/announcify/background/sql/AnnouncifyDatabase.java">
-<persistable path="/Announcify/src/com/announcify/background/sql/AnnouncifyDatabase.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Item.java" tooltip="GreenDroid/src/greendroid/widget/item/Item.java">
+<persistable path="/GreenDroid/src/greendroid/widget/item/Item.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ConditionManager.java" tooltip="Announcify/src/com/announcify/background/service/ConditionManager.java">
-<persistable path="/Announcify/src/com/announcify/background/service/ConditionManager.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="proguard.cfg" tooltip="Announcify/proguard.cfg">
+<persistable path="/Announcify/proguard.cfg"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ExceptionParser.java" tooltip="Announcify/API - Announcify_src/com/announcify/api/background/error/ExceptionParser.java">
-<persistable path="/Announcify/API - Announcify_src/com/announcify/api/background/error/ExceptionParser.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.PropertiesFileEditor" name="default.properties" tooltip="Voicemail - Announcify/default.properties">
+<persistable path="/Voicemail - Announcify/default.properties"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ExceptionHandler.java" tooltip="Announcify/API - Announcify_src/com/announcify/api/background/error/ExceptionHandler.java">
-<persistable path="/Announcify/API - Announcify_src/com/announcify/api/background/error/ExceptionHandler.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.PropertiesFileEditor" name="default.properties" tooltip="Twitter - Announcify/default.properties">
+<persistable path="/Twitter - Announcify/default.properties"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ManagerService.java" tooltip="Announcify/src/com/announcify/background/service/ManagerService.java">
-<persistable path="/Announcify/src/com/announcify/background/service/ManagerService.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="Twitter - Announcify/AndroidManifest.xml">
+<persistable path="/Twitter - Announcify/AndroidManifest.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AnnouncificationHandler.java" tooltip="Announcify/src/com/announcify/background/handler/AnnouncificationHandler.java">
-<persistable path="/Announcify/src/com/announcify/background/handler/AnnouncificationHandler.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.PropertiesFileEditor" name="default.properties" tooltip="Talk - Announcify/default.properties">
+<persistable path="/Talk - Announcify/default.properties"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ExceptionService.java" tooltip="Announcify/src/com/announcify/background/error/ExceptionService.java">
-<persistable path="/Announcify/src/com/announcify/background/error/ExceptionService.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.PropertiesFileEditor" name="default.properties" tooltip="SMS - Announcify/default.properties">
+<persistable path="/SMS - Announcify/default.properties"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ExceptionReceiver.java" tooltip="Announcify/src/com/announcify/background/error/ExceptionReceiver.java">
-<persistable path="/Announcify/src/com/announcify/background/error/ExceptionReceiver.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.PropertiesFileEditor" name="default.properties" tooltip="MMS - Announcify/default.properties">
+<persistable path="/MMS - Announcify/default.properties"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GDApplication.java" tooltip="Announcify/GreenDroid_src/greendroid/app/GDApplication.java">
-<persistable path="/Announcify/GreenDroid_src/greendroid/app/GDApplication.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.PropertiesFileEditor" name="default.properties" tooltip="Mail - Announcify/default.properties">
+<persistable path="/Mail - Announcify/default.properties"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AnnouncifyApplication.java" tooltip="Announcify/src/com/announcify/AnnouncifyApplication.java">
-<persistable path="/Announcify/src/com/announcify/AnnouncifyApplication.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.PropertiesFileEditor" name="default.properties" tooltip="K-9 Mail - Announcify/default.properties">
+<persistable path="/K-9 Mail - Announcify/default.properties"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="Announcify/AndroidManifest.xml">
-<persistable path="/Announcify/AndroidManifest.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="proguard.cfg" tooltip="K-9 Mail - Announcify/proguard.cfg">
+<persistable path="/K-9 Mail - Announcify/proguard.cfg"/>
 </file>
-<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="ACRA.class" tooltip="org.acra.ACRA">
-<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=Announcify/libs\/acra-3.1.0.jar&lt;org.acra(ACRA.class"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.PropertiesFileEditor" name="default.properties" tooltip="Call - Announcify/default.properties">
+<persistable path="/Call - Announcify/default.properties"/>
 </file>
 </mruList>
 </workbench>

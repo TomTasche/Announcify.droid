@@ -6667,24 +6667,37 @@ _____________________________________________________________________
 
 Interfaces (count = 0):
 
-Constant Pool (count = 19):
+Constant Pool (count = 32):
+  - Class [android/view/LayoutInflater]
   - Class [com/a/a/a/a]
   - Class [com/a/a/a/b]
   - Class [greendroid/widget/a/a]
+  - Class [greendroid/widget/itemview/a]
   - Class [java/lang/Object]
   - Fieldref [greendroid/widget/a/a.a Z]
+  - Methodref [android/view/LayoutInflater.from (Landroid/content/Context;)Landroid/view/LayoutInflater;]
+  - Methodref [android/view/LayoutInflater.inflate (ILandroid/view/ViewGroup;Z)Landroid/view/View;]
   - Methodref [java/lang/Object.<init> ()V]
   + NameAndType [<init> ()V]
   + NameAndType [a Z]
+  + NameAndType [from (Landroid/content/Context;)Landroid/view/LayoutInflater;]
+  + NameAndType [inflate (ILandroid/view/ViewGroup;Z)Landroid/view/View;]
   + Utf8 [()V]
-  + Utf8 [(Landroid/content/Context;)Lgreendroid/widget/b/a;]
+  + Utf8 [(ILandroid/view/ViewGroup;Z)Landroid/view/View;]
+  + Utf8 [(Landroid/content/Context;)Landroid/view/LayoutInflater;]
+  + Utf8 [(Landroid/content/Context;)Lgreendroid/widget/itemview/a;]
+  + Utf8 [(Landroid/content/Context;I)Lgreendroid/widget/itemview/a;]
   + Utf8 [<init>]
   + Utf8 [Code]
   + Utf8 [Z]
   + Utf8 [a]
+  + Utf8 [android/view/LayoutInflater]
   + Utf8 [com/a/a/a/a]
   + Utf8 [com/a/a/a/b]
+  + Utf8 [from]
   + Utf8 [greendroid/widget/a/a]
+  + Utf8 [greendroid/widget/itemview/a]
+  + Utf8 [inflate]
   + Utf8 [java/lang/Object]
 
 Fields (count = 1):
@@ -6692,25 +6705,43 @@ Fields (count = 1):
     Access flags: 0x1
       = public boolean a
 
-Methods (count = 2):
+Methods (count = 3):
   - Method:       <init>()V
     Access flags: 0x1
       = public a()
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 10, locals = 1, stack = 2):
       [0] aload_0 v0
-      [1] invokespecial #6
+      [1] invokespecial #10
         - Methodref [java/lang/Object.<init> ()V]
       [4] aload_0 v0
       [5] iconst_1
-      [6] putfield #5
+      [6] putfield #7
         - Fieldref [greendroid/widget/a/a.a Z]
       [9] return
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 0):
-  + Method:       a(Landroid/content/Context;)Lgreendroid/widget/b/a;
+  + Method:       a(Landroid/content/Context;)Lgreendroid/widget/itemview/a;
     Access flags: 0x401
-      = public abstract greendroid.widget.b.a a(android.content.Context)
+      = public abstract greendroid.widget.itemview.a a(android.content.Context)
+  + Method:       a(Landroid/content/Context;I)Lgreendroid/widget/itemview/a;
+    Access flags: 0xc
+      = protected static greendroid.widget.itemview.a a(android.content.Context,int)
+    Class member attributes (count = 1):
+    + Code attribute instructions (code length = 14, locals = 2, stack = 4):
+      [0] aload_0 v0
+      [1] invokestatic #8
+        - Methodref [android/view/LayoutInflater.from (Landroid/content/Context;)Landroid/view/LayoutInflater;]
+      [4] iload_1 v1
+      [5] aconst_null
+      [6] iconst_0
+      [7] invokevirtual #9
+        - Methodref [android/view/LayoutInflater.inflate (ILandroid/view/ViewGroup;Z)Landroid/view/View;]
+      [10] checkcast #5
+        - Class [greendroid/widget/itemview/a]
+      [13] areturn
+      Code attribute exceptions (count = 0):
+      Code attribute attributes (attribute count = 0):
 
 Class file attributes (count = 0):
 
@@ -8083,6 +8114,72 @@ Methods (count = 2):
 Class file attributes (count = 0):
 
 _____________________________________________________________________
++ Program class: greendroid/widget/a/b
+  Superclass:    greendroid/widget/a/a
+  Major version: 0x31
+  Minor version: 0x0
+  Access flags:  0x31
+    = public final class greendroid.widget.a.b extends greendroid.widget.a.a
+
+Interfaces (count = 0):
+
+Constant Pool (count = 22):
+  - Integer [2130903065]
+  - Class [com/a/a/a/a]
+  - Class [com/a/a/a/b]
+  - Class [greendroid/widget/a/a]
+  - Class [greendroid/widget/a/b]
+  - Methodref [greendroid/widget/a/a.<init> ()V]
+  - Methodref [greendroid/widget/a/b.a (Landroid/content/Context;I)Lgreendroid/widget/itemview/a;]
+  + NameAndType [<init> ()V]
+  + NameAndType [a (Landroid/content/Context;I)Lgreendroid/widget/itemview/a;]
+  + Utf8 [()V]
+  + Utf8 [(Landroid/content/Context;)Lgreendroid/widget/itemview/a;]
+  + Utf8 [(Landroid/content/Context;I)Lgreendroid/widget/itemview/a;]
+  + Utf8 [<init>]
+  + Utf8 [Code]
+  + Utf8 [Ljava/lang/String;]
+  + Utf8 [a]
+  + Utf8 [b]
+  + Utf8 [com/a/a/a/a]
+  + Utf8 [com/a/a/a/b]
+  + Utf8 [greendroid/widget/a/a]
+  + Utf8 [greendroid/widget/a/b]
+
+Fields (count = 1):
+  + Field:        b Ljava/lang/String;
+    Access flags: 0x1
+      = public java.lang.String b
+
+Methods (count = 2):
+  - Method:       <init>()V
+    Access flags: 0x1
+      = public b()
+    Class member attributes (count = 1):
+    + Code attribute instructions (code length = 5, locals = 1, stack = 1):
+      [0] aload_0 v0
+      [1] invokespecial #6
+        - Methodref [greendroid/widget/a/a.<init> ()V]
+      [4] return
+      Code attribute exceptions (count = 0):
+      Code attribute attributes (attribute count = 0):
+  + Method:       a(Landroid/content/Context;)Lgreendroid/widget/itemview/a;
+    Access flags: 0x11
+      = public final greendroid.widget.itemview.a a(android.content.Context)
+    Class member attributes (count = 1):
+    + Code attribute instructions (code length = 7, locals = 2, stack = 2):
+      [0] aload_1 v1
+      [1] ldc #1
+        - Integer [2130903065]
+      [3] invokestatic #7
+        - Methodref [greendroid/widget/a/b.a (Landroid/content/Context;I)Lgreendroid/widget/itemview/a;]
+      [6] areturn
+      Code attribute exceptions (count = 0):
+      Code attribute attributes (attribute count = 0):
+
+Class file attributes (count = 0):
+
+_____________________________________________________________________
 + Program class: org/acra/c
   Superclass:    java/lang/Object
   Major version: 0x32
@@ -9184,7 +9281,7 @@ _____________________________________________________________________
     = public class com.announcify.ui.widget.PluginItemView extends android.widget.LinearLayout
 
 Interfaces (count = 1):
-  - Class [greendroid/widget/b/a]
+  - Class [greendroid/widget/itemview/a]
 
 Constant Pool (count = 128):
   - Integer [2130837506]
@@ -9207,7 +9304,7 @@ Constant Pool (count = 128):
   - Class [com/announcify/ui/widget/PluginItemView]
   - Class [com/announcify/ui/widget/a]
   - Class [com/announcify/ui/widget/d]
-  - Class [greendroid/widget/b/a]
+  - Class [greendroid/widget/itemview/a]
   - Class [java/lang/CharSequence]
   - Fieldref [com/announcify/ui/widget/PluginItemView.a Landroid/widget/ImageView;]
   - Fieldref [com/announcify/ui/widget/PluginItemView.b Landroid/content/Context;]
@@ -9303,7 +9400,7 @@ Constant Pool (count = 128):
   + Utf8 [getDrawable]
   + Utf8 [getResources]
   + Utf8 [getText]
-  + Utf8 [greendroid/widget/b/a]
+  + Utf8 [greendroid/widget/itemview/a]
   + Utf8 [isEmpty]
   + Utf8 [java/lang/CharSequence]
   + Utf8 [parseColor]
@@ -12209,6 +12306,154 @@ Methods (count = 3):
 Class file attributes (count = 0):
 
 _____________________________________________________________________
++ Program class: com/announcify/ui/control/a
+  Superclass:    java/lang/Object
+  Major version: 0x31
+  Minor version: 0x0
+  Access flags:  0x30
+    = final class com.announcify.ui.control.a extends java.lang.Object
+
+Interfaces (count = 1):
+  - Class [android/content/DialogInterface$OnClickListener]
+
+Constant Pool (count = 49):
+  - String [com.announcify.ACTION_CONTINUE]
+  - String [com.announcify.ACTION_PAUSE]
+  - String [com.announcify.ACTION_SKIP]
+  - Class [android/content/DialogInterface]
+  - Class [android/content/DialogInterface$OnClickListener]
+  - Class [android/content/Intent]
+  - Class [com/announcify/background/service/ManagerService]
+  - Class [com/announcify/ui/control/RemoteControlDialog]
+  - Class [com/announcify/ui/control/a]
+  - Class [java/lang/Object]
+  - Fieldref [com/announcify/ui/control/a.a Lcom/announcify/ui/control/RemoteControlDialog;]
+  - Methodref [android/content/Intent.<init> (Landroid/content/Context;Ljava/lang/Class;)V]
+  - Methodref [com/announcify/ui/control/RemoteControlDialog.a (Lcom/announcify/ui/control/RemoteControlDialog;Ljava/lang/String;)V]
+  - Methodref [com/announcify/ui/control/RemoteControlDialog.finish ()V]
+  - Methodref [com/announcify/ui/control/RemoteControlDialog.stopService (Landroid/content/Intent;)Z]
+  - Methodref [java/lang/Object.<init> ()V]
+  - InterfaceMethodref [android/content/DialogInterface.dismiss ()V]
+  + NameAndType [<init> ()V]
+  + NameAndType [<init> (Landroid/content/Context;Ljava/lang/Class;)V]
+  + NameAndType [a (Lcom/announcify/ui/control/RemoteControlDialog;Ljava/lang/String;)V]
+  + NameAndType [a Lcom/announcify/ui/control/RemoteControlDialog;]
+  + NameAndType [dismiss ()V]
+  + NameAndType [finish ()V]
+  + NameAndType [stopService (Landroid/content/Intent;)Z]
+  + Utf8 [()V]
+  + Utf8 [(Landroid/content/Context;Ljava/lang/Class;)V]
+  + Utf8 [(Landroid/content/DialogInterface;I)V]
+  + Utf8 [(Landroid/content/Intent;)Z]
+  + Utf8 [(Lcom/announcify/ui/control/RemoteControlDialog;)V]
+  + Utf8 [(Lcom/announcify/ui/control/RemoteControlDialog;Ljava/lang/String;)V]
+  + Utf8 [<init>]
+  + Utf8 [Code]
+  + Utf8 [Lcom/announcify/ui/control/RemoteControlDialog;]
+  + Utf8 [a]
+  + Utf8 [android/content/DialogInterface]
+  + Utf8 [android/content/DialogInterface$OnClickListener]
+  + Utf8 [android/content/Intent]
+  + Utf8 [com.announcify.ACTION_CONTINUE]
+  + Utf8 [com.announcify.ACTION_PAUSE]
+  + Utf8 [com.announcify.ACTION_SKIP]
+  + Utf8 [com/announcify/background/service/ManagerService]
+  + Utf8 [com/announcify/ui/control/RemoteControlDialog]
+  + Utf8 [com/announcify/ui/control/a]
+  + Utf8 [dismiss]
+  + Utf8 [finish]
+  + Utf8 [java/lang/Object]
+  + Utf8 [onClick]
+  + Utf8 [stopService]
+
+Fields (count = 1):
+  + Field:        a Lcom/announcify/ui/control/RemoteControlDialog;
+    Access flags: 0x1002
+      = private com.announcify.ui.control.RemoteControlDialog a
+
+Methods (count = 2):
+  - Method:       <init>(Lcom/announcify/ui/control/RemoteControlDialog;)V
+    Access flags: 0x0
+      = a(com.announcify.ui.control.RemoteControlDialog)
+    Class member attributes (count = 1):
+    + Code attribute instructions (code length = 10, locals = 2, stack = 2):
+      [0] aload_0 v0
+      [1] aload_1 v1
+      [2] putfield #11
+        - Fieldref [com/announcify/ui/control/a.a Lcom/announcify/ui/control/RemoteControlDialog;]
+      [5] aload_0 v0
+      [6] invokespecial #16
+        - Methodref [java/lang/Object.<init> ()V]
+      [9] return
+      Code attribute exceptions (count = 0):
+      Code attribute attributes (attribute count = 0):
+  + Method:       onClick(Landroid/content/DialogInterface;I)V
+    Access flags: 0x11
+      = public final void onClick(android.content.DialogInterface,int)
+    Class member attributes (count = 1):
+    + Code attribute instructions (code length = 103, locals = 3, stack = 5):
+      [0] iload_2 v2
+      [1] tableswitch (4 offsets, default=88) (target=89)
+        0: offset = 31, target = 32
+        1: offset = 43, target = 44
+        2: offset = 55, target = 56
+        3: offset = 67, target = 68
+        default: offset = 88, target = 89
+      [32] aload_0 v0
+      [33] getfield #11
+        - Fieldref [com/announcify/ui/control/a.a Lcom/announcify/ui/control/RemoteControlDialog;]
+      [36] ldc #2
+        - String [com.announcify.ACTION_PAUSE]
+      [38] invokestatic #13
+        - Methodref [com/announcify/ui/control/RemoteControlDialog.a (Lcom/announcify/ui/control/RemoteControlDialog;Ljava/lang/String;)V]
+      [41] goto +48 (target=89)
+      [44] aload_0 v0
+      [45] getfield #11
+        - Fieldref [com/announcify/ui/control/a.a Lcom/announcify/ui/control/RemoteControlDialog;]
+      [48] ldc #1
+        - String [com.announcify.ACTION_CONTINUE]
+      [50] invokestatic #13
+        - Methodref [com/announcify/ui/control/RemoteControlDialog.a (Lcom/announcify/ui/control/RemoteControlDialog;Ljava/lang/String;)V]
+      [53] goto +36 (target=89)
+      [56] aload_0 v0
+      [57] getfield #11
+        - Fieldref [com/announcify/ui/control/a.a Lcom/announcify/ui/control/RemoteControlDialog;]
+      [60] ldc #3
+        - String [com.announcify.ACTION_SKIP]
+      [62] invokestatic #13
+        - Methodref [com/announcify/ui/control/RemoteControlDialog.a (Lcom/announcify/ui/control/RemoteControlDialog;Ljava/lang/String;)V]
+      [65] goto +24 (target=89)
+      [68] aload_0 v0
+      [69] getfield #11
+        - Fieldref [com/announcify/ui/control/a.a Lcom/announcify/ui/control/RemoteControlDialog;]
+      [72] new #6
+        - Class [android/content/Intent]
+      [75] dup
+      [76] aload_0 v0
+      [77] getfield #11
+        - Fieldref [com/announcify/ui/control/a.a Lcom/announcify/ui/control/RemoteControlDialog;]
+      [80] ldc #7
+        - Class [com/announcify/background/service/ManagerService]
+      [82] invokespecial #12
+        - Methodref [android/content/Intent.<init> (Landroid/content/Context;Ljava/lang/Class;)V]
+      [85] invokevirtual #15
+        - Methodref [com/announcify/ui/control/RemoteControlDialog.stopService (Landroid/content/Intent;)Z]
+      [88] pop
+      [89] aload_1 v1
+      [90] invokeinterface #17
+        - InterfaceMethodref [android/content/DialogInterface.dismiss ()V]
+      [95] aload_0 v0
+      [96] getfield #11
+        - Fieldref [com/announcify/ui/control/a.a Lcom/announcify/ui/control/RemoteControlDialog;]
+      [99] invokevirtual #14
+        - Methodref [com/announcify/ui/control/RemoteControlDialog.finish ()V]
+      [102] return
+      Code attribute exceptions (count = 0):
+      Code attribute attributes (attribute count = 0):
+
+Class file attributes (count = 0):
+
+_____________________________________________________________________
 + Program class: org/acra/h
   Superclass:    java/lang/Object
   Major version: 0x32
@@ -13159,154 +13404,6 @@ Methods (count = 4):
         - [61] Var: ...[i][i], Stack: (empty)
         - [75] Var: -2, Stack: (empty)
         - [78] Var: ..., Stack: (empty)
-
-Class file attributes (count = 0):
-
-_____________________________________________________________________
-+ Program class: com/announcify/ui/control/a
-  Superclass:    java/lang/Object
-  Major version: 0x31
-  Minor version: 0x0
-  Access flags:  0x30
-    = final class com.announcify.ui.control.a extends java.lang.Object
-
-Interfaces (count = 1):
-  - Class [android/content/DialogInterface$OnClickListener]
-
-Constant Pool (count = 49):
-  - String [com.announcify.ACTION_CONTINUE]
-  - String [com.announcify.ACTION_PAUSE]
-  - String [com.announcify.ACTION_SKIP]
-  - Class [android/content/DialogInterface]
-  - Class [android/content/DialogInterface$OnClickListener]
-  - Class [android/content/Intent]
-  - Class [com/announcify/background/service/ManagerService]
-  - Class [com/announcify/ui/control/RemoteControlDialog]
-  - Class [com/announcify/ui/control/a]
-  - Class [java/lang/Object]
-  - Fieldref [com/announcify/ui/control/a.a Lcom/announcify/ui/control/RemoteControlDialog;]
-  - Methodref [android/content/Intent.<init> (Landroid/content/Context;Ljava/lang/Class;)V]
-  - Methodref [com/announcify/ui/control/RemoteControlDialog.a (Lcom/announcify/ui/control/RemoteControlDialog;Ljava/lang/String;)V]
-  - Methodref [com/announcify/ui/control/RemoteControlDialog.finish ()V]
-  - Methodref [com/announcify/ui/control/RemoteControlDialog.stopService (Landroid/content/Intent;)Z]
-  - Methodref [java/lang/Object.<init> ()V]
-  - InterfaceMethodref [android/content/DialogInterface.dismiss ()V]
-  + NameAndType [<init> ()V]
-  + NameAndType [<init> (Landroid/content/Context;Ljava/lang/Class;)V]
-  + NameAndType [a (Lcom/announcify/ui/control/RemoteControlDialog;Ljava/lang/String;)V]
-  + NameAndType [a Lcom/announcify/ui/control/RemoteControlDialog;]
-  + NameAndType [dismiss ()V]
-  + NameAndType [finish ()V]
-  + NameAndType [stopService (Landroid/content/Intent;)Z]
-  + Utf8 [()V]
-  + Utf8 [(Landroid/content/Context;Ljava/lang/Class;)V]
-  + Utf8 [(Landroid/content/DialogInterface;I)V]
-  + Utf8 [(Landroid/content/Intent;)Z]
-  + Utf8 [(Lcom/announcify/ui/control/RemoteControlDialog;)V]
-  + Utf8 [(Lcom/announcify/ui/control/RemoteControlDialog;Ljava/lang/String;)V]
-  + Utf8 [<init>]
-  + Utf8 [Code]
-  + Utf8 [Lcom/announcify/ui/control/RemoteControlDialog;]
-  + Utf8 [a]
-  + Utf8 [android/content/DialogInterface]
-  + Utf8 [android/content/DialogInterface$OnClickListener]
-  + Utf8 [android/content/Intent]
-  + Utf8 [com.announcify.ACTION_CONTINUE]
-  + Utf8 [com.announcify.ACTION_PAUSE]
-  + Utf8 [com.announcify.ACTION_SKIP]
-  + Utf8 [com/announcify/background/service/ManagerService]
-  + Utf8 [com/announcify/ui/control/RemoteControlDialog]
-  + Utf8 [com/announcify/ui/control/a]
-  + Utf8 [dismiss]
-  + Utf8 [finish]
-  + Utf8 [java/lang/Object]
-  + Utf8 [onClick]
-  + Utf8 [stopService]
-
-Fields (count = 1):
-  + Field:        a Lcom/announcify/ui/control/RemoteControlDialog;
-    Access flags: 0x1002
-      = private com.announcify.ui.control.RemoteControlDialog a
-
-Methods (count = 2):
-  - Method:       <init>(Lcom/announcify/ui/control/RemoteControlDialog;)V
-    Access flags: 0x0
-      = a(com.announcify.ui.control.RemoteControlDialog)
-    Class member attributes (count = 1):
-    + Code attribute instructions (code length = 10, locals = 2, stack = 2):
-      [0] aload_0 v0
-      [1] aload_1 v1
-      [2] putfield #11
-        - Fieldref [com/announcify/ui/control/a.a Lcom/announcify/ui/control/RemoteControlDialog;]
-      [5] aload_0 v0
-      [6] invokespecial #16
-        - Methodref [java/lang/Object.<init> ()V]
-      [9] return
-      Code attribute exceptions (count = 0):
-      Code attribute attributes (attribute count = 0):
-  + Method:       onClick(Landroid/content/DialogInterface;I)V
-    Access flags: 0x11
-      = public final void onClick(android.content.DialogInterface,int)
-    Class member attributes (count = 1):
-    + Code attribute instructions (code length = 103, locals = 3, stack = 5):
-      [0] iload_2 v2
-      [1] tableswitch (4 offsets, default=88) (target=89)
-        0: offset = 31, target = 32
-        1: offset = 43, target = 44
-        2: offset = 55, target = 56
-        3: offset = 67, target = 68
-        default: offset = 88, target = 89
-      [32] aload_0 v0
-      [33] getfield #11
-        - Fieldref [com/announcify/ui/control/a.a Lcom/announcify/ui/control/RemoteControlDialog;]
-      [36] ldc #2
-        - String [com.announcify.ACTION_PAUSE]
-      [38] invokestatic #13
-        - Methodref [com/announcify/ui/control/RemoteControlDialog.a (Lcom/announcify/ui/control/RemoteControlDialog;Ljava/lang/String;)V]
-      [41] goto +48 (target=89)
-      [44] aload_0 v0
-      [45] getfield #11
-        - Fieldref [com/announcify/ui/control/a.a Lcom/announcify/ui/control/RemoteControlDialog;]
-      [48] ldc #1
-        - String [com.announcify.ACTION_CONTINUE]
-      [50] invokestatic #13
-        - Methodref [com/announcify/ui/control/RemoteControlDialog.a (Lcom/announcify/ui/control/RemoteControlDialog;Ljava/lang/String;)V]
-      [53] goto +36 (target=89)
-      [56] aload_0 v0
-      [57] getfield #11
-        - Fieldref [com/announcify/ui/control/a.a Lcom/announcify/ui/control/RemoteControlDialog;]
-      [60] ldc #3
-        - String [com.announcify.ACTION_SKIP]
-      [62] invokestatic #13
-        - Methodref [com/announcify/ui/control/RemoteControlDialog.a (Lcom/announcify/ui/control/RemoteControlDialog;Ljava/lang/String;)V]
-      [65] goto +24 (target=89)
-      [68] aload_0 v0
-      [69] getfield #11
-        - Fieldref [com/announcify/ui/control/a.a Lcom/announcify/ui/control/RemoteControlDialog;]
-      [72] new #6
-        - Class [android/content/Intent]
-      [75] dup
-      [76] aload_0 v0
-      [77] getfield #11
-        - Fieldref [com/announcify/ui/control/a.a Lcom/announcify/ui/control/RemoteControlDialog;]
-      [80] ldc #7
-        - Class [com/announcify/background/service/ManagerService]
-      [82] invokespecial #12
-        - Methodref [android/content/Intent.<init> (Landroid/content/Context;Ljava/lang/Class;)V]
-      [85] invokevirtual #15
-        - Methodref [com/announcify/ui/control/RemoteControlDialog.stopService (Landroid/content/Intent;)Z]
-      [88] pop
-      [89] aload_1 v1
-      [90] invokeinterface #17
-        - InterfaceMethodref [android/content/DialogInterface.dismiss ()V]
-      [95] aload_0 v0
-      [96] getfield #11
-        - Fieldref [com/announcify/ui/control/a.a Lcom/announcify/ui/control/RemoteControlDialog;]
-      [99] invokevirtual #14
-        - Methodref [com/announcify/ui/control/RemoteControlDialog.finish ()V]
-      [102] return
-      Code attribute exceptions (count = 0):
-      Code attribute attributes (attribute count = 0):
 
 Class file attributes (count = 0):
 
@@ -16062,17 +16159,15 @@ _____________________________________________________________________
 
 Interfaces (count = 0):
 
-Constant Pool (count = 95):
+Constant Pool (count = 86):
   - Integer [2130903069]
   - Class [android/content/Context]
   - Class [android/content/Intent]
   - Class [android/content/pm/PackageManager]
   - Class [android/content/pm/PackageManager$NameNotFoundException]
-  - Class [android/view/LayoutInflater]
   - Class [com/announcify/api/background/c/a/d]
   - Class [com/announcify/ui/widget/a]
   - Class [greendroid/widget/a/a]
-  - Class [greendroid/widget/b/a]
   - Class [java/lang/Exception]
   - Fieldref [com/announcify/ui/widget/a.c J]
   - Fieldref [com/announcify/ui/widget/a.d Landroid/content/Context;]
@@ -16081,20 +16176,20 @@ Constant Pool (count = 95):
   - Methodref [android/content/Context.startActivity (Landroid/content/Intent;)V]
   - Methodref [android/content/Intent.<init> (Ljava/lang/String;)V]
   - Methodref [android/content/pm/PackageManager.getActivityIcon (Landroid/content/Intent;)Landroid/graphics/drawable/Drawable;]
-  - Methodref [android/view/LayoutInflater.from (Landroid/content/Context;)Landroid/view/LayoutInflater;]
-  - Methodref [android/view/LayoutInflater.inflate (ILandroid/view/ViewGroup;Z)Landroid/view/View;]
   - Methodref [com/announcify/api/background/c/a/d.a (J)V]
   - Methodref [com/announcify/api/background/c/a/d.c (J)V]
   - Methodref [com/announcify/api/background/c/a/d.d (J)Z]
   - Methodref [com/announcify/api/background/c/a/d.e (J)I]
   - Methodref [com/announcify/api/background/c/a/d.f (J)Ljava/lang/String;]
   - Methodref [com/announcify/api/background/c/a/d.h (J)Ljava/lang/String;]
+  - Methodref [com/announcify/ui/widget/a.a (Landroid/content/Context;I)Lgreendroid/widget/itemview/a;]
   - Methodref [com/announcify/ui/widget/a.g ()Ljava/lang/String;]
   - Methodref [greendroid/widget/a/a.<init> ()V]
   - Methodref [java/lang/Exception.printStackTrace ()V]
   + NameAndType [<init> ()V]
   + NameAndType [<init> (Ljava/lang/String;)V]
   + NameAndType [a (J)V]
+  + NameAndType [a (Landroid/content/Context;I)Lgreendroid/widget/itemview/a;]
   + NameAndType [c (J)V]
   + NameAndType [c J]
   + NameAndType [d (J)Z]
@@ -16102,12 +16197,10 @@ Constant Pool (count = 95):
   + NameAndType [e (J)I]
   + NameAndType [e Lcom/announcify/api/background/c/a/d;]
   + NameAndType [f (J)Ljava/lang/String;]
-  + NameAndType [from (Landroid/content/Context;)Landroid/view/LayoutInflater;]
   + NameAndType [g ()Ljava/lang/String;]
   + NameAndType [getActivityIcon (Landroid/content/Intent;)Landroid/graphics/drawable/Drawable;]
   + NameAndType [getPackageManager ()Landroid/content/pm/PackageManager;]
   + NameAndType [h (J)Ljava/lang/String;]
-  + NameAndType [inflate (ILandroid/view/ViewGroup;Z)Landroid/view/View;]
   + NameAndType [printStackTrace ()V]
   + NameAndType [startActivity (Landroid/content/Intent;)V]
   + Utf8 [()I]
@@ -16116,13 +16209,12 @@ Constant Pool (count = 95):
   + Utf8 [()Ljava/lang/String;]
   + Utf8 [()V]
   + Utf8 [()Z]
-  + Utf8 [(ILandroid/view/ViewGroup;Z)Landroid/view/View;]
   + Utf8 [(J)I]
   + Utf8 [(J)Ljava/lang/String;]
   + Utf8 [(J)V]
   + Utf8 [(J)Z]
-  + Utf8 [(Landroid/content/Context;)Landroid/view/LayoutInflater;]
-  + Utf8 [(Landroid/content/Context;)Lgreendroid/widget/b/a;]
+  + Utf8 [(Landroid/content/Context;)Lgreendroid/widget/itemview/a;]
+  + Utf8 [(Landroid/content/Context;I)Lgreendroid/widget/itemview/a;]
   + Utf8 [(Landroid/content/Context;Lcom/announcify/api/background/c/a/d;J)V]
   + Utf8 [(Landroid/content/Intent;)Landroid/graphics/drawable/Drawable;]
   + Utf8 [(Landroid/content/Intent;)V]
@@ -16138,7 +16230,6 @@ Constant Pool (count = 95):
   + Utf8 [android/content/Intent]
   + Utf8 [android/content/pm/PackageManager]
   + Utf8 [android/content/pm/PackageManager$NameNotFoundException]
-  + Utf8 [android/view/LayoutInflater]
   + Utf8 [b]
   + Utf8 [c]
   + Utf8 [com/announcify/api/background/c/a/d]
@@ -16146,14 +16237,11 @@ Constant Pool (count = 95):
   + Utf8 [d]
   + Utf8 [e]
   + Utf8 [f]
-  + Utf8 [from]
   + Utf8 [g]
   + Utf8 [getActivityIcon]
   + Utf8 [getPackageManager]
   + Utf8 [greendroid/widget/a/a]
-  + Utf8 [greendroid/widget/b/a]
   + Utf8 [h]
-  + Utf8 [inflate]
   + Utf8 [java/lang/Exception]
   + Utf8 [printStackTrace]
   + Utf8 [startActivity]
@@ -16179,40 +16267,34 @@ Methods (count = 9):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 20, locals = 5, stack = 3):
       [0] aload_0 v0
-      [1] invokespecial #28
+      [1] invokespecial #25
         - Methodref [greendroid/widget/a/a.<init> ()V]
       [4] aload_0 v0
       [5] lload_3 v3
-      [6] putfield #12
+      [6] putfield #10
         - Fieldref [com/announcify/ui/widget/a.c J]
       [9] aload_0 v0
       [10] aload_1 v1
-      [11] putfield #13
+      [11] putfield #11
         - Fieldref [com/announcify/ui/widget/a.d Landroid/content/Context;]
       [14] aload_0 v0
       [15] aload_2 v2
-      [16] putfield #14
+      [16] putfield #12
         - Fieldref [com/announcify/ui/widget/a.e Lcom/announcify/api/background/c/a/d;]
       [19] return
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 0):
-  + Method:       a(Landroid/content/Context;)Lgreendroid/widget/b/a;
+  + Method:       a(Landroid/content/Context;)Lgreendroid/widget/itemview/a;
     Access flags: 0x11
-      = public final greendroid.widget.b.a a(android.content.Context)
+      = public final greendroid.widget.itemview.a a(android.content.Context)
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 15, locals = 2, stack = 4):
+    + Code attribute instructions (code length = 7, locals = 2, stack = 2):
       [0] aload_1 v1
-      [1] invokestatic #19
-        - Methodref [android/view/LayoutInflater.from (Landroid/content/Context;)Landroid/view/LayoutInflater;]
-      [4] ldc #1
+      [1] ldc #1
         - Integer [2130903069]
-      [6] aconst_null
-      [7] iconst_0
-      [8] invokevirtual #20
-        - Methodref [android/view/LayoutInflater.inflate (ILandroid/view/ViewGroup;Z)Landroid/view/View;]
-      [11] checkcast #10
-        - Class [greendroid/widget/b/a]
-      [14] areturn
+      [3] invokestatic #23
+        - Methodref [com/announcify/ui/widget/a.a (Landroid/content/Context;I)Lgreendroid/widget/itemview/a;]
+      [6] areturn
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 0):
   + Method:       a()Z
@@ -16221,12 +16303,12 @@ Methods (count = 9):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 12, locals = 1, stack = 3):
       [0] aload_0 v0
-      [1] getfield #14
+      [1] getfield #12
         - Fieldref [com/announcify/ui/widget/a.e Lcom/announcify/api/background/c/a/d;]
       [4] aload_0 v0
-      [5] getfield #12
+      [5] getfield #10
         - Fieldref [com/announcify/ui/widget/a.c J]
-      [8] invokevirtual #23
+      [8] invokevirtual #19
         - Methodref [com/announcify/api/background/c/a/d.d (J)Z]
       [11] ireturn
       Code attribute exceptions (count = 0):
@@ -16237,12 +16319,12 @@ Methods (count = 9):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 12, locals = 1, stack = 3):
       [0] aload_0 v0
-      [1] getfield #14
+      [1] getfield #12
         - Fieldref [com/announcify/ui/widget/a.e Lcom/announcify/api/background/c/a/d;]
       [4] aload_0 v0
-      [5] getfield #12
+      [5] getfield #10
         - Fieldref [com/announcify/ui/widget/a.c J]
-      [8] invokevirtual #22
+      [8] invokevirtual #18
         - Methodref [com/announcify/api/background/c/a/d.c (J)V]
       [11] return
       Code attribute exceptions (count = 0):
@@ -16253,12 +16335,12 @@ Methods (count = 9):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 12, locals = 1, stack = 3):
       [0] aload_0 v0
-      [1] getfield #14
+      [1] getfield #12
         - Fieldref [com/announcify/ui/widget/a.e Lcom/announcify/api/background/c/a/d;]
       [4] aload_0 v0
-      [5] getfield #12
+      [5] getfield #10
         - Fieldref [com/announcify/ui/widget/a.c J]
-      [8] invokevirtual #25
+      [8] invokevirtual #21
         - Methodref [com/announcify/api/background/c/a/d.f (J)Ljava/lang/String;]
       [11] areturn
       Code attribute exceptions (count = 0):
@@ -16269,19 +16351,19 @@ Methods (count = 9):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 22, locals = 1, stack = 4):
       [0] aload_0 v0
-      [1] getfield #13
+      [1] getfield #11
         - Fieldref [com/announcify/ui/widget/a.d Landroid/content/Context;]
-      [4] invokevirtual #15
+      [4] invokevirtual #13
         - Methodref [android/content/Context.getPackageManager ()Landroid/content/pm/PackageManager;]
       [7] new #3
         - Class [android/content/Intent]
       [10] dup
       [11] aload_0 v0
-      [12] invokespecial #27
+      [12] invokespecial #24
         - Methodref [com/announcify/ui/widget/a.g ()Ljava/lang/String;]
-      [15] invokespecial #17
+      [15] invokespecial #15
         - Methodref [android/content/Intent.<init> (Ljava/lang/String;)V]
-      [18] invokevirtual #18
+      [18] invokevirtual #16
         - Methodref [android/content/pm/PackageManager.getActivityIcon (Landroid/content/Intent;)Landroid/graphics/drawable/Drawable;]
       [21] areturn
       Code attribute exceptions (count = 0):
@@ -16292,12 +16374,12 @@ Methods (count = 9):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 12, locals = 1, stack = 3):
       [0] aload_0 v0
-      [1] getfield #14
+      [1] getfield #12
         - Fieldref [com/announcify/ui/widget/a.e Lcom/announcify/api/background/c/a/d;]
       [4] aload_0 v0
-      [5] getfield #12
+      [5] getfield #10
         - Fieldref [com/announcify/ui/widget/a.c J]
-      [8] invokevirtual #24
+      [8] invokevirtual #20
         - Methodref [com/announcify/api/background/c/a/d.e (J)I]
       [11] ireturn
       Code attribute exceptions (count = 0):
@@ -16308,12 +16390,12 @@ Methods (count = 9):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 12, locals = 1, stack = 3):
       [0] aload_0 v0
-      [1] getfield #14
+      [1] getfield #12
         - Fieldref [com/announcify/ui/widget/a.e Lcom/announcify/api/background/c/a/d;]
       [4] aload_0 v0
-      [5] getfield #12
+      [5] getfield #10
         - Fieldref [com/announcify/ui/widget/a.c J]
-      [8] invokevirtual #26
+      [8] invokevirtual #22
         - Methodref [com/announcify/api/background/c/a/d.h (J)Ljava/lang/String;]
       [11] areturn
       Code attribute exceptions (count = 0):
@@ -16324,29 +16406,29 @@ Methods (count = 9):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 36, locals = 1, stack = 4):
       [0] aload_0 v0
-      [1] getfield #13
+      [1] getfield #11
         - Fieldref [com/announcify/ui/widget/a.d Landroid/content/Context;]
       [4] new #3
         - Class [android/content/Intent]
       [7] dup
       [8] aload_0 v0
-      [9] invokespecial #27
+      [9] invokespecial #24
         - Methodref [com/announcify/ui/widget/a.g ()Ljava/lang/String;]
-      [12] invokespecial #17
+      [12] invokespecial #15
         - Methodref [android/content/Intent.<init> (Ljava/lang/String;)V]
-      [15] invokevirtual #16
+      [15] invokevirtual #14
         - Methodref [android/content/Context.startActivity (Landroid/content/Intent;)V]
       [18] iconst_1
       [19] ireturn
-      [20] invokevirtual #29
+      [20] invokevirtual #26
         - Methodref [java/lang/Exception.printStackTrace ()V]
       [23] aload_0 v0
-      [24] getfield #14
+      [24] getfield #12
         - Fieldref [com/announcify/ui/widget/a.e Lcom/announcify/api/background/c/a/d;]
       [27] aload_0 v0
-      [28] getfield #12
+      [28] getfield #10
         - Fieldref [com/announcify/ui/widget/a.c J]
-      [31] invokevirtual #21
+      [31] invokevirtual #17
         - Methodref [com/announcify/api/background/c/a/d.a (J)V]
       [34] iconst_0
       [35] ireturn
@@ -17496,22 +17578,22 @@ Methods (count = 4):
 Class file attributes (count = 0):
 
 _____________________________________________________________________
-+ Program class: greendroid/widget/b/a
++ Program class: greendroid/widget/itemview/a
   Superclass:    java/lang/Object
   Major version: 0x31
   Minor version: 0x0
   Access flags:  0x601
-    = public interface greendroid.widget.b.a extends java.lang.Object
+    = public interface greendroid.widget.itemview.a extends java.lang.Object
 
 Interfaces (count = 0):
 
 Constant Pool (count = 8):
-  - Class [greendroid/widget/b/a]
+  - Class [greendroid/widget/itemview/a]
   - Class [java/lang/Object]
   + Utf8 [()V]
   + Utf8 [(Lgreendroid/widget/a/a;)V]
   + Utf8 [a]
-  + Utf8 [greendroid/widget/b/a]
+  + Utf8 [greendroid/widget/itemview/a]
   + Utf8 [java/lang/Object]
 
 Fields (count = 0):
@@ -18615,9 +18697,9 @@ Constant Pool (count = 138):
   - Class [android/view/View]
   - Class [android/widget/BaseAdapter]
   - Class [greendroid/widget/a/a]
-  - Class [greendroid/widget/b/a]
   - Class [greendroid/widget/f]
   - Class [greendroid/widget/g]
+  - Class [greendroid/widget/itemview/a]
   - Class [java/lang/Math]
   - Class [java/lang/Object]
   - Class [java/lang/RuntimeException]
@@ -18633,7 +18715,7 @@ Constant Pool (count = 138):
   - Fieldref [greendroid/widget/g.c Landroid/content/Context;]
   - Fieldref [greendroid/widget/g.d I]
   - Methodref [android/widget/BaseAdapter.<init> ()V]
-  - Methodref [greendroid/widget/a/a.a (Landroid/content/Context;)Lgreendroid/widget/b/a;]
+  - Methodref [greendroid/widget/a/a.a (Landroid/content/Context;)Lgreendroid/widget/itemview/a;]
   - Methodref [greendroid/widget/f.<init> ()V]
   - Methodref [greendroid/widget/g.<init> (Landroid/content/Context;Ljava/util/List;)V]
   - Methodref [greendroid/widget/g.getItem (I)Ljava/lang/Object;]
@@ -18648,8 +18730,8 @@ Constant Pool (count = 138):
   - Methodref [java/util/HashMap.get (Ljava/lang/Object;)Ljava/lang/Object;]
   - Methodref [java/util/HashMap.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;]
   - Methodref [java/util/HashMap.size ()I]
-  - InterfaceMethodref [greendroid/widget/b/a.a ()V]
-  - InterfaceMethodref [greendroid/widget/b/a.a (Lgreendroid/widget/a/a;)V]
+  - InterfaceMethodref [greendroid/widget/itemview/a.a ()V]
+  - InterfaceMethodref [greendroid/widget/itemview/a.a (Lgreendroid/widget/a/a;)V]
   - InterfaceMethodref [java/util/Iterator.hasNext ()Z]
   - InterfaceMethodref [java/util/Iterator.next ()Ljava/lang/Object;]
   - InterfaceMethodref [java/util/List.get (I)Ljava/lang/Object;]
@@ -18659,7 +18741,7 @@ Constant Pool (count = 138):
   + NameAndType [<init> (Landroid/content/Context;Ljava/util/List;)V]
   + NameAndType [<init> (Ljava/lang/String;)V]
   + NameAndType [a ()V]
-  + NameAndType [a (Landroid/content/Context;)Lgreendroid/widget/b/a;]
+  + NameAndType [a (Landroid/content/Context;)Lgreendroid/widget/itemview/a;]
   + NameAndType [a (Lgreendroid/widget/a/a;)V]
   + NameAndType [a I]
   + NameAndType [a Ljava/util/List;]
@@ -18696,7 +18778,7 @@ Constant Pool (count = 138):
   + Utf8 [(I)Z]
   + Utf8 [(II)I]
   + Utf8 [(ILandroid/view/View;Landroid/view/ViewGroup;)Landroid/view/View;]
-  + Utf8 [(Landroid/content/Context;)Lgreendroid/widget/b/a;]
+  + Utf8 [(Landroid/content/Context;)Lgreendroid/widget/itemview/a;]
   + Utf8 [(Landroid/content/Context;Ljava/util/List;)V]
   + Utf8 [(Landroid/content/Context;Ljava/util/List;B)V]
   + Utf8 [(Lgreendroid/widget/a/a;)V]
@@ -18728,9 +18810,9 @@ Constant Pool (count = 138):
   + Utf8 [getView]
   + Utf8 [getViewTypeCount]
   + Utf8 [greendroid/widget/a/a]
-  + Utf8 [greendroid/widget/b/a]
   + Utf8 [greendroid/widget/f]
   + Utf8 [greendroid/widget/g]
+  + Utf8 [greendroid/widget/itemview/a]
   + Utf8 [hasNext]
   + Utf8 [isEnabled]
   + Utf8 [iterator]
@@ -18831,7 +18913,7 @@ Methods (count = 9):
       [67] aload_3 v3
       [68] invokevirtual #37
         - Methodref [java/util/HashMap.get (Ljava/lang/Object;)Ljava/lang/Object;]
-      [71] checkcast #8
+      [71] checkcast #7
         - Class [greendroid/widget/f]
       [74] dup
       [75] astore v4
@@ -18871,7 +18953,7 @@ Methods (count = 9):
       [125] invokespecial #31
         - Methodref [java/lang/RuntimeException.<init> (Ljava/lang/String;)V]
       [128] athrow
-      [129] new #8
+      [129] new #7
         - Class [greendroid/widget/f]
       [132] dup
       [133] invokespecial #26
@@ -18976,7 +19058,7 @@ Methods (count = 9):
         - Methodref [java/lang/Object.getClass ()Ljava/lang/Class;]
       [12] invokevirtual #37
         - Methodref [java/util/HashMap.get (Ljava/lang/Object;)Ljava/lang/Object;]
-      [15] checkcast #8
+      [15] checkcast #7
         - Class [greendroid/widget/f]
       [18] getfield #19
         - Fieldref [greendroid/widget/f.b I]
@@ -19023,8 +19105,8 @@ Methods (count = 9):
         - Class [greendroid/widget/a/a]
       [8] astore_1 v1
       [9] aload_2 v2
-      [10] checkcast #7
-        - Class [greendroid/widget/b/a]
+      [10] checkcast #9
+        - Class [greendroid/widget/itemview/a]
       [13] dup
       [14] astore_2 v2
       [15] ifnonnull +18 (target=33)
@@ -19033,15 +19115,15 @@ Methods (count = 9):
       [20] getfield #22
         - Fieldref [greendroid/widget/g.c Landroid/content/Context;]
       [23] invokevirtual #25
-        - Methodref [greendroid/widget/a/a.a (Landroid/content/Context;)Lgreendroid/widget/b/a;]
+        - Methodref [greendroid/widget/a/a.a (Landroid/content/Context;)Lgreendroid/widget/itemview/a;]
       [26] dup
       [27] astore_2 v2
       [28] invokeinterface #40
-        - InterfaceMethodref [greendroid/widget/b/a.a ()V]
+        - InterfaceMethodref [greendroid/widget/itemview/a.a ()V]
       [33] aload_2 v2
       [34] aload_1 v1
       [35] invokeinterface #41
-        - InterfaceMethodref [greendroid/widget/b/a.a (Lgreendroid/widget/a/a;)V]
+        - InterfaceMethodref [greendroid/widget/itemview/a.a (Lgreendroid/widget/a/a;)V]
       [40] aload_2 v2
       [41] checkcast #4
         - Class [android/view/View]
@@ -27117,6 +27199,105 @@ Methods (count = 10):
       [11] getfield #14
         - Fieldref [com/announcify/api/background/queue/PluginQueue.d Ljava/lang/String;]
       [14] areturn
+      Code attribute exceptions (count = 0):
+      Code attribute attributes (attribute count = 0):
+
+Class file attributes (count = 0):
+
+_____________________________________________________________________
++ Program class: greendroid/widget/itemview/SeparatorItemView
+  Superclass:    android/widget/TextView
+  Major version: 0x31
+  Minor version: 0x0
+  Access flags:  0x21
+    = public class greendroid.widget.itemview.SeparatorItemView extends android.widget.TextView
+
+Interfaces (count = 1):
+  - Class [greendroid/widget/itemview/a]
+
+Constant Pool (count = 27):
+  - Class [android/widget/TextView]
+  - Class [greendroid/widget/a/b]
+  - Class [greendroid/widget/itemview/SeparatorItemView]
+  - Class [greendroid/widget/itemview/a]
+  - Fieldref [greendroid/widget/a/b.b Ljava/lang/String;]
+  - Methodref [android/widget/TextView.<init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V]
+  - Methodref [greendroid/widget/itemview/SeparatorItemView.<init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V]
+  - Methodref [greendroid/widget/itemview/SeparatorItemView.setText (Ljava/lang/CharSequence;)V]
+  + NameAndType [<init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V]
+  + NameAndType [b Ljava/lang/String;]
+  + NameAndType [setText (Ljava/lang/CharSequence;)V]
+  + Utf8 [()V]
+  + Utf8 [(Landroid/content/Context;Landroid/util/AttributeSet;)V]
+  + Utf8 [(Landroid/content/Context;Landroid/util/AttributeSet;I)V]
+  + Utf8 [(Lgreendroid/widget/a/a;)V]
+  + Utf8 [(Ljava/lang/CharSequence;)V]
+  + Utf8 [<init>]
+  + Utf8 [Code]
+  + Utf8 [Ljava/lang/String;]
+  + Utf8 [a]
+  + Utf8 [android/widget/TextView]
+  + Utf8 [b]
+  + Utf8 [greendroid/widget/a/b]
+  + Utf8 [greendroid/widget/itemview/SeparatorItemView]
+  + Utf8 [greendroid/widget/itemview/a]
+  + Utf8 [setText]
+
+Fields (count = 0):
+
+Methods (count = 4):
+  - Method:       <init>(Landroid/content/Context;Landroid/util/AttributeSet;)V
+    Access flags: 0x1
+      = public SeparatorItemView(android.content.Context,android.util.AttributeSet)
+    Class member attributes (count = 1):
+    + Code attribute instructions (code length = 8, locals = 3, stack = 4):
+      [0] aload_0 v0
+      [1] aload_1 v1
+      [2] aload_2 v2
+      [3] iconst_0
+      [4] invokespecial #7
+        - Methodref [greendroid/widget/itemview/SeparatorItemView.<init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V]
+      [7] return
+      Code attribute exceptions (count = 0):
+      Code attribute attributes (attribute count = 0):
+  - Method:       <init>(Landroid/content/Context;Landroid/util/AttributeSet;I)V
+    Access flags: 0x1
+      = public SeparatorItemView(android.content.Context,android.util.AttributeSet,int)
+    Class member attributes (count = 1):
+    + Code attribute instructions (code length = 8, locals = 4, stack = 4):
+      [0] aload_0 v0
+      [1] aload_1 v1
+      [2] aload_2 v2
+      [3] iload_3 v3
+      [4] invokespecial #6
+        - Methodref [android/widget/TextView.<init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V]
+      [7] return
+      Code attribute exceptions (count = 0):
+      Code attribute attributes (attribute count = 0):
+  + Method:       a()V
+    Access flags: 0x11
+      = public final void a()
+    Class member attributes (count = 1):
+    + Code attribute instructions (code length = 1, locals = 1, stack = 0):
+      [0] return
+      Code attribute exceptions (count = 0):
+      Code attribute attributes (attribute count = 0):
+  + Method:       a(Lgreendroid/widget/a/a;)V
+    Access flags: 0x11
+      = public final void a(greendroid.widget.a.a)
+    Class member attributes (count = 1):
+    + Code attribute instructions (code length = 14, locals = 2, stack = 2):
+      [0] aload_1 v1
+      [1] checkcast #2
+        - Class [greendroid/widget/a/b]
+      [4] astore_1 v1
+      [5] aload_0 v0
+      [6] aload_1 v1
+      [7] getfield #5
+        - Fieldref [greendroid/widget/a/b.b Ljava/lang/String;]
+      [10] invokevirtual #8
+        - Methodref [greendroid/widget/itemview/SeparatorItemView.setText (Ljava/lang/CharSequence;)V]
+      [13] return
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 0):
 

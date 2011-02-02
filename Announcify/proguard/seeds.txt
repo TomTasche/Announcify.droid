@@ -1,3 +1,4 @@
+greendroid.widget.itemview.SeparatorItemView
 greendroid.widget.itemview.ThumbnailItemView
 greendroid.widget.itemview.ThumbnailItemView: ThumbnailItemView(android.content.Context,android.util.AttributeSet)
 com.announcify.ui.widget.PluginItemView

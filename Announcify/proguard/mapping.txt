@@ -658,7 +658,14 @@ greendroid.widget.NormalActionBarItem -> greendroid.widget.h:
 greendroid.widget.item.Item -> greendroid.widget.a.a:
     boolean enabled -> a
     greendroid.widget.itemview.ItemView newView$2e711b49(android.content.Context) -> a
-greendroid.widget.itemview.ItemView -> greendroid.widget.b.a:
+    greendroid.widget.itemview.ItemView createCellFromXml$39ca8f46(android.content.Context,int) -> a
+greendroid.widget.item.TextItem -> greendroid.widget.a.b:
+    java.lang.String text -> b
+    greendroid.widget.itemview.ItemView newView$2e711b49(android.content.Context) -> a
+greendroid.widget.itemview.ItemView -> greendroid.widget.itemview.a:
+    void prepareItemView() -> a
+    void setObject(greendroid.widget.item.Item) -> a
+greendroid.widget.itemview.SeparatorItemView -> greendroid.widget.itemview.SeparatorItemView:
     void prepareItemView() -> a
     void setObject(greendroid.widget.item.Item) -> a
 org.acra.ACRA -> org.acra.k:

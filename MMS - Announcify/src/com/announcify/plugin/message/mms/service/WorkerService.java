@@ -1,4 +1,3 @@
-
 package com.announcify.plugin.message.mms.service;
 
 import android.content.Intent;
@@ -13,6 +12,7 @@ import com.announcify.plugin.message.mms.util.pdu.EncodedStringValue;
 import com.announcify.plugin.message.mms.util.pdu.PduHeaders;
 import com.announcify.plugin.message.mms.util.pdu.PduParser;
 
+
 public class WorkerService extends PluginService {
 
     public static final String ACTION_START_RINGTONE = "com.announcify.plugin.message.mms.ACTION_START_RINGTONE";
@@ -20,7 +20,8 @@ public class WorkerService extends PluginService {
     public static final String ACTION_STOP_RINGTONE = "com.announcify.plugin.message.mms.ACTION_STOP_RINGTONE";
 
     public WorkerService() {
-        super("Announcify - Multimedia Message", ACTION_START_RINGTONE, ACTION_STOP_RINGTONE);
+        super("Announcify - Multimedia Message", ACTION_START_RINGTONE,
+                ACTION_STOP_RINGTONE);
     }
 
     @Override
@@ -34,19 +35,16 @@ public class WorkerService extends PluginService {
 
             if (intent.getExtras().containsKey("data")) {
                 final PduParser parser = new PduParser();
-                final PduHeaders headers = parser.parseHeaders(intent.getByteArrayExtra("data"));
+                final PduHeaders headers = parser.parseHeaders(intent
+                        .getByteArrayExtra("data"));
 
-                if (headers == null) {
-                    return;
-                }
+                if (headers == null) return;
 
                 if (headers.getMessageType() == PduHeaders.MESSAGE_TYPE_NOTIFICATION_IND) {
                     final EncodedStringValue from = headers.getFrom();
                     if (from != null) {
                         number = from.getString();
-                    } else {
-                        return;
-                    }
+                    } else return;
                 }
             } else {
                 number = intent.getStringExtra("com.announcify.EXTRA_TEST");
@@ -54,19 +52,17 @@ public class WorkerService extends PluginService {
 
             final Settings settings = new Settings(this);
 
-            if (number == null && "".equals(number)) {
-                return;
-            }
+            if ((number == null) && "".equals(number)) return;
             final Contact contact = new Contact(this,
-                    new com.announcify.api.background.contact.lookup.Number(this), number);
+                    new com.announcify.api.background.contact.lookup.Number(
+                            this), number);
 
-            if (!Filter.announcableContact(this, contact)) {
-                return;
-            }
+            if (!Filter.announcableContact(this, contact)) return;
 
             final Formatter formatter = new Formatter(this, contact, settings);
 
-            final AnnouncifyIntent announcify = new AnnouncifyIntent(this, settings);
+            final AnnouncifyIntent announcify = new AnnouncifyIntent(this,
+                    settings);
             announcify.setStopBroadcast(ACTION_START_RINGTONE);
             announcify.announce(formatter.format(settings.getEventType()));
         } else {

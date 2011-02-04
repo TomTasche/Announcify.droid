@@ -1,4 +1,3 @@
-
 package com.announcify.background.tts;
 
 import android.content.Context;
@@ -6,7 +5,9 @@ import android.media.AudioManager;
 
 import com.announcify.api.background.util.AnnouncifySettings;
 
+
 public class Volume {
+
     private final AudioManager manager;
 
     private int previousVolume;
@@ -14,7 +15,8 @@ public class Volume {
     private final int STREAM;
 
     public Volume(final Context context) {
-        manager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+        manager = (AudioManager) context
+                .getSystemService(Context.AUDIO_SERVICE);
 
         STREAM = new AnnouncifySettings(context).getStream();
     }
@@ -24,31 +26,27 @@ public class Volume {
     }
 
     public void lowerVolume() {
-        if (isSilent()) {
-            return;
-        }
+        if (isSilent()) return;
         previousVolume = manager.getStreamVolume(STREAM);
         manager.setStreamVolume(STREAM, 5, 0);
     }
 
-    public void upperVolume() {
-        if (previousVolume > 0) {
-            manager.setStreamVolume(STREAM, previousVolume, 0);
-        }
+    public void muteStreams() {
+        if (isSilent()) return;
+        manager.setStreamSolo(STREAM, true);
     }
 
-    public void muteStreams() {
-        if (isSilent()) {
-            return;
-        }
-        manager.setStreamSolo(STREAM, true);
+    public void quit() {
+        // TODO Auto-generated method stub
     }
 
     public void unmuteStreams() {
         manager.setStreamSolo(STREAM, false);
     }
 
-    public void quit() {
-        // TODO Auto-generated method stub
+    public void upperVolume() {
+        if (previousVolume > 0) {
+            manager.setStreamVolume(STREAM, previousVolume, 0);
+        }
     }
 }

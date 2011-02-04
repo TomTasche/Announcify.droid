@@ -1,4 +1,3 @@
-
 package com.announcify.background.receiver.gravity;
 
 import android.content.Context;
@@ -6,13 +5,14 @@ import android.content.Context;
 import com.announcify.background.receiver.gravity.motion.Motion;
 import com.announcify.background.receiver.gravity.motion.MotionListener;
 
+
 public class GravityListener {
 
     public interface GravityStateListener {
 
-        public void onDisplayUp();
-
         public void onDisplayDown();
+
+        public void onDisplayUp();
 
     }
 
@@ -34,21 +34,12 @@ public class GravityListener {
 
     private final Motion motion;
 
-    public GravityListener(final Context context, final GravityStateListener listener) {
+    public GravityListener(final Context context,
+            final GravityStateListener listener) {
         this.listener = listener;
 
         // INITIALIZE MOTION LISTENER
         motion = new Motion(context, new MotionListener() {
-
-            public void onDisplayUp() {
-                if (lastMotionEvent != DISPLAY_UP) {
-                    lastMotionEvent = DISPLAY_UP;
-                    GravityListener.this.listener.onDisplayUp();
-                }
-                isFlat = true;
-                isDisplayUp = true;
-                isDisplayDown = false;
-            }
 
             public void onDisplayDown() {
                 if (lastMotionEvent != DISPLAY_DOWN) {
@@ -59,22 +50,32 @@ public class GravityListener {
                 isDisplayUp = false;
                 isDisplayDown = true;
             }
-        });
-    }
 
-    public void setAccuracy(final float accuracy) {
-        motion.accuracy = accuracy;
+            public void onDisplayUp() {
+                if (lastMotionEvent != DISPLAY_UP) {
+                    lastMotionEvent = DISPLAY_UP;
+                    GravityListener.this.listener.onDisplayUp();
+                }
+                isFlat = true;
+                isDisplayUp = true;
+                isDisplayDown = false;
+            }
+        });
     }
 
     public float getAccuracy() {
         return motion.accuracy;
     }
 
-    public void stopAccelerometer() {
-        motion.stop();
-    }
-
     public void resumeAccelerometer() {
         motion.resume();
+    }
+
+    public void setAccuracy(final float accuracy) {
+        motion.accuracy = accuracy;
+    }
+
+    public void stopAccelerometer() {
+        motion.stop();
     }
 }

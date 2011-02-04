@@ -1,4 +1,3 @@
-
 package com.announcify.background.sql;
 
 import android.content.ContentValues;
@@ -12,6 +11,7 @@ import com.announcify.api.background.sql.model.GroupModel;
 import com.announcify.api.background.sql.model.PluginModel;
 import com.announcify.api.background.sql.model.TranslationModel;
 
+
 public class AnnouncifyDatabase extends SQLiteOpenHelper {
 
     public AnnouncifyDatabase(final Context context) {
@@ -20,21 +20,25 @@ public class AnnouncifyDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(final SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + PluginModel.TABLE_NAME + " (" + BaseColumns._ID
-                + " INTEGER PRIMARY KEY AUTOINCREMENT," + PluginModel.KEY_PLUGIN_PACKAGE
-                + " TEXT NOT NULL," + PluginModel.KEY_PLUGIN_NAME + " TEXT UNIQUE NOT NULL,"
-                + PluginModel.KEY_PLUGIN_PRIORITY + " INTEGER," + PluginModel.KEY_PLUGIN_ACTION
-                + " TEXT NOT NULL," + PluginModel.KEY_PLUGIN_ACTIVE + " INTEGER);");
+        db.execSQL("CREATE TABLE " + PluginModel.TABLE_NAME + " ("
+                + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + PluginModel.KEY_PLUGIN_PACKAGE + " TEXT NOT NULL,"
+                + PluginModel.KEY_PLUGIN_NAME + " TEXT UNIQUE NOT NULL,"
+                + PluginModel.KEY_PLUGIN_PRIORITY + " INTEGER,"
+                + PluginModel.KEY_PLUGIN_ACTION + " TEXT NOT NULL,"
+                + PluginModel.KEY_PLUGIN_ACTIVE + " INTEGER);");
 
-        db.execSQL("CREATE TABLE " + TranslationModel.TABLE_NAME + " (" + BaseColumns._ID
-                + " INTEGER PRIMARY KEY AUTOINCREMENT," + TranslationModel.KEY_TRANSLATION_FROM
-                + " TEXT UNIQUE," + TranslationModel.KEY_TRANSLATION_TO + " TEXT NOT NULL,"
+        db.execSQL("CREATE TABLE " + TranslationModel.TABLE_NAME + " ("
+                + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + TranslationModel.KEY_TRANSLATION_FROM + " TEXT UNIQUE,"
+                + TranslationModel.KEY_TRANSLATION_TO + " TEXT NOT NULL,"
                 + TranslationModel.KEY_TRANSLATION_DESTINATION + " TEXT,"
                 + TranslationModel.KEY_TRANSLATION_SOURCE + " TEXT);");
 
-        db.execSQL("CREATE TABLE " + GroupModel.TABLE_NAME + " (" + BaseColumns._ID
-                + " INTEGER PRIMARY KEY AUTOINCREMENT," + GroupModel.KEY_GROUP_ID
-                + " INTEGER UNIQUE NOT NULL," + GroupModel.KEY_GROUP_TITLE + " TEXT NOT NULL);");
+        db.execSQL("CREATE TABLE " + GroupModel.TABLE_NAME + " ("
+                + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + GroupModel.KEY_GROUP_ID + " INTEGER UNIQUE NOT NULL,"
+                + GroupModel.KEY_GROUP_TITLE + " TEXT NOT NULL);");
 
         final ContentValues values = new ContentValues();
         values.put(PluginModel.KEY_PLUGIN_NAME, "Announcify++");
@@ -46,7 +50,8 @@ public class AnnouncifyDatabase extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
+    public void onUpgrade(final SQLiteDatabase db, final int oldVersion,
+            final int newVersion) {
         Log.e("smn", "onUpgrade");
     }
 }

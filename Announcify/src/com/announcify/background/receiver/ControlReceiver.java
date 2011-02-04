@@ -1,4 +1,3 @@
-
 package com.announcify.background.receiver;
 
 import android.content.BroadcastReceiver;
@@ -9,7 +8,9 @@ import android.os.Message;
 import com.announcify.background.handler.AnnouncificationHandler;
 import com.announcify.ui.control.RemoteControlDialog;
 
+
 public class ControlReceiver extends BroadcastReceiver {
+
     private final AnnouncificationHandler handler;
 
     public ControlReceiver(final AnnouncificationHandler handler) {

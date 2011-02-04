@@ -1,4 +1,3 @@
-
 package com.announcify.ui.activity;
 
 import android.content.Context;
@@ -26,7 +25,26 @@ import com.announcify.R;
 import com.announcify.api.background.sql.model.GroupModel;
 import com.announcify.api.background.util.AnnouncifySettings;
 
+
 public class GroupActivity extends com.announcify.api.ui.activity.BaseActivity {
+
+    private class SimpleWhiteCursorAdapter extends SimpleCursorAdapter {
+
+        public SimpleWhiteCursorAdapter(final Context context,
+                final int layout, final Cursor c, final String[] from,
+                final int[] to) {
+            super(context, layout, c, from, to);
+        }
+
+        @Override
+        public View newView(final Context context, final Cursor cursor,
+                final ViewGroup parent) {
+            final View view = super.newView(context, cursor, parent);
+            ((TextView) view.findViewById(android.R.id.text1))
+                    .setTextColor(Color.BLACK);
+            return view;
+        }
+    }
 
     private CheckedTextView checkBlock;
 
@@ -47,12 +65,26 @@ public class GroupActivity extends com.announcify.api.ui.activity.BaseActivity {
     private AnnouncifySettings settings;
 
     @Override
+    public boolean onContextItemSelected(final MenuItem item) {
+        final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
+                .getMenuInfo();
+
+        if (item.getItemId() == R.id.menu_remove) {
+            model.remove(info.id);
+
+            refreshList();
+        }
+
+        return super.onContextItemSelected(item);
+    }
+
+    @Override
     protected void onCreate(final Bundle bundle) {
         super.onCreate(bundle, R.layout.activity_choose);
 
         settings = new AnnouncifySettings(this);
 
-        checkBlock = (CheckedTextView)findViewById(R.id.check_block_groups);
+        checkBlock = (CheckedTextView) findViewById(R.id.check_block_groups);
         checkBlock.setChecked(settings.getBlockGroups());
         checkBlock.setOnClickListener(new OnClickListener() {
 
@@ -65,14 +97,12 @@ public class GroupActivity extends com.announcify.api.ui.activity.BaseActivity {
 
         model = new GroupModel(this);
 
-        listAdapter = new SimpleWhiteCursorAdapter(this, android.R.layout.simple_list_item_1, null,
-                new String[] {
-                    GroupModel.KEY_GROUP_TITLE
-                }, new int[] {
-                    android.R.id.text1
-                });
+        listAdapter = new SimpleWhiteCursorAdapter(this,
+                android.R.layout.simple_list_item_1, null,
+                new String[] { GroupModel.KEY_GROUP_TITLE },
+                new int[] { android.R.id.text1 });
 
-        list = (ListView)findViewById(android.R.id.list);
+        list = (ListView) findViewById(android.R.id.list);
         list.setAdapter(listAdapter);
         list.setBackgroundColor(Color.WHITE);
         list.setCacheColorHint(Color.TRANSPARENT);
@@ -80,21 +110,19 @@ public class GroupActivity extends com.announcify.api.ui.activity.BaseActivity {
 
         registerForContextMenu(list);
 
-        autoAdapter = new SimpleWhiteCursorAdapter(this, android.R.layout.simple_list_item_1, null,
-                new String[] {
-                    Groups.TITLE
-                }, new int[] {
-                    android.R.id.text1
-                });
+        autoAdapter = new SimpleWhiteCursorAdapter(this,
+                android.R.layout.simple_list_item_1, null,
+                new String[] { Groups.TITLE }, new int[] { android.R.id.text1 });
 
-        auto = (AutoCompleteTextView)findViewById(R.id.auto_edit_chooser);
+        auto = (AutoCompleteTextView) findViewById(R.id.auto_edit_chooser);
         auto.setSingleLine();
         auto.setAdapter(autoAdapter);
         auto.setOnItemClickListener(new OnItemClickListener() {
 
-            public void onItemClick(final AdapterView<?> parent, final View view,
-                    final int position, final long id) {
-                model.add(autoAdapter.getItemId(position), ((TextView)view).getText().toString());
+            public void onItemClick(final AdapterView<?> parent,
+                    final View view, final int position, final long id) {
+                model.add(autoAdapter.getItemId(position), ((TextView) view)
+                        .getText().toString());
 
                 refreshList();
 
@@ -111,27 +139,6 @@ public class GroupActivity extends com.announcify.api.ui.activity.BaseActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-
-        refreshList();
-
-        autoCursor = getContentResolver().query(Groups.CONTENT_URI, new String[] {
-                BaseColumns._ID, Groups.TITLE
-        }, null, null, Groups.TITLE);
-        autoAdapter.changeCursor(autoCursor);
-    }
-
-    private void refreshList() {
-        if (listCursor != null) {
-            listCursor.close();
-        }
-
-        listCursor = model.getAll();
-        listAdapter.changeCursor(listCursor);
-    }
-
-    @Override
     public void onCreateContextMenu(final ContextMenu menu, final View v,
             final ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -140,17 +147,15 @@ public class GroupActivity extends com.announcify.api.ui.activity.BaseActivity {
     }
 
     @Override
-    public boolean onContextItemSelected(final MenuItem item) {
-        final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item
-                .getMenuInfo();
+    protected void onStart() {
+        super.onStart();
 
-        if (item.getItemId() == R.id.menu_remove) {
-            model.remove(info.id);
+        refreshList();
 
-            refreshList();
-        }
-
-        return super.onContextItemSelected(item);
+        autoCursor = getContentResolver().query(Groups.CONTENT_URI,
+                new String[] { BaseColumns._ID, Groups.TITLE }, null, null,
+                Groups.TITLE);
+        autoAdapter.changeCursor(autoCursor);
     }
 
     @Override
@@ -161,18 +166,12 @@ public class GroupActivity extends com.announcify.api.ui.activity.BaseActivity {
         super.onStop();
     }
 
-    private class SimpleWhiteCursorAdapter extends SimpleCursorAdapter {
-
-        public SimpleWhiteCursorAdapter(final Context context, final int layout, final Cursor c,
-                final String[] from, final int[] to) {
-            super(context, layout, c, from, to);
+    private void refreshList() {
+        if (listCursor != null) {
+            listCursor.close();
         }
 
-        @Override
-        public View newView(final Context context, final Cursor cursor, final ViewGroup parent) {
-            final View view = super.newView(context, cursor, parent);
-            ((TextView)view.findViewById(android.R.id.text1)).setTextColor(Color.BLACK);
-            return view;
-        }
+        listCursor = model.getAll();
+        listAdapter.changeCursor(listCursor);
     }
 }

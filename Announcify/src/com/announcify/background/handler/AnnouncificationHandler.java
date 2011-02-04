@@ -1,4 +1,3 @@
-
 package com.announcify.background.handler;
 
 import java.util.LinkedList;
@@ -18,6 +17,7 @@ import com.announcify.api.background.sql.model.PluginModel;
 import com.announcify.background.queue.Queue;
 import com.announcify.background.service.ManagerService;
 import com.announcify.background.tts.Speaker;
+
 
 public class AnnouncificationHandler extends Handler {
 
@@ -47,7 +47,8 @@ public class AnnouncificationHandler extends Handler {
 
     private boolean shutUp;
 
-    public AnnouncificationHandler(final Context context, final Looper looper, final Speaker speaker) {
+    public AnnouncificationHandler(final Context context, final Looper looper,
+            final Speaker speaker) {
         super(looper);
         this.context = context;
         this.speaker = speaker;
@@ -62,10 +63,12 @@ public class AnnouncificationHandler extends Handler {
 
         switch (msg.what) {
             case WHAT_PUT_QUEUE:
-                PluginQueue little = msg.getData().getParcelable(PluginService.EXTRA_QUEUE);
+                PluginQueue little = msg.getData().getParcelable(
+                        PluginService.EXTRA_QUEUE);
 
                 if (!model.getActive(model.getId(little.getPluginName()))) {
-                    little = new PluginQueue("Empty", new LinkedList<Object>(), context);
+                    little = new PluginQueue("Empty", new LinkedList<Object>(),
+                            context);
                     msg.getData().putInt(PluginService.EXTRA_PRIORITY, 9);
                 }
 
@@ -85,14 +88,14 @@ public class AnnouncificationHandler extends Handler {
 
             case WHAT_NEXT_ITEM:
                 if (msg.obj instanceof String) {
-                    speaker.speak((String)msg.obj);
+                    speaker.speak((String) msg.obj);
                 } else if (msg.obj instanceof Integer) {
                     postDelayed(new Runnable() {
 
                         public void run() {
                             speaker.speak("");
                         }
-                    }, (Integer)msg.obj);
+                    }, (Integer) msg.obj);
                 }
 
                 break;
@@ -106,9 +109,7 @@ public class AnnouncificationHandler extends Handler {
                 break;
 
             case WHAT_SHUTDOWN:
-                if (shutUp) {
-                    return;
-                }
+                if (shutUp) return;
                 quit(null);
                 break;
 
@@ -123,7 +124,8 @@ public class AnnouncificationHandler extends Handler {
 
             case WHAT_START:
                 if (speaker.setOnUtteranceCompletedListener(queue) != TextToSpeech.SUCCESS) {
-                    quit(new RuntimeException("Couldn't set UtteranceListener for TextToSpeech"));
+                    quit(new RuntimeException(
+                            "Couldn't set UtteranceListener for TextToSpeech"));
                 }
 
                 queue.start();
@@ -135,7 +137,8 @@ public class AnnouncificationHandler extends Handler {
     }
 
     /**
-     * @param exception Exception to send to Server.
+     * @param exception
+     *            Exception to send to Server.
      */
     public void quit(final Exception exception) {
         shutUp = true;

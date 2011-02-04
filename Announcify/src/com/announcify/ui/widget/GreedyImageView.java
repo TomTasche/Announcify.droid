@@ -5,20 +5,21 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
+
 public class GreedyImageView extends ImageView {
 
-    public GreedyImageView(Context context) {
+    public GreedyImageView(final Context context) {
         super(context);
     }
-    
-    public GreedyImageView(Context context, AttributeSet attrSet) {
+
+    public GreedyImageView(final Context context, final AttributeSet attrSet) {
         super(context, attrSet);
     }
-    
+
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    public boolean onTouchEvent(final MotionEvent event) {
         super.onTouchEvent(event);
-        
+
         return true;
     }
 }

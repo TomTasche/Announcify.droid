@@ -1,4 +1,3 @@
-
 package com.announcify.ui.control;
 
 import android.app.Activity;
@@ -13,16 +12,21 @@ import android.os.Bundle;
 import com.announcify.R;
 import com.announcify.background.service.ManagerService;
 
+
 public class RemoteControlDialog extends Activity {
+
     public static final String ACTION_CONTINUE = "com.announcify.ACTION_CONTINUE";
 
     public static final String ACTION_PAUSE = "com.announcify.ACTION_PAUSE";
 
     public static final String ACTION_SKIP = "com.announcify.ACTION_SKIP";
 
-    private final String[] controls = new String[] {
-            "Pause", "Continue", "Skip", "Kill"
-    };
+    private final String[] controls = new String[] { "Pause", "Continue",
+            "Skip", "Kill" };
+
+    private void fireBroadcast(final String action) {
+        sendBroadcast(new Intent(action));
+    }
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -45,8 +49,10 @@ public class RemoteControlDialog extends Activity {
                         fireBroadcast(ACTION_SKIP);
                         break;
                     case 3:
-                        RemoteControlDialog.this.stopService(new Intent(RemoteControlDialog.this,
-                                ManagerService.class));
+                        RemoteControlDialog.this
+                                .stopService(new Intent(
+                                        RemoteControlDialog.this,
+                                        ManagerService.class));
                         break;
                 }
 
@@ -62,9 +68,5 @@ public class RemoteControlDialog extends Activity {
             }
         });
         bob.create().show();
-    }
-
-    private void fireBroadcast(final String action) {
-        sendBroadcast(new Intent(action));
     }
 }

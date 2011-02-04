@@ -1,4 +1,3 @@
-
 package com.announcify.background.util;
 
 public class AnnouncifySecurity {

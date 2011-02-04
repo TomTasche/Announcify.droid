@@ -1,4 +1,3 @@
-
 package com.announcify.background.service;
 
 import android.app.Notification;
@@ -23,8 +22,9 @@ import com.announcify.background.receiver.ControlReceiver;
 import com.announcify.background.tts.Speaker;
 import com.announcify.ui.control.RemoteControlDialog;
 
+
 public class ManagerService extends Service {
-    
+
     private NotificationManager notificationManager;
 
     private ConditionManager conditionManager;
@@ -38,16 +38,21 @@ public class ManagerService extends Service {
     private Speaker speaker;
 
     @Override
+    public IBinder onBind(final Intent arg0) {
+        return null;
+    }
+
+    @Override
     public void onCreate() {
         super.onCreate();
 
         final AnnouncifySettings settings = new AnnouncifySettings(this);
 
         if (settings.isShowNotification()) {
-            final PendingIntent pendingIntent = PendingIntent.getActivity(this, 1993, new Intent(
-                    this, RemoteControlDialog.class), 0);
-            final Notification notification = new Notification(R.drawable.notification_icon, null,
-                    0);
+            final PendingIntent pendingIntent = PendingIntent.getActivity(this,
+                    1993, new Intent(this, RemoteControlDialog.class), 0);
+            final Notification notification = new Notification(
+                    R.drawable.notification_icon, null, 0);
             notification.setLatestEventInfo(this, "Important Announcification",
                     "Press here to stop it.", pendingIntent);
             startForeground(17, notification);
@@ -68,12 +73,14 @@ public class ManagerService extends Service {
             }
         });
 
-        handler = new AnnouncificationHandler(ManagerService.this, thread.getLooper(), speaker);
+        handler = new AnnouncificationHandler(ManagerService.this,
+                thread.getLooper(), speaker);
         handler.post(new Runnable() {
 
             public void run() {
-                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(ManagerService.this,
-                        Thread.getDefaultUncaughtExceptionHandler()));
+                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(
+                        ManagerService.this, Thread
+                                .getDefaultUncaughtExceptionHandler()));
             }
         });
 
@@ -86,38 +93,12 @@ public class ManagerService extends Service {
     }
 
     @Override
-    public void onStart(final Intent intent, final int startId) {
-        super.onStart(intent, startId);
-
-        if (intent == null || intent.getExtras() == null) {
-            return;
-        }
-
-        if (intent.getExtras().getInt(PluginService.EXTRA_PRIORITY, -1) > 1
-                && conditionManager.isScreenOn()) {
-            Toast.makeText(
-                    this,
-                    "I've decided to stay silent and shut up, because I don't want to disturb you. Please check notifications for new notifications.",
-                    Toast.LENGTH_LONG).show();
-            
-            return;
-        }
-
-        if (intent.getExtras().getInt(PluginService.EXTRA_PRIORITY, -1) == 1) {
-            conditionManager.setOnCall(true);
-        }
-
-        final Message msg = handler.obtainMessage(AnnouncificationHandler.WHAT_PUT_QUEUE);
-        msg.setData(intent.getExtras());
-        handler.sendMessage(msg);
-    }
-
-    @Override
     public void onDestroy() {
         Log.e("Announcify", "shutdown");
 
         if (handler != null) {
-            final Message msg = handler.obtainMessage(AnnouncificationHandler.WHAT_SHUTDOWN);
+            final Message msg = handler
+                    .obtainMessage(AnnouncificationHandler.WHAT_SHUTDOWN);
             handler.sendMessage(msg);
         }
 
@@ -131,7 +112,7 @@ public class ManagerService extends Service {
             speaker.shutdown();
         }
 
-        if (thread != null && thread.isAlive()) {
+        if ((thread != null) && thread.isAlive()) {
             thread.interrupt();
             thread.getLooper().quit();
         }
@@ -144,7 +125,28 @@ public class ManagerService extends Service {
     }
 
     @Override
-    public IBinder onBind(final Intent arg0) {
-        return null;
+    public void onStart(final Intent intent, final int startId) {
+        super.onStart(intent, startId);
+
+        if ((intent == null) || (intent.getExtras() == null)) return;
+
+        if ((intent.getExtras().getInt(PluginService.EXTRA_PRIORITY, -1) > 1)
+                && conditionManager.isScreenOn()) {
+            Toast.makeText(
+                    this,
+                    "I've decided to stay silent and shut up, because I don't want to disturb you. Please check notifications for new notifications.",
+                    Toast.LENGTH_LONG).show();
+
+            return;
+        }
+
+        if (intent.getExtras().getInt(PluginService.EXTRA_PRIORITY, -1) == 1) {
+            conditionManager.setOnCall(true);
+        }
+
+        final Message msg = handler
+                .obtainMessage(AnnouncificationHandler.WHAT_PUT_QUEUE);
+        msg.setData(intent.getExtras());
+        handler.sendMessage(msg);
     }
 }

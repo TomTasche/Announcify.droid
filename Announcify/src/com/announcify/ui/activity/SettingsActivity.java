@@ -1,4 +1,3 @@
-
 package com.announcify.ui.activity;
 
 import android.app.AlertDialog;
@@ -21,6 +20,7 @@ import com.announcify.api.background.util.AnnouncifySettings;
 import com.announcify.api.ui.activity.PluginActivity;
 import com.announcify.background.util.AnnouncifySecurity;
 
+
 public class SettingsActivity extends PluginActivity {
 
     private AnnouncifySecurity security;
@@ -41,6 +41,7 @@ public class SettingsActivity extends PluginActivity {
             showDialog(1);
 
             thread = new Thread() {
+
                 @Override
                 public void run() {
                     // security = new AnnouncifySecurity(SettingsActivity.this);
@@ -53,24 +54,29 @@ public class SettingsActivity extends PluginActivity {
             builder.setMessage("Feel free to play with these settings, but keep in mind that they won't take any effect unless you install \"Announcify++\" from Android Market. ;)");
             builder.setCancelable(false);
             builder.setNegativeButton("Damn.", null);
-            builder.setPositiveButton("Beam me to the Market!", new OnClickListener() {
+            builder.setPositiveButton("Beam me to the Market!",
+                    new OnClickListener() {
 
-                public void onClick(final DialogInterface dialog, final int which) {
-                    // TODO: appbrain.com/Announcify++
-                }
-            });
+                        public void onClick(final DialogInterface dialog,
+                                final int which) {
+                            // TODO: appbrain.com/Announcify++
+                        }
+                    });
             // builder.create().show();
         }
 
-        getPreferenceManager().setSharedPreferencesName(AnnouncifySettings.PREFERENCES_NAME);
-        getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
+        getPreferenceManager().setSharedPreferencesName(
+                AnnouncifySettings.PREFERENCES_NAME);
+        getPreferenceManager().setSharedPreferencesMode(
+                Context.MODE_WORLD_READABLE);
         addPreferencesFromResource(R.xml.preferences_main_settings);
 
         getPreferenceScreen().findPreference("preference_replace_chooser")
                 .setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
                     public boolean onPreferenceClick(final Preference preference) {
-                        startActivity(new Intent(SettingsActivity.this, ReplaceActivity.class));
+                        startActivity(new Intent(SettingsActivity.this,
+                                ReplaceActivity.class));
 
                         return false;
                     }
@@ -80,7 +86,8 @@ public class SettingsActivity extends PluginActivity {
                 .setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
                     public boolean onPreferenceClick(final Preference preference) {
-                        startActivity(new Intent(SettingsActivity.this, GroupActivity.class));
+                        startActivity(new Intent(SettingsActivity.this,
+                                GroupActivity.class));
 
                         return false;
                     }
@@ -90,7 +97,8 @@ public class SettingsActivity extends PluginActivity {
                 .setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
                     public boolean onPreferenceClick(final Preference preference) {
-                        Toast.makeText(SettingsActivity.this, "Not yet implemented, sorry!",
+                        Toast.makeText(SettingsActivity.this,
+                                "Not yet implemented, sorry!",
                                 Toast.LENGTH_LONG).show();
 
                         return false;
@@ -114,9 +122,12 @@ public class SettingsActivity extends PluginActivity {
                         .setMessage(R.string.unlicensed_dialog_body)
                         .setPositiveButton(R.string.buy_button,
                                 new DialogInterface.OnClickListener() {
-                                    public void onClick(final DialogInterface dialog,
+
+                                    public void onClick(
+                                            final DialogInterface dialog,
                                             final int which) {
-                                        final Intent marketIntent = new Intent(Intent.ACTION_VIEW,
+                                        final Intent marketIntent = new Intent(
+                                                Intent.ACTION_VIEW,
                                                 Uri.parse("http://market.android.com/details?id="
                                                         + getPackageName()));
                                         startActivity(marketIntent);
@@ -124,7 +135,9 @@ public class SettingsActivity extends PluginActivity {
                                 })
                         .setNegativeButton(R.string.quit_button,
                                 new DialogInterface.OnClickListener() {
-                                    public void onClick(final DialogInterface dialog,
+
+                                    public void onClick(
+                                            final DialogInterface dialog,
                                             final int which) {
                                         finish();
                                     }
@@ -138,6 +151,15 @@ public class SettingsActivity extends PluginActivity {
                 started = true;
         }
         return null;
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (security != null) {
+            // security.quit();
+        }
+
+        super.onDestroy();
     }
 
     @Override
@@ -165,14 +187,5 @@ public class SettingsActivity extends PluginActivity {
         }
 
         super.onResume();
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (security != null) {
-            // security.quit();
-        }
-
-        super.onDestroy();
     }
 }

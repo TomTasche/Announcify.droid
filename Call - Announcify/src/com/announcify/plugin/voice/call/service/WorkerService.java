@@ -1,4 +1,3 @@
-
 package com.announcify.plugin.voice.call.service;
 
 import android.content.Context;
@@ -15,6 +14,7 @@ import com.announcify.api.background.text.Formatter;
 import com.announcify.api.background.util.AnnouncifySettings;
 import com.announcify.api.background.util.PluginSettings;
 import com.announcify.plugin.voice.call.util.Settings;
+
 
 public class WorkerService extends PluginService {
 
@@ -33,35 +33,32 @@ public class WorkerService extends PluginService {
         }
 
         if (ACTION_ANNOUNCE.equals(intent.getAction())) {
-            final String number = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
-            if (number == null && "".equals(number)) {
-                return;
-            }
+            final String number = intent
+                    .getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+            if ((number == null) && "".equals(number)) return;
             final Contact contact = new Contact(this,
-                    new com.announcify.api.background.contact.lookup.Number(this), number);
+                    new com.announcify.api.background.contact.lookup.Number(
+                            this), number);
 
-            if (!Filter.announcableContact(this, contact)) {
-                return;
-            }
+            if (!Filter.announcableContact(this, contact)) return;
 
             final Formatter formatter = new Formatter(this, contact, settings);
 
-            final AnnouncifyIntent announcify = new AnnouncifyIntent(this, settings);
+            final AnnouncifyIntent announcify = new AnnouncifyIntent(this,
+                    settings);
             announcify.setStartBroadcast(ACTION_START_RINGTONE);
             announcify.setStopBroadcast(ACTION_STOP_RINGTONE);
             announcify.announce(formatter.format(null));
         } else if (ACTION_START_RINGTONE.equals(intent.getAction())) {
             final String s = getSharedPreferences(Settings.PREFERENCES_NAME,
-                    Context.MODE_WORLD_READABLE).getString(PluginSettings.KEY_RINGTONE, "");
-            if (s == null || "".equals(s)) {
-                return;
-            }
+                    Context.MODE_WORLD_READABLE).getString(
+                    PluginSettings.KEY_RINGTONE, "");
+            if ((s == null) || "".equals(s)) return;
             final RingtoneManager manager = new RingtoneManager(this);
             manager.setType(RingtoneManager.TYPE_RINGTONE);
-            ringtone = manager.getRingtone(manager.getRingtonePosition(Uri.parse(s)));
-            if (ringtone == null) {
-                return;
-            }
+            ringtone = manager.getRingtone(manager.getRingtonePosition(Uri
+                    .parse(s)));
+            if (ringtone == null) return;
             ringtone.setStreamType(new AnnouncifySettings(this).getStream());
             ringtone.play();
         } else if (ACTION_STOP_RINGTONE.equals(intent.getAction())) {

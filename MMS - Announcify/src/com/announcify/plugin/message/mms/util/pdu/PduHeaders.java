@@ -1,27 +1,28 @@
-
 package com.announcify.plugin.message.mms.util.pdu;
 
 /*
- * Copyright (C) 2007 Esmertec AG.
- * Copyright (C) 2007 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * Copyright (C) 2007 Esmertec AG. Copyright (C) 2007 The Android Open Source
+ * Project
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 public class PduHeaders {
+
     /**
      * All pdu header fields.
      */
@@ -484,258 +485,136 @@ public class PduHeaders {
     }
 
     /**
-     * Get octet value by header field.
+     * Append one EncodedStringValue to another.
      * 
-     * @param field the field
-     * @return the octet value of the pdu header with specified header field.
-     *         Return 0 if the value is not set.
+     * @param value
+     *            the EncodedStringValue to append
+     * @param field
+     *            the field
+     * @throws NullPointerException
+     *             if the value is null.
      */
-    protected int getOctet(final int field) {
-        final Integer octet = (Integer)mHeaderMap.get(field);
-        if (null == octet) {
-            return 0;
-        }
-
-        return octet;
-    }
-
-    /**
-     * Set octet value to pdu header by header field.
-     * 
-     * @param value the value
-     * @param field the field
-     * @throws InvalidHeaderValueException if the value is invalid.
-     */
-    protected void setOctet(int value, final int field) throws IllegalArgumentException {
-        /**
-         * Check whether this field can be set for specific header and check
-         * validity of the field.
-         */
-        switch (field) {
-            case REPORT_ALLOWED:
-            case ADAPTATION_ALLOWED:
-            case DELIVERY_REPORT:
-            case DRM_CONTENT:
-            case DISTRIBUTION_INDICATOR:
-            case QUOTAS:
-            case READ_REPORT:
-            case STORE:
-            case STORED:
-            case TOTALS:
-            case SENDER_VISIBILITY:
-                if (VALUE_YES != value && VALUE_NO != value) {
-                    // Invalid value.
-                    throw new IllegalArgumentException("Invalid Octet value!");
-                }
-                break;
-            case READ_STATUS:
-                if (READ_STATUS_READ != value && READ_STATUS__DELETED_WITHOUT_BEING_READ != value) {
-                    // Invalid value.
-                    throw new IllegalArgumentException("Invalid Octet value!");
-                }
-                break;
-            case CANCEL_STATUS:
-                if (CANCEL_STATUS_REQUEST_SUCCESSFULLY_RECEIVED != value
-                        && CANCEL_STATUS_REQUEST_CORRUPTED != value) {
-                    // Invalid value.
-                    throw new IllegalArgumentException("Invalid Octet value!");
-                }
-                break;
-            case PRIORITY:
-                if (value < PRIORITY_LOW || value > PRIORITY_HIGH) {
-                    // Invalid value.
-                    throw new IllegalArgumentException("Invalid Octet value!");
-                }
-                break;
-            case STATUS:
-                if (value < STATUS_EXPIRED || value > STATUS_UNREACHABLE) {
-                    // Invalid value.
-                    throw new IllegalArgumentException("Invalid Octet value!");
-                }
-                break;
-            case REPLY_CHARGING:
-                if (value < REPLY_CHARGING_REQUESTED || value > REPLY_CHARGING_ACCEPTED_TEXT_ONLY) {
-                    // Invalid value.
-                    throw new IllegalArgumentException("Invalid Octet value!");
-                }
-                break;
-            case MM_STATE:
-                if (value < MM_STATE_DRAFT || value > MM_STATE_FORWARDED) {
-                    // Invalid value.
-                    throw new IllegalArgumentException("Invalid Octet value!");
-                }
-                break;
-            case RECOMMENDED_RETRIEVAL_MODE:
-                if (RECOMMENDED_RETRIEVAL_MODE_MANUAL != value) {
-                    // Invalid value.
-                    throw new IllegalArgumentException("Invalid Octet value!");
-                }
-                break;
-            case CONTENT_CLASS:
-                if (value < CONTENT_CLASS_TEXT || value > CONTENT_CLASS_CONTENT_RICH) {
-                    // Invalid value.
-                    throw new IllegalArgumentException("Invalid Octet value!");
-                }
-                break;
-            case RETRIEVE_STATUS:
-                // According to oma-ts-mms-enc-v1_3, section 7.3.50, we modify
-                // the invalid value.
-                if (value > RETRIEVE_STATUS_ERROR_TRANSIENT_NETWORK_PROBLEM
-                        && value < RETRIEVE_STATUS_ERROR_PERMANENT_FAILURE) {
-                    value = RETRIEVE_STATUS_ERROR_TRANSIENT_FAILURE;
-                } else if (value > RETRIEVE_STATUS_ERROR_PERMANENT_CONTENT_UNSUPPORTED
-                        && value <= RETRIEVE_STATUS_ERROR_END) {
-                    value = RETRIEVE_STATUS_ERROR_PERMANENT_FAILURE;
-                } else if (value < RETRIEVE_STATUS_OK || value > RETRIEVE_STATUS_OK
-                        && value < RETRIEVE_STATUS_ERROR_TRANSIENT_FAILURE
-                        || value > RETRIEVE_STATUS_ERROR_END) {
-                    value = RETRIEVE_STATUS_ERROR_PERMANENT_FAILURE;
-                }
-                break;
-            case STORE_STATUS:
-                // According to oma-ts-mms-enc-v1_3, section 7.3.58, we modify
-                // the invalid value.
-                if (value > STORE_STATUS_ERROR_TRANSIENT_NETWORK_PROBLEM
-                        && value < STORE_STATUS_ERROR_PERMANENT_FAILURE) {
-                    value = STORE_STATUS_ERROR_TRANSIENT_FAILURE;
-                } else if (value > STORE_STATUS_ERROR_PERMANENT_MMBOX_FULL
-                        && value <= STORE_STATUS_ERROR_END) {
-                    value = STORE_STATUS_ERROR_PERMANENT_FAILURE;
-                } else if (value < STORE_STATUS_SUCCESS || value > STORE_STATUS_SUCCESS
-                        && value < STORE_STATUS_ERROR_TRANSIENT_FAILURE
-                        || value > STORE_STATUS_ERROR_END) {
-                    value = STORE_STATUS_ERROR_PERMANENT_FAILURE;
-                }
-                break;
-            case RESPONSE_STATUS:
-                // According to oma-ts-mms-enc-v1_3, section 7.3.48, we modify
-                // the invalid value.
-                if (value > RESPONSE_STATUS_ERROR_TRANSIENT_PARTIAL_SUCCESS
-                        && value < RESPONSE_STATUS_ERROR_PERMANENT_FAILURE) {
-                    value = RESPONSE_STATUS_ERROR_TRANSIENT_FAILURE;
-                } else if (value > RESPONSE_STATUS_ERROR_PERMANENT_LACK_OF_PREPAID
-                        && value <= RESPONSE_STATUS_ERROR_PERMANENT_END
-                        || value < RESPONSE_STATUS_OK
-                        || value > RESPONSE_STATUS_ERROR_UNSUPPORTED_MESSAGE
-                        && value < RESPONSE_STATUS_ERROR_TRANSIENT_FAILURE
-                        || value > RESPONSE_STATUS_ERROR_PERMANENT_END) {
-                    value = RESPONSE_STATUS_ERROR_PERMANENT_FAILURE;
-                }
-                break;
-            case MMS_VERSION:
-                if (value < MMS_VERSION_1_0 || value > MMS_VERSION_1_3) {
-                    value = CURRENT_MMS_VERSION; // Current version is the
-                                                 // default value.
-                }
-                break;
-            case MESSAGE_TYPE:
-                if (value < MESSAGE_TYPE_SEND_REQ || value > MESSAGE_TYPE_CANCEL_CONF) {
-                    // Invalid value.
-                    throw new IllegalArgumentException("Invalid Octet value!");
-                }
-                break;
-            default:
-                // This header value should not be Octect.
-                throw new RuntimeException("Invalid header field!");
-        }
-        mHeaderMap.put(field, value);
-    }
-
-    /**
-     * Get TextString value by header field.
-     * 
-     * @param field the field
-     * @return the TextString value of the pdu header with specified header
-     *         field
-     */
-    protected byte[] getTextString(final int field) {
-        return (byte[])mHeaderMap.get(field);
-    }
-
-    /**
-     * Set TextString value to pdu header by header field.
-     * 
-     * @param value the value
-     * @param field the field
-     * @return the TextString value of the pdu header with specified header
-     *         field
-     * @throws NullPointerException if the value is null.
-     */
-    protected void setTextString(final byte[] value, final int field) {
-        /**
-         * Check whether this field can be set for specific header and check
-         * validity of the field.
-         */
-        if (null == value) {
-            throw new NullPointerException();
-        }
+    protected void appendEncodedStringValue(final EncodedStringValue value,
+            final int field) {
+        if (null == value) throw new NullPointerException();
 
         switch (field) {
-            case TRANSACTION_ID:
-            case REPLY_CHARGING_ID:
-            case AUX_APPLIC_ID:
-            case APPLIC_ID:
-            case REPLY_APPLIC_ID:
-            case MESSAGE_ID:
-            case REPLACE_ID:
-            case CANCEL_ID:
-            case CONTENT_LOCATION:
-            case MESSAGE_CLASS:
-            case CONTENT_TYPE:
+            case BCC:
+            case CC:
+            case TO:
                 break;
             default:
-                // This header value should not be Text-String.
                 throw new RuntimeException("Invalid header field!");
         }
-        mHeaderMap.put(field, value);
+
+        @SuppressWarnings("unchecked")
+        ArrayList<EncodedStringValue> list = (ArrayList<EncodedStringValue>) mHeaderMap
+                .get(field);
+        if (null == list) {
+            list = new ArrayList<EncodedStringValue>();
+        }
+        list.add(value);
+        mHeaderMap.put(field, list);
     }
 
     /**
      * Get EncodedStringValue value by header field.
      * 
-     * @param field the field
+     * @param field
+     *            the field
      * @return the EncodedStringValue value of the pdu header with specified
      *         header field
      */
     protected EncodedStringValue getEncodedStringValue(final int field) {
-        return (EncodedStringValue)mHeaderMap.get(field);
+        return (EncodedStringValue) mHeaderMap.get(field);
     }
 
     /**
      * Get TO, CC or BCC header value.
      * 
-     * @param field the field
+     * @param field
+     *            the field
      * @return the EncodeStringValue array of the pdu header with specified
      *         header field
      */
     protected EncodedStringValue[] getEncodedStringValues(final int field) {
         @SuppressWarnings("unchecked")
-        final ArrayList<EncodedStringValue> list = (ArrayList<EncodedStringValue>)mHeaderMap
+        final ArrayList<EncodedStringValue> list = (ArrayList<EncodedStringValue>) mHeaderMap
                 .get(field);
-        if (null == list) {
-            return null;
-        }
+        if (null == list) return null;
         final EncodedStringValue[] values = new EncodedStringValue[list.size()];
         return list.toArray(values);
+    }
+
+    public EncodedStringValue getFrom() {
+        return getEncodedStringValue(PduHeaders.FROM);
+    }
+
+    /**
+     * Get LongInteger value by header field.
+     * 
+     * @param field
+     *            the field
+     * @return the LongInteger value of the pdu header with specified header
+     *         field. if return -1, the field is not existed in pdu header.
+     */
+    protected long getLongInteger(final int field) {
+        final Long longInteger = (Long) mHeaderMap.get(field);
+        if (null == longInteger) return -1;
+
+        return longInteger.longValue();
+    }
+
+    public int getMessageType() {
+        return getOctet(PduHeaders.MESSAGE_TYPE);
+    }
+
+    /**
+     * Get octet value by header field.
+     * 
+     * @param field
+     *            the field
+     * @return the octet value of the pdu header with specified header field.
+     *         Return 0 if the value is not set.
+     */
+    protected int getOctet(final int field) {
+        final Integer octet = (Integer) mHeaderMap.get(field);
+        if (null == octet) return 0;
+
+        return octet;
+    }
+
+    /**
+     * Get TextString value by header field.
+     * 
+     * @param field
+     *            the field
+     * @return the TextString value of the pdu header with specified header
+     *         field
+     */
+    protected byte[] getTextString(final int field) {
+        return (byte[]) mHeaderMap.get(field);
     }
 
     /**
      * Set EncodedStringValue value to pdu header by header field.
      * 
-     * @param value the value
-     * @param field the field
+     * @param value
+     *            the value
+     * @param field
+     *            the field
      * @return the EncodedStringValue value of the pdu header with specified
      *         header field
-     * @throws NullPointerException if the value is null.
+     * @throws NullPointerException
+     *             if the value is null.
      */
-    protected void setEncodedStringValue(final EncodedStringValue value, final int field) {
+    protected void setEncodedStringValue(final EncodedStringValue value,
+            final int field) {
         /**
          * Check whether this field can be set for specific header and check
          * validity of the field.
          */
-        if (null == value) {
-            throw new NullPointerException();
-        }
+        if (null == value) throw new NullPointerException();
 
         switch (field) {
             case SUBJECT:
@@ -759,20 +638,22 @@ public class PduHeaders {
     /**
      * Set TO, CC or BCC header value.
      * 
-     * @param value the value
-     * @param field the field
+     * @param value
+     *            the value
+     * @param field
+     *            the field
      * @return the EncodedStringValue value array of the pdu header with
      *         specified header field
-     * @throws NullPointerException if the value is null.
+     * @throws NullPointerException
+     *             if the value is null.
      */
-    protected void setEncodedStringValues(final EncodedStringValue[] value, final int field) {
+    protected void setEncodedStringValues(final EncodedStringValue[] value,
+            final int field) {
         /**
          * Check whether this field can be set for specific header and check
          * validity of the field.
          */
-        if (null == value) {
-            throw new NullPointerException();
-        }
+        if (null == value) throw new NullPointerException();
 
         switch (field) {
             case BCC:
@@ -785,63 +666,19 @@ public class PduHeaders {
         }
 
         final ArrayList<EncodedStringValue> list = new ArrayList<EncodedStringValue>();
-        for (int i = 0; i < value.length; i++) {
-            list.add(value[i]);
+        for (final EncodedStringValue element : value) {
+            list.add(element);
         }
         mHeaderMap.put(field, list);
-    }
-
-    /**
-     * Append one EncodedStringValue to another.
-     * 
-     * @param value the EncodedStringValue to append
-     * @param field the field
-     * @throws NullPointerException if the value is null.
-     */
-    protected void appendEncodedStringValue(final EncodedStringValue value, final int field) {
-        if (null == value) {
-            throw new NullPointerException();
-        }
-
-        switch (field) {
-            case BCC:
-            case CC:
-            case TO:
-                break;
-            default:
-                throw new RuntimeException("Invalid header field!");
-        }
-
-        @SuppressWarnings("unchecked")
-        ArrayList<EncodedStringValue> list = (ArrayList<EncodedStringValue>)mHeaderMap.get(field);
-        if (null == list) {
-            list = new ArrayList<EncodedStringValue>();
-        }
-        list.add(value);
-        mHeaderMap.put(field, list);
-    }
-
-    /**
-     * Get LongInteger value by header field.
-     * 
-     * @param field the field
-     * @return the LongInteger value of the pdu header with specified header
-     *         field. if return -1, the field is not existed in pdu header.
-     */
-    protected long getLongInteger(final int field) {
-        final Long longInteger = (Long)mHeaderMap.get(field);
-        if (null == longInteger) {
-            return -1;
-        }
-
-        return longInteger.longValue();
     }
 
     /**
      * Set LongInteger value to pdu header by header field.
      * 
-     * @param value the value
-     * @param field the field
+     * @param value
+     *            the value
+     * @param field
+     *            the field
      */
     protected void setLongInteger(final long value, final int field) {
         /**
@@ -867,11 +704,179 @@ public class PduHeaders {
         mHeaderMap.put(field, value);
     }
 
-    public int getMessageType() {
-        return getOctet(PduHeaders.MESSAGE_TYPE);
+    /**
+     * Set octet value to pdu header by header field.
+     * 
+     * @param value
+     *            the value
+     * @param field
+     *            the field
+     * @throws InvalidHeaderValueException
+     *             if the value is invalid.
+     */
+    protected void setOctet(int value, final int field)
+            throws IllegalArgumentException {
+        /**
+         * Check whether this field can be set for specific header and check
+         * validity of the field.
+         */
+        switch (field) {
+            case REPORT_ALLOWED:
+            case ADAPTATION_ALLOWED:
+            case DELIVERY_REPORT:
+            case DRM_CONTENT:
+            case DISTRIBUTION_INDICATOR:
+            case QUOTAS:
+            case READ_REPORT:
+            case STORE:
+            case STORED:
+            case TOTALS:
+            case SENDER_VISIBILITY:
+                if ((VALUE_YES != value) && (VALUE_NO != value)) // Invalid
+                                                                 // value.
+                throw new IllegalArgumentException("Invalid Octet value!");
+                break;
+            case READ_STATUS:
+                if ((READ_STATUS_READ != value)
+                        && (READ_STATUS__DELETED_WITHOUT_BEING_READ != value)) // Invalid
+                                                                               // value.
+                throw new IllegalArgumentException("Invalid Octet value!");
+                break;
+            case CANCEL_STATUS:
+                if ((CANCEL_STATUS_REQUEST_SUCCESSFULLY_RECEIVED != value)
+                        && (CANCEL_STATUS_REQUEST_CORRUPTED != value)) // Invalid
+                                                                       // value.
+                throw new IllegalArgumentException("Invalid Octet value!");
+                break;
+            case PRIORITY:
+                if ((value < PRIORITY_LOW) || (value > PRIORITY_HIGH)) // Invalid
+                                                                       // value.
+                throw new IllegalArgumentException("Invalid Octet value!");
+                break;
+            case STATUS:
+                if ((value < STATUS_EXPIRED) || (value > STATUS_UNREACHABLE)) // Invalid
+                                                                              // value.
+                throw new IllegalArgumentException("Invalid Octet value!");
+                break;
+            case REPLY_CHARGING:
+                if ((value < REPLY_CHARGING_REQUESTED)
+                        || (value > REPLY_CHARGING_ACCEPTED_TEXT_ONLY)) // Invalid
+                                                                        // value.
+                throw new IllegalArgumentException("Invalid Octet value!");
+                break;
+            case MM_STATE:
+                if ((value < MM_STATE_DRAFT) || (value > MM_STATE_FORWARDED)) // Invalid
+                                                                              // value.
+                throw new IllegalArgumentException("Invalid Octet value!");
+                break;
+            case RECOMMENDED_RETRIEVAL_MODE:
+                if (RECOMMENDED_RETRIEVAL_MODE_MANUAL != value) // Invalid
+                                                                // value.
+                throw new IllegalArgumentException("Invalid Octet value!");
+                break;
+            case CONTENT_CLASS:
+                if ((value < CONTENT_CLASS_TEXT)
+                        || (value > CONTENT_CLASS_CONTENT_RICH)) // Invalid
+                                                                 // value.
+                throw new IllegalArgumentException("Invalid Octet value!");
+                break;
+            case RETRIEVE_STATUS:
+                // According to oma-ts-mms-enc-v1_3, section 7.3.50, we modify
+                // the invalid value.
+                if ((value > RETRIEVE_STATUS_ERROR_TRANSIENT_NETWORK_PROBLEM)
+                        && (value < RETRIEVE_STATUS_ERROR_PERMANENT_FAILURE)) {
+                    value = RETRIEVE_STATUS_ERROR_TRANSIENT_FAILURE;
+                } else if ((value > RETRIEVE_STATUS_ERROR_PERMANENT_CONTENT_UNSUPPORTED)
+                        && (value <= RETRIEVE_STATUS_ERROR_END)) {
+                    value = RETRIEVE_STATUS_ERROR_PERMANENT_FAILURE;
+                } else if ((value < RETRIEVE_STATUS_OK)
+                        || ((value > RETRIEVE_STATUS_OK) && (value < RETRIEVE_STATUS_ERROR_TRANSIENT_FAILURE))
+                        || (value > RETRIEVE_STATUS_ERROR_END)) {
+                    value = RETRIEVE_STATUS_ERROR_PERMANENT_FAILURE;
+                }
+                break;
+            case STORE_STATUS:
+                // According to oma-ts-mms-enc-v1_3, section 7.3.58, we modify
+                // the invalid value.
+                if ((value > STORE_STATUS_ERROR_TRANSIENT_NETWORK_PROBLEM)
+                        && (value < STORE_STATUS_ERROR_PERMANENT_FAILURE)) {
+                    value = STORE_STATUS_ERROR_TRANSIENT_FAILURE;
+                } else if ((value > STORE_STATUS_ERROR_PERMANENT_MMBOX_FULL)
+                        && (value <= STORE_STATUS_ERROR_END)) {
+                    value = STORE_STATUS_ERROR_PERMANENT_FAILURE;
+                } else if ((value < STORE_STATUS_SUCCESS)
+                        || ((value > STORE_STATUS_SUCCESS) && (value < STORE_STATUS_ERROR_TRANSIENT_FAILURE))
+                        || (value > STORE_STATUS_ERROR_END)) {
+                    value = STORE_STATUS_ERROR_PERMANENT_FAILURE;
+                }
+                break;
+            case RESPONSE_STATUS:
+                // According to oma-ts-mms-enc-v1_3, section 7.3.48, we modify
+                // the invalid value.
+                if ((value > RESPONSE_STATUS_ERROR_TRANSIENT_PARTIAL_SUCCESS)
+                        && (value < RESPONSE_STATUS_ERROR_PERMANENT_FAILURE)) {
+                    value = RESPONSE_STATUS_ERROR_TRANSIENT_FAILURE;
+                } else if (((value > RESPONSE_STATUS_ERROR_PERMANENT_LACK_OF_PREPAID) && (value <= RESPONSE_STATUS_ERROR_PERMANENT_END))
+                        || (value < RESPONSE_STATUS_OK)
+                        || ((value > RESPONSE_STATUS_ERROR_UNSUPPORTED_MESSAGE) && (value < RESPONSE_STATUS_ERROR_TRANSIENT_FAILURE))
+                        || (value > RESPONSE_STATUS_ERROR_PERMANENT_END)) {
+                    value = RESPONSE_STATUS_ERROR_PERMANENT_FAILURE;
+                }
+                break;
+            case MMS_VERSION:
+                if ((value < MMS_VERSION_1_0) || (value > MMS_VERSION_1_3)) {
+                    value = CURRENT_MMS_VERSION; // Current version is the
+                                                 // default value.
+                }
+                break;
+            case MESSAGE_TYPE:
+                if ((value < MESSAGE_TYPE_SEND_REQ)
+                        || (value > MESSAGE_TYPE_CANCEL_CONF)) // Invalid value.
+                throw new IllegalArgumentException("Invalid Octet value!");
+                break;
+            default:
+                // This header value should not be Octect.
+                throw new RuntimeException("Invalid header field!");
+        }
+        mHeaderMap.put(field, value);
     }
 
-    public EncodedStringValue getFrom() {
-        return getEncodedStringValue(PduHeaders.FROM);
+    /**
+     * Set TextString value to pdu header by header field.
+     * 
+     * @param value
+     *            the value
+     * @param field
+     *            the field
+     * @return the TextString value of the pdu header with specified header
+     *         field
+     * @throws NullPointerException
+     *             if the value is null.
+     */
+    protected void setTextString(final byte[] value, final int field) {
+        /**
+         * Check whether this field can be set for specific header and check
+         * validity of the field.
+         */
+        if (null == value) throw new NullPointerException();
+
+        switch (field) {
+            case TRANSACTION_ID:
+            case REPLY_CHARGING_ID:
+            case AUX_APPLIC_ID:
+            case APPLIC_ID:
+            case REPLY_APPLIC_ID:
+            case MESSAGE_ID:
+            case REPLACE_ID:
+            case CANCEL_ID:
+            case CONTENT_LOCATION:
+            case MESSAGE_CLASS:
+            case CONTENT_TYPE:
+                break;
+            default:
+                // This header value should not be Text-String.
+                throw new RuntimeException("Invalid header field!");
+        }
+        mHeaderMap.put(field, value);
     }
 }

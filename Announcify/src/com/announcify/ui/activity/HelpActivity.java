@@ -6,14 +6,13 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.announcify.R;
+import com.announcify.api.ui.activity.BaseActivity;
 
 public class HelpActivity extends BaseActivity {
 
     @Override
     protected void onCreate(final Bundle bundle) {
-        super.onCreate(bundle);
-
-        setActionBarContentView(R.layout.activity_help);
+        super.onCreate(bundle, R.layout.activity_help);
 
         final WebView help = (WebView)findViewById(R.id.web_help);
 

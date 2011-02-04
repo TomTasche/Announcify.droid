@@ -26,7 +26,7 @@ import com.announcify.R;
 import com.announcify.api.background.sql.model.GroupModel;
 import com.announcify.api.background.util.AnnouncifySettings;
 
-public class GroupActivity extends BaseActivity {
+public class GroupActivity extends com.announcify.api.ui.activity.BaseActivity {
 
     private CheckedTextView checkBlock;
 
@@ -48,9 +48,7 @@ public class GroupActivity extends BaseActivity {
 
     @Override
     protected void onCreate(final Bundle bundle) {
-        super.onCreate(bundle);
-
-        setActionBarContentView(R.layout.activity_choose);
+        super.onCreate(bundle, R.layout.activity_choose);
 
         settings = new AnnouncifySettings(this);
 

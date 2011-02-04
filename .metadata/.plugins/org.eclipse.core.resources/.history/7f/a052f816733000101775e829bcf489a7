@@ -1,0 +1,43 @@
+package com.announcify.api.ui.activity;
+
+import com.announcify.api.R;
+import com.markupartist.android.widget.ActionBar;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+
+public class BaseActivity extends Activity {
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        
+        ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
+        actionBar.setHomeAction(new ActionBar.IntentAction(this, new Intent("com.announcify"), R.drawable.launcher_icon));
+        // TODO: add intents
+        actionBar.addAction(new ActionBar.IntentAction(this, new Intent(), R.drawable.gd_action_bar_talk_normal));
+        actionBar.addAction(new ActionBar.IntentAction(this, new Intent(), R.drawable.gd_action_bar_add_normal));
+        actionBar.addAction(new ActionBar.IntentAction(this, new Intent(), R.drawable.gd_action_bar_share_normal));
+    }
+
+    protected void share() {
+        final Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent
+                .putExtra(Intent.EXTRA_TEXT,
+                        "I'm in love with my phone, now that it's talking to me!\n@Announcify - http://announcify.com");
+        shareIntent.setType("text/plain");
+        shareIntent.addCategory(Intent.CATEGORY_DEFAULT);
+        startActivity(shareIntent);
+    }
+
+    protected void morePlugins() {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://plugins.announcify.com/")));
+        // market://search?q=Announcify
+    }
+    
+    protected void openHelp() {
+        startActivity(new Intent("com.announcify.HELP"));
+    }
+}

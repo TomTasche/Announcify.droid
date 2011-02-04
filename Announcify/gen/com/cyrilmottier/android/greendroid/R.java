@@ -864,9 +864,9 @@ containing a value of this type.
         public static final int TextAppearance_Separator=0x7f0a0004;
         public static final int TextAppearance_Small=0x7f0a0003;
         public static final int TextAppearance_TabIndicator=0x7f0a0005;
-        public static final int Theme_Announcify=0x7f0a0036;
         public static final int Theme_GreenDroid=0x7f0a0031;
         public static final int Theme_GreenDroid_NoTitleBar=0x7f0a0032;
+        public static final int Theme_Light_NoTitleBar_Announcify=0x7f0a0036;
     }
     public static final class xml {
         public static final int preferences_main_settings=0x7f050000;

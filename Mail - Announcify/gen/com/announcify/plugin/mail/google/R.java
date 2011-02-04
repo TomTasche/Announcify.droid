@@ -103,6 +103,7 @@ containing a value of this type.
         public static final int ActionBar=0x7f090000;
         public static final int ActionBarHomeItem=0x7f090002;
         public static final int ActionBarItem=0x7f090001;
+        public static final int Theme_Light_NoTitleBar_Announcify=0x7f090003;
     }
     public static final class xml {
         public static final int preferences_mail_settings=0x7f040000;

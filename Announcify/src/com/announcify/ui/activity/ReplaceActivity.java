@@ -16,6 +16,8 @@ import android.widget.SimpleCursorAdapter;
 
 import com.announcify.R;
 import com.announcify.api.background.sql.model.TranslationModel;
+import com.announcify.api.ui.activity.BaseActivity;
+import com.announcify.api.ui.activity.PluginActivity;
 import com.announcify.background.tts.Speaker;
 
 public class ReplaceActivity extends BaseActivity {
@@ -36,9 +38,7 @@ public class ReplaceActivity extends BaseActivity {
 
     @Override
     protected void onCreate(final Bundle bundle) {
-        super.onCreate(bundle);
-
-        setActionBarContentView(R.layout.activity_replace);
+        super.onCreate(bundle, R.layout.activity_replace);
 
         with = (EditText)findViewById(R.id.edit_with);
         replace = (EditText)findViewById(R.id.edit_replace);

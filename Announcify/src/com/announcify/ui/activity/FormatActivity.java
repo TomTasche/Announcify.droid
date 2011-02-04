@@ -7,15 +7,15 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 
 import com.announcify.R;
+import com.announcify.api.ui.activity.BaseActivity;
 
 public class FormatActivity extends BaseActivity {
+    
     private EditText formatstring;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setActionBarContentView(R.layout.activity_formatstring);
+        super.onCreate(savedInstanceState, R.layout.activity_formatstring);
 
         formatstring = (EditText)findViewById(R.id.edit_formatstring);
 

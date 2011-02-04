@@ -38,8 +38,8 @@ public class PluginItemView extends LinearLayout implements ItemView {
     }
 
     public void prepareItemView() {
-        headerView = (TextView)findViewById(R.id.gd_separator_text);
-        headerView.setBackgroundColor(Color.parseColor("#AD0000"));
+//        headerView = (TextView)findViewById(R.id.gd_separator_text);
+//        headerView.setBackgroundColor(Color.parseColor("#AD0000"));
 
         icon = (ImageView)findViewById(R.id.icon);
         settings = (TextView)findViewById(R.id.settings);
@@ -51,12 +51,12 @@ public class PluginItemView extends LinearLayout implements ItemView {
 
         final String headerString = item.header;
 
-        if (!TextUtils.isEmpty(headerString)) {
-            headerView.setText(headerString);
-            headerView.setVisibility(View.VISIBLE);
-        } else {
-            headerView.setVisibility(View.GONE);
-        }
+//        if (!TextUtils.isEmpty(headerString)) {
+//            headerView.setText(headerString);
+//            headerView.setVisibility(View.VISIBLE);
+//        } else {
+//            headerView.setVisibility(View.GONE);
+//        }
 
         try {
             icon.setImageDrawable(item.getDrawable());

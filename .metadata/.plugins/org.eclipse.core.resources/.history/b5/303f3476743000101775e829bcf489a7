@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style
+		name="Announcify" parent="@android:style/Theme_Light_NoTitleBar">
+		
+		<item
+			name="android:windowBackground">@android:color/white</item>
+			
+			<item name="android:windowContentOverlay">@null</item>
+    	<item name="android:windowNoTitle">true</item>
+	</style>
+</resources>

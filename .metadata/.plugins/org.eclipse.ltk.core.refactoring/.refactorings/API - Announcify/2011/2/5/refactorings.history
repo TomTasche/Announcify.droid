@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;API - Announcify/res/layout/actionbar.xml&apos; to &apos;actionbar_list.xml&apos;" description="Rename resource &apos;actionbar.xml&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="res/layout/actionbar.xml" name="actionbar_list.xml" stamp="1296814143805" updateReferences="true"/>
+</session>

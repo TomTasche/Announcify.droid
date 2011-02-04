@@ -12,6 +12,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.announcify.R;
 import com.announcify.api.background.error.ExceptionHandler;
@@ -23,6 +24,7 @@ import com.announcify.background.tts.Speaker;
 import com.announcify.ui.control.RemoteControlDialog;
 
 public class ManagerService extends Service {
+    
     private NotificationManager notificationManager;
 
     private ConditionManager conditionManager;
@@ -93,6 +95,11 @@ public class ManagerService extends Service {
 
         if (intent.getExtras().getInt(PluginService.EXTRA_PRIORITY, -1) > 1
                 && conditionManager.isScreenOn()) {
+            Toast.makeText(
+                    this,
+                    "I've decided to stay silent and shut up, because I don't want to disturb you. Please check notifications for new notifications.",
+                    Toast.LENGTH_LONG).show();
+            
             return;
         }
 

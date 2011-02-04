@@ -1,0 +1,196 @@
+
+package com.announcify.api.ui.activity;
+
+import java.io.IOException;
+
+import org.xmlpull.v1.XmlPullParserException;
+
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.content.SharedPreferences.Editor;
+import android.content.res.XmlResourceParser;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceScreen;
+import android.text.InputType;
+import android.util.AttributeSet;
+import android.util.Xml;
+import android.widget.EditText;
+
+import com.announcify.api.R;
+import com.announcify.api.background.util.PluginSettings;
+import com.markupartist.android.widget.ActionBar;
+
+public class PluginActivity extends PreferenceActivity {
+
+    private static final String CUSTOM_VALUE = "com.announcify.CUSTOM";
+
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
+        setTheme(android.R.style.Theme_Light_NoTitleBar);
+
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.actionbar_list);
+
+        ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar_home);
+        //actionBar.setHomeAction(new IntentAction(this, createIntent(this), R.drawable.ic_title_home_demo));
+        actionBar.setTitle("SETTINGS");
+        //        actionBar.addAction(new IntentAction(this, createShareIntent(), R.drawable.ic_title_share_default));
+        //        actionBar.addAction(new IntentAction(this, new Intent(this, OtherActivity.class), R.drawable.ic_title_export_default));
+    }
+
+    protected void applyThemeProtection(final String key) {
+        getPreferenceScreen().findPreference(key).setOnPreferenceClickListener(
+                new OnPreferenceClickListener() {
+
+                    public boolean onPreferenceClick(final Preference preference) {
+                        ((PreferenceScreen)preference).getDialog().getWindow().setTitle("");
+                        ((PreferenceScreen)preference).getDialog().getWindow()
+                        .setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+
+                        return false;
+                    }
+                });
+    }
+
+    protected void setCustomListeners(final PluginSettings settings) {
+        setCustomNumberListener(PluginSettings.KEY_READING_WAIT, settings, CUSTOM_VALUE);
+        setCustomNumberListener(PluginSettings.KEY_READING_BREAK, settings, CUSTOM_VALUE);
+        setCustomNumberListener(PluginSettings.KEY_READING_REPEAT, settings, CUSTOM_VALUE);
+
+        setCustomAnnouncementListener(PluginSettings.KEY_READING_ANNOUNCEMENT, settings,
+                CUSTOM_VALUE);
+        setCustomAnnouncementListener(PluginSettings.KEY_READING_DISCREET, settings, CUSTOM_VALUE);
+        setCustomAnnouncementListener(PluginSettings.KEY_READING_UNKNOWN, settings, CUSTOM_VALUE);
+    }
+
+    private void setCustomNumberListener(final String key, final PluginSettings settings,
+            final String value) {
+        getPreferenceScreen().findPreference(key).setOnPreferenceChangeListener(
+                new OnPreferenceChangeListener() {
+
+                    public boolean onPreferenceChange(final Preference preference,
+                            final Object newValue) {
+                        if (((String)newValue).equals(value)) {
+                            return true;
+                        }
+
+                        final EditText edit = new EditText(PluginActivity.this);
+                        edit.setInputType(InputType.TYPE_CLASS_NUMBER);
+                        edit.setHint("Something between 0 and infinity...");
+                        final Builder builder = new AlertDialog.Builder(PluginActivity.this);
+                        builder.setTitle("Choose a custom value");
+                        builder.setView(edit);
+                        builder.setPositiveButton("Save", new OnClickListener() {
+
+                            public void onClick(final DialogInterface dialog, final int which) {
+                                final Editor editor = PluginActivity.this.getSharedPreferences(
+                                        settings.getSharedPreferencesName(),
+                                        Context.MODE_WORLD_READABLE).edit();
+                                editor.putString(key, edit.getText().toString());
+                                editor.commit();
+                            }
+                        });
+                        builder.setCancelable(false);
+                        builder.setNegativeButton("Cancel", new OnClickListener() {
+
+                            public void onClick(final DialogInterface dialog, final int which) {
+                            }
+                        });
+                        builder.create().show();
+
+                        return true;
+                    }
+                });
+    }
+
+    private void setCustomAnnouncementListener(final String key, final PluginSettings settings,
+            final String value) {
+        getPreferenceScreen().findPreference(key).setOnPreferenceChangeListener(
+                new OnPreferenceChangeListener() {
+
+                    public boolean onPreferenceChange(final Preference preference,
+                            final Object newValue) {
+                        if (((String)newValue).equals(value)) {
+                            return true;
+                        }
+
+                        final EditText edit = new EditText(PluginActivity.this);
+                        edit.setInputType(InputType.TYPE_CLASS_TEXT);
+                        edit.setHint("& for name, and % for adress type");
+                        final Builder builder = new AlertDialog.Builder(PluginActivity.this);
+                        builder.setTitle("Choose a custom text");
+                        builder.setView(edit);
+                        builder.setPositiveButton("Save", new OnClickListener() {
+
+                            public void onClick(final DialogInterface dialog, final int which) {
+                                final Editor editor = PluginActivity.this.getSharedPreferences(
+                                        settings.getSharedPreferencesName(),
+                                        Context.MODE_WORLD_READABLE).edit();
+                                editor.putString(key, edit.getText().toString());
+                                editor.commit();
+                            }
+                        });
+                        builder.setCancelable(false);
+                        builder.setNegativeButton("Cancel", new OnClickListener() {
+
+                            public void onClick(final DialogInterface dialog, final int which) {
+                                final Editor editor = PluginActivity.this.getSharedPreferences(
+                                        settings.getSharedPreferencesName(),
+                                        Context.MODE_WORLD_READABLE).edit();
+                                editor.putString(key, "<NAME>");
+                                editor.commit();
+                            }
+                        });
+                        builder.create().show();
+
+                        return true;
+                    }
+                });
+    }
+
+    protected void parseRingtone(final int requestCode, final int resultCode, final Intent data,
+            final int type) {
+        if (requestCode == 100 && resultCode == RESULT_OK) {
+            final Editor editor = getPreferenceManager().getSharedPreferences().edit();
+
+            if (data != null
+                    && data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI) != null) {
+                editor.putString(PluginSettings.KEY_RINGTONE,
+                        data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI)
+                        .toString());
+
+                RingtoneManager.setActualDefaultRingtoneUri(this, type, null);
+            } else {
+                editor.putString(PluginSettings.KEY_RINGTONE, "");
+
+                final Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, false);
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, type);
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE,
+                "Choose new Ringtone to be played by Android");
+
+                startActivityForResult(intent, 101);
+            }
+
+            editor.commit();
+        } else if (requestCode == 101 && resultCode == RESULT_OK && data != null
+                && data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI) != null) {
+            RingtoneManager.setActualDefaultRingtoneUri(this, type,
+                    (Uri)data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI));
+        }
+    }
+}

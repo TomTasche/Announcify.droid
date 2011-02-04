@@ -15,6 +15,7 @@ import com.announcify.background.receiver.ScreenReceiver;
 import com.announcify.background.receiver.gravity.GravityListener;
 
 public class ConditionManager {
+    
     private final Context context;
 
     private ScreenReceiver screenReceiver;

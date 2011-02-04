@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="13" version="2.0">
+<workbench progressCount="18" version="2.0">
 <workbenchAdvisor/>
 <window height="716" maximized="true" width="1028" x="118" y="25">
 <fastViewData fastViewLocation="1024"/>
@@ -27,7 +27,7 @@
 <coolItem id="org.eclipse.ui.browser.editor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" itemType="typePlaceholder" x="-1" y="-1"/>
-<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typePlaceholder" x="-1" y="-1"/>
+<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
@@ -36,10 +36,25 @@
 <editorArea activeWorkbook="DefaultEditorWorkbook">
 <info part="DefaultEditorWorkbook">
 <folder appearance="1" expanded="2">
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+<part id="2"/>
+</presentation>
 </folder>
 </info>
 </editorArea>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PluginActivity.java" partName="PluginActivity.java" path="/home/tom/Programmieren/MailBoxer/android/workspace/Announcify/API - Announcify/src/com/announcify/api/ui/activity/PluginActivity.java" title="PluginActivity.java" tooltip="API - Announcify/src/com/announcify/api/ui/activity/PluginActivity.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/API - Announcify/src/com/announcify/api/ui/activity/PluginActivity.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1559" selectionTopPixel="102"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ActionBar.java" partName="ActionBar.java" path="/home/tom/Programmieren/MailBoxer/android/workspace/Announcify/API - Announcify/src/com/markupartist/android/widget/ActionBar.java" title="ActionBar.java" tooltip="API - Announcify/src/com/markupartist/android/widget/ActionBar.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/API - Announcify/src/com/markupartist/android/widget/ActionBar.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1847" selectionTopPixel="102"/>
+</editor>
+<editor activePart="true" focus="true" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="actionbar_background.xml" partName="actionbar_background.xml" path="/home/tom/Programmieren/MailBoxer/android/workspace/Announcify/API - Announcify/res/drawable/actionbar_background.xml" title="actionbar_background.xml" tooltip="API - Announcify/res/drawable/actionbar_background.xml" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/API - Announcify/res/drawable/actionbar_background.xml"/>
+</editor>
 </editors>
 <views>
 <view id="com.android.ide.eclipse.ddms.views.DeviceView" partName="Devices">
@@ -71,7 +86,10 @@
 </view>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
-<columnWidths org.eclipse.ui.ide.locationField="73" org.eclipse.ui.ide.markerType="108" org.eclipse.ui.ide.pathField="143" org.eclipse.ui.ide.resourceField="108" org.eclipse.ui.ide.severityAndDescriptionField="324"/>
+<expanded>
+<category IMemento.internal.id="Errors"/>
+</expanded>
+<columnWidths org.eclipse.ui.ide.locationField="0" org.eclipse.ui.ide.markerType="0" org.eclipse.ui.ide.pathField="0" org.eclipse.ui.ide.resourceField="0" org.eclipse.ui.ide.severityAndDescriptionField="0"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.pathField"/>
@@ -121,7 +139,7 @@
 <viewState/>
 </view>
 </views>
-<perspectives activePart="org.eclipse.jdt.ui.PackageExplorer" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePart="com.android.ide.eclipse.editors.resources.ResourcesEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.jdt.internal.ui.JavaPerspectiveFactory" id="org.eclipse.jdt.ui.JavaPerspective" label="Java"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
@@ -217,7 +235,7 @@
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.26494464" ratioLeft="359" ratioRight="996" relationship="2" relative="left"/>
 <info folder="true" part="bottom" ratio="0.67346936" ratioLeft="396" ratioRight="192" relationship="4" relative="org.eclipse.ui.editorss">
-<folder activePageID="org.eclipse.ui.views.ProblemView" appearance="2" expanded="2">
+<folder activePageID="org.eclipse.jdt.ui.JavadocView" appearance="2" expanded="2">
 <page content="org.eclipse.jdt.ui.JavadocView" label="Javadoc"/>
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.jdt.ui.SourceView" label="LabelNotFound"/>
@@ -295,31 +313,43 @@
 <view id="org.eclipse.ui.console.ConsoleView"/>
 <view id="com.android.ide.eclipse.ddms.views.EmulatorControlView"/>
 <fastViewBars/>
-<layout>&#x0A;<mainWindow>&#x0A;<info folder="true" part="devices">&#x0A;<folder activePageID="com.android.ide.eclipse.ddms.views.DeviceView" appearance="2" expanded="2">&#x0A;<page content="com.android.ide.eclipse.ddms.views.DeviceView" label="Devices"/>
+<layout>
+<mainWindow>
+<info folder="true" part="devices">
+<folder activePageID="com.android.ide.eclipse.ddms.views.DeviceView" appearance="2" expanded="2">
+<page content="com.android.ide.eclipse.ddms.views.DeviceView" label="Devices"/>
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="com.android.ide.eclipse.ddms.views.DeviceView:*" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
 <part id="1"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="stickyFolderRight" ratio="0.7496318" ratioLeft="1018" ratioRight="340" relationship="2" relative="devices">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<info folder="true" part="stickyFolderRight" ratio="0.7496318" ratioLeft="1018" ratioRight="340" relationship="2" relative="devices">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
 </folder>
 </info>
-<info folder="true" part="logcat" ratio="0.7986464" ratioLeft="472" ratioRight="119" relationship="4" relative="devices">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="com.android.ide.eclipse.ddms.views.LogCatView:*" label="LabelNotFound"/>
+<info folder="true" part="logcat" ratio="0.7986464" ratioLeft="472" ratioRight="119" relationship="4" relative="devices">
+<folder appearance="2" expanded="2">
+<page content="com.android.ide.eclipse.ddms.views.LogCatView:*" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.29970545" ratioLeft="407" ratioRight="951" relationship="2" relative="devices"/>
-<info folder="true" part="ddms-detail" ratio="0.49947423" ratioLeft="475" ratioRight="476" relationship="2" relative="org.eclipse.ui.editorss">&#x0A;<folder activePageID="com.android.ide.eclipse.ddms.views.LogCatView" appearance="2" expanded="2">&#x0A;<page content="com.android.ide.eclipse.ddms.views.ThreadView" label="Threads"/>
+<info folder="true" part="ddms-detail" ratio="0.49947423" ratioLeft="475" ratioRight="476" relationship="2" relative="org.eclipse.ui.editorss">
+<folder activePageID="com.android.ide.eclipse.ddms.views.LogCatView" appearance="2" expanded="2">
+<page content="com.android.ide.eclipse.ddms.views.ThreadView" label="Threads"/>
 <page content="com.android.ide.eclipse.ddms.views.HeapView" label="Heap"/>
 <page content="com.android.ide.eclipse.ddms.views.AllocTrackerView" label="Allocation Tracker"/>
 <page content="com.android.ide.eclipse.ddms.views.FileExplorerView" label="File Explorer"/>
 <page content="com.android.ide.eclipse.ddms.views.LogCatView" label="LogCat"/>
 <page content="com.android.ide.eclipse.ddms.views.ThreadView:*" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
@@ -327,9 +357,12 @@
 </presentation>
 </folder>
 </info>
-<info folder="true" part="emulator" ratio="0.5" ratioLeft="236" ratioRight="236" relationship="4" relative="devices">&#x0A;<folder activePageID="com.android.ide.eclipse.ddms.views.EmulatorControlView" appearance="2" expanded="2">&#x0A;<page content="com.android.ide.eclipse.ddms.views.EmulatorControlView" label="Emulator Control"/>
+<info folder="true" part="emulator" ratio="0.5" ratioLeft="236" ratioRight="236" relationship="4" relative="devices">
+<folder activePageID="com.android.ide.eclipse.ddms.views.EmulatorControlView" appearance="2" expanded="2">
+<page content="com.android.ide.eclipse.ddms.views.EmulatorControlView" label="Emulator Control"/>
 <page content="com.android.ide.eclipse.ddms.views.EmulatorControlView:*" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
 </presentation>
 </folder>
 </info>
@@ -437,7 +470,97 @@
 </perspective>
 </perspectives>
 <workingSets/>
-<navigationHistory/>
+<navigationHistory>
+<editors>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/API - Announcify/src/com/markupartist/android/widget/ActionBar.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" path="/API - Announcify/res/values/attrs.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" path="/GreenDroid/res/values/gd_attrs.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/API - Announcify/src/com/announcify/api/ui/activity/PluginActivity.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.layout.LayoutEditor" path="/API - Announcify/res/layout/actionbar.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.layout.LayoutEditor" path="/API - Announcify/res/layout/actionbar_list.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" path="/API - Announcify/res/values/colors.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" path="/Announcify/res/values/themes.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" path="/Announcify/res/values/various.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" path="/GreenDroid/res/values/gd_colors.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" path="/GreenDroid/res/values/gd_dimens.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" path="/GreenDroid/res/values/gd_ids.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" path="/GreenDroid/res/values/gd_strings.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" path="/GreenDroid/res/values/gd_styles.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" path="/GreenDroid/res/values/gd_themes.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" path="/Announcify/res/drawable/action_bar_background.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" path="/API - Announcify/res/drawable/actionbar_background.xml"/>
+</editors>
+<item historyLabel="actionbar.xml" index="4"/>
+<item historyLabel="PluginActivity.java" index="3">
+<position info="not_deleted" x="1560" y="0"/>
+</item>
+<item historyLabel="actionbar_list.xml" index="5"/>
+<item historyLabel="PluginActivity.java" index="3">
+<position info="not_deleted" x="1560" y="0"/>
+</item>
+<item historyLabel="actionbar_list.xml" index="5"/>
+<item historyLabel="actionbar.xml" index="4"/>
+<item historyLabel="actionbar_list.xml" index="5"/>
+<item historyLabel="PluginActivity.java" index="3">
+<position info="not_deleted" x="1440" y="0"/>
+</item>
+<item historyLabel="attrs.xml" index="1"/>
+<item historyLabel="PluginActivity.java" index="3">
+<position info="not_deleted" x="1440" y="0"/>
+</item>
+<item historyLabel="colors.xml" index="6"/>
+<item historyLabel="themes.xml" index="7"/>
+<item historyLabel="colors.xml" index="6"/>
+<item historyLabel="themes.xml" index="7"/>
+<item historyLabel="various.xml" index="8"/>
+<item historyLabel="themes.xml" index="7"/>
+<item historyLabel="gd_attrs.xml" index="2"/>
+<item historyLabel="themes.xml" index="7"/>
+<item historyLabel="gd_colors.xml" index="9"/>
+<item historyLabel="themes.xml" index="7"/>
+<item historyLabel="gd_dimens.xml" index="10"/>
+<item historyLabel="themes.xml" index="7"/>
+<item historyLabel="gd_ids.xml" index="11"/>
+<item historyLabel="themes.xml" index="7"/>
+<item historyLabel="gd_strings.xml" index="12"/>
+<item historyLabel="themes.xml" index="7"/>
+<item historyLabel="gd_styles.xml" index="13"/>
+<item historyLabel="gd_themes.xml" index="14"/>
+<item historyLabel="action_bar_background.xml" index="15"/>
+<item historyLabel="themes.xml" index="7"/>
+<item historyLabel="colors.xml" index="6"/>
+<item historyLabel="action_bar_background.xml" index="15"/>
+<item historyLabel="colors.xml" index="6"/>
+<item historyLabel="themes.xml" index="7"/>
+<item historyLabel="colors.xml" index="6"/>
+<item historyLabel="gd_styles.xml" index="13"/>
+<item historyLabel="colors.xml" index="6"/>
+<item historyLabel="action_bar_background.xml" index="15"/>
+<item historyLabel="gd_themes.xml" index="14"/>
+<item historyLabel="PluginActivity.java" index="3">
+<position info="not_deleted" x="1490" y="0"/>
+</item>
+<item historyLabel="actionbar_list.xml" index="5"/>
+<item historyLabel="PluginActivity.java" index="3">
+<position info="not_deleted" x="1712" y="0"/>
+</item>
+<item historyLabel="actionbar_list.xml" index="5"/>
+<item historyLabel="ActionBar.java" index="0">
+<position info="not_deleted" x="670" y="0"/>
+</item>
+<item historyLabel="actionbar_list.xml" index="5"/>
+<item historyLabel="PluginActivity.java" index="3">
+<position info="not_deleted" x="1559" y="0"/>
+</item>
+<item historyLabel="ActionBar.java" index="0">
+<position info="not_deleted" x="1847" y="0"/>
+</item>
+<item historyLabel="actionbar_list.xml" index="5"/>
+<item historyLabel="ActionBar.java" index="0">
+<position info="not_deleted" x="1847" y="0"/>
+</item>
+<item active="true" historyLabel="actionbar_background.xml" index="16"/>
+</navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
 </page>
 <workbenchWindowAdvisor/>
@@ -454,50 +577,50 @@
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="Announcify - Telephone/AndroidManifest.xml">
-<persistable path="/Announcify - Telephone/AndroidManifest.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="actionbar_background.xml" tooltip="API - Announcify/res/drawable/actionbar_background.xml">
+<persistable path="/API - Announcify/res/drawable/actionbar_background.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="Announcify - Mail/AndroidManifest.xml">
-<persistable path="/Announcify - Mail/AndroidManifest.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ActionBar.java" tooltip="API - Announcify/src/com/markupartist/android/widget/ActionBar.java">
+<persistable path="/API - Announcify/src/com/markupartist/android/widget/ActionBar.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="Announcify - Messaging/AndroidManifest.xml">
-<persistable path="/Announcify - Messaging/AndroidManifest.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="action_bar_background.xml" tooltip="Announcify/res/drawable/action_bar_background.xml">
+<persistable path="/Announcify/res/drawable/action_bar_background.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="Announcify/AndroidManifest.xml">
-<persistable path="/Announcify/AndroidManifest.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="gd_themes.xml" tooltip="GreenDroid/res/values/gd_themes.xml">
+<persistable path="/GreenDroid/res/values/gd_themes.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="Call - Announcify/AndroidManifest.xml">
-<persistable path="/Call - Announcify/AndroidManifest.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="gd_styles.xml" tooltip="GreenDroid/res/values/gd_styles.xml">
+<persistable path="/GreenDroid/res/values/gd_styles.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="Voicemail - Announcify/AndroidManifest.xml">
-<persistable path="/Voicemail - Announcify/AndroidManifest.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="gd_strings.xml" tooltip="GreenDroid/res/values/gd_strings.xml">
+<persistable path="/GreenDroid/res/values/gd_strings.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Settings.java" tooltip="Call - Announcify/src/com/announcify/plugin/voice/call/util/Settings.java">
-<persistable path="/Call - Announcify/src/com/announcify/plugin/voice/call/util/Settings.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="gd_ids.xml" tooltip="GreenDroid/res/values/gd_ids.xml">
+<persistable path="/GreenDroid/res/values/gd_ids.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="WorkerService.java" tooltip="Call - Announcify/src/com/announcify/plugin/voice/call/service/WorkerService.java">
-<persistable path="/Call - Announcify/src/com/announcify/plugin/voice/call/service/WorkerService.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="gd_dimens.xml" tooltip="GreenDroid/res/values/gd_dimens.xml">
+<persistable path="/GreenDroid/res/values/gd_dimens.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SettingsActivity.java" tooltip="Call - Announcify/src/com/announcify/plugin/voice/call/activity/SettingsActivity.java">
-<persistable path="/Call - Announcify/src/com/announcify/plugin/voice/call/activity/SettingsActivity.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="gd_colors.xml" tooltip="GreenDroid/res/values/gd_colors.xml">
+<persistable path="/GreenDroid/res/values/gd_colors.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="strings.xml" tooltip="Call - Announcify/res/values/strings.xml">
-<persistable path="/Call - Announcify/res/values/strings.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="gd_attrs.xml" tooltip="GreenDroid/res/values/gd_attrs.xml">
+<persistable path="/GreenDroid/res/values/gd_attrs.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Settings.java" tooltip="Talk - Announcify/src/com/announcify/plugin/talk/google/util/Settings.java">
-<persistable path="/Talk - Announcify/src/com/announcify/plugin/talk/google/util/Settings.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="various.xml" tooltip="Announcify/res/values/various.xml">
+<persistable path="/Announcify/res/values/various.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Settings.java" tooltip="Mail - Announcify/src/com/announcify/plugin/mail/google/util/Settings.java">
-<persistable path="/Mail - Announcify/src/com/announcify/plugin/mail/google/util/Settings.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="themes.xml" tooltip="Announcify/res/values/themes.xml">
+<persistable path="/Announcify/res/values/themes.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SettingsActivity.java" tooltip="Mail - Announcify/src/com/announcify/plugin/mail/google/activity/SettingsActivity.java">
-<persistable path="/Mail - Announcify/src/com/announcify/plugin/mail/google/activity/SettingsActivity.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="colors.xml" tooltip="API - Announcify/res/values/colors.xml">
+<persistable path="/API - Announcify/res/values/colors.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="strings.xml" tooltip="Mail - Announcify/res/values/strings.xml">
-<persistable path="/Mail - Announcify/res/values/strings.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="attrs.xml" tooltip="API - Announcify/res/values/attrs.xml">
+<persistable path="/API - Announcify/res/values/attrs.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SettingsActivity.java" tooltip="Voicemail - Announcify/src/com/announcify/plugin/voice/mail/activity/SettingsActivity.java">
-<persistable path="/Voicemail - Announcify/src/com/announcify/plugin/voice/mail/activity/SettingsActivity.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.layout.LayoutEditor" name="actionbar.xml" tooltip="API - Announcify/res/layout/actionbar.xml">
+<persistable path="/API - Announcify/res/layout/actionbar.xml"/>
 </file>
 </mruList>
 </workbench>

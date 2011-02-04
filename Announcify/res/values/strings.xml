@@ -6,8 +6,8 @@
 	
 	<string name="preference_speech_title">Speech Settings</string>
 	
-	<string name="preference_stream_title">Choose Stream</string>
-	<string name="preference_stream_summary">What stream to speak on?</string>
+	<string name="preference_stream_title">Choose Volume</string>
+	<string name="preference_stream_summary">What volume to use?</string>
 	
 	<string name="preference_tts_title">Change voice, speed, ...</string>
 	

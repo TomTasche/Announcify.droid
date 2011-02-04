@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.os.Bundle;
+import android.preference.RingtonePreference;
 
 import com.announcify.api.background.util.PluginSettings;
 import com.announcify.api.ui.activity.PluginActivity;

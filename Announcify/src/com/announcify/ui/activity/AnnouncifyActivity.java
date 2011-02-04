@@ -78,8 +78,7 @@ public class AnnouncifyActivity extends BaseActivity {
                 Uri.withAppendedPath(AnnouncifyProvider.PROVIDER_URI, PluginModel.TABLE_NAME),
                 false, observer);
 
-        sendBroadcast(new Intent("com.announcify.ACTION_PLUGIN_CONTACT"),
-                "com.announcify.PERMISSION_IM_A_PLUGIN");
+        sendStickyBroadcast(new Intent("com.announcify.ACTION_PLUGIN_CONTACT"));
     }
 
     private void refreshList() {

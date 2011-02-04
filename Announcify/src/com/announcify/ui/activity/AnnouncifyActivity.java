@@ -24,7 +24,7 @@ import com.announcify.R;
 import com.announcify.api.background.sql.model.PluginModel;
 import com.announcify.api.ui.activity.BaseActivity;
 import com.announcify.background.sql.AnnouncifyProvider;
-import com.announcify.ui.widget.SectionedItemAdapter;
+import com.announcify.ui.widget.SectionedAdapter;
 
 public class AnnouncifyActivity extends BaseActivity {
 
@@ -32,7 +32,7 @@ public class AnnouncifyActivity extends BaseActivity {
 
     private ContentObserver observer;
 
-    private SectionedItemAdapter adapter;
+    private SectionedAdapter adapter;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -74,14 +74,14 @@ public class AnnouncifyActivity extends BaseActivity {
 
     private void refreshList() {
         // final List<Item> items = new LinkedList<Item>();
-        final Cursor cursor = model.getAll();
+        final Cursor cursor = model.getAll(PluginModel.KEY_PLUGIN_NAME);
 
 //        while (cursor.moveToNext()) {
 //            items.add(new PluginItem(this, model, cursor.getInt(cursor
 //                    .getColumnIndex(BaseColumns._ID))));
 //        }
 
-        adapter = new SectionedItemAdapter(this, model, cursor);
+        adapter = new SectionedAdapter(this, model, cursor);
         getListView().setAdapter(adapter);
     }
 
@@ -100,8 +100,7 @@ public class AnnouncifyActivity extends BaseActivity {
     public void onCreateContextMenu(final ContextMenu menu, final View v,
             final ContextMenuInfo menuInfo) {
         final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
-        long id = (Long)v.getTag();
-        menu.setHeaderTitle(model.getName(id));
+        menu.setHeaderTitle(model.getName(info.id));
 
         getMenuInflater().inflate(R.menu.context_main, menu);
     }

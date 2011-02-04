@@ -80,6 +80,7 @@ containing a value of this type.
         public static final int actionbar=0x7f030000;
         public static final int actionbar_item=0x7f030001;
         public static final int actionbar_list=0x7f030002;
+        public static final int list_header=0x7f030003;
     }
     public static final class string {
         public static final int app_name=0x7f07000e;

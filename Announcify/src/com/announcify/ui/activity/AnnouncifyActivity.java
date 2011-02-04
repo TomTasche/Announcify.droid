@@ -1,11 +1,6 @@
 
 package com.announcify.ui.activity;
 
-import greendroid.widget.item.Item;
-
-import java.util.LinkedList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -15,7 +10,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.BaseColumns;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -30,8 +24,6 @@ import com.announcify.R;
 import com.announcify.api.background.sql.model.PluginModel;
 import com.announcify.api.ui.activity.BaseActivity;
 import com.announcify.background.sql.AnnouncifyProvider;
-import com.announcify.ui.widget.PluginItem;
-import com.announcify.ui.widget.PluginItemView;
 import com.announcify.ui.widget.SectionedItemAdapter;
 
 public class AnnouncifyActivity extends BaseActivity {
@@ -44,7 +36,7 @@ public class AnnouncifyActivity extends BaseActivity {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.list);
+        super.onCreate(savedInstanceState, R.layout.actionbar_list);
 
         getListView().setBackgroundColor(Color.WHITE);
         getListView().setCacheColorHint(Color.TRANSPARENT);
@@ -55,11 +47,11 @@ public class AnnouncifyActivity extends BaseActivity {
         getListView().setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(final AdapterView<?> arg0, final View arg1, final int arg2,
                     final long arg3) {
-                if (!((PluginItem)getListView().getItemAtPosition(arg2)).fireAction()) {
-                    Toast.makeText(AnnouncifyActivity.this,
-                            "The Plugin you are looking for seems to be uninstalled!",
-                            Toast.LENGTH_LONG).show();
-                }
+//                if (!((PluginItem)getListView().getItemAtPosition(arg2)).fireAction()) {
+//                    Toast.makeText(AnnouncifyActivity.this,
+//                            "The Plugin you are looking for seems to be uninstalled!",
+//                            Toast.LENGTH_LONG).show();
+//                }
             }
         });
 
@@ -81,17 +73,15 @@ public class AnnouncifyActivity extends BaseActivity {
     }
 
     private void refreshList() {
-        final List<Item> items = new LinkedList<Item>();
+        // final List<Item> items = new LinkedList<Item>();
         final Cursor cursor = model.getAll();
 
-        while (cursor.moveToNext()) {
-            items.add(new PluginItem(this, model, cursor.getInt(cursor
-                    .getColumnIndex(BaseColumns._ID))));
-        }
+//        while (cursor.moveToNext()) {
+//            items.add(new PluginItem(this, model, cursor.getInt(cursor
+//                    .getColumnIndex(BaseColumns._ID))));
+//        }
 
-        cursor.close();
-
-        adapter = new SectionedItemAdapter(this, items);
+        adapter = new SectionedItemAdapter(this, model, cursor);
         getListView().setAdapter(adapter);
     }
 
@@ -110,8 +100,8 @@ public class AnnouncifyActivity extends BaseActivity {
     public void onCreateContextMenu(final ContextMenu menu, final View v,
             final ContextMenuInfo menuInfo) {
         final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
-        final PluginItem item = (PluginItem)adapter.getItem(info.position);
-        menu.setHeaderTitle(item.getName());
+        long id = (Long)v.getTag();
+        menu.setHeaderTitle(model.getName(id));
 
         getMenuInflater().inflate(R.menu.context_main, menu);
     }
@@ -121,18 +111,16 @@ public class AnnouncifyActivity extends BaseActivity {
         final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item
         .getMenuInfo();
 
-        final long id = model.getId(((PluginItemView)info.targetView).getText());
-
         switch (item.getItemId()) {
             case R.id.menu_uninstall:
                 startActivityForResult(
                         new Intent(Intent.ACTION_DELETE, Uri.parse("package:"
-                                + model.getPackage(id))), (int)(2000 + id));
+                                + model.getPackage(info.id))), (int)(2000 + info.id));
 
                 break;
 
             case R.id.menu_activate:
-                model.togglePlugin(id);
+                model.togglePlugin(info.id);
 
                 adapter.notifyDataSetChanged();
 
@@ -141,7 +129,7 @@ public class AnnouncifyActivity extends BaseActivity {
             case R.id.menu_report:
                 final Intent sendIntent = new Intent(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_SUBJECT,
-                        "Announcify - Problem with " + model.getName(id));
+                        "Announcify - Problem with " + model.getName(info.id));
                 sendIntent.putExtra(Intent.EXTRA_TEXT, "");
                 sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {
                         "tom@announcify.com"

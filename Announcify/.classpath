@@ -9,6 +9,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="API - Announcify_src"/>
-	<classpathentry kind="src" path="GreenDroid_src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,36 +1,47 @@
 
 package com.announcify.ui.widget;
 
-import greendroid.widget.ItemAdapter;
-import greendroid.widget.item.Item;
+import java.util.Currency;
 
-import java.util.List;
-
-import android.content.ContentResolver;
 import android.content.Context;
-import android.database.CharArrayBuffer;
-import android.database.ContentObserver;
+import android.content.res.Resources;
 import android.database.Cursor;
-import android.database.DataSetObserver;
-import android.net.Uri;
-import android.os.Bundle;
+import android.provider.ContactsContract.CommonDataKinds.Im;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AlphabetIndexer;
-import android.widget.ListAdapter;
-import android.widget.SectionIndexer;
+import android.widget.CursorAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-public class SectionedItemAdapter extends ItemAdapter implements SectionIndexer {
+import com.announcify.R;
+import com.announcify.api.background.sql.model.BaseModel;
+import com.announcify.api.background.sql.model.PluginModel;
+
+public class SectionedItemAdapter extends CursorAdapter {
+    
     private static final String SECTIONS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-    private boolean byPriority;
+    private final AlphabetIndexer indexer;    
+    private final LayoutInflater inflater;
+    private final PluginModel model;
+    private final Context context;
+    
+    private int idIndex;
 
-    private final AlphabetIndexer indexer;
-
-    public SectionedItemAdapter(final Context context, final List<Item> items) {
-        super(context, items);
-
-        indexer = new AlphabetIndexer(new FakeCursor(this), 0, SECTIONS);
+    public SectionedItemAdapter(final Context context, final PluginModel model, final Cursor cursor) {
+        super(context, cursor);
+        
+        this.model = model;
+        this.context = context;
+        inflater = LayoutInflater.from(context);
+        indexer = new AlphabetIndexer(getCursor(), 0, SECTIONS);
+        
+        idIndex = cursor.getColumnIndexOrThrow(BaseModel._ID);
     }
 
     @Override
@@ -39,221 +50,50 @@ public class SectionedItemAdapter extends ItemAdapter implements SectionIndexer 
 
         indexer.onChanged();
     }
-
-    public void toggleSort() {
-        byPriority = !byPriority;
-
-        // change Comparator in sort() ?
-        // http://www.java-blog-buch.de/d-objekte-sortieren-comparator-und-comparable/
-        notifyDataSetChanged();
-    }
-
-    public int getPositionForSection(final int sectionIndex) {
-        return indexer.getPositionForSection(sectionIndex);
-    }
-
-    public int getSectionForPosition(final int position) {
-        return indexer.getSectionForPosition(position);
-    }
-
-    public Object[] getSections() {
-        return indexer.getSections();
-    }
-
+    
     @Override
-    public View getView(final int position, final View convertView, final ViewGroup parent) {
-        final PluginItem item = (PluginItem)getItem(position);
-        final int section = getSectionForPosition(position);
-
-        if (getPositionForSection(section) == position) {
-            item.header = indexer.getSections()[section].toString().trim();
-        } else {
-            item.header = null;
+    public View getView(final int position, View convertView, final ViewGroup parent) {
+        Log.e("smn", "getView");
+        
+        if (convertView == null) {
+            convertView = newView(context, getCursor(), parent);
         }
+        
+//        final int section = indexer.getSectionForPosition(position);
+//
+//        if (indexer.getPositionForSection(section) == position) {
+//            item.header = indexer.getSections()[section].toString().trim();
+//        } else {
+//            item.header = null;
+//        }
 
         return super.getView(position, convertView, parent);
     }
 
-    /**
-     * An implementation of a Cursor that is almost useless. It is simply used
-     * for the SectionIndexer to browse our underlying data.
-     * 
-     * @author Cyril Mottier
-     */
-    private class FakeCursor implements Cursor {
+    @Override
+    public View newView(Context context, Cursor cursor, ViewGroup parent) {
+        Log.e("smn", "newView");
+        return inflater.inflate(com.announcify.R.layout.list_item_plugin, parent, false);
+    }
 
-        private final ListAdapter mAdapter;
-
-        private int mPosition;
-
-        public FakeCursor(final ListAdapter adapter) {
-            mAdapter = adapter;
-        }
-
-        public void close() {
-        }
-
-        public void copyStringToBuffer(final int columnIndex, final CharArrayBuffer buffer) {
-        }
-
-        public void deactivate() {
-        }
-
-        public byte[] getBlob(final int columnIndex) {
-            return null;
-        }
-
-        public int getColumnCount() {
-            return 0;
-        }
-
-        public int getColumnIndex(final String columnName) {
-            return 0;
-        }
-
-        public int getColumnIndexOrThrow(final String columnName) throws IllegalArgumentException {
-            return 0;
-        }
-
-        public String getColumnName(final int columnIndex) {
-            return null;
-        }
-
-        public String[] getColumnNames() {
-            return null;
-        }
-
-        public int getCount() {
-            return mAdapter.getCount();
-        }
-
-        public double getDouble(final int columnIndex) {
-            return 0;
-        }
-
-        public Bundle getExtras() {
-            return null;
-        }
-
-        public float getFloat(final int columnIndex) {
-            return 0;
-        }
-
-        public int getInt(final int columnIndex) {
-            return 0;
-        }
-
-        public long getLong(final int columnIndex) {
-            return 0;
-        }
-
-        public int getPosition() {
-            return 0;
-        }
-
-        public short getShort(final int columnIndex) {
-            return 0;
-        }
-
-        public String getString(final int columnIndex) {
-            final PluginItem item = (PluginItem)mAdapter.getItem(mPosition);
-
-            if (byPriority) {
-                final int priority = item.getPriority();
-
-                if (priority == 1) {
-                    return priority + " - highest priority";
-                } else if (priority == 9) {
-                    return priority + " - lowest priority";
-                }
-
-                return String.valueOf(priority);
-            } else {
-                if ("".equals(item.getName())) {
-                    return "";
-                }
-
-                return item.getName().substring(0, 1);
+    @Override
+    public void bindView(View view, Context context, Cursor cursor) {
+        Log.e("smn", "bindView");
+        
+        final long id = cursor.getLong(idIndex);
+        view.setTag(id);
+        
+        ((ImageView)view.findViewById(R.id.icon)).setImageDrawable(context.getResources().getDrawable(R.drawable.launcher_icon));
+        
+        ((TextView)view.findViewById(R.id.plugin)).setText("Announcify");
+        
+        ImageView check = (ImageView)view.findViewById(R.id.check);
+        check.setImageDrawable(context.getResources().getDrawable(model.getActive(id) ? R.drawable.btn_check_buttonless_on : R.drawable.btn_check_buttonless_off));
+        check.setOnClickListener(new OnClickListener() {
+            
+            public void onClick(View v) {
+                model.togglePlugin((Long) v.getTag());
             }
-        }
-
-        public boolean getWantsAllOnMoveCalls() {
-            return false;
-        }
-
-        public boolean isAfterLast() {
-            return false;
-        }
-
-        public boolean isBeforeFirst() {
-            return false;
-        }
-
-        public boolean isClosed() {
-            return false;
-        }
-
-        public boolean isFirst() {
-            return false;
-        }
-
-        public boolean isLast() {
-            return false;
-        }
-
-        public boolean isNull(final int columnIndex) {
-            return false;
-        }
-
-        public boolean move(final int offset) {
-            return false;
-        }
-
-        public boolean moveToFirst() {
-            return false;
-        }
-
-        public boolean moveToLast() {
-            return false;
-        }
-
-        public boolean moveToNext() {
-            return false;
-        }
-
-        public boolean moveToPosition(final int position) {
-            if (position < -1 || position > getCount()) {
-                return false;
-            }
-            mPosition = position;
-            return true;
-        }
-
-        public boolean moveToPrevious() {
-            return false;
-        }
-
-        public void registerContentObserver(final ContentObserver observer) {
-        }
-
-        public void registerDataSetObserver(final DataSetObserver observer) {
-        }
-
-        public boolean requery() {
-            return false;
-        }
-
-        public Bundle respond(final Bundle extras) {
-            return null;
-        }
-
-        public void setNotificationUri(final ContentResolver cr, final Uri uri) {
-        }
-
-        public void unregisterContentObserver(final ContentObserver observer) {
-        }
-
-        public void unregisterDataSetObserver(final DataSetObserver observer) {
-        }
+        });
     }
 }

@@ -44,10 +44,10 @@ public class ReplaceActivity extends BaseActivity {
         replace = (EditText)findViewById(R.id.edit_replace);
         list = (ListView)findViewById(android.R.id.list);
 
-        adapter = new SimpleCursorAdapter(this, R.layout.list_item_replace, null, new String[] {
+        adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, null, new String[] {
                 TranslationModel.KEY_TRANSLATION_FROM, TranslationModel.KEY_TRANSLATION_TO
         }, new int[] {
-                R.id.textLeft, R.id.textRight
+                android.R.id.text1, android.R.id.text2
         });
 
         list.setBackgroundColor(Color.WHITE);

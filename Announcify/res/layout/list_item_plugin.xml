@@ -1,65 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.announcify.ui.widget.PluginItemView
+<LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 
 	android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
+	android:layout_height="fill_parent"
 
-	android:orientation="vertical">
+	android:orientation="horizontal">
 
-	<!-- <include
-		layout="@layout/gd_separator_item_view" /> -->
+	<ImageView
+		android:id="@+id/icon"
 
-	<View
-		android:layout_width="fill_parent"
-		android:layout_height="2px"
-		android:background="?android:attr/listDivider" />
-
-	<LinearLayout
-		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
 
-		android:orientation="horizontal">
+		android:gravity="left" />
 
-		<ImageView
-			android:id="@+id/icon"
+	<TextView
+		android:id="@+id/plugin"
 
-			android:layout_height="wrap_content"
-			android:layout_width="wrap_content"
+		android:layout_width="wrap_content"
+		android:layout_height="fill_parent"
+		android:layout_weight="1"
 
-			android:layout_gravity="left" />
+		android:drawableRight="@android:drawable/ic_menu_preferences"
 
-		<TextView
-			android:id="@+id/settings"
+		android:singleLine="true" />
 
-			android:textColor="#000000"
+	<ImageView
+		android:layout_width="1dp"
+		android:layout_height="fill_parent"
 
-			android:drawableRight="@android:drawable/ic_menu_preferences"
+		android:background="@color/actionbar_separator"
 
-			android:layout_width="0dp"
-			android:layout_height="fill_parent"
-			android:layout_weight="1"
-			android:layout_gravity="center_horizontal"
+		android:layout_centerVertical="true"
 
-			android:singleLine="true"
-			android:gravity="center_vertical"
+		android:gravity="right" />
 
-			android:nextFocusLeft="@id/icon" />
+	<com.announcify.ui.widget.GreedyImageView
+		android:id="@+id/check"
 
-		<ImageView
-			android:layout_height="fill_parent"
-			android:layout_width="wrap_content"
+		android:layout_height="fill_parent"
+		android:layout_width="45dp"
 
-			android:src="@drawable/list_vertical_divider" />
-
-		<ImageView
-			android:id="@+id/check"
-
-			android:layout_height="fill_parent"
-			android:layout_width="wrap_content"
-
-			android:layout_gravity="right"
-
-			android:nextFocusLeft="@id/settings" />
-	</LinearLayout>
-</com.announcify.ui.widget.PluginItemView>
+		android:gravity="right" />
+</LinearLayout>

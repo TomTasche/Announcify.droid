@@ -9,7 +9,7 @@
 
 	<include
 		android:id="@+id/section"
-		
+
 		android:visibility="gone"
 
 		layout="@android:layout/preference_category" />
@@ -18,7 +18,9 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 
-		android:orientation="horizontal">
+		android:orientation="horizontal"
+
+		android:minHeight="?android:attr/listPreferredItemHeight">
 
 		<ImageView
 			android:id="@+id/icon"
@@ -26,35 +28,53 @@
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
 
-			android:gravity="left" />
+			android:layout_gravity="center_vertical" />
 
 		<TextView
 			android:id="@+id/plugin"
 
 			android:layout_width="wrap_content"
-			android:layout_height="fill_parent"
+			android:layout_height="wrap_content"
+
 			android:layout_weight="1"
 
-			android:drawableRight="@android:drawable/ic_menu_preferences"
+			android:layout_gravity="center_vertical"
+
+			android:paddingLeft="6dip"
+
+			android:textAppearance="?android:attr/textAppearanceLarge"
 
 			android:singleLine="true" />
+
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+
+			android:layout_marginLeft="5dp"
+
+			android:layout_gravity="center_vertical"
+
+			android:src="@android:drawable/ic_menu_preferences" />
 
 		<ImageView
 			android:layout_width="1dp"
 			android:layout_height="fill_parent"
 
-			android:background="@color/actionbar_separator"
+			android:layout_gravity="center_vertical"
 
-			android:layout_centerVertical="true"
+			android:layout_marginLeft="5dp"
+			android:layout_marginRight="5dp"
 
-			android:gravity="right" />
+			android:src="@drawable/list_vertical_divider" />
 
 		<com.announcify.ui.widget.GreedyImageView
 			android:id="@+id/check"
 
-			android:layout_height="fill_parent"
-			android:layout_width="45dp"
+			android:layout_marginRight="5dp"
 
-			android:gravity="right" />
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+
+			android:layout_gravity="center_vertical" />
 	</LinearLayout>
 </LinearLayout>

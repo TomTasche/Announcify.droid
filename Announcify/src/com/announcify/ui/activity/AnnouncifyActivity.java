@@ -13,10 +13,12 @@ import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.announcify.R;
 import com.announcify.api.background.sql.model.PluginModel;
@@ -69,14 +71,14 @@ public class AnnouncifyActivity extends BaseActivity {
     @Override
     public boolean onContextItemSelected(final MenuItem item) {
         final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
-                .getMenuInfo();
+        .getMenuInfo();
 
         switch (item.getItemId()) {
             case R.id.menu_uninstall:
                 startActivityForResult(
                         new Intent(Intent.ACTION_DELETE, Uri.parse("package:"
                                 + model.getPackage(info.id))),
-                        (int) (2000 + info.id));
+                                (int) (2000 + info.id));
 
                 break;
 
@@ -117,13 +119,15 @@ public class AnnouncifyActivity extends BaseActivity {
 
             public void onItemClick(final AdapterView<?> arg0, final View arg1,
                     final int arg2, final long arg3) {
-                // if
-                // (!((PluginItem)getListView().getItemAtPosition(arg2)).fireAction())
-                // {
-                // Toast.makeText(AnnouncifyActivity.this,
-                // "The Plugin you are looking for seems to be uninstalled!",
-                // Toast.LENGTH_LONG).show();
-                // }
+                try {
+                    startActivity(new Intent(model.getAction(arg3)));
+                } catch (Exception e) {
+                    model.remove(arg3);
+
+                    Toast.makeText(AnnouncifyActivity.this,
+                            "The Plugin you are looking for seems to be uninstalled!",
+                            Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -156,7 +160,7 @@ public class AnnouncifyActivity extends BaseActivity {
                 values.put(PluginModel.KEY_PLUGIN_ACTIVE,
                         !model.getActive(model.getId("Announcify++")));
                 model.getResolver()
-                        .update(model.buildUri(), values, null, null);
+                .update(model.buildUri(), values, null, null);
 
                 adapter.notifyDataSetChanged();
 
@@ -206,14 +210,15 @@ public class AnnouncifyActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
 
-        refreshList();
-
         observer = new AnnouncifyObserver(new Handler());
         getContentResolver().registerContentObserver(
                 Uri.withAppendedPath(AnnouncifyProvider.PROVIDER_URI,
                         PluginModel.TABLE_NAME), false, observer);
 
         sendStickyBroadcast(new Intent("com.announcify.ACTION_PLUGIN_CONTACT"));
+
+
+        refreshList();
     }
 
     @Override
@@ -224,13 +229,7 @@ public class AnnouncifyActivity extends BaseActivity {
     }
 
     private void refreshList() {
-        // final List<Item> items = new LinkedList<Item>();
         final Cursor cursor = model.getAll(PluginModel.KEY_PLUGIN_NAME);
-
-        // while (cursor.moveToNext()) {
-        // items.add(new PluginItem(this, model, cursor.getInt(cursor
-        // .getColumnIndex(BaseColumns._ID))));
-        // }
 
         adapter = new SectionedAdapter(this, model, cursor);
         getListView().setAdapter(adapter);

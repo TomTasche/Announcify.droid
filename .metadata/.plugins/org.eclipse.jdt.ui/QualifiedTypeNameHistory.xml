@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="android.content.SharedPreferences.Editor"/>
 <fullyQualifiedTypeName name="android.provider.ContactsContract.Groups"/>
-<fullyQualifiedTypeName name="android.widget.TextView"/>
 <fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
 <fullyQualifiedTypeName name="com.announcify.api.AnnouncifyIntent"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.util.AnnouncifySettings"/>
-<fullyQualifiedTypeName name="com.announcify.R.id"/>
 <fullyQualifiedTypeName name="android.location.Address"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.util.PluginSettings"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.contact.lookup.Number"/>
@@ -56,8 +53,11 @@
 <fullyQualifiedTypeName name="com.markupartist.android.widget.ActionBar"/>
 <fullyQualifiedTypeName name="com.announcify.api.R"/>
 <fullyQualifiedTypeName name="com.announcify.api.R.style"/>
-<fullyQualifiedTypeName name="android.util.AttributeSet"/>
 <fullyQualifiedTypeName name="android.content.res.XmlResourceParser"/>
 <fullyQualifiedTypeName name="android.util.Xml"/>
 <fullyQualifiedTypeName name="com.announcify.api.R.layout"/>
+<fullyQualifiedTypeName name="android.util.AttributeSet"/>
+<fullyQualifiedTypeName name="com.announcify.R.id"/>
+<fullyQualifiedTypeName name="android.widget.TextView"/>
+<fullyQualifiedTypeName name="com.announcify.api.background.sql.model.PluginModel"/>
 </qualifiedTypeNameHistroy>

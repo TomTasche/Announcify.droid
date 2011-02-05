@@ -1,12 +1,11 @@
 package com.announcify.ui.activity;
 
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.net.Uri;
@@ -25,8 +24,6 @@ public class SettingsActivity extends PluginActivity {
 
     private AnnouncifySecurity security;
 
-    private Thread thread;
-
     private boolean licensed;
 
     private boolean started;
@@ -34,37 +31,7 @@ public class SettingsActivity extends PluginActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        try {
-            createPackageContext("com.announcify.paid", 0);
-
-            showDialog(1);
-
-            thread = new Thread() {
-
-                @Override
-                public void run() {
-                    // security = new AnnouncifySecurity(SettingsActivity.this);
-                }
-            };
-            // thread.start();
-        } catch (final Exception e) {
-            final AlertDialog.Builder builder = new Builder(this);
-            builder.setTitle("VIP only");
-            builder.setMessage("Feel free to play with these settings, but keep in mind that they won't take any effect unless you install \"Announcify++\" from Android Market. ;)");
-            builder.setCancelable(false);
-            builder.setNegativeButton("Damn.", null);
-            builder.setPositiveButton("Beam me to the Market!",
-                    new OnClickListener() {
-
-                        public void onClick(final DialogInterface dialog,
-                                final int which) {
-                            // TODO: appbrain.com/Announcify++
-                        }
-                    });
-            // builder.create().show();
-        }
-
+        
         getPreferenceManager().setSharedPreferencesName(
                 AnnouncifySettings.PREFERENCES_NAME);
         getPreferenceManager().setSharedPreferencesMode(
@@ -72,38 +39,50 @@ public class SettingsActivity extends PluginActivity {
         addPreferencesFromResource(R.xml.preferences_main_settings);
 
         getPreferenceScreen().findPreference("preference_replace_chooser")
-                .setOnPreferenceClickListener(new OnPreferenceClickListener() {
+        .setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
-                    public boolean onPreferenceClick(final Preference preference) {
-                        startActivity(new Intent(SettingsActivity.this,
-                                ReplaceActivity.class));
+            public boolean onPreferenceClick(final Preference preference) {
+                startActivity(new Intent(SettingsActivity.this,
+                        ReplaceActivity.class));
 
-                        return false;
-                    }
-                });
+                return false;
+            }
+        });
 
         getPreferenceScreen().findPreference("preference_choose_group")
-                .setOnPreferenceClickListener(new OnPreferenceClickListener() {
+        .setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
-                    public boolean onPreferenceClick(final Preference preference) {
-                        startActivity(new Intent(SettingsActivity.this,
-                                GroupActivity.class));
+            public boolean onPreferenceClick(final Preference preference) {
+                startActivity(new Intent(SettingsActivity.this,
+                        GroupActivity.class));
 
-                        return false;
-                    }
-                });
+                return false;
+            }
+        });
 
         getPreferenceScreen().findPreference("preference_spam_filter")
-                .setOnPreferenceClickListener(new OnPreferenceClickListener() {
+        .setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
-                    public boolean onPreferenceClick(final Preference preference) {
-                        Toast.makeText(SettingsActivity.this,
-                                "Not yet implemented, sorry!",
-                                Toast.LENGTH_LONG).show();
+            public boolean onPreferenceClick(final Preference preference) {
+                Toast.makeText(SettingsActivity.this,
+                        "Not yet implemented, sorry!",
+                        Toast.LENGTH_LONG).show();
 
-                        return false;
-                    }
-                });
+                return false;
+            }
+        });
+
+        getPreferenceScreen().findPreference("preference_tts_settings")
+        .setOnPreferenceClickListener(new OnPreferenceClickListener() {
+
+            public boolean onPreferenceClick(final Preference preference) {
+                Intent intent = new Intent();
+                intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.TextToSpeechSettings"));
+                startActivity(intent);
+
+                return false;
+            }
+        });        
 
         // ugly fix for bug #4611
         // https://code.google.com/p/android/issues/detail?id=4611
@@ -117,31 +96,31 @@ public class SettingsActivity extends PluginActivity {
         switch (id) {
             case 0:
                 return new AlertDialog.Builder(this)
-                        .setCancelable(false)
-                        .setTitle(R.string.unlicensed_dialog_title)
-                        .setMessage(R.string.unlicensed_dialog_body)
-                        .setPositiveButton(R.string.buy_button,
-                                new DialogInterface.OnClickListener() {
+                .setCancelable(false)
+                .setTitle(R.string.unlicensed_dialog_title)
+                .setMessage(R.string.unlicensed_dialog_body)
+                .setPositiveButton(R.string.buy_button,
+                        new DialogInterface.OnClickListener() {
 
-                                    public void onClick(
-                                            final DialogInterface dialog,
-                                            final int which) {
-                                        final Intent marketIntent = new Intent(
-                                                Intent.ACTION_VIEW,
-                                                Uri.parse("http://market.android.com/details?id="
-                                                        + getPackageName()));
-                                        startActivity(marketIntent);
-                                    }
-                                })
-                        .setNegativeButton(R.string.quit_button,
-                                new DialogInterface.OnClickListener() {
+                    public void onClick(
+                            final DialogInterface dialog,
+                            final int which) {
+                        final Intent marketIntent = new Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("http://market.android.com/details?id="
+                                        + getPackageName()));
+                        startActivity(marketIntent);
+                    }
+                })
+                .setNegativeButton(R.string.quit_button,
+                        new DialogInterface.OnClickListener() {
 
-                                    public void onClick(
-                                            final DialogInterface dialog,
-                                            final int which) {
-                                        finish();
-                                    }
-                                }).create();
+                    public void onClick(
+                            final DialogInterface dialog,
+                            final int which) {
+                        finish();
+                    }
+                }).create();
 
             case 1:
                 return ProgressDialog.show(this, "Announcify",

@@ -107,7 +107,8 @@
 				android:entries="@array/preference_list_reading_break_names"
 				android:title="@string/preference_break_title"
 				android:summary="@string/preference_break_summary"
-				android:key="preference_reading_break" />
+				android:key="preference_reading_break"
+				android:defaultValue="2" />
 
 			<ListPreference
 				android:dialogTitle="@string/preference_repeat_title"
@@ -115,7 +116,8 @@
 				android:entries="@array/preference_list_reading_repeat_names"
 				android:title="@string/preference_repeat_title"
 				android:summary="@string/preference_repeat_summary"
-				android:key="preference_reading_repeat" />
+				android:key="preference_reading_repeat"
+				android:defaultValue="1" />
 
 			<ListPreference
 				android:dialogTitle="@string/preference_wait_title"
@@ -123,7 +125,8 @@
 				android:entries="@array/preference_list_reading_wait_names"
 				android:title="@string/preference_wait_title"
 				android:summary="@string/preference_wait_summary"
-				android:key="preference_reading_wait" />
+				android:key="preference_reading_wait"
+				android:defaultValue="0" />
 
 			<ListPreference
 				android:dialogTitle="@string/preference_unknown_title"
@@ -131,7 +134,8 @@
 				android:entries="@array/preference_list_reading_unknown_names"
 				android:title="@string/preference_unknown_title"
 				android:summary="@string/preference_unknown_summary"
-				android:key="preference_reading_unknown" />
+				android:key="preference_reading_unknown"
+				android:defaultValue="" />
 
 			<ListPreference
 				android:dialogTitle="@string/preference_known_title"
@@ -139,7 +143,8 @@
 				android:entries="@array/preference_list_reading_announcement_names"
 				android:title="@string/preference_known_title"
 				android:summary="@string/preference_known_summary"
-				android:key="preference_reading_announcement" />
+				android:key="preference_reading_announcement"
+				android:defaultValue="&lt;NAME&gt;" />
 
 			<ListPreference
 				android:dialogTitle="@string/preference_discreet_title"
@@ -147,7 +152,8 @@
 				android:entries="@array/preference_list_reading_announcement_names"
 				android:title="@string/preference_discreet_title"
 				android:summary="@string/preference_discreet_summary"
-				android:key="preference_reading_discreet" />
+				android:key="preference_reading_discreet"
+				android:defaultValue="&lt;NAME&gt;" />
 		</PreferenceCategory>
 	</PreferenceScreen>
 

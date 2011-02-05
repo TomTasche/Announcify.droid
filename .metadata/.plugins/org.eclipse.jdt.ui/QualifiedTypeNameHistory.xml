@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="android.provider.ContactsContract.Groups"/>
-<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
-<fullyQualifiedTypeName name="com.announcify.api.AnnouncifyIntent"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.util.AnnouncifySettings"/>
 <fullyQualifiedTypeName name="android.location.Address"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.util.PluginSettings"/>
@@ -40,7 +37,6 @@
 <fullyQualifiedTypeName name="com.announcify.plugin.voice.mail.R.string"/>
 <fullyQualifiedTypeName name="org.acra.annotation.ReportsCrashes"/>
 <fullyQualifiedTypeName name="org.acra.ACRA"/>
-<fullyQualifiedTypeName name="android.content.Intent"/>
 <fullyQualifiedTypeName name="com.announcify.ui.activity.AnnouncifyActivity"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.error.ExceptionHandler"/>
 <fullyQualifiedTypeName name="org.acra.ErrorReporter"/>
@@ -60,4 +56,8 @@
 <fullyQualifiedTypeName name="com.announcify.R.id"/>
 <fullyQualifiedTypeName name="android.widget.TextView"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.sql.model.PluginModel"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="android.view.MotionEvent"/>
+<fullyQualifiedTypeName name="com.announcify.ui.activity.SettingsActivity"/>
+<fullyQualifiedTypeName name="android.content.Intent"/>
 </qualifiedTypeNameHistroy>

@@ -1,4 +1,3 @@
-
 package com.announcify.plugin.mail.google.util;
 
 import android.content.Context;
@@ -6,10 +5,11 @@ import android.content.Context;
 import com.announcify.api.background.util.PluginSettings;
 import com.announcify.plugin.mail.google.R;
 
+
 public class Settings extends PluginSettings {
 
     public static final String ACTION_SETTINGS = "com.announcify.plugin.mail.google.SETTINGS";
-    
+
     public static final String PREFERENCES_NAME = "com.announcify.plugin.mail.google";
 
     private static final String KEY_READ_OWN = "preference_read_own";
@@ -20,14 +20,6 @@ public class Settings extends PluginSettings {
 
     public Settings(final Context context) {
         super(context, PREFERENCES_NAME);
-    }
-
-    public int getReadMessageMode() {
-        return preferences.getInt(KEY_MESSAGE, 0);
-    }
-
-    public boolean getReadOwn() {
-        return preferences.getBoolean(KEY_READ_OWN, false);
     }
 
     public String getAddress() {
@@ -42,6 +34,14 @@ public class Settings extends PluginSettings {
     @Override
     public int getPriority() {
         return 5;
+    }
+
+    public int getReadMessageMode() {
+        return preferences.getInt(KEY_MESSAGE, 0);
+    }
+
+    public boolean getReadOwn() {
+        return preferences.getBoolean(KEY_READ_OWN, false);
     }
 
     @Override

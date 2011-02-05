@@ -1,4 +1,3 @@
-
 package com.announcify.plugin.mail.google.service;
 
 import android.content.Intent;
@@ -10,6 +9,7 @@ import com.announcify.api.background.service.PluginService;
 import com.announcify.api.background.text.Formatter;
 import com.announcify.plugin.mail.google.contact.Mail;
 import com.announcify.plugin.mail.google.util.Settings;
+
 
 public class WorkerService extends PluginService {
 
@@ -38,19 +38,15 @@ public class WorkerService extends PluginService {
         if (ACTION_ANNOUNCE.equals(intent.getAction())) {
             final String address = intent.getStringExtra(EXTRA_FROM);
 
-            if (address == null && "".equals(address)) {
-                return;
-            }
+            if ((address == null) && "".equals(address)) return;
             final Contact contact = new Contact(this, new Mail(this), address);
 
-            if (!Filter.announcableContact(this, contact)) {
-                return;
-            }
+            if (!Filter.announcableContact(this, contact)) return;
 
             final Formatter formatter = new Formatter(this, contact, settings);
 
             String message = "";
-            switch (((Settings)settings).getReadMessageMode()) {
+            switch (((Settings) settings).getReadMessageMode()) {
                 case 0:
                     message = intent.getStringExtra(EXTRA_SUBJECT);
                     break;
@@ -64,7 +60,8 @@ public class WorkerService extends PluginService {
                     break;
             }
 
-            final AnnouncifyIntent announcify = new AnnouncifyIntent(this, settings);
+            final AnnouncifyIntent announcify = new AnnouncifyIntent(this,
+                    settings);
             announcify.setStopBroadcast(ACTION_START_RINGTONE);
             announcify.announce(formatter.format(message));
         } else {

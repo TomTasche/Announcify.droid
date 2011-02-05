@@ -1,4 +1,3 @@
-
 package com.announcify.plugin.mail.google.receiver;
 
 import android.content.BroadcastReceiver;
@@ -6,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.announcify.plugin.mail.google.service.WorkerService;
+
 
 public class RingtoneReceiver extends BroadcastReceiver {
 

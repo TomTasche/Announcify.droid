@@ -1,23 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="android.location.Address"/>
-<fullyQualifiedTypeName name="com.announcify.api.background.util.PluginSettings"/>
-<fullyQualifiedTypeName name="com.announcify.api.background.contact.lookup.Number"/>
-<fullyQualifiedTypeName name="com.announcify.plugin.message.mms.util.Settings"/>
-<fullyQualifiedTypeName name="com.announcify.plugin.mail.google.util.Settings"/>
-<fullyQualifiedTypeName name="com.announcify.api.background.service.PluginService"/>
-<fullyQualifiedTypeName name="com.announcify.plugin.talk.google.service.TalkService"/>
-<fullyQualifiedTypeName name="com.announcify.plugin.mail.google.service.MailService"/>
-<fullyQualifiedTypeName name="com.announcify.api.background.contact.Filter"/>
-<fullyQualifiedTypeName name="com.announcify.plugin.voice.mail.service.VoicemailService"/>
-<fullyQualifiedTypeName name="android.content.BroadcastReceiver"/>
-<fullyQualifiedTypeName name="com.announcify.api.background.text.Formatter"/>
-<fullyQualifiedTypeName name="com.announcify.plugin.voice.mail.service.WorkerService"/>
-<fullyQualifiedTypeName name="com.announcify.api.simple.SimpleAnnouncifyIntent"/>
-<fullyQualifiedTypeName name="com.announcify.plugin.voice.mail.util.Settings"/>
-<fullyQualifiedTypeName name="android.provider.ContactsContract.CommonDataKinds.Email"/>
 <fullyQualifiedTypeName name="android.provider.ContactsContract.CommonDataKinds.Im"/>
-<fullyQualifiedTypeName name="android.database.Cursor"/>
 <fullyQualifiedTypeName name="android.net.Uri"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.mail.k9.R"/>
 <fullyQualifiedTypeName name="android.database.ContentObserver"/>
@@ -59,5 +42,22 @@
 <fullyQualifiedTypeName name="android.content.Intent"/>
 <fullyQualifiedTypeName name="com.announcify.background.queue.WakeLocker"/>
 <fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="android.content.ComponentName"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.message.sms.service.WorkerService"/>
+<fullyQualifiedTypeName name="com.announcify.api.background.service.PluginService"/>
+<fullyQualifiedTypeName name="com.announcify.api.background.util.PluginSettings"/>
+<fullyQualifiedTypeName name="com.announcify.api.background.sql.model.BaseModel"/>
+<fullyQualifiedTypeName name="com.announcify.ui.activity.ChooserActivity"/>
+<fullyQualifiedTypeName name="com.announcify.api.background.sql.model.ChooserModelInterface"/>
+<fullyQualifiedTypeName name="android.widget.FilterQueryProvider"/>
+<fullyQualifiedTypeName name="java.util.Locale"/>
+<fullyQualifiedTypeName name="java.lang.Object"/>
+<fullyQualifiedTypeName name="com.announcify.ui.activity.ContactActivity"/>
+<fullyQualifiedTypeName name="com.announcify.api.ui.activity.BaseActivity"/>
+<fullyQualifiedTypeName name="android.provider.ContactsContract.Contacts"/>
+<fullyQualifiedTypeName name="android.widget.AdapterView"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="android.database.Cursor"/>
+<fullyQualifiedTypeName name="com.announcify.api.background.sql.model.GroupModel"/>
+<fullyQualifiedTypeName name="com.announcify.api.background.sql.model.ContactModel"/>
 </qualifiedTypeNameHistroy>

@@ -1,7 +1,0 @@
-package com.announcify.api.background.sql.model;
-
-public class Snippet {
-
-    public void remove(final long groupId) {
-}
-

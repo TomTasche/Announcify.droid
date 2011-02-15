@@ -14,15 +14,10 @@ import com.announcify.plugin.mail.google.util.Settings;
 public class WorkerService extends PluginService {
 
     public static final String ACTION_START_RINGTONE = "com.announcify.plugin.mail.google.ACTION_START_RINGTONE";
-
     public static final String ACTION_STOP_RINGTONE = "com.announcify.plugin.mail.google.ACTION_STOP_RINGTONE";
-
     public static final String EXTRA_FROM = "com.announcify.plugin.mail.google.EXTRA_FROM";
-
     public static final String EXTRA_SUBJECT = "com.announcify.plugin.mail.google.EXTRA_SUBJECT";
-
     public static final String EXTRA_SNIPPET = "com.announcify.plugin.mail.google.EXTRA_SNIPPET";
-
     public static final String EXTRA_MESSAGE = "com.announcify.plugin.mail.google.EXTRA_MESSAGE";
 
     public WorkerService() {
@@ -67,5 +62,7 @@ public class WorkerService extends PluginService {
         } else {
             super.onHandleIntent(intent);
         }
+        
+        stopSelf();
     }
 }

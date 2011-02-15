@@ -1,0 +1,47 @@
+package com.announcify.background.error;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import com.announcify.api.background.error.ExceptionHandler;
+import com.announcify.api.background.error.ExceptionParser;
+
+import android.app.IntentService;
+import android.content.Intent;
+
+
+public class ExceptionService extends IntentService {
+
+    public ExceptionService() {
+        super("ExceptionService");
+    }
+
+    @Override
+    protected void onHandleIntent(final Intent intent) {
+        // taken from:
+        // http://www.androidsnippets.org/snippets/36/
+        
+        HttpClient client = new DefaultHttpClient();  
+        HttpPost post = new HttpPost("http://www.announcify.com/bug/report.php");  
+
+        try {
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();  
+            nameValuePairs.add(new BasicNameValuePair(ExceptionHandler.PACKAGE, intent.getStringExtra(ExceptionHandler.PACKAGE)));  
+            nameValuePairs.add(new BasicNameValuePair("stringdata", "AndDev is Cool!"));  
+            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));  
+
+            client.execute(post);
+        } catch (ClientProtocolException e) {
+        } catch (IOException e) {}
+    }
+}

@@ -94,29 +94,28 @@ containing a value of this type.
         public static final int button_nickname=0x7f0b000f;
         public static final int button_speak=0x7f0b0019;
         public static final int button_title=0x7f0b0011;
-        public static final int check=0x7f0b001f;
-        public static final int check_block_groups=0x7f0b0009;
+        public static final int check=0x7f0b001e;
+        public static final int check_block=0x7f0b0009;
         public static final int edit_formatstring=0x7f0b000b;
         public static final int edit_replace=0x7f0b0017;
         public static final int edit_with=0x7f0b0018;
-        public static final int icon=0x7f0b001d;
-        public static final int menu_about=0x7f0b002b;
-        public static final int menu_activate=0x7f0b0023;
-        public static final int menu_edit=0x7f0b0025;
-        public static final int menu_help=0x7f0b0027;
-        public static final int menu_plugins=0x7f0b0028;
-        public static final int menu_rate=0x7f0b0029;
-        public static final int menu_remove=0x7f0b0021;
-        public static final int menu_report=0x7f0b0024;
-        public static final int menu_share=0x7f0b002a;
-        public static final int menu_toggle=0x7f0b0026;
-        public static final int menu_uninstall=0x7f0b0022;
-        public static final int plugin=0x7f0b001e;
+        public static final int icon=0x7f0b001c;
+        public static final int menu_about=0x7f0b002a;
+        public static final int menu_activate=0x7f0b0022;
+        public static final int menu_edit=0x7f0b0024;
+        public static final int menu_help=0x7f0b0026;
+        public static final int menu_plugins=0x7f0b0027;
+        public static final int menu_rate=0x7f0b0028;
+        public static final int menu_remove=0x7f0b0020;
+        public static final int menu_report=0x7f0b0023;
+        public static final int menu_share=0x7f0b0029;
+        public static final int menu_toggle=0x7f0b0025;
+        public static final int menu_uninstall=0x7f0b0021;
+        public static final int plugin=0x7f0b001d;
         public static final int screen=0x7f0b0000;
-        public static final int section=0x7f0b001c;
-        public static final int textLeft=0x7f0b001b;
+        public static final int section=0x7f0b001b;
         public static final int web_help=0x7f0b0016;
-        public static final int widget_control_button=0x7f0b0020;
+        public static final int widget_control_button=0x7f0b001f;
     }
     public static final class layout {
         public static final int actionbar=0x7f030000;
@@ -127,9 +126,8 @@ containing a value of this type.
         public static final int activity_help=0x7f030005;
         public static final int activity_replace=0x7f030006;
         public static final int list_header=0x7f030007;
-        public static final int list_item_choose=0x7f030008;
-        public static final int list_item_plugin=0x7f030009;
-        public static final int widget_control=0x7f03000a;
+        public static final int list_item_plugin=0x7f030008;
+        public static final int widget_control=0x7f030009;
     }
     public static final class menu {
         public static final int context_choose=0x7f0a0000;

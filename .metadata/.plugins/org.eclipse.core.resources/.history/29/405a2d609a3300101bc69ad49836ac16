@@ -1,0 +1,22 @@
+package com.announcify.background.error;
+
+import android.app.IntentService;
+import android.content.Intent;
+
+
+public class ExceptionService extends IntentService {
+
+    public ExceptionService() {
+        super("ExceptionService");
+    }
+
+    @Override
+    protected void onHandleIntent(final Intent intent) {
+//        final ErrorReporter reporter = ErrorReporter.getInstance();
+//        reporter.putCustomData("plugin",
+//                intent.getStringExtra(ExceptionHandler.PACKAGE));
+//        reporter.handleException((Throwable) intent
+//                .getSerializableExtra(ExceptionHandler.STACKTRACE));
+//        reporter.removeCustomData("plugin");
+    }
+}

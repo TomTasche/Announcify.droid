@@ -14,7 +14,6 @@ import com.announcify.plugin.message.sms.util.Settings;
 public class WorkerService extends PluginService {
 
     public final static String ACTION_START_RINGTONE = "com.announcify.plugin.message.sms.ACTION_START_RINGTONE";
-
     public final static String ACTION_STOP_RINGTONE = "com.announcify.plugin.message.sms.ACTION_STOP_RINGTONE";
 
     public WorkerService() {
@@ -77,5 +76,7 @@ public class WorkerService extends PluginService {
         } else {
             super.onHandleIntent(intent);
         }
+        
+        stopSelf();
     }
 }

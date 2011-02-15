@@ -1,0 +1,69 @@
+package com.announcify.ui.activity;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.provider.BaseColumns;
+import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Groups;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AutoCompleteTextView;
+import android.widget.CheckedTextView;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.SimpleCursorAdapter.CursorToStringConverter;
+import android.widget.TextView;
+
+import com.announcify.R;
+import com.announcify.api.background.sql.model.ContactModel;
+import com.announcify.api.background.sql.model.GroupModel;
+import com.announcify.api.background.util.AnnouncifySettings;
+import com.announcify.api.ui.activity.BaseActivity;
+
+
+public class ContactActivity extends ChooserActivity {
+
+    @Override
+    protected void onCreate(final Bundle bundle) {
+        super.onCreate(bundle);
+
+        checkBlock.setChecked(settings.getBlockContacts());
+        checkBlock.setOnClickListener(new OnClickListener() {
+
+            public void onClick(final View v) {
+                final boolean enable = !checkBlock.isChecked();
+                settings.setBlockContacts(enable);
+                checkBlock.setChecked(enable);
+            }
+        });
+
+        model = new ContactModel(this);
+        
+        listAdapter.changeCursorAndColumns(null, , to)
+
+        autoAdapter.setCursorToStringConverter(new CursorToStringConverter() {
+
+            public CharSequence convertToString(final Cursor cursor) {
+                return cursor.getString(cursor.getColumnIndex(Contacts.DISPLAY_NAME));
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        autoCursor = getContentResolver().query(Contacts.CONTENT_URI,
+                new String[] { Contacts._ID, Contacts.DISPLAY_NAME }, null, null,
+                Contacts.DISPLAY_NAME);
+        autoAdapter.changeCursor(autoCursor);
+    }
+}

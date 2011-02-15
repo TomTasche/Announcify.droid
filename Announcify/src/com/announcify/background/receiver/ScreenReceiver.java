@@ -12,16 +12,16 @@ import com.announcify.ui.control.RemoteControlDialog;
 
 
 public class ScreenReceiver extends BroadcastReceiver {
-
-    private boolean screenOn;
+    
+    private Context context;
 
     public ScreenReceiver(final Context context) {
-        screenOn = ((PowerManager) context
-                .getSystemService(Context.POWER_SERVICE)).isScreenOn();
+        this.context = context;
     }
 
     public boolean isScreenOn() {
-        return screenOn;
+        return ((PowerManager) context
+                .getSystemService(Context.POWER_SERVICE)).isScreenOn();
     }
 
     @Override
@@ -31,16 +31,9 @@ public class ScreenReceiver extends BroadcastReceiver {
                     .getSystemService(Context.TELEPHONY_SERVICE))
                     .getCallState() == TelephonyManager.CALL_STATE_RINGING) return;
 
-            screenOn = true;
             context.sendBroadcast(new Intent(RemoteControlDialog.ACTION_PAUSE));
             Log.e("Announcify", "Shutdown because: Screen");
-
-            Toast.makeText(
-                    context,
-                    "I've decided to stay silent and shut up, because I don't want to disturb you. Please check notifications for new notifications.",
-                    Toast.LENGTH_LONG).show();
         } else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
-            screenOn = false;
             // manager.upperSpeechVolume();
         }
     }

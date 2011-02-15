@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Message;
 import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
+import android.util.Log;
 
 import com.announcify.api.background.queue.PluginQueue;
 import com.announcify.background.handler.AnnouncificationHandler;
@@ -16,21 +17,15 @@ public class Queue implements OnUtteranceCompletedListener {
     public static final String EXTRA_TEXT_SNIPPET = "com.announcify.EXTRA_TEXT_SNIPPET";
 
     private final Context context;
-
     private final AnnouncificationHandler handler;
-
-    private final WakeLocker wakeLocker;
-
     private final LinkedList<PluginQueue> queue;
 
     private boolean started;
-
     private boolean granted;
 
     public Queue(final Context context, final AnnouncificationHandler handler) {
         queue = new LinkedList<PluginQueue>();
         this.context = context;
-        wakeLocker = new WakeLocker(context);
         this.handler = handler;
     }
 
@@ -41,12 +36,7 @@ public class Queue implements OnUtteranceCompletedListener {
     }
 
     private void checkNext() {
-        if (queue.isEmpty()) {
-            quit();
-            return;
-        }
-
-        if (queue.getFirst().isEmpty()) {
+        if (!queue.isEmpty() && queue.getFirst().isEmpty()) {
             handler.sendEmptyMessage(AnnouncificationHandler.WHAT_REVERT_LOCALE);
             context.sendBroadcast(new Intent(queue.getFirst()
                     .getStopBroadcast()));
@@ -69,30 +59,17 @@ public class Queue implements OnUtteranceCompletedListener {
     }
 
     public void deny() {
-        if (!queue.isEmpty()) {
-            context.sendBroadcast(new Intent(queue.getFirst()
-                    .getStopBroadcast()));
-        }
-
         granted = false;
 
-        if (wakeLocker.isLocked()) {
-            wakeLocker.unlock();
-        }
+        WakeLocker.unlock();
     }
 
     public void grant() {
         if (!started) return;
 
         granted = true;
-        if (!wakeLocker.isLocked()) {
-            wakeLocker.lock();
-        }
+        WakeLocker.lock(context);
 
-        if (!queue.isEmpty()) {
-            context.sendBroadcast(new Intent(queue.getFirst()
-                    .getStartBroadcast()));
-        }
         next();
     }
 
@@ -117,26 +94,26 @@ public class Queue implements OnUtteranceCompletedListener {
 
     public void putFirst(final PluginQueue little) {
         queue.add(0, little);
-        // TODO: if (grant) ?
+        
         grant();
     }
 
     public void putLast(final PluginQueue little) {
+        Log.e("Announcify", "Size: " + queue.size());
+        
         queue.add(little);
-
-        if (!granted) {
-            next();
+        
+        if (queue.size() == 1) {
+            grant();
         }
     }
 
     public void quit() {
-        if (wakeLocker.isLocked()) {
-            wakeLocker.unlock();
-        }
-
         deny();
 
         handler.sendEmptyMessage(AnnouncificationHandler.WHAT_SHUTDOWN);
+        
+        WakeLocker.unlock();
     }
 
     public void start() {

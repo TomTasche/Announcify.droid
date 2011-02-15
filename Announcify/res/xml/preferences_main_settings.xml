@@ -37,18 +37,19 @@
 					android:key="preference_condition_screen"
 					android:title="@string/preference_screen_condition_title"
 					android:summary="@string/preference_screen_condition_summary"
-					android:defaultValue="true" />
+					android:defaultValue="false" />
 
 				<CheckBoxPreference
 					android:key="preference_condition_discreet"
 					android:title="@string/preference_discreet_condition_title"
-					android:summary="@string/preference_discreet_condition_summary" />
+					android:summary="@string/preference_discreet_condition_summary"
+					android:defaultValue="false" />
 
 				<CheckBoxPreference
 					android:key="preference_condition_gravity"
 					android:title="@string/preference_gravity_condition_title"
 					android:summary="@string/preference_gravity_condition_summary"
-					android:defaultValue="true" />
+					android:defaultValue="false" />
 
 				<CheckBoxPreference
 					android:key="preference_behavior_notification"
@@ -82,6 +83,16 @@
 			<Preference
 				android:key="preference_choose_group"
 				android:title="@string/preference_choose_group_title"
+				android:summary="@string/preference_choose_group_summary" />
+
+			<CheckBoxPreference
+				android:key="preference_filter_by_contact"
+				android:title="FILTER CONTACTS"
+				android:summary="@string/preference_filter_group_summary" />
+
+			<Preference
+				android:key="preference_choose_contact"
+				android:title="CHOOSE FILTERED CONTACTS"
 				android:summary="@string/preference_choose_group_summary" />
 		</PreferenceCategory>
 	</PreferenceScreen>

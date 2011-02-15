@@ -26,15 +26,10 @@ import com.announcify.ui.control.RemoteControlDialog;
 public class ManagerService extends Service {
 
     private NotificationManager notificationManager;
-
     private ConditionManager conditionManager;
-
     private ControlReceiver controlReceiver;
-
     private AnnouncificationHandler handler;
-
     private HandlerThread thread;
-
     private Speaker speaker;
 
     @Override
@@ -59,9 +54,6 @@ public class ManagerService extends Service {
         }
 
         conditionManager = new ConditionManager(this, settings);
-        // if (conditionManager.isScreenOn()) {
-        // manager.lowerSpeechVolume();
-        // }
 
         thread = new HandlerThread("Announcifications");
         thread.start();
@@ -123,21 +115,14 @@ public class ManagerService extends Service {
 
         super.onDestroy();
     }
-
+    
     @Override
-    public void onStart(final Intent intent, final int startId) {
-        super.onStart(intent, startId);
-
-        if ((intent == null) || (intent.getExtras() == null)) return;
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        if ((intent == null) || (intent.getExtras() == null)) return START_NOT_STICKY;
 
         if ((intent.getExtras().getInt(PluginService.EXTRA_PRIORITY, -1) > 1)
                 && conditionManager.isScreenOn()) {
-            Toast.makeText(
-                    this,
-                    "I've decided to stay silent and shut up, because I don't want to disturb you. Please check notifications for new notifications.",
-                    Toast.LENGTH_LONG).show();
-
-            return;
+            return START_NOT_STICKY;
         }
 
         if (intent.getExtras().getInt(PluginService.EXTRA_PRIORITY, -1) == 1) {
@@ -148,5 +133,7 @@ public class ManagerService extends Service {
                 .obtainMessage(AnnouncificationHandler.WHAT_PUT_QUEUE);
         msg.setData(intent.getExtras());
         handler.sendMessage(msg);
+        
+        return START_NOT_STICKY;
     }
 }

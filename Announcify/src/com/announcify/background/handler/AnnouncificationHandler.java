@@ -22,27 +22,17 @@ import com.announcify.background.tts.Speaker;
 public class AnnouncificationHandler extends Handler {
 
     public static final int WHAT_START = 40;
-
     public static final int WHAT_CONTINUE = 44;
-
     public static final int WHAT_PAUSE = 43;
-
     public static final int WHAT_SHUTDOWN = 45;
-
     public static final int WHAT_PUT_QUEUE = 41;
-
     public static final int WHAT_NEXT_ITEM = 42;
-
     public static final int WHAT_CHANGE_LOCALE = 46;
-
     public static final int WHAT_REVERT_LOCALE = 47;
 
     private final Context context;
-
     private final Queue queue;
-
     private final Speaker speaker;
-
     private final PluginModel model;
 
     private boolean shutUp;

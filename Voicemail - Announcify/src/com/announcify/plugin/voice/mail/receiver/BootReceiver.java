@@ -11,9 +11,6 @@ public class BootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, final Intent intent) {
-        final Intent service = new Intent(context, VoicemailService.class);
-        service.setAction(intent.getAction());
-
-        context.startService(service);
+        context.startService(new Intent(context, VoicemailService.class));
     }
 }

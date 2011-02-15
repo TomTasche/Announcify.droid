@@ -1,0 +1,14 @@
+package com.announcify.background.util;
+
+import android.content.ContentValues;
+
+
+public interface ChooserModelInterface {
+    
+    public void add(final long groupId, final String title);
+
+    public boolean getEnabled(final long groupId);
+    
+    
+    
+}

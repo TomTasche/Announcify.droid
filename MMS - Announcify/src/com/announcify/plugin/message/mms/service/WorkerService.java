@@ -68,5 +68,7 @@ public class WorkerService extends PluginService {
         } else {
             super.onHandleIntent(intent);
         }
+        
+        stopSelf();
     }
 }

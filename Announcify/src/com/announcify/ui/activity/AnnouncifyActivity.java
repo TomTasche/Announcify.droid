@@ -42,10 +42,9 @@ public class AnnouncifyActivity extends BaseActivity {
         }
     }
 
+    private Cursor cursor;
     private PluginModel model;
-
     private ContentObserver observer;
-
     private SectionedAdapter adapter;
 
     private ListView getListView() {
@@ -223,12 +222,14 @@ public class AnnouncifyActivity extends BaseActivity {
     @Override
     protected void onStop() {
         getContentResolver().unregisterContentObserver(observer);
+        
+        cursor.close();
 
         super.onStop();
     }
 
     private void refreshList() {
-        final Cursor cursor = model.getAll(PluginModel.KEY_PLUGIN_NAME);
+        cursor = model.getAll(PluginModel.KEY_PLUGIN_NAME);
 
         adapter = new SectionedAdapter(this, model, cursor);
         getListView().setAdapter(adapter);

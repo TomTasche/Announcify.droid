@@ -1,0 +1,6 @@
+package com.announcify.background.util;
+
+
+public interface ChooserModelInterface {
+
+}

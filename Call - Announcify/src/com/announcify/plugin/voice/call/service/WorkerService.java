@@ -19,7 +19,6 @@ import com.announcify.plugin.voice.call.util.Settings;
 public class WorkerService extends PluginService {
 
     public final static String ACTION_START_RINGTONE = "com.announcify.plugin.voice.call.ACTION_START_RINGTONE";
-
     public final static String ACTION_STOP_RINGTONE = "com.announcify.plugin.voice.call.ACTION_STOP_RINGTONE";
 
     public WorkerService() {
@@ -33,9 +32,10 @@ public class WorkerService extends PluginService {
         }
 
         if (ACTION_ANNOUNCE.equals(intent.getAction())) {
-            final String number = intent
+            String number = intent
                     .getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
-            if ((number == null) && "".equals(number)) return;
+            if (number == null) number = "";
+            
             final Contact contact = new Contact(this,
                     new com.announcify.api.background.contact.lookup.Number(
                             this), number);
@@ -49,25 +49,10 @@ public class WorkerService extends PluginService {
             announcify.setStartBroadcast(ACTION_START_RINGTONE);
             announcify.setStopBroadcast(ACTION_STOP_RINGTONE);
             announcify.announce(formatter.format(null));
-        } else if (ACTION_START_RINGTONE.equals(intent.getAction())) {
-            final String s = getSharedPreferences(Settings.PREFERENCES_NAME,
-                    Context.MODE_WORLD_READABLE).getString(
-                    PluginSettings.KEY_RINGTONE, "");
-            if ((s == null) || "".equals(s)) return;
-            final RingtoneManager manager = new RingtoneManager(this);
-            manager.setType(RingtoneManager.TYPE_RINGTONE);
-            ringtone = manager.getRingtone(manager.getRingtonePosition(Uri
-                    .parse(s)));
-            if (ringtone == null) return;
-            ringtone.setStreamType(new AnnouncifySettings(this).getStream());
-            ringtone.play();
-        } else if (ACTION_STOP_RINGTONE.equals(intent.getAction())) {
-            if (ringtone != null) {
-                ringtone.stop();
-                ringtone = null;
-            }
         } else {
             super.onHandleIntent(intent);
         }
+        
+        stopSelf();
     }
 }

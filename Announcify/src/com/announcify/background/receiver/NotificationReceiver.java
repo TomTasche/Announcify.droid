@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.announcify.background.service.ManagerService;
+import com.announcify.ui.control.RemoteControlDialog;
 
 
 public class NotificationReceiver extends BroadcastReceiver {
@@ -13,6 +14,6 @@ public class NotificationReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, final Intent intent) {
-        context.stopService(new Intent(context, ManagerService.class));
+        context.sendBroadcast(new Intent(RemoteControlDialog.ACTION_PAUSE));
     }
 }

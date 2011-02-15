@@ -14,11 +14,8 @@ import com.announcify.plugin.talk.google.util.Settings;
 public class WorkerService extends PluginService {
 
     public static final String ACTION_START_RINGTONE = "com.announcify.plugin.talk.google.ACTION_START_RINGTONE";
-
     public static final String ACTION_STOP_RINGTONE = "com.announcify.plugin.talk.google.ACTION_STOP_RINGTONE";
-
     public static final String EXTRA_FROM = "com.announcify.plugin.talk.EXTRA_FROM";
-
     public static final String EXTRA_MESSAGE = "com.announcify.plugin.talk.EXTRA_MESSAGE";
 
     public WorkerService() {
@@ -51,5 +48,7 @@ public class WorkerService extends PluginService {
         } else {
             super.onHandleIntent(intent);
         }
+        
+        stopSelf();
     }
 }

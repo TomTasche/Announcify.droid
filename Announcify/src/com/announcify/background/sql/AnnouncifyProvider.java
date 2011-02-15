@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.util.Log;
 
 
 public class AnnouncifyProvider extends ContentProvider {
@@ -46,7 +47,9 @@ public class AnnouncifyProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
+        Log.e("smn", "create db");
         announcify = new AnnouncifyDatabase(getContext());
+        Log.e("smn", "created db");
 
         return true;
     }
@@ -55,7 +58,9 @@ public class AnnouncifyProvider extends ContentProvider {
     public Cursor query(final Uri uri, final String[] projection,
             final String selection, final String[] selectionArgs,
             final String sortOrder) {
+        Log.e("smn", "query");
         final SQLiteDatabase database = announcify.getReadableDatabase();
+        Log.e("smn", "queried");
 
         return database.query(uri.getLastPathSegment(), projection, selection,
                 selectionArgs, null, null, sortOrder);

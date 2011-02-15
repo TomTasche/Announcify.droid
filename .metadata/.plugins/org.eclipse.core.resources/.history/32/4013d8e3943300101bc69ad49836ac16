@@ -1,0 +1,126 @@
+package com.announcify.ui.activity;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.provider.BaseColumns;
+import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Groups;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AutoCompleteTextView;
+import android.widget.CheckedTextView;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.SimpleCursorAdapter.CursorToStringConverter;
+import android.widget.TextView;
+
+import com.announcify.R;
+import com.announcify.api.background.sql.model.GroupModel;
+import com.announcify.api.background.util.AnnouncifySettings;
+import com.announcify.api.ui.activity.BaseActivity;
+
+
+public class ContactActivity extends ChooserActivity {
+
+    @Override
+    protected void onCreate(final Bundle bundle) {
+        super.onCreate(bundle, R.layout.activity_choose);
+
+        checkBlock.setChecked(settings.getBlockContacts());
+        checkBlock.setOnClickListener(new OnClickListener() {
+
+            public void onClick(final View v) {
+                final boolean enable = !checkBlock.isChecked();
+                settings.setBlockContacts(enable);
+                checkBlock.setChecked(enable);
+            }
+        });
+
+        model = new GroupModel(this);
+
+        listAdapter = new SimpleWhiteCursorAdapter(this,
+                android.R.layout.simple_list_item_1, null,
+                new String[] { GroupModel.KEY_GROUP_TITLE },
+                new int[] { android.R.id.text1 });
+
+        list = (ListView) findViewById(android.R.id.list);
+        list.setAdapter(listAdapter);
+        list.setBackgroundColor(Color.WHITE);
+        list.setCacheColorHint(Color.TRANSPARENT);
+        list.setFastScrollEnabled(true);
+
+        registerForContextMenu(list);
+
+        autoAdapter = new SimpleWhiteCursorAdapter(this,
+                android.R.layout.simple_list_item_1, null,
+                new String[] { Contacts.DISPLAY_NAME }, new int[] { android.R.id.text1 });
+
+        auto = (AutoCompleteTextView) findViewById(R.id.auto_edit_chooser);
+        auto.setSingleLine();
+        auto.setAdapter(autoAdapter);
+        auto.setOnItemClickListener(new OnItemClickListener() {
+
+            public void onItemClick(final AdapterView<?> parent,
+                    final View view, final int position, final long id) {
+                model.add(autoAdapter.getItemId(position), ((TextView) view)
+                        .getText().toString());
+
+                refreshList();
+
+                auto.setText("");
+            }
+        });
+
+        autoAdapter.setCursorToStringConverter(new CursorToStringConverter() {
+
+            public CharSequence convertToString(final Cursor cursor) {
+                return cursor.getString(cursor.getColumnIndex(Contacts.DISPLAY_NAME));
+            }
+        });
+    }
+
+    @Override
+    public void onCreateContextMenu(final ContextMenu menu, final View v,
+            final ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        getMenuInflater().inflate(R.menu.context_choose, menu);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        refreshList();
+
+        autoCursor = getContentResolver().query(Contacts.CONTENT_URI,
+                new String[] { Contacts._ID, Contacts.DISPLAY_NAME }, null, null,
+                Contacts.DISPLAY_NAME);
+        autoAdapter.changeCursor(autoCursor);
+    }
+
+    @Override
+    protected void onStop() {
+        listCursor.close();
+        autoCursor.close();
+
+        super.onStop();
+    }
+
+    private void refreshList() {
+        if (listCursor != null) {
+            listCursor.close();
+        }
+
+        listCursor = model.getAll();
+        listAdapter.changeCursor(listCursor);
+    }
+}

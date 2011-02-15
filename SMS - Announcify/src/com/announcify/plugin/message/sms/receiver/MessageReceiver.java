@@ -1,6 +1,7 @@
 package com.announcify.plugin.message.sms.receiver;
 
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 
@@ -12,9 +13,8 @@ public class MessageReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, final Intent intent) {
-        final Intent serviceIntent = new Intent(context, WorkerService.class);
-        serviceIntent.setAction(PluginService.ACTION_ANNOUNCE);
-        serviceIntent.putExtras(intent.getExtras());
-        context.startService(serviceIntent);
+        intent.setComponent(new ComponentName(context, WorkerService.class));
+        intent.setAction(PluginService.ACTION_ANNOUNCE);
+        context.startService(intent);
     }
 }

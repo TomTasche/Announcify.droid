@@ -36,9 +36,14 @@
 	<string name="preference_choose_group_title">Choose Groups</string>
 	<string name="preference_choose_group_summary">Block / Allow desired groups</string>
 	
+	<string name="preference_special_title">Cut after character</string>
+	<string name="preference_special_summary">Cut names after selected characters</string>
+	
 	<string name="preference_default_title">Default Settings</string>
 	
 	<string name="preference_general_title">General Settings</string>
+	
+	<string name="preference_text_title">Text Settings</string>
 	
 	<string name="preference_translate_title">Translate Announcifications</string>
 	<string name="preference_translate_summary">ATTENTION: Could delay Announcifications!</string>

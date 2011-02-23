@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.PowerManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.announcify.ui.control.RemoteControlDialog;
 

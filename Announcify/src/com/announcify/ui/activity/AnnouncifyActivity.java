@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.announcify.R;
 import com.announcify.api.background.sql.model.PluginModel;
+import com.announcify.api.ui.activity.ActivityUtils;
 import com.announcify.api.ui.activity.BaseActivity;
 import com.announcify.background.sql.AnnouncifyProvider;
 import com.announcify.ui.widget.SectionedAdapter;
@@ -52,14 +53,12 @@ public class AnnouncifyActivity extends BaseActivity {
     }
 
     @Override
-    protected void onActivityResult(final int requestCode,
-            final int resultCode, final Intent data) {
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode > 2000) {
             try {
-                getPackageManager().getPackageGids(
-                        model.getPackage(requestCode - 2000));
+                getPackageManager().getPackageGids(model.getPackage(requestCode - 2000));
             } catch (final NameNotFoundException e) {
                 model.remove(requestCode - 2000);
             }
@@ -68,15 +67,11 @@ public class AnnouncifyActivity extends BaseActivity {
 
     @Override
     public boolean onContextItemSelected(final MenuItem item) {
-        final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
-                .getMenuInfo();
+        final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 
         switch (item.getItemId()) {
             case R.id.menu_uninstall:
-                startActivityForResult(
-                        new Intent(Intent.ACTION_DELETE, Uri.parse("package:"
-                                + model.getPackage(info.id))),
-                        (int) (2000 + info.id));
+                startActivityForResult(new Intent(Intent.ACTION_DELETE, Uri.parse("package:" + model.getPackage(info.id))), (int) (2000 + info.id));
 
                 break;
 
@@ -89,11 +84,9 @@ public class AnnouncifyActivity extends BaseActivity {
 
             case R.id.menu_report:
                 final Intent sendIntent = new Intent(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_SUBJECT,
-                        "Announcify - Problem with " + model.getName(info.id));
+                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Announcify - Problem with " + model.getName(info.id));
                 sendIntent.putExtra(Intent.EXTRA_TEXT, "");
-                sendIntent.putExtra(Intent.EXTRA_EMAIL,
-                        new String[] { "tom@announcify.com" });
+                sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { "tom@announcify.com" });
                 sendIntent.setType("message/rfc822");
                 startActivity(sendIntent);
 
@@ -115,17 +108,13 @@ public class AnnouncifyActivity extends BaseActivity {
 
         getListView().setOnItemClickListener(new OnItemClickListener() {
 
-            public void onItemClick(final AdapterView<?> arg0, final View arg1,
-                    final int arg2, final long arg3) {
+            public void onItemClick(final AdapterView<?> arg0, final View arg1, final int arg2, final long arg3) {
                 try {
                     startActivity(new Intent(model.getAction(arg3)));
                 } catch (final Exception e) {
                     model.remove(arg3);
 
-                    Toast.makeText(
-                            AnnouncifyActivity.this,
-                            "The Plugin you are looking for seems to be uninstalled!",
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(AnnouncifyActivity.this, "The Plugin you are looking for seems to be uninstalled!", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -171,7 +160,7 @@ public class AnnouncifyActivity extends BaseActivity {
                 break;
 
             case R.id.menu_plugins:
-                morePlugins();
+                ActivityUtils.getPluginsIntent();
 
                 break;
 
@@ -184,7 +173,7 @@ public class AnnouncifyActivity extends BaseActivity {
                 break;
 
             case R.id.menu_share:
-                share();
+                ActivityUtils.getShareIntent();
 
                 break;
 

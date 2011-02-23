@@ -27,9 +27,6 @@ com.announcify.api.background.contact.ContactEnum: com.announcify.api.background
 com.announcify.api.background.contact.ContactEnum: com.announcify.api.background.contact.ContactEnum valueOf(java.lang.String)
 com.announcify.api.background.contact.ContactEnum: com.announcify.api.background.contact.ContactEnum[] values()
 com.announcify.api.background.contact.ContactEnum: com.announcify.api.background.contact.ContactEnum valueOf(java.lang.String)
-org.acra.ReportingInteractionMode: org.acra.ReportingInteractionMode[] values()
-org.acra.ReportingInteractionMode: org.acra.ReportingInteractionMode valueOf(java.lang.String)
-org.acra.CrashReportDialog
 com.announcify.ui.control.RemoteControlDialog
 com.announcify.ui.control.RemoteControlDialogInstaller
 com.announcify.api.ui.activity.BaseActivity
@@ -38,17 +35,17 @@ com.announcify.ui.activity.GroupActivity
 com.announcify.ui.activity.HelpActivity
 com.announcify.ui.activity.ReplaceActivity
 com.announcify.ui.activity.AnnouncifyActivity
+com.announcify.ui.activity.ContactActivity
 com.announcify.api.ui.activity.PluginActivity
+com.announcify.ui.activity.LocaleActivity
 com.announcify.ui.activity.SettingsActivity
-com.announcify.AnnouncifyApplication
 com.announcify.background.service.ManagerService
 com.announcify.api.background.service.PluginService
-com.announcify.background.error.ExceptionService
 com.announcify.background.receiver.HeadsetReceiver
 com.announcify.background.receiver.ScreenReceiver
-com.announcify.background.error.ExceptionReceiver
 com.announcify.background.receiver.NotificationReceiver
 com.announcify.background.receiver.ControlReceiver
+com.announcify.background.receiver.LocaleReceiver
 com.announcify.ui.control.RemoteControlWidget
 com.announcify.background.sql.AnnouncifyProvider
 com.announcify.api.background.tts.Speech

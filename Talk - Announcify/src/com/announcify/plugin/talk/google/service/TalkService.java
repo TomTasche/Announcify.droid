@@ -9,6 +9,8 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 
+import com.announcify.api.background.error.ExceptionHandler;
+
 
 public class TalkService extends Service {
 
@@ -89,7 +91,16 @@ public class TalkService extends Service {
     public void onCreate() {
         thread = new HandlerThread("TalkThread");
         thread.start();
-        observer = new TalkObserver(new Handler(thread.getLooper()));
+        
+        Handler handler = new Handler(thread.getLooper());
+        handler.post(new Runnable() {
+            
+            public void run() {
+                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(TalkService.this));
+            }
+        });
+        
+        observer = new TalkObserver(handler);
 
         getContentResolver().registerContentObserver(
                 Uri.withAppendedPath(Uri

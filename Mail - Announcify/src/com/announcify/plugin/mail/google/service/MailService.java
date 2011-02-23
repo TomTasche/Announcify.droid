@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 
+import com.announcify.api.background.error.ExceptionHandler;
 import com.announcify.api.background.service.PluginService;
 import com.announcify.plugin.mail.google.util.Settings;
 
@@ -118,6 +119,8 @@ public class MailService extends Service {
 
     @Override
     public void onCreate() {
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
+        
         observers = new LinkedList<MailService.MailObserver>();
         addresses = new LinkedList<String>();
         threads = new LinkedList<HandlerThread>();
@@ -164,8 +167,16 @@ public class MailService extends Service {
         addresses.add(address);
         threads.add(new HandlerThread("MailThread for " + address));
         threads.getLast().start();
-        observers.add(new MailObserver(new Handler(threads.getLast()
-                .getLooper()), address));
+        
+        Handler handler = new Handler(threads.getLast().getLooper());
+        handler.post(new Runnable() {
+            
+            public void run() {
+                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(MailService.this));
+            }
+        });
+        
+        observers.add(new MailObserver(handler, address));
 
         getContentResolver().registerContentObserver(
                 Uri.parse("content://gmail-ls/conversations/"

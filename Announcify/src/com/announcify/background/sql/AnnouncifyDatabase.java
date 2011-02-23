@@ -43,7 +43,7 @@ public class AnnouncifyDatabase extends SQLiteOpenHelper {
         
         db.execSQL("CREATE TABLE " + ContactModel.TABLE_NAME + " ("
                 + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + ContactModel.KEY_CONTACT_ID + " INTEGER UNIQUE NOT NULL,"
+                + ContactModel.KEY_CONTACT_ID + " TEXT UNIQUE NOT NULL,"
                 + ContactModel.KEY_CONTACT_TITLE + " TEXT NOT NULL);");
 
         final ContentValues values = new ContentValues();

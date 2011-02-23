@@ -6,6 +6,8 @@ import android.os.IBinder;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 
+import com.announcify.api.background.error.ExceptionHandler;
+
 
 public class VoicemailService extends Service {
 
@@ -27,6 +29,8 @@ public class VoicemailService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
 
         listener = new VoicemailListener();
         ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).listen(

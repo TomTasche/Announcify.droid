@@ -1,9 +1,6 @@
 package com.announcify.plugin.voice.call.service;
 
-import android.content.Context;
 import android.content.Intent;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.telephony.TelephonyManager;
 
 import com.announcify.api.AnnouncifyIntent;
@@ -11,8 +8,6 @@ import com.announcify.api.background.contact.Contact;
 import com.announcify.api.background.contact.Filter;
 import com.announcify.api.background.service.PluginService;
 import com.announcify.api.background.text.Formatter;
-import com.announcify.api.background.util.AnnouncifySettings;
-import com.announcify.api.background.util.PluginSettings;
 import com.announcify.plugin.voice.call.util.Settings;
 
 

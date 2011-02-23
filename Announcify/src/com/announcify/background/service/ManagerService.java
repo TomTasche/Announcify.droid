@@ -11,7 +11,6 @@ import android.os.IBinder;
 import android.os.Message;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.announcify.R;
 import com.announcify.api.background.error.ExceptionHandler;
@@ -39,6 +38,8 @@ public class ManagerService extends Service {
 
     @Override
     public void onCreate() {
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
+        
         super.onCreate();
 
         final AnnouncifySettings settings = new AnnouncifySettings(this);
@@ -70,9 +71,7 @@ public class ManagerService extends Service {
         handler.post(new Runnable() {
 
             public void run() {
-                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(
-                        ManagerService.this, Thread
-                                .getDefaultUncaughtExceptionHandler()));
+                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(ManagerService.this));
             }
         });
 

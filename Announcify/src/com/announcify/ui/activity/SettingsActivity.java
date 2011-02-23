@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.announcify.R;
 import com.announcify.api.background.util.AnnouncifySettings;
+import com.announcify.api.background.util.PluginSettings;
 import com.announcify.api.ui.activity.PluginActivity;
 
 
@@ -17,7 +18,23 @@ public class SettingsActivity extends PluginActivity {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState, new PluginSettings(this, "com.announcify") {
+            
+            @Override
+            public String getSettingsAction() {
+                return "com.announcify.SETTINGS";
+            }
+            
+            @Override
+            public int getPriority() {
+                return 9;
+            }
+            
+            @Override
+            public String getEventType() {
+                return "Announcify++";
+            }
+        });
         
         getPreferenceManager().setSharedPreferencesName(
                 AnnouncifySettings.PREFERENCES_NAME);
@@ -80,12 +97,14 @@ public class SettingsActivity extends PluginActivity {
 
                 return false;
             }
-        });        
+        });
 
         // ugly fix for bug #4611
         // https://code.google.com/p/android/issues/detail?id=4611
-        for (int i = 1; i < 5; i++) {
+        for (int i = 1; i < 6; i++) {
             applyThemeProtection("screen" + i);
         }
+        
+        setCustomListeners();
     }
 }

@@ -54,8 +54,6 @@ com.announcify.api.background.error.ExceptionHandler:
     public static final java.lang.String VERSION_NAME
     public static final java.lang.String STACKTRACE
     public static final java.lang.String MODEL
-    public static final java.lang.String INFORMATION
-com.announcify.api.background.error.ExpectedException
 com.announcify.api.background.queue.PluginQueue:
     56:61:public PluginQueue(java.lang.String,java.util.LinkedList,com.announcify.api.background.tts.Speech)
     63:71:public PluginQueue(java.lang.String,java.util.LinkedList,java.lang.String,java.lang.String,android.content.Context)
@@ -77,9 +75,15 @@ com.announcify.api.background.service.PluginService:
     public final java.lang.String ACTION_START_RINGTONE
     public final java.lang.String ACTION_STOP_RINGTONE
     protected com.announcify.api.background.util.PluginSettings settings
-    45:49:public PluginService(java.lang.String)
-    53:60:public PluginService(java.lang.String,java.lang.String,java.lang.String)
-    64:98:protected void onHandleIntent(android.content.Intent)
+    35:39:public PluginService(java.lang.String)
+    43:49:public PluginService(java.lang.String,java.lang.String,java.lang.String)
+    53:84:protected void onHandleIntent(android.content.Intent)
+com.announcify.api.background.sql.model.ContactModel:
+    public static final java.lang.String TABLE_NAME
+    public static final java.lang.String KEY_CONTACT_ID
+    public static final java.lang.String KEY_CONTACT_TITLE
+    27:35:public boolean getEnabled(java.lang.String)
+    39:41:public void remove(java.lang.String)
 com.announcify.api.background.sql.model.GroupModel:
     public static final java.lang.String TABLE_NAME
     public static final java.lang.String KEY_GROUP_ID
@@ -92,9 +96,9 @@ com.announcify.api.background.sql.model.PluginModel:
     public static final java.lang.String KEY_PLUGIN_ACTION
     public static final java.lang.String KEY_PLUGIN_ACTIVE
     public static final java.lang.String KEY_PLUGIN_PRIORITY
-    25:33:public void add(java.lang.String,int,java.lang.String,java.lang.String,boolean)
-    112:122:public int getPriority(long)
-    145:154:public void update(long,java.lang.String,int,java.lang.String,java.lang.String,boolean)
+    24:32:public void add(java.lang.String,int,java.lang.String,java.lang.String,boolean)
+    107:115:public int getPriority(long)
+    134:142:public void update(long,java.lang.String,int,java.lang.String,java.lang.String,boolean)
 com.announcify.api.background.sql.model.TranslationModel:
     public static final java.lang.String TABLE_NAME
     public static final java.lang.String KEY_TRANSLATION_FROM
@@ -116,36 +120,57 @@ com.announcify.api.background.util.AnnouncifySettings:
     public static final java.lang.String KEY_READING_MODE
     public static final java.lang.String KEY_GROUP_FILTER
     public static final java.lang.String KEY_GROUP_BLOCK
+    public static final java.lang.String KEY_CONTACT_FILTER
+    public static final java.lang.String KEY_CONTACT_BLOCK
     public static final java.lang.String KEY_TRANSLATE_TEXT
     public static final java.lang.String KEY_STREAM
     public static final java.lang.String KEY_DISCREET
     public static final java.lang.String KEY_SCREEN
     public static final java.lang.String KEY_GRAVITY
     public static final java.lang.String KEY_NOTIFICATION
-    51:51:public java.lang.String getDefaultDefaultMode()
-    56:56:public java.lang.String getDefaultDiscreetMode()
-    61:61:public int getDefaultReadingBreak()
-    66:66:public int getDefaultReadingRepeat()
-    71:71:public int getDefaultReadingWait()
-    76:76:public java.lang.String getDefaultUnknownMode()
-    80:80:public boolean getFilterByGroup()
-    84:84:public int getReadingMode()
-    92:92:public boolean getTranslateText()
-com.announcify.api.background.util.PluginSettings
+    public static final java.lang.String KEY_SPECIAL_CHARACTERS
+    46:46:public java.lang.String getSpecialCharacter()
+    54:54:public java.lang.String getDefaultDefaultMode()
+    59:59:public java.lang.String getDefaultDiscreetMode()
+    64:64:public int getDefaultReadingBreak()
+    69:69:public int getDefaultReadingRepeat()
+    74:74:public int getDefaultReadingWait()
+    79:79:public java.lang.String getDefaultUnknownMode()
+    83:83:public boolean getFilterByGroup()
+    87:87:public boolean getFilterByContact()
+    91:91:public int getReadingMode()
+    99:99:public boolean getTranslateText()
+    131:131:public java.lang.String getRingtone()
+com.announcify.api.background.util.PluginSettings:
+    public static final java.lang.String KEY_RINGTONE
+    public static final java.lang.String KEY_READING_BREAK
+    public static final java.lang.String KEY_READING_REPEAT
+    public static final java.lang.String KEY_READING_WAIT
+    public static final java.lang.String KEY_READING_UNKNOWN
+    public static final java.lang.String KEY_READING_UNKNOWN_CUSTOM
+    public static final java.lang.String KEY_READING_DISCREET
+    public static final java.lang.String KEY_READING_DISCREET_CUSTOM
+    public static final java.lang.String KEY_READING_ANNOUNCEMENT
+    public static final java.lang.String KEY_READING_ANNOUNCEMENT_CUSTOM
+    33:33:public java.lang.String getDefaultMode()
+    37:37:public java.lang.String getDiscreetMode()
+    public abstract int getPriority()
+    45:49:public int getReadingBreak()
+    53:53:public int getReadingRepeat()
+    57:61:public int getReadingWait()
+    public abstract java.lang.String getSettingsAction()
+    67:67:public java.lang.String getSharedPreferencesName()
+    71:71:public java.lang.String getUnknownMode()
+    75:75:public java.lang.String getRingtone()
 com.announcify.api.simple.SimpleAnnouncifyIntent
 com.announcify.api.simple.SimpleAnnouncifyIntent$SimpleSettings
 com.announcify.api.simple.SimplePluginModel
-com.announcify.api.ui.activity.BaseActivity:
-    43:44:protected void openHelp()
 com.announcify.api.ui.activity.PluginActivity:
     private static final java.lang.String CUSTOM_VALUE
-    51:54:protected void morePlugins()
-    81:82:protected void openHelp()
-    86:127:protected void parseRingtone(int,int,android.content.Intent,int)
-    131:185:private void setCustomAnnouncementListener(java.lang.String,com.announcify.api.background.util.PluginSettings,java.lang.String)
-    188:201:protected void setCustomListeners(com.announcify.api.background.util.PluginSettings)
-    205:251:private void setCustomNumberListener(java.lang.String,com.announcify.api.background.util.PluginSettings,java.lang.String)
-    254:262:protected void share()
+    73:96:protected void parseRingtone(int,int,android.content.Intent,int)
+    99:133:private void setCustomAnnouncementListener(java.lang.String,com.announcify.api.background.util.PluginSettings,java.lang.String)
+    136:143:protected void setCustomListeners()
+    146:176:private void setCustomNumberListener(java.lang.String,com.announcify.api.background.util.PluginSettings,java.lang.String)
 com.announcify.api.ui.activity.PluginActivity$2
 com.announcify.api.ui.activity.PluginActivity$2$1
 com.announcify.api.ui.activity.PluginActivity$2$2
@@ -163,6 +188,8 @@ com.announcify.background.handler.AnnouncificationHandler:
     public static final int WHAT_REVERT_LOCALE
 com.announcify.background.queue.Queue:
     public static final java.lang.String EXTRA_TEXT_SNIPPET
+com.announcify.background.receiver.LocaleReceiver:
+    public static final java.lang.String ANNOUNCIFY_ENABLED
 com.announcify.background.receiver.NotificationReceiver:
     public static final java.lang.String NOTIFICATION_BROADCAST
 com.announcify.background.receiver.gravity.GravityListener:
@@ -171,6 +198,12 @@ com.announcify.background.receiver.gravity.GravityListener:
 com.announcify.background.tts.Speaker:
     28:31:public void applyLanguage(com.announcify.api.background.tts.Speech)
 com.announcify.background.tts.Volume
+com.announcify.ui.activity.LocaleActivity$1:
+    26:26:public java.lang.String getSettingsAction()
+    31:31:public int getPriority()
+com.announcify.ui.activity.SettingsActivity$1:
+    25:25:public java.lang.String getSettingsAction()
+    30:30:public int getPriority()
 com.announcify.ui.control.RemoteControlDialog:
     public static final java.lang.String ACTION_CONTINUE
     public static final java.lang.String ACTION_PAUSE
@@ -180,75 +213,3 @@ com.announcify.ui.widget.SectionedAdapter:
 com.markupartist.android.widget.ActionBar:
     199:202:public void setHomeLogo(int)
     209:210:public void setTitle(int)
-org.acra.ACRA:
-    static final java.lang.String RES_NOTIF_ICON
-    static final java.lang.String RES_NOTIF_TICKER_TEXT
-    static final java.lang.String RES_NOTIF_TITLE
-    static final java.lang.String RES_NOTIF_TEXT
-    static final java.lang.String RES_DIALOG_ICON
-    static final java.lang.String RES_DIALOG_TITLE
-    static final java.lang.String RES_DIALOG_TEXT
-    static final java.lang.String RES_DIALOG_COMMENT_PROMPT
-    static final java.lang.String RES_DIALOG_OK_TOAST
-    static final java.lang.String RES_TOAST_TEXT
-    static final int NOTIF_CRASH_ID
-    public static final java.lang.String PREF_DISABLE_ACRA
-    public static final java.lang.String PREF_ENABLE_ACRA
-org.acra.ACRAConfigurationException:
-    private static final long serialVersionUID
-org.acra.ConfigurationInspector:
-    private static final java.lang.String SUFFIX_MASK
-    private static final java.lang.String FIELD_SCREENLAYOUT
-    private static final java.lang.String FIELD_UIMODE
-    private static final java.lang.String FIELD_MNC
-    private static final java.lang.String FIELD_MCC
-    private static final java.lang.String PREFIX_UI_MODE
-    private static final java.lang.String PREFIX_TOUCHSCREEN
-    private static final java.lang.String PREFIX_SCREENLAYOUT
-    private static final java.lang.String PREFIX_ORIENTATION
-    private static final java.lang.String PREFIX_NAVIGATIONHIDDEN
-    private static final java.lang.String PREFIX_NAVIGATION
-    private static final java.lang.String PREFIX_KEYBOARDHIDDEN
-    private static final java.lang.String PREFIX_KEYBOARD
-    private static final java.lang.String PREFIX_HARDKEYBOARDHIDDEN
-org.acra.CrashReportDialog:
-    private static final int CRASH_DIALOG_LEFT_ICON
-org.acra.ErrorReporter:
-    private static final int MAX_SEND_REPORTS
-    private static final java.lang.String VERSION_NAME_KEY
-    private static final java.lang.String PACKAGE_NAME_KEY
-    private static final java.lang.String FILE_PATH_KEY
-    private static final java.lang.String PHONE_MODEL_KEY
-    private static final java.lang.String ANDROID_VERSION_KEY
-    private static final java.lang.String BOARD_KEY
-    private static final java.lang.String BRAND_KEY
-    private static final java.lang.String DEVICE_KEY
-    private static final java.lang.String BUILD_DISPLAY_KEY
-    private static final java.lang.String FINGERPRINT_KEY
-    private static final java.lang.String HOST_KEY
-    private static final java.lang.String ID_KEY
-    private static final java.lang.String MODEL_KEY
-    private static final java.lang.String PRODUCT_KEY
-    private static final java.lang.String TAGS_KEY
-    private static final java.lang.String TIME_KEY
-    private static final java.lang.String TYPE_KEY
-    private static final java.lang.String USER_KEY
-    private static final java.lang.String TOTAL_MEM_SIZE_KEY
-    private static final java.lang.String AVAILABLE_MEM_SIZE_KEY
-    private static final java.lang.String CUSTOM_DATA_KEY
-    private static final java.lang.String STACK_TRACE_KEY
-    private static final java.lang.String INITIAL_CONFIGURATION_KEY
-    private static final java.lang.String CRASH_CONFIGURATION_KEY
-    private static final java.lang.String DISPLAY_KEY
-    private static final java.lang.String USER_COMMENT_KEY
-    private static final java.lang.String USER_CRASH_DATE_KEY
-    static final java.lang.String IS_SILENT_KEY
-    static final java.lang.String SILENT_SUFFIX
-    static final java.lang.String EXTRA_REPORT_FILE_NAME
-    212:213:public void addCustomData(java.lang.String,java.lang.String)
-    263:263:public java.lang.String getCustomData(java.lang.String)
-    582:583:public org.acra.ErrorReporter$ReportsSenderWorker handleSilentException(java.lang.Throwable)
-    845:846:public void deletePendingSilentReports()
-    852:853:public void deletePendingNonSilentReports()
-org.acra.HttpUtils:
-    private static final int SOCKET_TIMEOUT

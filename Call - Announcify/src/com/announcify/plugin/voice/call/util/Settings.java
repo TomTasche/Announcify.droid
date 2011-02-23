@@ -28,7 +28,12 @@ public class Settings extends PluginSettings {
 
     @Override
     public int getReadingRepeat() {
-        return Integer.parseInt(preferences.getString(KEY_READING_REPEAT, "5"));
+        final String s = preferences.getString(KEY_READING_REPEAT, "5");
+        if (s.equals(DEFAULT_SETTING)) {
+            return defaultSettings.getDefaultReadingRepeat();
+        } else {
+            return Integer.parseInt(s);
+        }
     }
 
     @Override

@@ -5,4 +5,38 @@
 
 	<string
 		name="event_sms">SMS</string>
+		
+	<string-array
+		name="preference_list_reading_announcement_names">
+		<item>\"Tom\"</item>
+		<item>\"Tom from Home\"</item>
+		<item>\"SMS from Tom\"</item>
+		<item>\"You have a new SMS\"</item>
+		<item>\"You have a new Announcification!\"</item>
+		<item>Same as default in Announcify++</item>
+		<item>Custom...</item>
+	</string-array>
+
+	<string-array
+		name="preference_list_reading_unknown_names">
+		<item>Nothing.</item>
+		<item>\"Unknown\"</item>
+		<item>Address</item>	
+		<item>\"You have a new SMS\"</item>
+		<item>\"You have a new Announcification!\"</item>
+		<item>Same as default in Announcify++</item>
+		<item>Custom...</item>
+	</string-array>
+
+	<string-array
+		name="preference_list_reading_discreet_names">
+		<item>\"Tom\"</item>
+		<item>\"Tom from Home\"</item>
+		<item>\"SMS from Tom\"</item>
+		<item>\"SMS from Tom: ...\"</item>
+		<item>\"You have a new SMS\"</item>
+		<item>\"You have a new Announcification!\"</item>
+		<item>Same as default in Announcify++</item>
+		<item>Custom...</item>
+	</string-array>
 </resources>

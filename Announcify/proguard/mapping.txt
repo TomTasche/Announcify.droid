@@ -1,13 +1,11 @@
-com.announcify.AnnouncifyApplication -> com.announcify.AnnouncifyApplication:
-    void onCreate() -> onCreate
 com.announcify.api.R -> com.announcify.api.a:
 com.announcify.api.R$styleable -> com.announcify.api.b:
     int[] ActionBar -> a
-com.announcify.api.background.error.ExceptionHandler -> com.announcify.api.background.b.a:
+com.announcify.api.background.error.ExceptionHandler -> com.announcify.api.background.c.b:
     android.content.Context context -> a
     java.lang.Thread$UncaughtExceptionHandler defaultHandler -> b
     void uncaughtException(java.lang.Thread,java.lang.Throwable) -> uncaughtException
-com.announcify.api.background.error.ExceptionParser -> com.announcify.api.background.b.b:
+com.announcify.api.background.error.ExceptionParser -> com.announcify.api.background.c.a:
     android.content.Context context -> a
     java.lang.Throwable exception -> b
     java.lang.String getVersionCode() -> b
@@ -31,27 +29,29 @@ com.announcify.api.background.queue.PluginQueue$1 -> com.announcify.api.backgrou
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
     java.lang.Object[] newArray(int) -> newArray
 com.announcify.api.background.service.PluginService -> com.announcify.api.background.service.PluginService:
-com.announcify.api.background.sql.model.BaseModel -> com.announcify.api.background.c.a.c:
+com.announcify.api.background.sql.model.BaseModel -> com.announcify.api.background.a.a.b:
     android.net.Uri PROVIDER_URI -> b
     java.lang.String TABLE_NAME -> c
     android.content.ContentResolver resolver -> a
     android.net.Uri buildUri() -> a
-    android.database.Cursor get(long) -> b
+    android.database.Cursor get(long) -> a
     android.database.Cursor getAll() -> b
     android.database.Cursor getAll(java.lang.String) -> a
     android.content.ContentResolver getResolver() -> c
-    void remove(long) -> a
-com.announcify.api.background.sql.model.GroupModel -> com.announcify.api.background.c.a.a:
-    void remove(long) -> a
-com.announcify.api.background.sql.model.PluginModel -> com.announcify.api.background.c.a.d:
+    void remove(long) -> b
+com.announcify.api.background.sql.model.ContactModel -> com.announcify.api.background.a.a.e:
+com.announcify.api.background.sql.model.GroupModel -> com.announcify.api.background.a.a.d:
+    void remove(long) -> b
+com.announcify.api.background.sql.model.PluginModel -> com.announcify.api.background.a.a.c:
     java.lang.String getAction(long) -> c
     boolean getActive(long) -> d
+    void setActive(long,boolean) -> a
     android.database.Cursor getAll() -> b
     long getId(java.lang.String) -> b
     java.lang.String getName(long) -> e
     java.lang.String getPackage(long) -> f
     void togglePlugin(long) -> g
-com.announcify.api.background.sql.model.TranslationModel -> com.announcify.api.background.c.a.b:
+com.announcify.api.background.sql.model.TranslationModel -> com.announcify.api.background.a.a.a:
     void add(java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
 com.announcify.api.background.tts.Speech -> com.announcify.api.background.tts.Speech:
     android.os.Parcelable$Creator CREATOR -> CREATOR
@@ -63,27 +63,37 @@ com.announcify.api.background.tts.Speech -> com.announcify.api.background.tts.Sp
 com.announcify.api.background.tts.Speech$1 -> com.announcify.api.background.tts.a:
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
     java.lang.Object[] newArray(int) -> newArray
-com.announcify.api.background.util.AnnouncifySettings -> com.announcify.api.background.a.a:
+com.announcify.api.background.util.AnnouncifySettings -> com.announcify.api.background.b.a:
     android.content.SharedPreferences preferences -> a
     boolean getBlockGroups() -> a
-    int getStream() -> b
-    boolean isDiscreetCondition() -> c
-    boolean isGravityCondition() -> d
-    boolean isScreenCondition() -> e
-    boolean isShowNotification() -> f
+    boolean getBlockContacts() -> b
+    int getStream() -> c
+    boolean isDiscreetCondition() -> d
+    boolean isGravityCondition() -> e
+    boolean isScreenCondition() -> f
+    boolean isShowNotification() -> g
     void setBlockGroups(boolean) -> a
+    void setBlockContacts(boolean) -> b
+com.announcify.api.background.util.PluginSettings -> com.announcify.api.background.b.b:
+    java.lang.String name -> a
+    android.content.Context context -> b
+    android.content.SharedPreferences preferences -> c
+    com.announcify.api.background.util.AnnouncifySettings defaultSettings -> d
+    java.lang.String getEventType() -> a
+com.announcify.api.ui.activity.ActivityUtils -> com.announcify.api.ui.activity.b:
+    android.content.Intent getPluginsIntent() -> a
+    android.content.Intent getHomeIntent() -> b
+    android.content.Intent getHelpIntent() -> c
+    android.content.Intent getShareIntent() -> d
 com.announcify.api.ui.activity.BaseActivity -> com.announcify.api.ui.activity.BaseActivity:
     void onCreate(android.os.Bundle,int) -> a
 com.announcify.api.ui.activity.PluginActivity -> com.announcify.api.ui.activity.PluginActivity:
+    com.announcify.api.background.util.PluginSettings settings -> a
     void applyThemeProtection(java.lang.String) -> a
-    void onCreate(android.os.Bundle) -> onCreate
+    void onCreate(android.os.Bundle,com.announcify.api.background.util.PluginSettings) -> a
 com.announcify.api.ui.activity.PluginActivity$1 -> com.announcify.api.ui.activity.a:
     com.announcify.api.ui.activity.PluginActivity this$0 -> a
     boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
-com.announcify.background.error.ExceptionReceiver -> com.announcify.background.error.ExceptionReceiver:
-    void onReceive(android.content.Context,android.content.Intent) -> onReceive
-com.announcify.background.error.ExceptionService -> com.announcify.background.error.ExceptionService:
-    void onHandleIntent(android.content.Intent) -> onHandleIntent
 com.announcify.background.handler.AnnouncificationHandler -> com.announcify.background.b.a:
     android.content.Context context -> a
     com.announcify.background.queue.Queue queue -> b
@@ -99,10 +109,9 @@ com.announcify.background.handler.AnnouncificationHandler$1 -> com.announcify.ba
 com.announcify.background.queue.Queue -> com.announcify.background.c.a:
     android.content.Context context -> a
     com.announcify.background.handler.AnnouncificationHandler handler -> b
-    com.announcify.background.queue.WakeLocker wakeLocker -> c
-    java.util.LinkedList queue -> d
-    boolean started -> e
-    boolean granted -> f
+    java.util.LinkedList queue -> c
+    boolean started -> d
+    boolean granted -> e
     void changeLanguage() -> d
     void grant() -> a
     void next() -> e
@@ -113,9 +122,9 @@ com.announcify.background.queue.Queue -> com.announcify.background.c.a:
     void start() -> c
 com.announcify.background.queue.WakeLocker -> com.announcify.background.c.b:
     android.os.PowerManager$WakeLock lock -> a
-    boolean isLocked() -> a
-    void lock() -> b
-    void unlock() -> c
+    boolean isLocked() -> b
+    void lock(android.content.Context) -> a
+    void unlock() -> a
 com.announcify.background.receiver.CallReceiver -> com.announcify.background.receiver.a:
     android.content.Context context -> a
     boolean stickyBroadcastReceived -> b
@@ -130,10 +139,12 @@ com.announcify.background.receiver.GravityReceiver$1 -> com.announcify.backgroun
     void onDisplayDown() -> a
 com.announcify.background.receiver.HeadsetReceiver -> com.announcify.background.receiver.HeadsetReceiver:
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
+com.announcify.background.receiver.LocaleReceiver -> com.announcify.background.receiver.LocaleReceiver:
+    void onReceive(android.content.Context,android.content.Intent) -> onReceive
 com.announcify.background.receiver.NotificationReceiver -> com.announcify.background.receiver.NotificationReceiver:
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
 com.announcify.background.receiver.ScreenReceiver -> com.announcify.background.receiver.ScreenReceiver:
-    boolean screenOn -> a
+    android.content.Context context -> a
     boolean isScreenOn() -> a
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
 com.announcify.background.receiver.gravity.GravityListener -> com.announcify.background.receiver.a.b:
@@ -193,7 +204,7 @@ com.announcify.background.service.ManagerService -> com.announcify.background.se
     android.os.IBinder onBind(android.content.Intent) -> onBind
     void onCreate() -> onCreate
     void onDestroy() -> onDestroy
-    void onStart(android.content.Intent,int) -> onStart
+    int onStartCommand(android.content.Intent,int,int) -> onStartCommand
     com.announcify.background.handler.AnnouncificationHandler access$0(com.announcify.background.service.ManagerService) -> a
 com.announcify.background.service.ManagerService$1 -> com.announcify.background.service.b:
     com.announcify.background.service.ManagerService this$0 -> a
@@ -220,7 +231,6 @@ com.announcify.background.tts.Speaker -> com.announcify.background.a.a:
     void shutdown() -> shutdown
     void speak(java.lang.String) -> a
     int speak(java.lang.String,int,java.util.HashMap) -> speak
-com.announcify.background.util.AnnouncifySecurity -> com.announcify.background.d.a:
 com.announcify.ui.activity.AnnouncifyActivity -> com.announcify.ui.activity.AnnouncifyActivity:
     android.database.Cursor cursor -> a
     com.announcify.api.background.sql.model.PluginModel model -> b
@@ -242,35 +252,63 @@ com.announcify.ui.activity.AnnouncifyActivity -> com.announcify.ui.activity.Anno
 com.announcify.ui.activity.AnnouncifyActivity$1 -> com.announcify.ui.activity.c:
     com.announcify.ui.activity.AnnouncifyActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.announcify.ui.activity.AnnouncifyActivity$AnnouncifyObserver -> com.announcify.ui.activity.h:
+com.announcify.ui.activity.AnnouncifyActivity$AnnouncifyObserver -> com.announcify.ui.activity.p:
     com.announcify.ui.activity.AnnouncifyActivity this$0 -> a
     void onChange(boolean) -> onChange
+com.announcify.ui.activity.ContactActivity -> com.announcify.ui.activity.ContactActivity:
+    android.widget.CheckedTextView checkBlock -> a
+    android.widget.ListView list -> g
+    android.widget.AutoCompleteTextView auto -> b
+    android.widget.SimpleCursorAdapter listAdapter -> h
+    android.widget.SimpleCursorAdapter autoAdapter -> c
+    com.announcify.api.background.sql.model.ContactModel model -> d
+    android.database.Cursor listCursor -> i
+    android.database.Cursor autoCursor -> e
+    com.announcify.api.background.util.AnnouncifySettings settings -> f
+    void onCreate(android.os.Bundle) -> onCreate
+    void onStart() -> onStart
+    void onCreateContextMenu(android.view.ContextMenu,android.view.View,android.view.ContextMenu$ContextMenuInfo) -> onCreateContextMenu
+    void onStop() -> onStop
+    void refreshList() -> a
+    boolean onContextItemSelected(android.view.MenuItem) -> onContextItemSelected
+com.announcify.ui.activity.ContactActivity$1 -> com.announcify.ui.activity.x:
+    com.announcify.ui.activity.ContactActivity this$0 -> a
+    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+com.announcify.ui.activity.ContactActivity$2 -> com.announcify.ui.activity.z:
+    com.announcify.ui.activity.ContactActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.announcify.ui.activity.ContactActivity$3 -> com.announcify.ui.activity.ab:
+    com.announcify.ui.activity.ContactActivity this$0 -> a
+    java.lang.CharSequence convertToString(android.database.Cursor) -> convertToString
+com.announcify.ui.activity.ContactActivity$4 -> com.announcify.ui.activity.ac:
+    com.announcify.ui.activity.ContactActivity this$0 -> a
+    android.database.Cursor runQuery(java.lang.CharSequence) -> runQuery
 com.announcify.ui.activity.FormatActivity -> com.announcify.ui.activity.FormatActivity:
     android.widget.EditText formatstring -> a
     void onCreate(android.os.Bundle) -> onCreate
     android.widget.EditText access$0(com.announcify.ui.activity.FormatActivity) -> a
-com.announcify.ui.activity.FormatActivity$1 -> com.announcify.ui.activity.q:
+com.announcify.ui.activity.FormatActivity$1 -> com.announcify.ui.activity.aa:
     com.announcify.ui.activity.FormatActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.announcify.ui.activity.FormatActivity$10 -> com.announcify.ui.activity.g:
+com.announcify.ui.activity.FormatActivity$10 -> com.announcify.ui.activity.h:
     com.announcify.ui.activity.FormatActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.announcify.ui.activity.FormatActivity$2 -> com.announcify.ui.activity.o:
+com.announcify.ui.activity.FormatActivity$2 -> com.announcify.ui.activity.w:
     com.announcify.ui.activity.FormatActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.announcify.ui.activity.FormatActivity$3 -> com.announcify.ui.activity.p:
+com.announcify.ui.activity.FormatActivity$3 -> com.announcify.ui.activity.y:
     com.announcify.ui.activity.FormatActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.announcify.ui.activity.FormatActivity$4 -> com.announcify.ui.activity.m:
+com.announcify.ui.activity.FormatActivity$4 -> com.announcify.ui.activity.u:
     com.announcify.ui.activity.FormatActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.announcify.ui.activity.FormatActivity$5 -> com.announcify.ui.activity.n:
+com.announcify.ui.activity.FormatActivity$5 -> com.announcify.ui.activity.v:
     com.announcify.ui.activity.FormatActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.announcify.ui.activity.FormatActivity$6 -> com.announcify.ui.activity.k:
+com.announcify.ui.activity.FormatActivity$6 -> com.announcify.ui.activity.s:
     com.announcify.ui.activity.FormatActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.announcify.ui.activity.FormatActivity$7 -> com.announcify.ui.activity.l:
+com.announcify.ui.activity.FormatActivity$7 -> com.announcify.ui.activity.t:
     com.announcify.ui.activity.FormatActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 com.announcify.ui.activity.FormatActivity$8 -> com.announcify.ui.activity.b:
@@ -281,40 +319,42 @@ com.announcify.ui.activity.FormatActivity$9 -> com.announcify.ui.activity.a:
     void onClick(android.view.View) -> onClick
 com.announcify.ui.activity.GroupActivity -> com.announcify.ui.activity.GroupActivity:
     android.widget.CheckedTextView checkBlock -> a
-    android.widget.ListView list -> b
-    android.widget.AutoCompleteTextView auto -> c
-    android.widget.SimpleCursorAdapter listAdapter -> d
-    android.widget.SimpleCursorAdapter autoAdapter -> e
-    com.announcify.api.background.sql.model.GroupModel model -> f
-    android.database.Cursor listCursor -> g
-    android.database.Cursor autoCursor -> h
-    com.announcify.api.background.util.AnnouncifySettings settings -> i
-    boolean onContextItemSelected(android.view.MenuItem) -> onContextItemSelected
+    android.widget.ListView list -> f
+    android.widget.AutoCompleteTextView auto -> b
+    android.widget.SimpleCursorAdapter listAdapter -> g
+    android.widget.SimpleCursorAdapter autoAdapter -> c
+    com.announcify.api.background.sql.model.GroupModel model -> d
+    android.database.Cursor listCursor -> h
+    android.database.Cursor autoCursor -> i
+    com.announcify.api.background.util.AnnouncifySettings settings -> e
     void onCreate(android.os.Bundle) -> onCreate
-    void onCreateContextMenu(android.view.ContextMenu,android.view.View,android.view.ContextMenu$ContextMenuInfo) -> onCreateContextMenu
     void onStart() -> onStart
+    void onCreateContextMenu(android.view.ContextMenu,android.view.View,android.view.ContextMenu$ContextMenuInfo) -> onCreateContextMenu
     void onStop() -> onStop
     void refreshList() -> a
-    android.widget.CheckedTextView access$0(com.announcify.ui.activity.GroupActivity) -> a
-    com.announcify.api.background.util.AnnouncifySettings access$1(com.announcify.ui.activity.GroupActivity) -> b
-    com.announcify.api.background.sql.model.GroupModel access$2(com.announcify.ui.activity.GroupActivity) -> c
-    android.widget.SimpleCursorAdapter access$3(com.announcify.ui.activity.GroupActivity) -> d
-    void access$4(com.announcify.ui.activity.GroupActivity) -> e
-    android.widget.AutoCompleteTextView access$5(com.announcify.ui.activity.GroupActivity) -> f
-com.announcify.ui.activity.GroupActivity$1 -> com.announcify.ui.activity.f:
-    com.announcify.ui.activity.GroupActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-com.announcify.ui.activity.GroupActivity$2 -> com.announcify.ui.activity.e:
+    boolean onContextItemSelected(android.view.MenuItem) -> onContextItemSelected
+com.announcify.ui.activity.GroupActivity$1 -> com.announcify.ui.activity.g:
     com.announcify.ui.activity.GroupActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.announcify.ui.activity.GroupActivity$3 -> com.announcify.ui.activity.d:
+com.announcify.ui.activity.GroupActivity$2 -> com.announcify.ui.activity.f:
+    com.announcify.ui.activity.GroupActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.announcify.ui.activity.GroupActivity$3 -> com.announcify.ui.activity.e:
     com.announcify.ui.activity.GroupActivity this$0 -> a
     java.lang.CharSequence convertToString(android.database.Cursor) -> convertToString
-com.announcify.ui.activity.GroupActivity$SimpleWhiteCursorAdapter -> com.announcify.ui.activity.r:
+com.announcify.ui.activity.GroupActivity$4 -> com.announcify.ui.activity.i:
     com.announcify.ui.activity.GroupActivity this$0 -> a
-    android.view.View newView(android.content.Context,android.database.Cursor,android.view.ViewGroup) -> newView
+    android.database.Cursor runQuery(java.lang.CharSequence) -> runQuery
 com.announcify.ui.activity.HelpActivity -> com.announcify.ui.activity.HelpActivity:
     void onCreate(android.os.Bundle) -> onCreate
+com.announcify.ui.activity.LocaleActivity -> com.announcify.ui.activity.LocaleActivity:
+    boolean isCancelled -> a
+    android.preference.CheckBoxPreference announcifyCheck -> b
+    void onCreate(android.os.Bundle) -> onCreate
+    void finish() -> finish
+com.announcify.ui.activity.LocaleActivity$1 -> com.announcify.ui.activity.d:
+    com.announcify.ui.activity.LocaleActivity this$0 -> a
+    java.lang.String getEventType() -> a
 com.announcify.ui.activity.ReplaceActivity -> com.announcify.ui.activity.ReplaceActivity:
     android.widget.SimpleCursorAdapter adapter -> a
     android.widget.EditText with -> b
@@ -335,39 +375,32 @@ com.announcify.ui.activity.ReplaceActivity -> com.announcify.ui.activity.Replace
     android.database.Cursor access$4(com.announcify.ui.activity.ReplaceActivity) -> e
     void access$5(com.announcify.ui.activity.ReplaceActivity,android.database.Cursor) -> a
     android.widget.SimpleCursorAdapter access$6(com.announcify.ui.activity.ReplaceActivity) -> f
-com.announcify.ui.activity.ReplaceActivity$1 -> com.announcify.ui.activity.i:
+com.announcify.ui.activity.ReplaceActivity$1 -> com.announcify.ui.activity.q:
     com.announcify.ui.activity.ReplaceActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.announcify.ui.activity.ReplaceActivity$2 -> com.announcify.ui.activity.j:
+com.announcify.ui.activity.ReplaceActivity$2 -> com.announcify.ui.activity.r:
     com.announcify.ui.activity.ReplaceActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 com.announcify.ui.activity.SettingsActivity -> com.announcify.ui.activity.SettingsActivity:
-    com.announcify.background.util.AnnouncifySecurity security -> a
-    boolean licensed -> b
-    boolean started -> c
     void onCreate(android.os.Bundle) -> onCreate
-    android.app.Dialog onCreateDialog(int) -> onCreateDialog
-    void onDestroy() -> onDestroy
-    void onPause() -> onPause
-    void onResume() -> onResume
-com.announcify.ui.activity.SettingsActivity$1 -> com.announcify.ui.activity.u:
+com.announcify.ui.activity.SettingsActivity$1 -> com.announcify.ui.activity.l:
+    com.announcify.ui.activity.SettingsActivity this$0 -> a
+    java.lang.String getEventType() -> a
+com.announcify.ui.activity.SettingsActivity$2 -> com.announcify.ui.activity.k:
     com.announcify.ui.activity.SettingsActivity this$0 -> a
     boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
-com.announcify.ui.activity.SettingsActivity$2 -> com.announcify.ui.activity.t:
+com.announcify.ui.activity.SettingsActivity$3 -> com.announcify.ui.activity.j:
     com.announcify.ui.activity.SettingsActivity this$0 -> a
     boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
-com.announcify.ui.activity.SettingsActivity$3 -> com.announcify.ui.activity.s:
+com.announcify.ui.activity.SettingsActivity$4 -> com.announcify.ui.activity.o:
     com.announcify.ui.activity.SettingsActivity this$0 -> a
     boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
-com.announcify.ui.activity.SettingsActivity$4 -> com.announcify.ui.activity.x:
+com.announcify.ui.activity.SettingsActivity$5 -> com.announcify.ui.activity.n:
     com.announcify.ui.activity.SettingsActivity this$0 -> a
     boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
-com.announcify.ui.activity.SettingsActivity$5 -> com.announcify.ui.activity.w:
+com.announcify.ui.activity.SettingsActivity$6 -> com.announcify.ui.activity.m:
     com.announcify.ui.activity.SettingsActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-com.announcify.ui.activity.SettingsActivity$6 -> com.announcify.ui.activity.v:
-    com.announcify.ui.activity.SettingsActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
+    boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
 com.announcify.ui.control.RemoteControlDialog -> com.announcify.ui.control.RemoteControlDialog:
     java.lang.String[] controls -> a
     void onCreate(android.os.Bundle) -> onCreate
@@ -411,137 +444,19 @@ com.markupartist.android.widget.ActionBar -> com.markupartist.android.widget.Act
     void addAction(com.markupartist.android.widget.ActionBar$Action) -> a
     void onClick(android.view.View) -> onClick
     void setHomeAction(com.markupartist.android.widget.ActionBar$Action) -> b
-com.markupartist.android.widget.ActionBar$AbstractAction -> com.markupartist.android.widget.a:
+    void setTitle(java.lang.CharSequence) -> a
+com.markupartist.android.widget.ActionBar$AbstractAction -> com.markupartist.android.widget.b:
     int mDrawable -> a
-    int getDrawable() -> a
-    void performAction$3c7ec8c3() -> b
-com.markupartist.android.widget.ActionBar$Action -> com.markupartist.android.widget.b:
-    int getDrawable() -> a
-    void performAction$3c7ec8c3() -> b
-com.markupartist.android.widget.ActionBar$IntentAction -> com.markupartist.android.widget.c:
+    int getDrawable() -> b
+    void performAction$3c7ec8c3() -> a
+com.markupartist.android.widget.ActionBar$Action -> com.markupartist.android.widget.c:
+    int getDrawable() -> b
+    void performAction$3c7ec8c3() -> a
+com.markupartist.android.widget.ActionBar$IntentAction -> com.markupartist.android.widget.a:
     android.content.Context mContext -> a
     android.content.Intent mIntent -> b
-    void performAction$3c7ec8c3() -> b
+    void performAction$3c7ec8c3() -> a
 com.markupartist.android.widget.ScrollingTextView -> com.markupartist.android.widget.ScrollingTextView:
     boolean isFocused() -> isFocused
     void onFocusChanged(boolean,int,android.graphics.Rect) -> onFocusChanged
     void onWindowFocusChanged(boolean) -> onWindowFocusChanged
-org.acra.ACRA -> org.acra.k:
-    java.lang.String LOG_TAG -> a
-    android.app.Application mApplication -> b
-    org.acra.annotation.ReportsCrashes mReportsCrashes -> c
-    android.os.Bundle mCrashResources -> d
-    android.content.SharedPreferences$OnSharedPreferenceChangeListener mPrefListener -> e
-    int[] $SWITCH_TABLE$org$acra$ReportingInteractionMode -> f
-    void init(android.app.Application) -> a
-    void initAcra() -> c
-    android.os.Bundle getCrashResources() -> a
-    void access$0() -> b
-    int[] $SWITCH_TABLE$org$acra$ReportingInteractionMode() -> d
-org.acra.ACRA$1 -> org.acra.d:
-    void onSharedPreferenceChanged(android.content.SharedPreferences,java.lang.String) -> onSharedPreferenceChanged
-org.acra.ACRAConfigurationException -> org.acra.m:
-org.acra.ConfigurationInspector -> org.acra.h:
-    android.util.SparseArray mHardKeyboardHiddenValues -> a
-    android.util.SparseArray mKeyboardValues -> b
-    android.util.SparseArray mKeyboardHiddenValues -> c
-    android.util.SparseArray mNavigationValues -> d
-    android.util.SparseArray mNavigationHiddenValues -> e
-    android.util.SparseArray mOrientationValues -> f
-    android.util.SparseArray mScreenLayoutValues -> g
-    android.util.SparseArray mTouchScreenValues -> h
-    android.util.SparseArray mUiModeValues -> i
-    java.util.HashMap mValueArrays -> j
-    java.lang.String toString(android.content.res.Configuration) -> a
-    java.lang.String activeFlags(android.util.SparseArray,int) -> a
-org.acra.CrashReportDialog -> org.acra.CrashReportDialog:
-    android.widget.EditText userComment -> b
-    java.lang.String mReportFileName -> a
-    void onCreate(android.os.Bundle) -> onCreate
-    android.widget.EditText access$0(org.acra.CrashReportDialog) -> a
-org.acra.CrashReportDialog$1 -> org.acra.b:
-    org.acra.CrashReportDialog this$0 -> a
-    android.os.Bundle val$crashResources -> b
-    void onClick(android.view.View) -> onClick
-org.acra.CrashReportDialog$2 -> org.acra.c:
-    org.acra.CrashReportDialog this$0 -> a
-    void onClick(android.view.View) -> onClick
-org.acra.ErrorReporter -> org.acra.a:
-    java.lang.String LOG_TAG -> a
-    java.util.Properties mCrashProperties -> b
-    java.util.Map mCustomParameters -> c
-    java.lang.String mUserComment -> d
-    java.lang.Thread$UncaughtExceptionHandler mDfltExceptionHandler -> e
-    org.acra.ErrorReporter mInstanceSingleton -> f
-    android.content.Context mContext -> g
-    java.lang.String mInitialConfiguration -> h
-    org.acra.ReportingInteractionMode mReportingInteractionMode -> i
-    android.os.Bundle mCrashResources -> j
-    android.net.Uri mFormUri -> k
-    void setFormUri(android.net.Uri) -> a
-    java.lang.String putCustomData(java.lang.String,java.lang.String) -> a
-    java.lang.String removeCustomData(java.lang.String) -> a
-    java.lang.String createCustomInfoString() -> e
-    org.acra.ErrorReporter getInstance() -> a
-    void init(android.content.Context) -> a
-    void uncaughtException(java.lang.Thread,java.lang.Throwable) -> uncaughtException
-    org.acra.ErrorReporter$ReportsSenderWorker handleException(java.lang.Throwable,org.acra.ReportingInteractionMode) -> a
-    org.acra.ErrorReporter$ReportsSenderWorker handleException(java.lang.Throwable) -> a
-    void notifySendReport(java.lang.String) -> c
-    java.lang.String saveCrashReportFile() -> f
-    java.lang.String[] getCrashReportFilesList() -> g
-    void checkAndSendReports(android.content.Context,java.lang.String,boolean) -> a
-    boolean storeToXML() -> h
-    void setReportingInteractionMode(org.acra.ReportingInteractionMode) -> a
-    void checkReportsOnApplicationStart() -> b
-    void deletePendingReports() -> c
-    void setCrashResources(android.os.Bundle) -> a
-    void disable() -> d
-    void setUserComment(java.lang.String) -> b
-    int getAPILevel() -> i
-    android.content.Context access$0(org.acra.ErrorReporter) -> a
-    android.os.Bundle access$1(org.acra.ErrorReporter) -> b
-org.acra.ErrorReporter$1 -> org.acra.e:
-    org.acra.ErrorReporter this$0 -> a
-    void run() -> run
-org.acra.ErrorReporter$2 -> org.acra.f:
-    org.acra.ErrorReporter this$0 -> a
-    boolean accept(java.io.File,java.lang.String) -> accept
-org.acra.ErrorReporter$ReportsSenderWorker -> org.acra.j:
-    java.lang.String mReportFileName -> a
-    boolean mSendOnlySilentReports -> b
-    org.acra.ErrorReporter this$0 -> c
-    void run() -> run
-    void setCommentReportFileName(java.lang.String) -> a
-org.acra.HttpUtils -> org.acra.i:
-    java.lang.String LOG_TAG -> a
-    javax.net.ssl.TrustManager[] TRUST_MANAGER -> b
-    org.apache.http.conn.ssl.AllowAllHostnameVerifier HOSTNAME_VERIFIER -> c
-    void doPost(java.util.Map,java.net.URL) -> a
-org.acra.NaiveTrustManager -> org.acra.g:
-    java.security.cert.X509Certificate[] getAcceptedIssuers() -> getAcceptedIssuers
-    void checkClientTrusted(java.security.cert.X509Certificate[],java.lang.String) -> checkClientTrusted
-    void checkServerTrusted(java.security.cert.X509Certificate[],java.lang.String) -> checkServerTrusted
-org.acra.ReportingInteractionMode -> org.acra.l:
-    org.acra.ReportingInteractionMode SILENT -> a
-    org.acra.ReportingInteractionMode NOTIFICATION -> b
-    org.acra.ReportingInteractionMode TOAST -> c
-    org.acra.ReportingInteractionMode[] ENUM$VALUES -> d
-    org.acra.ReportingInteractionMode[] values() -> values
-    org.acra.ReportingInteractionMode valueOf(java.lang.String) -> valueOf
-org.acra.annotation.ReportsCrashes -> org.acra.a.a:
-    java.lang.String formKey() -> a
-    java.lang.String formUri() -> b
-    org.acra.ReportingInteractionMode mode() -> c
-    int resDialogCommentPrompt() -> d
-    int resDialogIcon() -> e
-    int resDialogOkToast() -> f
-    int resDialogText() -> g
-    int resDialogTitle() -> h
-    int resNotifIcon() -> i
-    int resNotifText() -> j
-    int resNotifTickerText() -> k
-    int resNotifTitle() -> l
-    int resToastText() -> m
-    java.lang.String sharedPreferencesName() -> n
-    int sharedPreferencesMode() -> o

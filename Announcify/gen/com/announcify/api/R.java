@@ -9,22 +9,23 @@ package com.announcify.api;
 
 public final class R {
     public static final class array {
+        public static final int dialog_list_formatstring_variables=0x7f08000c;
         public static final int preference_list_reading_announcement_ids=0x7f080006;
         public static final int preference_list_reading_announcement_names=0x7f080003;
         public static final int preference_list_reading_break_ids=0x7f080009;
         public static final int preference_list_reading_break_names=0x7f080000;
         public static final int preference_list_reading_discreet_ids=0x7f080008;
         public static final int preference_list_reading_discreet_names=0x7f080005;
-        public static final int preference_list_reading_mode_ids=0x7f08000f;
-        public static final int preference_list_reading_mode_names=0x7f08000d;
+        public static final int preference_list_reading_mode_ids=0x7f080010;
+        public static final int preference_list_reading_mode_names=0x7f08000e;
         public static final int preference_list_reading_repeat_ids=0x7f08000a;
         public static final int preference_list_reading_repeat_names=0x7f080001;
         public static final int preference_list_reading_unknown_ids=0x7f080007;
         public static final int preference_list_reading_unknown_names=0x7f080004;
         public static final int preference_list_reading_wait_ids=0x7f08000b;
         public static final int preference_list_reading_wait_names=0x7f080002;
-        public static final int preference_list_stream_ids=0x7f08000e;
-        public static final int preference_list_stream_names=0x7f08000c;
+        public static final int preference_list_stream_ids=0x7f08000f;
+        public static final int preference_list_stream_names=0x7f08000d;
     }
     public static final class attr {
         /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
@@ -69,8 +70,9 @@ containing a value of this type.
         public static final int gd_action_bar_talk_normal=0x7f020010;
         public static final int gd_segment_divider=0x7f020011;
         public static final int launcher_icon=0x7f020012;
-        public static final int list_vertical_divider=0x7f020013;
-        public static final int notification_icon=0x7f020014;
+        public static final int launcher_icon_old=0x7f020013;
+        public static final int list_vertical_divider=0x7f020014;
+        public static final int notification_icon=0x7f020015;
     }
     public static final class id {
         public static final int actionbar=0x7f0b0008;
@@ -136,31 +138,31 @@ containing a value of this type.
         public static final int menu_main=0x7f0a0003;
     }
     public static final class string {
-        public static final int allow=0x7f07002f;
+        public static final int allow=0x7f070032;
         public static final int app_name=0x7f07000e;
-        public static final int application_error=0x7f070030;
-        public static final int buy_button=0x7f070033;
+        public static final int application_error=0x7f070033;
+        public static final int buy_button=0x7f070036;
         /**  License checking status messages 
          */
-        public static final int check_license=0x7f07002c;
-        public static final int checking_license=0x7f07002d;
-        public static final int dont_allow=0x7f07002e;
+        public static final int check_license=0x7f07002f;
+        public static final int checking_license=0x7f070030;
+        public static final int dont_allow=0x7f070031;
         public static final int preference_behavior_title=0x7f070014;
         public static final int preference_break_summary=0x7f070003;
         public static final int preference_break_title=0x7f070002;
-        public static final int preference_cache_summary=0x7f070029;
-        public static final int preference_cache_title=0x7f070028;
+        public static final int preference_cache_summary=0x7f07002c;
+        public static final int preference_cache_title=0x7f07002b;
         public static final int preference_choose_group_summary=0x7f070023;
         public static final int preference_choose_group_title=0x7f070022;
         public static final int preference_contact_title=0x7f07001d;
-        public static final int preference_default_title=0x7f070024;
+        public static final int preference_default_title=0x7f070026;
         public static final int preference_discreet_condition_summary=0x7f070018;
         public static final int preference_discreet_condition_title=0x7f070017;
         public static final int preference_discreet_summary=0x7f07000d;
         public static final int preference_discreet_title=0x7f07000c;
         public static final int preference_filter_group_summary=0x7f070021;
         public static final int preference_filter_group_title=0x7f070020;
-        public static final int preference_general_title=0x7f070025;
+        public static final int preference_general_title=0x7f070027;
         public static final int preference_gravity_condition_summary=0x7f07001a;
         public static final int preference_gravity_condition_title=0x7f070019;
         public static final int preference_known_summary=0x7f07000b;
@@ -175,24 +177,27 @@ containing a value of this type.
         public static final int preference_ringtone_title=0x7f070000;
         public static final int preference_screen_condition_summary=0x7f070016;
         public static final int preference_screen_condition_title=0x7f070015;
-        public static final int preference_spam_summary=0x7f07002b;
-        public static final int preference_spam_title=0x7f07002a;
+        public static final int preference_spam_summary=0x7f07002e;
+        public static final int preference_spam_title=0x7f07002d;
+        public static final int preference_special_summary=0x7f070025;
+        public static final int preference_special_title=0x7f070024;
         public static final int preference_specific_title=0x7f07000f;
         public static final int preference_speech_title=0x7f070010;
         public static final int preference_stream_summary=0x7f070012;
         public static final int preference_stream_title=0x7f070011;
-        public static final int preference_translate_summary=0x7f070027;
-        public static final int preference_translate_title=0x7f070026;
+        public static final int preference_text_title=0x7f070028;
+        public static final int preference_translate_summary=0x7f07002a;
+        public static final int preference_translate_title=0x7f070029;
         public static final int preference_tts_title=0x7f070013;
         public static final int preference_unknown_summary=0x7f070009;
         public static final int preference_unknown_title=0x7f070008;
         public static final int preference_wait_summary=0x7f070007;
         public static final int preference_wait_title=0x7f070006;
-        public static final int quit_button=0x7f070034;
-        public static final int unlicensed_dialog_body=0x7f070032;
+        public static final int quit_button=0x7f070037;
+        public static final int unlicensed_dialog_body=0x7f070035;
         /**  Unlicensed dialog messages 
          */
-        public static final int unlicensed_dialog_title=0x7f070031;
+        public static final int unlicensed_dialog_title=0x7f070034;
     }
     public static final class style {
         public static final int ActionBar=0x7f090000;
@@ -201,8 +206,9 @@ containing a value of this type.
         public static final int Theme_Light_NoTitleBar_Announcify=0x7f090003;
     }
     public static final class xml {
-        public static final int preferences_main_settings=0x7f040000;
-        public static final int preferences_settings=0x7f040001;
+        public static final int preferences_locale_settings=0x7f040000;
+        public static final int preferences_main_settings=0x7f040001;
+        public static final int preferences_settings=0x7f040002;
     }
     public static final class styleable {
         /** Attributes that can be used with a ActionBar.

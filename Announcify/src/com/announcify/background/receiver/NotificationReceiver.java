@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.announcify.background.service.ManagerService;
 import com.announcify.ui.control.RemoteControlDialog;
 
 

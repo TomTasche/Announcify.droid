@@ -44,8 +44,6 @@ public class SectionedAdapter extends CursorAdapter {
     @Override
     public void bindView(final View view, final Context context,
             final Cursor cursor) {
-        Log.e("smn", "bindView");
-
         final long id = cursor.getLong(idIndex);
         view.setTag(id);
 
@@ -76,8 +74,6 @@ public class SectionedAdapter extends CursorAdapter {
     @Override
     public View getView(final int position, View convertView,
             final ViewGroup parent) {
-        Log.e("smn", "getView");
-
         convertView = super.getView(position, convertView, parent);
 
         final int section = indexer.getSectionForPosition(position);
@@ -100,7 +96,6 @@ public class SectionedAdapter extends CursorAdapter {
     @Override
     public View newView(final Context context, final Cursor cursor,
             final ViewGroup parent) {
-        Log.e("smn", "newView");
         return inflater.inflate(com.announcify.R.layout.list_item_plugin,
                 parent, false);
     }

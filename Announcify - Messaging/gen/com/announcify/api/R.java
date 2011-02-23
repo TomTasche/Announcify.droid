@@ -9,6 +9,7 @@ package com.announcify.api;
 
 public final class R {
     public static final class array {
+        public static final int dialog_list_formatstring_variables=0x7f08000c;
         public static final int preference_list_reading_announcement_ids=0x7f080006;
         public static final int preference_list_reading_announcement_names=0x7f080003;
         public static final int preference_list_reading_break_ids=0x7f080009;
@@ -62,6 +63,7 @@ containing a value of this type.
         public static final int gd_segment_divider=0x7f02000d;
         public static final int icon=0x7f02000e;
         public static final int launcher_icon=0x7f02000f;
+        public static final int launcher_icon_old=0x7f020010;
     }
     public static final class id {
         public static final int actionbar=0x7f0a0008;
@@ -79,13 +81,11 @@ containing a value of this type.
         public static final int actionbar_item=0x7f030001;
         public static final int actionbar_list=0x7f030002;
         public static final int list_header=0x7f030003;
-        public static final int main=0x7f030004;
     }
     public static final class string {
         public static final int app_name=0x7f07000e;
         public static final int event_mms=0x7f07000f;
         public static final int event_sms=0x7f070010;
-        public static final int hello=0x7f070011;
         public static final int preference_break_summary=0x7f070003;
         public static final int preference_break_title=0x7f070002;
         public static final int preference_discreet_summary=0x7f07000d;

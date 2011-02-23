@@ -5,7 +5,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 
-import com.announcify.api.background.service.PluginService;
 import com.announcify.plugin.message.mms.service.WorkerService;
 
 

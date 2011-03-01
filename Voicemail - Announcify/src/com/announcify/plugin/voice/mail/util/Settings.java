@@ -23,7 +23,7 @@ public class Settings extends PluginSettings {
 
     @Override
     public int getPriority() {
-        return 3;
+        return 4;
     }
 
     @Override

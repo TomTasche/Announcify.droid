@@ -5,7 +5,7 @@ import android.telephony.TelephonyManager;
 
 import com.announcify.api.AnnouncifyIntent;
 import com.announcify.api.background.contact.Contact;
-import com.announcify.api.background.contact.Filter;
+import com.announcify.api.background.contact.ContactFilter;
 import com.announcify.api.background.service.PluginService;
 import com.announcify.api.background.text.Formatter;
 import com.announcify.plugin.voice.call.util.Settings;
@@ -31,16 +31,13 @@ public class WorkerService extends PluginService {
                     .getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
             if (number == null) number = "";
             
-            final Contact contact = new Contact(this,
-                    new com.announcify.api.background.contact.lookup.Number(
-                            this), number);
+            final Contact contact = new Contact(this, new com.announcify.api.background.contact.lookup.Number(this), number);
 
-            if (!Filter.announcableContact(this, contact)) return;
+            if (!ContactFilter.announcableContact(this, contact)) return;
 
             final Formatter formatter = new Formatter(this, contact, settings);
 
-            final AnnouncifyIntent announcify = new AnnouncifyIntent(this,
-                    settings);
+            final AnnouncifyIntent announcify = new AnnouncifyIntent(this, settings);
             announcify.setStartBroadcast(ACTION_START_RINGTONE);
             announcify.setStopBroadcast(ACTION_STOP_RINGTONE);
             announcify.announce(formatter.format(null));

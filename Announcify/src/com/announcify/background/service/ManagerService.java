@@ -119,20 +119,21 @@ public class ManagerService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         if ((intent == null) || (intent.getExtras() == null)) return START_NOT_STICKY;
 
-        if ((intent.getExtras().getInt(PluginService.EXTRA_PRIORITY, -1) > 1)
-                && conditionManager.isScreenOn()) {
+        if ((intent.getExtras().getInt(PluginService.EXTRA_PRIORITY, 9) > 3) && conditionManager.isScreenOn()) {
+            // it's not a screen-on plugin. stop.
             return START_NOT_STICKY;
         }
 
-        if (intent.getExtras().getInt(PluginService.EXTRA_PRIORITY, -1) == 1) {
+        if (intent.getExtras().getInt(PluginService.EXTRA_PRIORITY, 9) <= 3) {
+            // it's a screen-on plugin. disable screen-on condition temporarily.
             conditionManager.setOnCall(true);
         }
 
-        final Message msg = handler
-                .obtainMessage(AnnouncificationHandler.WHAT_PUT_QUEUE);
+        final Message msg = handler.obtainMessage(AnnouncificationHandler.WHAT_PUT_QUEUE);
         msg.setData(intent.getExtras());
         handler.sendMessage(msg);
         
+        // we don't want android to restart the service after killing us (in order to prevent duplicate announcements). 
         return START_NOT_STICKY;
     }
 }

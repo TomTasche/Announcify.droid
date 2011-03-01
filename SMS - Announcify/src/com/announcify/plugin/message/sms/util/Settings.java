@@ -9,7 +9,6 @@ import com.announcify.plugin.message.sms.R;
 public class Settings extends PluginSettings {
 
     public static final String ACTION_SETTINGS = "com.announcify.plugin.message.sms.SETTINGS";
-
     public static final String PREFERENCES_NAME = "com.announcify.plugin.message.sms";
 
     public Settings(final Context context) {
@@ -23,7 +22,7 @@ public class Settings extends PluginSettings {
 
     @Override
     public int getPriority() {
-        return 2;
+        return 4;
     }
 
     @Override

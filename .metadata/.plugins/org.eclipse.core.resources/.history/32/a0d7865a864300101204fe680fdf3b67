@@ -1,0 +1,26 @@
+package com.announcify.background.error;
+
+import android.app.IntentService;
+import android.app.PendingIntent;
+import android.app.PendingIntent.CanceledException;
+import android.content.Intent;
+
+
+public class ExceptionService extends IntentService {
+
+    public ExceptionService() {
+        super("Announcify - ExceptionService");
+    }
+
+    @Override
+    protected void onHandleIntent(Intent intent) {
+        Intent intent = new Intent("com.announcify.ERROR");
+        
+        
+        try {
+            PendingIntent.getBroadcast(context, 18, intent, 0).send();
+        } catch (CanceledException e1) {
+            e1.printStackTrace();
+        }
+    }
+}

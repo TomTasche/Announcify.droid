@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
-<typeInfo handle="=Announcify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.content(BroadcastReceiver.class[BroadcastReceiver" modifiers="1025" timestamp="1296677910000"/>
-<typeInfo handle="=Announcify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.app(IntentService.class[IntentService" modifiers="1025" timestamp="1296677910000"/>
-<typeInfo handle="=Announcify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.preference(Preference.class[Preference" modifiers="1" timestamp="1296677910000"/>
-<typeInfo handle="=Announcify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.preference(PreferenceActivity.class[PreferenceActivity" modifiers="1025" timestamp="1296677910000"/>
-<typeInfo handle="=Voicemail - Announcify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.app(Service.class[Service" modifiers="1025" timestamp="1296677910000"/>
-<typeInfo handle="=Announcify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.content(ContentProvider.class[ContentProvider" modifiers="1025" timestamp="1296677910000"/>
+<typeInfo handle="=Announcify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.content(BroadcastReceiver.class[BroadcastReceiver" modifiers="1025" timestamp="1298931305000"/>
+<typeInfo handle="=Announcify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.app(IntentService.class[IntentService" modifiers="1025" timestamp="1298931305000"/>
+<typeInfo handle="=Announcify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.preference(Preference.class[Preference" modifiers="1" timestamp="1298931305000"/>
+<typeInfo handle="=Announcify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.preference(PreferenceActivity.class[PreferenceActivity" modifiers="1025" timestamp="1298931305000"/>
+<typeInfo handle="=Voicemail - Announcify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.app(Service.class[Service" modifiers="1025" timestamp="1298931305000"/>
+<typeInfo handle="=Announcify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.content(ContentProvider.class[ContentProvider" modifiers="1025" timestamp="1298931305000"/>
+<typeInfo handle="=API - Announcify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.app(Application.class[Application" modifiers="1" timestamp="1298931305000"/>
+<typeInfo handle="=Announcify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.app(Activity.class[Activity" modifiers="1" timestamp="1298931305000"/>
+<typeInfo handle="=Announcify/\/home\/tom\/Programme\/android\/platforms\/android-9\/android.jar&lt;android.util(Base64.class[Base64" modifiers="1" timestamp="1298931305000"/>
 </typeInfoHistroy>

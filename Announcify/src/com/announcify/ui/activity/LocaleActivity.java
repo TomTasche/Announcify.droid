@@ -35,12 +35,10 @@ public class LocaleActivity extends PluginActivity {
             public String getEventType() {
                 return "Locale";
             }
-        });
+        }, 0);
         
-        getPreferenceManager().setSharedPreferencesName(
-                "com.announcify.locale");
-        getPreferenceManager().setSharedPreferencesMode(
-                Context.MODE_WORLD_READABLE);
+        getPreferenceManager().setSharedPreferencesName("com.announcify.locale");
+        getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
 
         addPreferencesFromResource(R.xml.preferences_locale_settings);
         

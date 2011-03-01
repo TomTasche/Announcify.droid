@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<item value="744" key="org.eclipse.jdt.uicleanup_pagemodify_dialog.preferred_height"/>
-	<item value="3" key="org.eclipse.jdt.uicleanup_pagemodify_dialog.last_focus"/>
-	<item value="0" key="org.eclipse.jdt.uiformatter_page.white_space.java_view.inner"/>
 	<item value="false" key="org.eclipse.jdt.ui.formatter_page.show_invisible_characters"/>
-	<item value="744" key="org.eclipse.jdt.uiformatter_pagemodify_dialog.preferred_height"/>
 	<item value="307" key="org.eclipse.jdt.uicleanup_pagemodify_dialog.preferred_x"/>
 	<item value="24" key="org.eclipse.jdt.uicleanup_pagemodify_dialog.preferred_y"/>
+	<item value="false" key="TypeHierarchyViewPart.qualifiednames"/>
+	<item value="3" key="TypeHierarchyViewPart.orientation"/>
+	<item value="1059" key="org.eclipse.jdt.uicleanup_pagemodify_dialog.preferred_width"/>
+	<item value="false" key="SortMembers.sort_all"/>
+	<item value="191" key="org.eclipse.jdt.uiformatter_pagemodify_dialog.preferred_x"/>
+	<item value="24" key="org.eclipse.jdt.uiformatter_pagemodify_dialog.preferred_y"/>
+	<item value="1175" key="org.eclipse.jdt.uiformatter_pagemodify_dialog.preferred_width"/>
+	<item value="1" key="org.eclipse.jdt.uiformatter_page.line_wrapping_tab_page.last_category_index"/>
+	<item value="3" key="org.eclipse.jdt.uicleanup_pagemodify_dialog.last_focus"/>
+	<item value="0" key="org.eclipse.jdt.uiformatter_page.white_space.java_view.inner"/>
+	<item value="744" key="org.eclipse.jdt.uiformatter_pagemodify_dialog.preferred_height"/>
 	<item value="0" key="org.eclipse.jdt.uiformatter_page.white_space_tab_page.node"/>
+	<item value="2" key="TypeHierarchyViewPart.hierarchyview"/>
 	<item value="true" key="org.eclipse.jdt.ui.codeformatter.create_profile_dialog.open_edit"/>
 	<item value="/home/tom/Android/workspace/Announcify" key="org.eclipse.jdt.ui.cleanup.savepath"/>
-	<item value="/home/tom/Programmieren/MailBoxer/android/workspace/Announcify" key="org.eclipse.jdt.ui.codeformatter.savepath"/>
 	<item value="1" key="org.eclipse.jdt.uiformatter_page.modify_dialog_tab_page.last_focus_index"/>
-	<item value="false" key="SortMembers.sort_all"/>
+	<item value="/home/tom/Programmieren/MailBoxer/android/workspace/Announcify" key="org.eclipse.jdt.ui.codeformatter.savepath"/>
 	<item value="/home/tom/Dropbox/Dokumente/Sonstiges/Backup" key="org.eclipse.jdt.ui.cleanup.loadpath"/>
-	<item value="1059" key="org.eclipse.jdt.uicleanup_pagemodify_dialog.preferred_width"/>
+	<item value="false" key="TypeHierarchyViewPart.linkeditors"/>
 	<item value="/home/tom/Android/workspace/Announcify" key="org.eclipse.jdt.ui.codeformatter.loadpath"/>
-	<item value="191" key="org.eclipse.jdt.uiformatter_pagemodify_dialog.preferred_x"/>
 	<item value="8" key="org.eclipse.jdt.uiformatter_pagemodify_dialog.last_focus"/>
-	<item value="1" key="org.eclipse.jdt.uiformatter_page.line_wrapping_tab_page.last_category_index"/>
-	<item value="1175" key="org.eclipse.jdt.uiformatter_pagemodify_dialog.preferred_width"/>
-	<item value="24" key="org.eclipse.jdt.uiformatter_pagemodify_dialog.preferred_y"/>
 	<section name="OptionalMessageDialog.hide.">
 		<item value="true" key="org.eclipse.jdt.ui.typecomment.deprecated"/>
 		<item value="false" key="SortMembersMessageDialog.optionalDialog.id"/>

@@ -4,7 +4,7 @@ import android.content.Intent;
 
 import com.announcify.api.AnnouncifyIntent;
 import com.announcify.api.background.contact.Contact;
-import com.announcify.api.background.contact.Filter;
+import com.announcify.api.background.contact.ContactFilter;
 import com.announcify.api.background.service.PluginService;
 import com.announcify.api.background.text.Formatter;
 import com.announcify.plugin.message.mms.util.Settings;
@@ -57,7 +57,7 @@ public class WorkerService extends PluginService {
                     new com.announcify.api.background.contact.lookup.Number(
                             this), number);
 
-            if (!Filter.announcableContact(this, contact)) return;
+            if (!ContactFilter.announcableContact(this, contact)) return;
 
             final Formatter formatter = new Formatter(this, contact, settings);
 

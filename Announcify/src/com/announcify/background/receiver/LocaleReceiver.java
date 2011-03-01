@@ -1,11 +1,10 @@
 package com.announcify.background.receiver;
 
-import com.announcify.api.background.sql.model.PluginModel;
-import com.announcify.background.queue.WakeLocker;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+
+import com.announcify.api.background.sql.model.PluginModel;
 
 
 public class LocaleReceiver extends BroadcastReceiver {

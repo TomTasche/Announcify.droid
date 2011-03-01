@@ -31,15 +31,22 @@ public class Queue implements OnUtteranceCompletedListener {
 
     private void changeLanguage() {
         final Message msg = Message.obtain();
-        msg.what = AnnouncificationHandler.WHAT_CHANGE_LOCALE;
+        
+        if (queue.getFirst().getSpeech() == null) {
+            msg.what = AnnouncificationHandler.WHAT_REVERT_LOCALE;
+        } else {
+            msg.what = AnnouncificationHandler.WHAT_CHANGE_LOCALE;
+            msg.obj = queue.getFirst().getSpeech();
+        }
+        
+        Log.d("Announcify", "Speech: " + queue.getFirst().getSpeech().getLanguage().toString());
         handler.sendMessage(msg);
     }
 
     private void checkNext() {
         if (!queue.isEmpty() && queue.getFirst().isEmpty()) {
             handler.sendEmptyMessage(AnnouncificationHandler.WHAT_REVERT_LOCALE);
-            context.sendBroadcast(new Intent(queue.getFirst()
-                    .getStopBroadcast()));
+            context.sendBroadcast(new Intent(queue.getFirst().getStopBroadcast()));
             queue.removeFirst();
 
             if (queue.isEmpty()) {
@@ -47,8 +54,7 @@ public class Queue implements OnUtteranceCompletedListener {
                 return;
             }
 
-            context.sendBroadcast(new Intent(queue.getFirst()
-                    .getStartBroadcast()));
+            context.sendBroadcast(new Intent(queue.getFirst().getStartBroadcast()));
             changeLanguage();
         }
 
@@ -99,7 +105,7 @@ public class Queue implements OnUtteranceCompletedListener {
     }
 
     public void putLast(final PluginQueue little) {
-        Log.e("Announcify", "Size: " + queue.size());
+        Log.d("Announcify", "Size: " + queue.size());
         
         queue.add(little);
         

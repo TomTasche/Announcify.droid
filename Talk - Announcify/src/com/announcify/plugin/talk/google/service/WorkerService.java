@@ -4,7 +4,7 @@ import android.content.Intent;
 
 import com.announcify.api.AnnouncifyIntent;
 import com.announcify.api.background.contact.Contact;
-import com.announcify.api.background.contact.Filter;
+import com.announcify.api.background.contact.ContactFilter;
 import com.announcify.api.background.service.PluginService;
 import com.announcify.api.background.text.Formatter;
 import com.announcify.plugin.talk.google.contact.Chat;
@@ -36,7 +36,7 @@ public class WorkerService extends PluginService {
             if ((address == null) && "".equals(address)) return;
             final Contact contact = new Contact(this, new Chat(this), address);
 
-            if (!Filter.announcableContact(this, contact)) return;
+            if (!ContactFilter.announcableContact(this, contact)) return;
 
             final Formatter formatter = new Formatter(this, contact, settings);
 

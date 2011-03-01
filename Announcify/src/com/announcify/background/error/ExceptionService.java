@@ -22,11 +22,13 @@ import com.announcify.api.background.error.ExceptionHandler;
 public class ExceptionService extends IntentService {
 
     public ExceptionService() {
-        super("ExceptionService");
+        super("Announcify - ExceptionService");
     }
 
     @Override
-    protected void onHandleIntent(final Intent intent) {
+    protected void onHandleIntent(Intent intent) {
+        Log.e("smn", "logged");
+        
         // taken from:
         // http://www.androidsnippets.org/snippets/36/
 
@@ -41,8 +43,7 @@ public class ExceptionService extends IntentService {
             params.add(new BasicNameValuePair(ExceptionHandler.VERSION_NAME, intent.getStringExtra(ExceptionHandler.VERSION_NAME)));
             params.add(new BasicNameValuePair(ExceptionHandler.MODEL, intent.getStringExtra(ExceptionHandler.MODEL)));
 
-            final Throwable error = (Throwable)intent
-            .getSerializableExtra(ExceptionHandler.STACKTRACE);
+            final Throwable error = (Throwable)intent.getSerializableExtra(ExceptionHandler.STACKTRACE);
 
             Log.e("Announcify", "Caught exception", error);
 

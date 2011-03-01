@@ -1,0 +1,40 @@
+package com.announcify.api.background.text;
+
+import android.content.Context;
+
+import com.announcify.api.background.util.AnnouncifySettings;
+
+
+public class TextFilter {
+    
+    public static boolean announcable(Context context, String text) {
+        
+        return true;
+    }
+    
+    public static boolean announcableText() {
+        // TODO
+        return true;
+    }
+    
+    public static String cutText(String text, Context context) {
+        if (text == null) return "";
+        
+        final AnnouncifySettings settings = new AnnouncifySettings(context);
+        
+        final StringBuilder stringBuilder = new StringBuilder();
+        final String specials = settings.getSpecialCharacter();
+
+        for (int i = 0; i < text.length(); i++) {
+            for (int j = 0; j < specials.length(); j++) {
+                if (text.charAt(i) == specials.charAt(j)) {
+                    return stringBuilder.toString();
+                }
+            }
+
+            stringBuilder.append(text.charAt(i));
+        }
+        
+        return text;
+    }
+}

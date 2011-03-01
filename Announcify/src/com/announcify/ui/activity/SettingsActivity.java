@@ -34,16 +34,9 @@ public class SettingsActivity extends PluginActivity {
             public String getEventType() {
                 return "Announcify++";
             }
-        });
-        
-        getPreferenceManager().setSharedPreferencesName(
-                AnnouncifySettings.PREFERENCES_NAME);
-        getPreferenceManager().setSharedPreferencesMode(
-                Context.MODE_WORLD_READABLE);
-        addPreferencesFromResource(R.xml.preferences_main_settings);
+        }, R.xml.preferences_main_settings);
 
-        getPreferenceScreen().findPreference("preference_replace_chooser")
-        .setOnPreferenceClickListener(new OnPreferenceClickListener() {
+        getPreferenceScreen().findPreference("preference_replace_chooser").setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
             public boolean onPreferenceClick(final Preference preference) {
                 startActivity(new Intent(SettingsActivity.this,

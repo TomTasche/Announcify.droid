@@ -1,12 +1,11 @@
 package com.announcify.plugin.voice.mail.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.os.Bundle;
 
+import com.announcify.api.R;
 import com.announcify.api.ui.activity.PluginActivity;
-import com.announcify.plugin.voice.mail.R;
 import com.announcify.plugin.voice.mail.service.VoicemailService;
 import com.announcify.plugin.voice.mail.util.Settings;
 
@@ -22,7 +21,7 @@ public class SettingsActivity extends PluginActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, new Settings(this));
+        super.onCreate(savedInstanceState, new Settings(this), R.xml.preferences_settings);
     }
 
     @Override

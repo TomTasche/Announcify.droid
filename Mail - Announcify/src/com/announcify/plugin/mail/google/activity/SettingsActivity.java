@@ -1,6 +1,5 @@
 package com.announcify.plugin.mail.google.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.os.Bundle;
@@ -22,7 +21,7 @@ public class SettingsActivity extends PluginActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, new Settings(this));
+        super.onCreate(savedInstanceState, new Settings(this), R.xml.preferences_settings);
 
         addPreferencesFromResource(R.xml.preferences_mail_settings);
     }

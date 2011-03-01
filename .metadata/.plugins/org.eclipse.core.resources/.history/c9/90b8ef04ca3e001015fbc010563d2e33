@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array
+		name="preference_list_reading_break_ids">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>com.announcify.DEFAULT</item>
+		<item>com.announcify.CUSTOM</item>
+	</string-array>
+
+	<string-array
+		name="preference_list_reading_repeat_ids">
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+		<item>5</item>
+		<item>6</item>
+		<item>7</item>
+		<item>com.announcify.DEFAULT</item>
+		<item>com.announcify.CUSTOM</item>
+	</string-array>
+
+	<string-array
+		name="preference_list_reading_wait_ids">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+		<item>5</item>
+		<item>6</item>
+		<item>com.announcify.DEFAULT</item>
+		<item>com.announcify.CUSTOM</item>
+	</string-array>
+	
+	<string-array
+		name="dialog_list_formatstring_variables">
+		<item></item>
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+		<item>5</item>
+		<item>6</item>
+		<item>com.announcify.DEFAULT</item>
+		<item>com.announcify.CUSTOM</item>
+	</string-array>
+</resources>

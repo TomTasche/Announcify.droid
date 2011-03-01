@@ -1,0 +1,17 @@
+package com.announcify.background.error;
+
+import android.app.IntentService;
+import android.content.Intent;
+
+
+public class ExceptionService extends IntentService {
+
+    public ExceptionService() {
+        super("Announcify - ExceptionService");
+    }
+
+    @Override
+    protected void onHandleIntent(Intent intent) {
+        
+    }
+}

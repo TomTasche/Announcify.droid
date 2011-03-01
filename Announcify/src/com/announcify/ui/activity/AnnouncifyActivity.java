@@ -99,7 +99,7 @@ public class AnnouncifyActivity extends BaseActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.actionbar_list);
-
+     
         getListView().setBackgroundColor(Color.WHITE);
         getListView().setCacheColorHint(Color.TRANSPARENT);
         getListView().setFastScrollEnabled(true);

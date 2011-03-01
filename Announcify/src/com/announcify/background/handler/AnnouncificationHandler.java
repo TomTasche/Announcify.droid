@@ -14,6 +14,7 @@ import com.announcify.api.background.error.ExceptionParser;
 import com.announcify.api.background.queue.PluginQueue;
 import com.announcify.api.background.service.PluginService;
 import com.announcify.api.background.sql.model.PluginModel;
+import com.announcify.api.background.tts.Speech;
 import com.announcify.background.queue.Queue;
 import com.announcify.background.service.ManagerService;
 import com.announcify.background.tts.Speaker;
@@ -104,8 +105,7 @@ public class AnnouncificationHandler extends Handler {
                 break;
 
             case WHAT_CHANGE_LOCALE:
-                // TODO:
-                // speaker.applyLanguage((Speech) msg.obj);
+                speaker.applyLanguage((Speech) msg.obj);
                 break;
 
             case WHAT_REVERT_LOCALE:
@@ -114,8 +114,7 @@ public class AnnouncificationHandler extends Handler {
 
             case WHAT_START:
                 if (speaker.setOnUtteranceCompletedListener(queue) != TextToSpeech.SUCCESS) {
-                    quit(new RuntimeException(
-                            "Couldn't set UtteranceListener for TextToSpeech"));
+                    quit(new RuntimeException("Couldn't set UtteranceListener for TextToSpeech"));
                 }
 
                 queue.start();

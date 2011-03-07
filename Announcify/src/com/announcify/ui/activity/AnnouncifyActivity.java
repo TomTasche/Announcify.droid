@@ -99,7 +99,7 @@ public class AnnouncifyActivity extends BaseActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.actionbar_list);
-     
+        
         getListView().setBackgroundColor(Color.WHITE);
         getListView().setCacheColorHint(Color.TRANSPARENT);
         getListView().setFastScrollEnabled(true);
@@ -123,8 +123,7 @@ public class AnnouncifyActivity extends BaseActivity {
     }
 
     @Override
-    public void onCreateContextMenu(final ContextMenu menu, final View v,
-            final ContextMenuInfo menuInfo) {
+    public void onCreateContextMenu(final ContextMenu menu, final View v, final ContextMenuInfo menuInfo) {
         final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
         menu.setHeaderTitle(model.getName(info.id));
 

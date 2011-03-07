@@ -1,7 +1,6 @@
 package com.announcify.ui.activity;
 
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -18,11 +17,11 @@ public class SettingsActivity extends PluginActivity {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, new PluginSettings(this, "com.announcify") {
+        super.onCreate(savedInstanceState, new PluginSettings(this, AnnouncifySettings.PREFERENCES_NAME) {
             
             @Override
             public String getSettingsAction() {
-                return "com.announcify.SETTINGS";
+                return AnnouncifySettings.PREFERENCES_NAME;
             }
             
             @Override

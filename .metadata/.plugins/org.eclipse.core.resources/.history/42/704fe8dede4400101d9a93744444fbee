@@ -1,0 +1,8 @@
+package com.announcify.api;
+
+import android.app.Application;
+
+
+public class App extends Application {
+    
+}

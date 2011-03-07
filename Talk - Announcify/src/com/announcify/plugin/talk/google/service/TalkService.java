@@ -89,6 +89,8 @@ public class TalkService extends Service {
 
     @Override
     public void onCreate() {
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(getBaseContext()));
+        
         thread = new HandlerThread("TalkThread");
         thread.start();
         
@@ -96,7 +98,7 @@ public class TalkService extends Service {
         handler.post(new Runnable() {
             
             public void run() {
-                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(TalkService.this));
+                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(getBaseContext()));
             }
         });
         

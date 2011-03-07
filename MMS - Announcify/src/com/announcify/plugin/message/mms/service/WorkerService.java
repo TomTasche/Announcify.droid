@@ -5,6 +5,7 @@ import android.content.Intent;
 import com.announcify.api.AnnouncifyIntent;
 import com.announcify.api.background.contact.Contact;
 import com.announcify.api.background.contact.ContactFilter;
+import com.announcify.api.background.error.ExceptionHandler;
 import com.announcify.api.background.service.PluginService;
 import com.announcify.api.background.text.Formatter;
 import com.announcify.plugin.message.mms.util.Settings;
@@ -16,7 +17,6 @@ import com.announcify.plugin.message.mms.util.pdu.PduParser;
 public class WorkerService extends PluginService {
 
     public static final String ACTION_START_RINGTONE = "com.announcify.plugin.message.mms.ACTION_START_RINGTONE";
-
     public static final String ACTION_STOP_RINGTONE = "com.announcify.plugin.message.mms.ACTION_STOP_RINGTONE";
 
     public WorkerService() {
@@ -26,6 +26,8 @@ public class WorkerService extends PluginService {
 
     @Override
     protected void onHandleIntent(final Intent intent) {
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(getBaseContext()));
+        
         if (settings == null) {
             settings = new Settings(this);
         }

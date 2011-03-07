@@ -31,14 +31,14 @@ public class Queue implements OnUtteranceCompletedListener {
 
     private void changeLanguage() {
         final Message msg = Message.obtain();
-        
+
         if (queue.getFirst().getSpeech() == null) {
             msg.what = AnnouncificationHandler.WHAT_REVERT_LOCALE;
         } else {
             msg.what = AnnouncificationHandler.WHAT_CHANGE_LOCALE;
             msg.obj = queue.getFirst().getSpeech();
         }
-        
+
         Log.d("Announcify", "Speech: " + queue.getFirst().getSpeech().getLanguage().toString());
         handler.sendMessage(msg);
     }
@@ -100,15 +100,15 @@ public class Queue implements OnUtteranceCompletedListener {
 
     public void putFirst(final PluginQueue little) {
         queue.add(0, little);
-        
+
         grant();
     }
 
     public void putLast(final PluginQueue little) {
         Log.d("Announcify", "Size: " + queue.size());
-        
+
         queue.add(little);
-        
+
         if (queue.size() == 1) {
             grant();
         }
@@ -118,7 +118,7 @@ public class Queue implements OnUtteranceCompletedListener {
         deny();
 
         handler.sendEmptyMessage(AnnouncificationHandler.WHAT_SHUTDOWN);
-        
+
         WakeLocker.unlock();
     }
 

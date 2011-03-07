@@ -14,7 +14,6 @@ import com.announcify.api.background.error.ExceptionParser;
 import com.announcify.api.background.queue.PluginQueue;
 import com.announcify.api.background.service.PluginService;
 import com.announcify.api.background.sql.model.PluginModel;
-import com.announcify.api.background.tts.Speech;
 import com.announcify.background.queue.Queue;
 import com.announcify.background.service.ManagerService;
 import com.announcify.background.tts.Speaker;
@@ -54,12 +53,10 @@ public class AnnouncificationHandler extends Handler {
 
         switch (msg.what) {
             case WHAT_PUT_QUEUE:
-                PluginQueue little = msg.getData().getParcelable(
-                        PluginService.EXTRA_QUEUE);
+                PluginQueue little = msg.getData().getParcelable(PluginService.EXTRA_QUEUE);
 
-                if (!model.getActive(model.getId(little.getPluginName()))) {
-                    little = new PluginQueue("Empty", new LinkedList<Object>(),
-                            context);
+                if (!model.known(model.getId(little.getPluginName())) && !model.getActive(model.getId(little.getPluginName()))) {
+                    little = new PluginQueue("Empty", new LinkedList<Object>(), context);
                     msg.getData().putInt(PluginService.EXTRA_PRIORITY, 9);
                 }
 
@@ -105,11 +102,11 @@ public class AnnouncificationHandler extends Handler {
                 break;
 
             case WHAT_CHANGE_LOCALE:
-                speaker.applyLanguage((Speech) msg.obj);
+                // speaker.applyLanguage((Speech) msg.obj);
                 break;
 
             case WHAT_REVERT_LOCALE:
-                speaker.revertLanguage();
+                // speaker.revertLanguage();
                 break;
 
             case WHAT_START:

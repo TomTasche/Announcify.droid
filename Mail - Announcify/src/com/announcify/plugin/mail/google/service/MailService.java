@@ -119,7 +119,7 @@ public class MailService extends Service {
 
     @Override
     public void onCreate() {
-        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(getBaseContext()));
         
         observers = new LinkedList<MailService.MailObserver>();
         addresses = new LinkedList<String>();
@@ -172,7 +172,7 @@ public class MailService extends Service {
         handler.post(new Runnable() {
             
             public void run() {
-                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(MailService.this));
+                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(getBaseContext()));
             }
         });
         

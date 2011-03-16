@@ -30,7 +30,6 @@ com.announcify.api.background.contact.ContactEnum: com.announcify.api.background
 com.announcify.ui.control.RemoteControlDialog
 com.announcify.ui.control.RemoteControlDialogInstaller
 com.announcify.api.ui.activity.BaseActivity
-com.announcify.ui.activity.FormatActivity
 com.announcify.ui.activity.GroupActivity
 com.announcify.ui.activity.HelpActivity
 com.announcify.ui.activity.ReplaceActivity
@@ -41,8 +40,10 @@ com.announcify.ui.activity.LocaleActivity
 com.announcify.ui.activity.SettingsActivity
 com.announcify.background.service.ManagerService
 com.announcify.api.background.service.PluginService
+com.announcify.background.error.ExceptionService
 com.announcify.background.receiver.HeadsetReceiver
 com.announcify.background.receiver.ScreenReceiver
+com.announcify.background.error.ExceptionReceiver
 com.announcify.background.receiver.NotificationReceiver
 com.announcify.background.receiver.ControlReceiver
 com.announcify.background.receiver.LocaleReceiver

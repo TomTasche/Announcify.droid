@@ -3,14 +3,14 @@
 	xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<item
-		android:title="Uninstall"
+		android:title="@string/context_menu_uninstall"
 		android:id="@+id/menu_uninstall" />
 
 	<item
-		android:title="Deactivate / Activate"
+		android:title="@string/context_menu_toggle"
 		android:id="@+id/menu_activate" />
 
 	<item
-		android:title="Report this Plugin"
+		android:title="@string/context_menu_report"
 		android:id="@+id/menu_report" />
 </menu>

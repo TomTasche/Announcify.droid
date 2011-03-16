@@ -27,8 +27,6 @@ public class AnnouncificationHandler extends Handler {
     public static final int WHAT_SHUTDOWN = 45;
     public static final int WHAT_PUT_QUEUE = 41;
     public static final int WHAT_NEXT_ITEM = 42;
-    public static final int WHAT_CHANGE_LOCALE = 46;
-    public static final int WHAT_REVERT_LOCALE = 47;
 
     private final Context context;
     private final Queue queue;
@@ -37,8 +35,7 @@ public class AnnouncificationHandler extends Handler {
 
     private boolean shutUp;
 
-    public AnnouncificationHandler(final Context context, final Looper looper,
-            final Speaker speaker) {
+    public AnnouncificationHandler(final Context context, final Looper looper, final Speaker speaker) {
         super(looper);
         this.context = context;
         this.speaker = speaker;
@@ -56,7 +53,7 @@ public class AnnouncificationHandler extends Handler {
                 PluginQueue little = msg.getData().getParcelable(PluginService.EXTRA_QUEUE);
 
                 if (!model.known(model.getId(little.getPluginName())) && !model.getActive(model.getId(little.getPluginName()))) {
-                    little = new PluginQueue("Empty", new LinkedList<Object>(), context);
+                    little = new PluginQueue("Empty", new LinkedList<Object>());
                     msg.getData().putInt(PluginService.EXTRA_PRIORITY, 9);
                 }
 
@@ -99,14 +96,6 @@ public class AnnouncificationHandler extends Handler {
             case WHAT_SHUTDOWN:
                 if (shutUp) return;
                 quit(null);
-                break;
-
-            case WHAT_CHANGE_LOCALE:
-                // speaker.applyLanguage((Speech) msg.obj);
-                break;
-
-            case WHAT_REVERT_LOCALE:
-                // speaker.revertLanguage();
                 break;
 
             case WHAT_START:

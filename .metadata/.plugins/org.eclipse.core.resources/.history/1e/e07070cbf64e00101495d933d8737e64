@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="control_title">Announcify RemoteControl</string>
+
+	<string-array name="control_items">
+		
+		<item>Pause</item>
+		
+		<item>Continue</item>
+		
+		<item>Skip</item>
+		
+		<item>Kill</item>
+	</string-array>
+</resources>

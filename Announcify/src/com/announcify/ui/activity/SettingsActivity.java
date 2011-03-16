@@ -18,17 +18,17 @@ public class SettingsActivity extends PluginActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, new PluginSettings(this, AnnouncifySettings.PREFERENCES_NAME) {
-            
+
             @Override
             public String getSettingsAction() {
                 return AnnouncifySettings.PREFERENCES_NAME;
             }
-            
+
             @Override
             public int getPriority() {
                 return 9;
             }
-            
+
             @Override
             public String getEventType() {
                 return "Announcify++";
@@ -55,7 +55,7 @@ public class SettingsActivity extends PluginActivity {
                 return false;
             }
         });
-        
+
         getPreferenceScreen().findPreference("preference_choose_contact")
         .setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
@@ -67,17 +67,17 @@ public class SettingsActivity extends PluginActivity {
             }
         });
 
-        getPreferenceScreen().findPreference("preference_spam_filter")
-        .setOnPreferenceClickListener(new OnPreferenceClickListener() {
-
-            public boolean onPreferenceClick(final Preference preference) {
-                Toast.makeText(SettingsActivity.this,
-                        "Not yet implemented, sorry!",
-                        Toast.LENGTH_LONG).show();
-
-                return false;
-            }
-        });
+        //        getPreferenceScreen().findPreference("preference_spam_filter")
+        //        .setOnPreferenceClickListener(new OnPreferenceClickListener() {
+        //
+        //            public boolean onPreferenceClick(final Preference preference) {
+        //                Toast.makeText(SettingsActivity.this,
+        //                        getString(R.string.toast_plugin_not_implemented),
+        //                        Toast.LENGTH_LONG).show();
+        //
+        //                return false;
+        //            }
+        //        });
 
         getPreferenceScreen().findPreference("preference_tts_settings")
         .setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -96,7 +96,7 @@ public class SettingsActivity extends PluginActivity {
         for (int i = 1; i < 6; i++) {
             applyThemeProtection("screen" + i);
         }
-        
+
         setCustomListeners();
     }
 }

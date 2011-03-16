@@ -14,7 +14,7 @@
 		android:id="@+id/edit_replace"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:hint="REPLACE" />
+		android:hint="@string/replacer_replace_hint" />
 
 	<LinearLayout
 		android:layout_width="fill_parent"
@@ -26,7 +26,7 @@
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:layout_weight="0.9"
-			android:hint="HINT" />
+			android:hint="@string/replacer_replace_with_hint" />
 
 		<ImageButton
 			android:id="@+id/button_speak"
@@ -36,7 +36,7 @@
 			android:layout_weight="0.1" />
 
 		<Button
-			android:text="ADD"
+			android:text="@string/replacer_button_add"
 			android:id="@+id/button_add"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string
+		name="app_name">K9 - Announcify</string>
+		
+	<string
+		name="event_mail">K9</string>	
+
+	<string-array
+		name="preference_list_read_message">
+		<item>Subject</item>
+		<item>Complete Message</item>
+	</string-array>
+</resources>

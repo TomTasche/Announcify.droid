@@ -14,7 +14,6 @@ import android.util.Log;
 
 import com.announcify.R;
 import com.announcify.api.background.error.ExceptionHandler;
-import com.announcify.api.background.queue.PluginQueue;
 import com.announcify.api.background.service.PluginService;
 import com.announcify.api.background.util.AnnouncifySettings;
 import com.announcify.background.handler.AnnouncificationHandler;
@@ -118,8 +117,6 @@ public class ManagerService extends Service {
     
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        PluginQueue.context = this;
-        
         if ((intent == null) || (intent.getExtras() == null)) return START_NOT_STICKY;
 
         if ((intent.getExtras().getInt(PluginService.EXTRA_PRIORITY, 9) > 3) && conditionManager.isScreenOn()) {

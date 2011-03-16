@@ -42,7 +42,7 @@ com.announcify.api.background.contact.ContactEnum$5
 com.announcify.api.background.contact.ContactEnum$6
 com.announcify.api.background.contact.ContactEnum$7
 com.announcify.api.background.contact.ContactEnum$8
-com.announcify.api.background.contact.Filter
+com.announcify.api.background.contact.ContactFilter
 com.announcify.api.background.contact.lookup.Group
 com.announcify.api.background.contact.lookup.LookupMethod
 com.announcify.api.background.contact.lookup.Name
@@ -55,12 +55,7 @@ com.announcify.api.background.error.ExceptionHandler:
     public static final java.lang.String STACKTRACE
     public static final java.lang.String MODEL
 com.announcify.api.background.queue.PluginQueue:
-    56:61:public PluginQueue(java.lang.String,java.util.LinkedList,com.announcify.api.background.tts.Speech)
-    63:71:public PluginQueue(java.lang.String,java.util.LinkedList,java.lang.String,java.lang.String,android.content.Context)
-    73:81:public PluginQueue(java.lang.String,java.util.LinkedList,java.lang.String,java.lang.String,com.announcify.api.background.tts.Speech)
-    96:96:public com.announcify.api.background.tts.Speech getSpeech()
-    114:115:public void setSpeech(com.announcify.api.background.tts.Speech)
-    118:121:public java.lang.String sniffNextString()
+    75:78:public java.lang.String sniffNextString()
 com.announcify.api.background.service.PluginService:
     public static final java.lang.String ACTION_PLUGIN_CONTACT
     public static final java.lang.String ACTION_ANNOUNCE
@@ -77,7 +72,9 @@ com.announcify.api.background.service.PluginService:
     protected com.announcify.api.background.util.PluginSettings settings
     35:39:public PluginService(java.lang.String)
     43:49:public PluginService(java.lang.String,java.lang.String,java.lang.String)
-    53:84:protected void onHandleIntent(android.content.Intent)
+    53:67:protected void onHandleIntent(android.content.Intent)
+    70:82:protected void playRingtone()
+    85:89:protected void stopRingtone()
 com.announcify.api.background.sql.model.ContactModel:
     public static final java.lang.String TABLE_NAME
     public static final java.lang.String KEY_CONTACT_ID
@@ -97,23 +94,30 @@ com.announcify.api.background.sql.model.PluginModel:
     public static final java.lang.String KEY_PLUGIN_ACTIVE
     public static final java.lang.String KEY_PLUGIN_PRIORITY
     24:32:public void add(java.lang.String,int,java.lang.String,java.lang.String,boolean)
-    107:115:public int getPriority(long)
-    134:142:public void update(long,java.lang.String,int,java.lang.String,java.lang.String,boolean)
+    121:129:public int getPriority(long)
+    148:156:public void update(long,java.lang.String,int,java.lang.String,java.lang.String,boolean)
 com.announcify.api.background.sql.model.TranslationModel:
     public static final java.lang.String TABLE_NAME
     public static final java.lang.String KEY_TRANSLATION_FROM
     public static final java.lang.String KEY_TRANSLATION_TO
     public static final java.lang.String KEY_TRANSLATION_SOURCE
     public static final java.lang.String KEY_TRANSLATION_DESTINATION
+com.announcify.api.background.text.AndroidPatterns
 com.announcify.api.background.text.FormatEnum
 com.announcify.api.background.text.Formatter
+com.announcify.api.background.text.TextFilter
 com.announcify.api.background.tts.Speech:
-    65:66:public Speech(float,float,android.content.Context)
-    76:77:public Speech(java.util.Locale,android.content.Context)
-    90:90:public java.util.Locale getLanguage()
-    94:94:public float getPitch()
-    98:98:public float getSpeechRate()
-    102:103:public void setLanguage(java.util.Locale)
+    26:31:private static java.util.Locale getDefaultLocale(android.content.Context)
+    36:41:private static float getDefaultPitch(android.content.Context)
+    46:51:private static float getDefaultSpeechRate(android.content.Context)
+    60:61:public Speech(android.content.Context)
+    64:65:public Speech(float,float,android.content.Context)
+    67:71:public Speech(float,float,java.util.Locale)
+    74:75:public Speech(java.util.Locale,android.content.Context)
+    88:88:public java.util.Locale getLanguage()
+    92:92:public float getPitch()
+    96:96:public float getSpeechRate()
+    100:101:public void setLanguage(java.util.Locale)
 com.announcify.api.background.tts.Translator
 com.announcify.api.background.util.AnnouncifySettings:
     public static final java.lang.String PREFERENCES_NAME
@@ -142,41 +146,29 @@ com.announcify.api.background.util.AnnouncifySettings:
     99:99:public boolean getTranslateText()
     131:131:public java.lang.String getRingtone()
 com.announcify.api.background.util.PluginSettings:
+    public static final java.lang.String DEFAULT_SETTING
     public static final java.lang.String KEY_RINGTONE
     public static final java.lang.String KEY_READING_BREAK
     public static final java.lang.String KEY_READING_REPEAT
     public static final java.lang.String KEY_READING_WAIT
     public static final java.lang.String KEY_READING_UNKNOWN
-    public static final java.lang.String KEY_READING_UNKNOWN_CUSTOM
     public static final java.lang.String KEY_READING_DISCREET
-    public static final java.lang.String KEY_READING_DISCREET_CUSTOM
     public static final java.lang.String KEY_READING_ANNOUNCEMENT
-    public static final java.lang.String KEY_READING_ANNOUNCEMENT_CUSTOM
-    33:33:public java.lang.String getDefaultMode()
-    37:37:public java.lang.String getDiscreetMode()
+    32:36:public java.lang.String getDefaultMode()
+    41:45:public java.lang.String getDiscreetMode()
     public abstract int getPriority()
-    45:49:public int getReadingBreak()
-    53:53:public int getReadingRepeat()
-    57:61:public int getReadingWait()
+    56:63:public int getReadingBreak()
+    67:71:public int getReadingRepeat()
+    78:85:public int getReadingWait()
     public abstract java.lang.String getSettingsAction()
-    67:67:public java.lang.String getSharedPreferencesName()
-    71:71:public java.lang.String getUnknownMode()
-    75:75:public java.lang.String getRingtone()
+    95:99:public java.lang.String getUnknownMode()
+    104:104:public java.lang.String getRingtone()
 com.announcify.api.simple.SimpleAnnouncifyIntent
 com.announcify.api.simple.SimpleAnnouncifyIntent$SimpleSettings
 com.announcify.api.simple.SimplePluginModel
 com.announcify.api.ui.activity.PluginActivity:
     private static final java.lang.String CUSTOM_VALUE
-    73:96:protected void parseRingtone(int,int,android.content.Intent,int)
-    99:133:private void setCustomAnnouncementListener(java.lang.String,com.announcify.api.background.util.PluginSettings,java.lang.String)
-    136:143:protected void setCustomListeners()
-    146:176:private void setCustomNumberListener(java.lang.String,com.announcify.api.background.util.PluginSettings,java.lang.String)
-com.announcify.api.ui.activity.PluginActivity$2
-com.announcify.api.ui.activity.PluginActivity$2$1
-com.announcify.api.ui.activity.PluginActivity$2$2
-com.announcify.api.ui.activity.PluginActivity$3
-com.announcify.api.ui.activity.PluginActivity$3$1
-com.announcify.api.ui.activity.PluginActivity$3$2
+    83:106:protected void parseRingtone(int,int,android.content.Intent,int)
 com.announcify.background.handler.AnnouncificationHandler:
     public static final int WHAT_START
     public static final int WHAT_CONTINUE
@@ -184,8 +176,6 @@ com.announcify.background.handler.AnnouncificationHandler:
     public static final int WHAT_SHUTDOWN
     public static final int WHAT_PUT_QUEUE
     public static final int WHAT_NEXT_ITEM
-    public static final int WHAT_CHANGE_LOCALE
-    public static final int WHAT_REVERT_LOCALE
 com.announcify.background.queue.Queue:
     public static final java.lang.String EXTRA_TEXT_SNIPPET
 com.announcify.background.receiver.LocaleReceiver:
@@ -195,15 +185,13 @@ com.announcify.background.receiver.NotificationReceiver:
 com.announcify.background.receiver.gravity.GravityListener:
     67:67:public float getAccuracy()
     71:72:public void resumeAccelerometer()
-com.announcify.background.tts.Speaker:
-    28:31:public void applyLanguage(com.announcify.api.background.tts.Speech)
 com.announcify.background.tts.Volume
 com.announcify.ui.activity.LocaleActivity$1:
     26:26:public java.lang.String getSettingsAction()
     31:31:public int getPriority()
 com.announcify.ui.activity.SettingsActivity$1:
-    25:25:public java.lang.String getSettingsAction()
-    30:30:public int getPriority()
+    24:24:public java.lang.String getSettingsAction()
+    29:29:public int getPriority()
 com.announcify.ui.control.RemoteControlDialog:
     public static final java.lang.String ACTION_CONTINUE
     public static final java.lang.String ACTION_PAUSE

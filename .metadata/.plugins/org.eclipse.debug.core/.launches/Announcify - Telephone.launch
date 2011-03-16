@@ -8,13 +8,11 @@
 <booleanAttribute key="com.android.ide.eclipse.adt.target" value="true"/>
 <booleanAttribute key="com.android.ide.eclipse.adt.wipedata" value="false"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/Announcify - Telephone"/>
-<listEntry value="/Announcify - Telephone/AndroidManifest.xml"/>
+<listEntry value="/Announcify-Telephone"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="4"/>
-<listEntry value="1"/>
 </listAttribute>
 <booleanAttribute key="org.eclipse.jdt.launching.ALLOW_TERMINATE" value="true"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="Announcify - Telephone"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="Announcify-Telephone"/>
 </launchConfiguration>

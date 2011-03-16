@@ -21,7 +21,7 @@ public class RemoteControlDialogInstaller extends Activity {
         final Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
         intent.putExtra(Intent.EXTRA_SHORTCUT_NAME,
-                "Announcify RemoteControl");
+                getString(R.string.control_title));
         intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
                 Intent.ShortcutIconResource.fromContext(this,
                         R.drawable.launcher_icon));

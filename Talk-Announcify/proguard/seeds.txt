@@ -1,0 +1,39 @@
+com.markupartist.android.widget.ActionBar
+com.markupartist.android.widget.ScrollingTextView
+com.markupartist.android.widget.ScrollingTextView
+com.markupartist.android.widget.ScrollingTextView: ScrollingTextView(android.content.Context,android.util.AttributeSet)
+com.markupartist.android.widget.ActionBar
+com.markupartist.android.widget.ActionBar: ActionBar(android.content.Context,android.util.AttributeSet)
+com.markupartist.android.widget.ScrollingTextView
+com.markupartist.android.widget.ScrollingTextView: ScrollingTextView(android.content.Context,android.util.AttributeSet,int)
+com.announcify.api.background.contact.ContactEnum: com.announcify.api.background.contact.ContactEnum[] values()
+com.announcify.api.background.contact.ContactEnum: com.announcify.api.background.contact.ContactEnum valueOf(java.lang.String)
+com.announcify.api.background.contact.ContactEnum: com.announcify.api.background.contact.ContactEnum[] values()
+com.announcify.api.background.contact.ContactEnum: com.announcify.api.background.contact.ContactEnum valueOf(java.lang.String)
+com.announcify.api.background.contact.ContactEnum: com.announcify.api.background.contact.ContactEnum[] values()
+com.announcify.api.background.contact.ContactEnum: com.announcify.api.background.contact.ContactEnum valueOf(java.lang.String)
+com.announcify.api.background.contact.ContactEnum: com.announcify.api.background.contact.ContactEnum[] values()
+com.announcify.api.background.contact.ContactEnum: com.announcify.api.background.contact.ContactEnum valueOf(java.lang.String)
+com.announcify.api.background.contact.ContactEnum: com.announcify.api.background.contact.ContactEnum[] values()
+com.announcify.api.background.contact.ContactEnum: com.announcify.api.background.contact.ContactEnum valueOf(java.lang.String)
+com.announcify.api.background.contact.ContactEnum: com.announcify.api.background.contact.ContactEnum[] values()
+com.announcify.api.background.contact.ContactEnum: com.announcify.api.background.contact.ContactEnum valueOf(java.lang.String)
+com.announcify.api.background.contact.ContactEnum: com.announcify.api.background.contact.ContactEnum[] values()
+com.announcify.api.background.contact.ContactEnum: com.announcify.api.background.contact.ContactEnum valueOf(java.lang.String)
+com.announcify.api.background.contact.ContactEnum: com.announcify.api.background.contact.ContactEnum[] values()
+com.announcify.api.background.contact.ContactEnum: com.announcify.api.background.contact.ContactEnum valueOf(java.lang.String)
+com.announcify.api.background.contact.ContactEnum: com.announcify.api.background.contact.ContactEnum[] values()
+com.announcify.api.background.contact.ContactEnum: com.announcify.api.background.contact.ContactEnum valueOf(java.lang.String)
+com.announcify.api.ui.activity.BaseActivity
+com.announcify.api.ui.activity.PluginActivity
+com.announcify.plugin.talk.google.activity.SettingsActivity
+com.announcify.plugin.talk.google.service.TalkService
+com.announcify.api.background.service.PluginService
+com.announcify.plugin.talk.google.service.WorkerService
+com.announcify.plugin.talk.google.receiver.RingtoneReceiver
+com.announcify.plugin.talk.google.receiver.BootReceiver
+com.announcify.plugin.talk.google.receiver.AnnouncifyReceiver
+com.announcify.api.background.tts.Speech
+com.announcify.api.background.tts.Speech: android.os.Parcelable$Creator CREATOR
+com.announcify.api.background.queue.PluginQueue
+com.announcify.api.background.queue.PluginQueue: android.os.Parcelable$Creator CREATOR

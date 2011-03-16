@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Announcify - Telephone</string>
+    
+    <string-array
+		name="preference_list_reading_announcement_names">
+		<item>\"Tom\"</item>
+		<item>\"Tom from Home\"</item>
+		<item>\"Call from Tom\"</item>
+		<item>\"You have a new Call\"</item>
+		<item>\"You have a new Announcification!\"</item>
+		<item>Same as default in Announcify++</item>
+		<item>Custom...</item>
+	</string-array>
+
+	<string-array
+		name="preference_list_reading_unknown_names">
+		<item>Nothing.</item>
+		<item>\"Unknown\"</item>
+		<item>Address</item>	
+		<item>\"You have a new Call\"</item>
+		<item>\"You have a new Announcification!\"</item>
+		<item>Same as default in Announcify++</item>
+		<item>Custom...</item>
+	</string-array>
+
+	<string-array
+		name="preference_list_reading_discreet_names">
+		<item>\"Tom\"</item>
+		<item>\"Tom from Home\"</item>
+		<item>\"Call from Tom\"</item>
+		<item>\"Call from Tom: ...\"</item>
+		<item>\"You have a new Call\"</item>
+		<item>\"You have a new Announcification!\"</item>
+		<item>Same as default in Announcify++</item>
+		<item>Custom...</item>
+	</string-array>
+	
+		<string-array
+		name="preference_list_reading_announcement_ids">
+		<item>&lt;NAME&gt;</item>
+		<item>&lt;NAME&gt; from &lt;ADDRESSTYPE&gt;</item>
+		<item>&lt;EVENT&gt; from &lt;NAME&gt;</item>
+		<item>You have a new &lt;EVENT&gt;!</item>
+		<item>You have a new Announcification!</item>
+		<item>com.announcify.DEFAULT</item>
+		<item>com.announcify.CUSTOM</item>
+	</string-array>
+
+	<string-array
+		name="preference_list_reading_unknown_ids">
+		<item></item>
+		<item>&lt;UNKNOWN&gt;</item>
+		<item>&lt;ADDRESS&gt;</item>
+		<item>You have a new &lt;EVENT&gt;!</item>
+		<item>You have a new Announcification!</item>
+		<item>com.announcify.DEFAULT</item>
+		<item>com.announcify.CUSTOM</item>
+	</string-array>
+
+	<string-array
+		name="preference_list_reading_discreet_ids">
+		<item>&lt;NAME&gt;</item>
+		<item>&lt;NAME&gt; from &lt;ADDRESSTYPE&gt;</item>
+		<item>&lt;EVENT&gt; from &lt;NAME&gt;</item>
+		<item>&lt;EVENT&gt; from &lt;NAME&gt;: &lt;MESSAGE&gt;</item>
+		<item>You have a new &lt;EVENT&gt;!</item>
+		<item>You have a new Announcification!</item>
+		<item>com.announcify.DEFAULT</item>
+		<item>com.announcify.CUSTOM</item>
+	</string-array>
+</resources>

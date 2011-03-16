@@ -14,4 +14,8 @@
 		<item value="*" key="patterns"/>
 		<item value="false" key="moveWizard.updateQualifiedNames"/>
 	</section>
+	<section name="RefactoringWizard.Externalize strings in &apos;AnnouncifyActivity.java&apos;">
+		<item value="400" key="height"/>
+		<item value="600" key="width"/>
+	</section>
 </section>

@@ -1,0 +1,221 @@
+com.announcify.api.Manifest
+com.announcify.api.Manifest$permission
+com.announcify.api.R$array
+com.announcify.api.R$attr
+com.announcify.api.R$color
+com.announcify.api.R$dimen
+com.announcify.api.R$drawable
+com.announcify.api.R$id
+com.announcify.api.R$layout
+com.announcify.api.R$string
+com.announcify.api.R$style
+com.announcify.api.R$styleable:
+    public static final int ActionBar_bar_title
+com.announcify.api.R$xml
+com.announcify.api.background.contact.Contact:
+    95:95:public java.lang.String getType()
+    104:106:public void setAddress(java.lang.String)
+    109:111:public void setAddressType(java.lang.String)
+    123:124:public void setGroups(java.util.LinkedList)
+com.announcify.api.background.contact.Contact$1:
+    35:35:public void getAddress()
+com.announcify.api.background.contact.ContactFilter:
+    74:74:public static boolean announcableText()
+com.announcify.api.background.contact.lookup.Group
+com.announcify.api.background.contact.lookup.LookupMethod:
+    public abstract void getAddress()
+com.announcify.api.background.contact.lookup.Name:
+    57:74:public static void getGroup(android.content.Context,com.announcify.api.background.contact.Contact)
+    99:117:public static void getMiddlename(android.content.Context,com.announcify.api.background.contact.Contact)
+    162:180:public static void getSuffix(android.content.Context,com.announcify.api.background.contact.Contact)
+com.announcify.api.background.contact.lookup.Number:
+    27:42:public void getAddress()
+com.announcify.api.background.error.ExceptionHandler:
+    public static final java.lang.String PACKAGE
+    public static final java.lang.String ANDROID_VERSION
+    public static final java.lang.String VERSION_CODE
+    public static final java.lang.String VERSION_NAME
+    public static final java.lang.String STACKTRACE
+    public static final java.lang.String MODEL
+com.announcify.api.background.queue.PluginQueue:
+    38:39:public PluginQueue(java.lang.String,java.util.LinkedList)
+    53:53:public java.lang.Object getNext()
+    57:57:public java.lang.String getPluginName()
+    61:62:public java.lang.String getStartBroadcast()
+    66:67:public java.lang.String getStopBroadcast()
+    75:78:public java.lang.String sniffNextString()
+com.announcify.api.background.service.PluginService:
+    public static final java.lang.String ACTION_PLUGIN_CONTACT
+    public static final java.lang.String ACTION_ANNOUNCE
+    public static final java.lang.String EXTRA_PRIORITY
+    public static final java.lang.String EXTRA_QUEUE
+    public static final java.lang.String EXTRA_PLUGIN_NAME
+    public static final java.lang.String EXTRA_PLUGIN_PACKAGE
+    public static final java.lang.String EXTRA_PLUGIN_ACTION
+    public static final java.lang.String EXTRA_PLUGIN_BROADCAST
+    public static final java.lang.String EXTRA_PLUGIN_PRIORITY
+com.announcify.api.background.sql.model.BaseModel:
+    29:29:public android.database.Cursor get(long)
+    38:38:public android.database.Cursor getAll(java.lang.String)
+    46:48:public void remove(long)
+com.announcify.api.background.sql.model.ContactModel:
+    public static final java.lang.String TABLE_NAME
+    public static final java.lang.String KEY_CONTACT_ID
+    public static final java.lang.String KEY_CONTACT_TITLE
+    20:24:public void add(java.lang.String,java.lang.String)
+    27:35:public boolean getEnabled(java.lang.String)
+    39:41:public void remove(java.lang.String)
+com.announcify.api.background.sql.model.GroupModel:
+    public static final java.lang.String TABLE_NAME
+    public static final java.lang.String KEY_GROUP_ID
+    public static final java.lang.String KEY_GROUP_TITLE
+    21:25:public void add(long,java.lang.String)
+    28:36:public boolean getEnabled(long)
+    41:43:public void remove(long)
+com.announcify.api.background.sql.model.PluginModel:
+    public static final java.lang.String TABLE_NAME
+    public static final java.lang.String KEY_PLUGIN_NAME
+    public static final java.lang.String KEY_PLUGIN_PACKAGE
+    public static final java.lang.String KEY_PLUGIN_ACTION
+    public static final java.lang.String KEY_PLUGIN_ACTIVE
+    public static final java.lang.String KEY_PLUGIN_PRIORITY
+    35:43:public java.lang.String getAction(long)
+    62:72:public boolean known(long)
+    76:77:public void setActive(long,boolean)
+    97:105:public java.lang.String getName(long)
+    109:117:public java.lang.String getPackage(long)
+    121:129:public int getPriority(long)
+    133:145:public void togglePlugin(long)
+com.announcify.api.background.sql.model.TranslationModel:
+    public static final java.lang.String TABLE_NAME
+    public static final java.lang.String KEY_TRANSLATION_FROM
+    public static final java.lang.String KEY_TRANSLATION_TO
+    public static final java.lang.String KEY_TRANSLATION_SOURCE
+    public static final java.lang.String KEY_TRANSLATION_DESTINATION
+com.announcify.api.background.text.AndroidPatterns:
+    public static final java.lang.String TOP_LEVEL_DOMAIN_STR
+    public static final java.lang.String TOP_LEVEL_DOMAIN_STR_FOR_WEB_URL
+    public static final java.lang.String GOOD_IRI_CHAR
+    189:202:public static final java.lang.String concatGroups(java.util.regex.Matcher)
+    216:226:public static final java.lang.String digitsAndPlusOnly(java.util.regex.Matcher)
+com.announcify.api.background.text.FormatEnum
+com.announcify.api.background.text.Formatter:
+    public static final java.lang.String EVENT
+    public static final java.lang.String NAME
+    public static final java.lang.String UNKNOWN
+    public static final java.lang.String FULLNAME
+    public static final java.lang.String FIRSTNAME
+    public static final java.lang.String LASTNAME
+    public static final java.lang.String NICKNAME
+    public static final java.lang.String TITLE
+    public static final java.lang.String ADDRESS
+    public static final java.lang.String ADDRESS_TYPE
+    public static final java.lang.String MESSAGE
+com.announcify.api.background.text.TextFilter
+com.announcify.api.background.tts.Speech:
+    26:31:private static java.util.Locale getDefaultLocale(android.content.Context)
+    36:41:private static float getDefaultPitch(android.content.Context)
+    46:51:private static float getDefaultSpeechRate(android.content.Context)
+    60:61:public Speech(android.content.Context)
+    64:65:public Speech(float,float,android.content.Context)
+    67:71:public Speech(float,float,java.util.Locale)
+    74:75:public Speech(java.util.Locale,android.content.Context)
+    88:88:public java.util.Locale getLanguage()
+    92:92:public float getPitch()
+    96:96:public float getSpeechRate()
+    100:101:public void setLanguage(java.util.Locale)
+com.announcify.api.background.util.AnnouncifySettings:
+    public static final java.lang.String PREFERENCES_NAME
+    public static final java.lang.String KEY_READING_MODE
+    public static final java.lang.String KEY_GROUP_FILTER
+    public static final java.lang.String KEY_GROUP_BLOCK
+    public static final java.lang.String KEY_CONTACT_FILTER
+    public static final java.lang.String KEY_CONTACT_BLOCK
+    public static final java.lang.String KEY_TRANSLATE_TEXT
+    public static final java.lang.String KEY_STREAM
+    public static final java.lang.String KEY_DISCREET
+    public static final java.lang.String KEY_SCREEN
+    public static final java.lang.String KEY_GRAVITY
+    public static final java.lang.String KEY_NOTIFICATION
+    public static final java.lang.String KEY_SPECIAL_CHARACTERS
+    103:103:public boolean isDiscreetCondition()
+    107:107:public boolean isGravityCondition()
+    111:111:public boolean isScreenCondition()
+    115:115:public boolean isShowNotification()
+    119:122:public void setBlockGroups(boolean)
+    125:128:public void setBlockContacts(boolean)
+com.announcify.api.background.util.PluginSettings:
+    public static final java.lang.String DEFAULT_SETTING
+    public static final java.lang.String KEY_RINGTONE
+    public static final java.lang.String KEY_READING_BREAK
+    public static final java.lang.String KEY_READING_REPEAT
+    public static final java.lang.String KEY_READING_WAIT
+    public static final java.lang.String KEY_READING_UNKNOWN
+    public static final java.lang.String KEY_READING_DISCREET
+    public static final java.lang.String KEY_READING_ANNOUNCEMENT
+com.announcify.api.simple.SimpleAnnouncifyIntent
+com.announcify.api.simple.SimpleAnnouncifyIntent$SimpleSettings
+com.announcify.api.simple.SimplePluginModel
+com.announcify.api.ui.activity.BaseActivity:
+    14:28:protected void onCreate(android.os.Bundle,int)
+com.announcify.api.ui.activity.PluginActivity:
+    private static final java.lang.String CUSTOM_VALUE
+    39:48:protected void applyThemeProtection(java.lang.String)
+com.announcify.api.ui.activity.PluginActivity$1
+com.announcify.plugin.voice.call.Manifest
+com.announcify.plugin.voice.call.Manifest$permission
+com.announcify.plugin.voice.call.R
+com.announcify.plugin.voice.call.R$array
+com.announcify.plugin.voice.call.R$attr
+com.announcify.plugin.voice.call.R$color
+com.announcify.plugin.voice.call.R$dimen
+com.announcify.plugin.voice.call.R$drawable
+com.announcify.plugin.voice.call.R$id
+com.announcify.plugin.voice.call.R$layout
+com.announcify.plugin.voice.call.R$string
+com.announcify.plugin.voice.call.R$style
+com.announcify.plugin.voice.call.R$styleable
+com.announcify.plugin.voice.call.R$xml
+com.announcify.plugin.voice.call.service.WorkerService:
+    public static final java.lang.String ACTION_START_RINGTONE
+    public static final java.lang.String ACTION_STOP_RINGTONE
+com.announcify.plugin.voice.call.util.Settings:
+    public static final java.lang.String ACTION_SETTINGS
+    public static final java.lang.String PREFERENCES_NAME
+com.announcify.plugin.voice.mail.Manifest
+com.announcify.plugin.voice.mail.Manifest$permission
+com.announcify.plugin.voice.mail.R
+com.announcify.plugin.voice.mail.R$array
+com.announcify.plugin.voice.mail.R$attr
+com.announcify.plugin.voice.mail.R$color
+com.announcify.plugin.voice.mail.R$dimen
+com.announcify.plugin.voice.mail.R$drawable
+com.announcify.plugin.voice.mail.R$id
+com.announcify.plugin.voice.mail.R$layout
+com.announcify.plugin.voice.mail.R$string
+com.announcify.plugin.voice.mail.R$style
+com.announcify.plugin.voice.mail.R$styleable
+com.announcify.plugin.voice.mail.R$xml
+com.announcify.plugin.voice.mail.service.WorkerService:
+    public static final java.lang.String ACTION_START_RINGTONE
+    public static final java.lang.String ACTION_STOP_RINGTONE
+com.announcify.plugin.voice.mail.util.Settings:
+    public static final java.lang.String ACTION_SETTINGS
+    public static final java.lang.String PREFERENCES_NAME
+com.announcify.telephone.Manifest
+com.announcify.telephone.Manifest$permission
+com.announcify.telephone.R
+com.announcify.telephone.R$array
+com.announcify.telephone.R$attr
+com.announcify.telephone.R$color
+com.announcify.telephone.R$dimen
+com.announcify.telephone.R$drawable
+com.announcify.telephone.R$id
+com.announcify.telephone.R$layout
+com.announcify.telephone.R$string
+com.announcify.telephone.R$style
+com.announcify.telephone.R$styleable
+com.announcify.telephone.R$xml
+com.markupartist.android.widget.ActionBar:
+    199:202:public void setHomeLogo(int)
+    209:210:public void setTitle(int)

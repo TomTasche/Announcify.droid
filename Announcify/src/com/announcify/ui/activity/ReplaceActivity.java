@@ -22,17 +22,11 @@ import com.announcify.background.tts.Speaker;
 public class ReplaceActivity extends BaseActivity {
 
     private SimpleCursorAdapter adapter;
-
     private EditText with;
-
     private EditText replace;
-
     private ListView list;
-
     private TranslationModel model;
-
     private Cursor cursor;
-
     private Speaker speaker;
 
     @Override

@@ -8,12 +8,10 @@
 <booleanAttribute key="com.android.ide.eclipse.adt.target" value="true"/>
 <booleanAttribute key="com.android.ide.eclipse.adt.wipedata" value="false"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/Mail - Announcify"/>
-<listEntry value="/Mail - Announcify/AndroidManifest.xml"/>
+<listEntry value="/Mail-Announcify"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="4"/>
-<listEntry value="1"/>
 </listAttribute>
-<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="Mail - Announcify"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="Mail-Announcify"/>
 </launchConfiguration>

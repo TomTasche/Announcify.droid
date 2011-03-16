@@ -29,23 +29,8 @@ public class Queue implements OnUtteranceCompletedListener {
         this.handler = handler;
     }
 
-    private void changeLanguage() {
-        final Message msg = Message.obtain();
-
-        if (queue.getFirst().getSpeech() == null) {
-            msg.what = AnnouncificationHandler.WHAT_REVERT_LOCALE;
-        } else {
-            msg.what = AnnouncificationHandler.WHAT_CHANGE_LOCALE;
-            msg.obj = queue.getFirst().getSpeech();
-        }
-
-        Log.d("Announcify", "Speech: " + queue.getFirst().getSpeech().getLanguage().toString());
-        handler.sendMessage(msg);
-    }
-
     private void checkNext() {
         if (!queue.isEmpty() && queue.getFirst().isEmpty()) {
-            handler.sendEmptyMessage(AnnouncificationHandler.WHAT_REVERT_LOCALE);
             context.sendBroadcast(new Intent(queue.getFirst().getStopBroadcast()));
             queue.removeFirst();
 
@@ -55,7 +40,6 @@ public class Queue implements OnUtteranceCompletedListener {
             }
 
             context.sendBroadcast(new Intent(queue.getFirst().getStartBroadcast()));
-            changeLanguage();
         }
 
         if (queue.isEmpty()) {
@@ -85,8 +69,6 @@ public class Queue implements OnUtteranceCompletedListener {
         checkNext();
 
         if (!granted) return;
-
-        changeLanguage();
 
         final Message message = Message.obtain();
         message.what = AnnouncificationHandler.WHAT_NEXT_ITEM;

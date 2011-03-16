@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;API-Announcify/res/values/strings.xml&apos; to &apos;strings_api.xml&apos;" description="Rename resource &apos;strings.xml&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="res/values/strings.xml" name="strings_api.xml" stamp="1300209700154" updateReferences="true"/>
+</session>

@@ -63,9 +63,9 @@ public class LocaleActivity extends PluginActivity {
 
             String blurb;
             if (announcifyCheck.isChecked()) {
-                blurb = "Announcify" + " " + "enabled";
+                blurb = "Announcify" + " " + getString(R.string.string_enabled);
             } else {
-                blurb = "Announcify" + " " + "disabled";
+                blurb = "Announcify" + " " + getString(R.string.string_disabled);
             }
 
             // this is the blurb shown in the Locale UI

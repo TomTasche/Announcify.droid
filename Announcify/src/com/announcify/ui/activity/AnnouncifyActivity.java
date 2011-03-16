@@ -1,6 +1,5 @@
 package com.announcify.ui.activity;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.ContentObserver;
@@ -84,7 +83,7 @@ public class AnnouncifyActivity extends BaseActivity {
 
             case R.id.menu_report:
                 final Intent sendIntent = new Intent(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Announcify - Problem with " + model.getName(info.id));
+                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Announcify - Problem using " + model.getName(info.id));
                 sendIntent.putExtra(Intent.EXTRA_TEXT, "");
                 sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { "tom@announcify.com" });
                 sendIntent.setType("message/rfc822");
@@ -114,7 +113,7 @@ public class AnnouncifyActivity extends BaseActivity {
                 } catch (final Exception e) {
                     model.remove(arg3);
 
-                    Toast.makeText(AnnouncifyActivity.this, "The Plugin you are looking for seems to be uninstalled!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AnnouncifyActivity.this, getString(R.string.toast_plugin_not_found), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -143,12 +142,7 @@ public class AnnouncifyActivity extends BaseActivity {
     public boolean onMenuItemSelected(final int featureId, final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_toggle:
-                final ContentValues values = new ContentValues();
-                values.put(PluginModel.KEY_PLUGIN_ACTIVE,
-                        !model.getActive(model.getId("Announcify++")));
-                model.getResolver()
-                        .update(model.buildUri(), values, null, null);
-
+                model.togglePlugin(model.getId("Announcify++"));
                 adapter.notifyDataSetChanged();
 
                 break;
@@ -172,13 +166,13 @@ public class AnnouncifyActivity extends BaseActivity {
                 break;
 
             case R.id.menu_share:
-                ActivityUtils.getShareIntent();
+                ActivityUtils.getShareIntent(this);
 
                 break;
 
-            case R.id.menu_about:
+            case R.id.menu_translate:
                 startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("http://announcify.com/")));
+                        Uri.parse("http://goo.gl/MmR5D")));
 
                 break;
         }
@@ -198,9 +192,7 @@ public class AnnouncifyActivity extends BaseActivity {
         super.onStart();
 
         observer = new AnnouncifyObserver(new Handler());
-        getContentResolver().registerContentObserver(
-                Uri.withAppendedPath(AnnouncifyProvider.PROVIDER_URI,
-                        PluginModel.TABLE_NAME), false, observer);
+        getContentResolver().registerContentObserver(Uri.withAppendedPath(AnnouncifyProvider.PROVIDER_URI, PluginModel.TABLE_NAME), false, observer);
 
         sendStickyBroadcast(new Intent("com.announcify.ACTION_PLUGIN_CONTACT"));
 
@@ -210,7 +202,6 @@ public class AnnouncifyActivity extends BaseActivity {
     @Override
     protected void onStop() {
         getContentResolver().unregisterContentObserver(observer);
-        
         cursor.close();
 
         super.onStop();

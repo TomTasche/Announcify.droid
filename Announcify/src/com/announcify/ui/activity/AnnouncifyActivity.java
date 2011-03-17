@@ -183,6 +183,8 @@ public class AnnouncifyActivity extends BaseActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
+        
+        sendStickyBroadcast(new Intent("com.announcify.ACTION_PLUGIN_CONTACT"));
 
         refreshList();
     }
@@ -190,10 +192,7 @@ public class AnnouncifyActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        observer = new AnnouncifyObserver(new Handler());
-        getContentResolver().registerContentObserver(Uri.withAppendedPath(AnnouncifyProvider.PROVIDER_URI, PluginModel.TABLE_NAME), false, observer);
-
+        
         sendStickyBroadcast(new Intent("com.announcify.ACTION_PLUGIN_CONTACT"));
 
         refreshList();
@@ -208,7 +207,16 @@ public class AnnouncifyActivity extends BaseActivity {
     }
 
     private void refreshList() {
+        // TODO: SectionedAdapter doesn't support lower-case.
+        if (model.getId("BbAdMob") < 0) {
+            // TODO: check if free or pro
+            model.add("BbAdMob", 9, "", "com.google.ad", false);
+        }
+        
         cursor = model.getAll(PluginModel.KEY_PLUGIN_NAME);
+        
+        observer = new AnnouncifyObserver(new Handler());
+        getContentResolver().registerContentObserver(Uri.withAppendedPath(AnnouncifyProvider.PROVIDER_URI, PluginModel.TABLE_NAME), false, observer);
 
         adapter = new SectionedAdapter(this, model, cursor);
         getListView().setAdapter(adapter);

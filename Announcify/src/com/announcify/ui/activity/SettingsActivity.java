@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.widget.Toast;
 
 import com.announcify.R;
 import com.announcify.api.background.util.AnnouncifySettings;

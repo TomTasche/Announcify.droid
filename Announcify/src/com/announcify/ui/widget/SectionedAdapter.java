@@ -1,13 +1,16 @@
 package com.announcify.ui.widget;
 
+import java.util.HashSet;
+
 import android.app.Activity;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.provider.BaseColumns;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -52,104 +55,150 @@ public class SectionedAdapter extends CursorAdapter {
     }
 
     @Override
-    public void bindView(final View view, final Context context,
-            final Cursor cursor) {
+    public void bindView(final View view, final Context context, final Cursor cursor) {
         final long id = cursor.getLong(idIndex);
         view.setTag(id);
 
         if ("BbAdMob".equals(model.getName(id))) {
-            ((TextView) view.findViewById(R.id.plugin)).setText("Publisher? Display your ad here!");
+            if (view.findViewById(R.id.admob) == null) {
+                ((TextView) view.findViewById(R.id.plugin)).setText("Publisher? Put your ad here!");
 
-            view.findViewById(R.id.separator).setVisibility(View.GONE);
-            view.findViewById(R.id.settings).setVisibility(View.GONE);
+                view.findViewById(R.id.separator).setVisibility(View.GONE);
+                view.findViewById(R.id.settings).setVisibility(View.GONE);
+                view.findViewById(R.id.check).setVisibility(View.GONE);
 
-            view.findViewById(R.id.plugin).setOnClickListener(new OnClickListener() {
+                view.findViewById(R.id.plugin).setOnClickListener(new OnClickListener() {
 
-                public void onClick(View v) {
-                    final Intent sendIntent = new Intent(Intent.ACTION_SEND);
-                    sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Announcify - Advertisement");
-                    sendIntent.putExtra(Intent.EXTRA_TEXT, "");
-                    sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { "tom@announcify.com" });
-                    sendIntent.setType("message/rfc822");
-                    context.startActivity(sendIntent);
-                }
-            });
+                    public void onClick(View v) {
+                        final Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                        sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Announcify - Advertisement");
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, "");
+                        sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { "tom@announcify.com" });
+                        sendIntent.setType("message/rfc822");
+                        context.startActivity(sendIntent);
+                    }
+                });
 
-            final AdRequest ad = new AdRequest();
-            ad.setTesting(true);
+                final AdRequest ad = new AdRequest();
+                
+                final HashSet<String> keywords = new HashSet<String>();
+                keywords.add("text-to-voice");
+                keywords.add("text-to-speech");
+                keywords.add("accessibility");
+                keywords.add("eyes-free");
+                keywords.add("speech");
+                keywords.add("voice");
+                keywords.add("announcify");
+                
+                final Cursor plugins = model.getAll();
+                plugins.moveToFirst();
+                
+                final int nameId = plugins.getColumnIndex(PluginModel.KEY_PLUGIN_NAME);
+                do {
+                    keywords.add(plugins.getString(nameId));
+                } while (plugins.moveToNext());
+                keywords.remove("BbAdMob");
+                
+                ad.setKeywords(keywords);
+                // ad.setTesting(true);
 
-            final AdView adView = new AdView((Activity) context, AdSize.BANNER, "a14d81b0baa0b54");
-            ((LinearLayout) view).addView(adView);
-            adView.setAdListener(new AdListener() {
+                final AdView adView = new AdView((Activity) context, AdSize.BANNER, "a14d81b0baa0b54");
+                adView.setId(R.id.admob);
+                ((LinearLayout) view).addView(adView);
+                adView.setAdListener(new AdListener() {
 
-                public void onReceiveAd(Ad arg0) {
-                    view.findViewById(R.id.plugin_info).setVisibility(View.GONE);
-                }
+                    public void onReceiveAd(Ad arg0) {
+                        view.findViewById(R.id.plugin_info).setVisibility(View.GONE);
+                    }
 
-                public void onPresentScreen(Ad arg0) {
-                    ((TextView) view.findViewById(R.id.plugin)).setText("Hate ads? Purchase Pro.");
-                    view.findViewById(R.id.plugin).setVisibility(View.VISIBLE);
-                    view.findViewById(R.id.plugin_info).setVisibility(View.VISIBLE);
-                    view.findViewById(R.id.plugin).setOnClickListener(new OnClickListener() {
+                    public void onPresentScreen(Ad arg0) {}
 
-                        public void onClick(View v) {
-                            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://goo.gl/p4jH2")));
-                        }
-                    });
-                }
+                    public void onLeaveApplication(Ad arg0) {}
 
-                public void onLeaveApplication(Ad arg0) {}
+                    public void onFailedToReceiveAd(Ad arg0, ErrorCode arg1) {}
 
-                public void onFailedToReceiveAd(Ad arg0, ErrorCode arg1) {}
+                    public void onDismissScreen(Ad arg0) {
+                        Builder builder = new Builder(context);
+                        builder.setCancelable(true);
+                        builder.setTitle(context.getString(R.string.dialog_pro_title));
+                        builder.setMessage(context.getString(R.string.dialog_pro_message)); 
+                        builder.setNegativeButton(context.getString(R.string.dialog_pro_cancel), null);
+                        builder.setPositiveButton(context.getString(R.string.dialog_pro_ok), new DialogInterface.OnClickListener() {
 
-                public void onDismissScreen(Ad arg0) {}
-            });
-            adView.loadAd(ad);
+                            public void onClick(DialogInterface dialog, int which) {
+                                // TODO: donate-dialog like in openoffice document reader
+                                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://goo.gl/p4jH2")));
+                            }
+                        });
+                        builder.create().show();
+                    }
+                });
+                adView.loadAd(ad);
+            } else {
+                view.findViewById(R.id.plugin_info).setVisibility(View.GONE);
+                view.findViewById(R.id.separator).setVisibility(View.GONE);
+                view.findViewById(R.id.admob).setVisibility(View.VISIBLE);
+                view.findViewById(R.id.settings).setVisibility(View.GONE);
+                view.findViewById(R.id.plugin).setVisibility(View.GONE);
+                view.findViewById(R.id.check).setVisibility(View.GONE);
+                
+                view.findViewById(R.id.plugin).setOnClickListener(new OnClickListener() {
 
+                    public void onClick(View v) {
+                        final Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                        sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Announcify - Advertisement");
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, "");
+                        sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { "tom@announcify.com" });
+                        sendIntent.setType("message/rfc822");
+                        context.startActivity(sendIntent);
+                    }
+                });
+            }
+            
             return;
         }
 
         view.findViewById(R.id.separator).setVisibility(View.VISIBLE);
         view.findViewById(R.id.settings).setVisibility(View.VISIBLE);
+        view.findViewById(R.id.check).setVisibility(View.VISIBLE);
+        view.findViewById(R.id.plugin).setVisibility(View.VISIBLE);
+        if (view.findViewById(R.id.admob) != null) view.findViewById(R.id.admob).setVisibility(View.GONE);
         view.findViewById(R.id.plugin_info).setVisibility(View.VISIBLE);
 
-        ((ImageView) view.findViewById(R.id.icon)).setImageDrawable(context
-                .getResources().getDrawable(R.drawable.launcher_icon));
+        ((ImageView) view.findViewById(R.id.icon)).setImageDrawable(context.getResources().getDrawable(R.drawable.launcher_icon));
 
         ((TextView) view.findViewById(R.id.plugin)).setText(model.getName(id));
 
         final ImageView check = (ImageView) view.findViewById(R.id.check);
         check.setTag(id);
-        check.setImageDrawable(context.getResources().getDrawable(
-                model.getActive(id) ? R.drawable.btn_check_buttonless_on
-                        : R.drawable.btn_check_buttonless_off));
+        check.setImageDrawable(context.getResources().getDrawable(model.getActive(id) ? R.drawable.btn_check_buttonless_on : R.drawable.btn_check_buttonless_off));
         check.setOnClickListener(new OnClickListener() {
 
             public void onClick(final View v) {
                 model.togglePlugin((Long) v.getTag());
 
-                check.setImageDrawable(context
-                        .getResources()
-                        .getDrawable(
-                                model.getActive(id) ? R.drawable.btn_check_buttonless_on
-                                        : R.drawable.btn_check_buttonless_off));
+                check.setImageDrawable(context.getResources().getDrawable(model.getActive(id) ? R.drawable.btn_check_buttonless_on : R.drawable.btn_check_buttonless_off));
+            }
+        });
+        
+        view.setOnClickListener(new OnClickListener() {
+            
+            public void onClick(View v) {
+                context.startActivity(new Intent(model.getAction((Long) v.getTag())));
             }
         });
     }
 
     @Override
-    public View getView(final int position, View convertView,
-            final ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         convertView = super.getView(position, convertView, parent);
 
         final int section = indexer.getSectionForPosition(position);
 
-        final TextView sectionView = (TextView) convertView
-        .findViewById(R.id.section);
+        final TextView sectionView = (TextView) convertView.findViewById(R.id.section);
         if (indexer.getPositionForSection(section) == position) {
             sectionView.setBackgroundColor(Color.parseColor("#AD0000"));
-            sectionView.setText(indexer.getSections()[section].toString()
-                    .trim());
+            sectionView.setText(indexer.getSections()[section].toString().trim());
             sectionView.setVisibility(View.VISIBLE);
         } else {
             sectionView.setVisibility(View.GONE);
@@ -160,10 +209,8 @@ public class SectionedAdapter extends CursorAdapter {
     }
 
     @Override
-    public View newView(final Context context, final Cursor cursor,
-            final ViewGroup parent) {
-        return inflater.inflate(com.announcify.R.layout.list_item_plugin,
-                parent, false);
+    public View newView(final Context context, final Cursor cursor, final ViewGroup parent) {
+        return inflater.inflate(com.announcify.R.layout.list_item_plugin, parent, false);
     }
 
     @Override

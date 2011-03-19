@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-	<string name="control_kill">Kill</string>
-	<string name="control_pause">Pause</string>
-	<string name="control_continue">Continue</string>
-	<string name="control_skip">Skip</string>
-	
-	
-</resources>

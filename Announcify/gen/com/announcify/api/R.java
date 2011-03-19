@@ -84,33 +84,35 @@ containing a value of this type.
         public static final int actionbar_home_logo=0x7f0b0002;
         public static final int actionbar_item=0x7f0b0007;
         public static final int actionbar_title=0x7f0b0006;
+        public static final int ad=0x7f0b0011;
+        public static final int admob=0x7f0b0010;
         public static final int auto_edit_chooser=0x7f0b000a;
         public static final int button_add=0x7f0b000f;
         public static final int button_speak=0x7f0b000e;
-        public static final int check=0x7f0b0016;
+        public static final int check=0x7f0b0018;
         public static final int check_block=0x7f0b0009;
         public static final int edit_replace=0x7f0b000c;
         public static final int edit_with=0x7f0b000d;
-        public static final int icon=0x7f0b0012;
-        public static final int menu_activate=0x7f0b001a;
-        public static final int menu_edit=0x7f0b001c;
-        public static final int menu_help=0x7f0b001e;
-        public static final int menu_plugins=0x7f0b001f;
-        public static final int menu_rate=0x7f0b0020;
-        public static final int menu_remove=0x7f0b0018;
-        public static final int menu_report=0x7f0b001b;
-        public static final int menu_share=0x7f0b0021;
-        public static final int menu_toggle=0x7f0b001d;
-        public static final int menu_translate=0x7f0b0022;
-        public static final int menu_uninstall=0x7f0b0019;
-        public static final int plugin=0x7f0b0013;
-        public static final int plugin_info=0x7f0b0011;
+        public static final int icon=0x7f0b0014;
+        public static final int menu_activate=0x7f0b001c;
+        public static final int menu_edit=0x7f0b001e;
+        public static final int menu_help=0x7f0b0020;
+        public static final int menu_plugins=0x7f0b0021;
+        public static final int menu_rate=0x7f0b0022;
+        public static final int menu_remove=0x7f0b001a;
+        public static final int menu_report=0x7f0b001d;
+        public static final int menu_share=0x7f0b0023;
+        public static final int menu_toggle=0x7f0b001f;
+        public static final int menu_translate=0x7f0b0024;
+        public static final int menu_uninstall=0x7f0b001b;
+        public static final int plugin=0x7f0b0015;
+        public static final int plugin_info=0x7f0b0013;
         public static final int screen=0x7f0b0000;
-        public static final int section=0x7f0b0010;
-        public static final int separator=0x7f0b0015;
-        public static final int settings=0x7f0b0014;
+        public static final int section=0x7f0b0012;
+        public static final int separator=0x7f0b0017;
+        public static final int settings=0x7f0b0016;
         public static final int web_help=0x7f0b000b;
-        public static final int widget_control_button=0x7f0b0017;
+        public static final int widget_control_button=0x7f0b0019;
     }
     public static final class layout {
         public static final int actionbar=0x7f030000;
@@ -119,9 +121,10 @@ containing a value of this type.
         public static final int activity_chooser=0x7f030003;
         public static final int activity_help=0x7f030004;
         public static final int activity_replace=0x7f030005;
-        public static final int list_header=0x7f030006;
-        public static final int list_item_plugin=0x7f030007;
-        public static final int widget_control=0x7f030008;
+        public static final int empty=0x7f030006;
+        public static final int list_header=0x7f030007;
+        public static final int list_item_plugin=0x7f030008;
+        public static final int widget_control=0x7f030009;
     }
     public static final class menu {
         public static final int context_choose=0x7f0a0000;
@@ -145,6 +148,12 @@ containing a value of this type.
         /**  RemoteControl 
          */
         public static final int control_title=0x7f070042;
+        public static final int dialog_pro_cancel=0x7f070055;
+        public static final int dialog_pro_message=0x7f070054;
+        public static final int dialog_pro_ok=0x7f070056;
+        /**  Dialogs 
+         */
+        public static final int dialog_pro_title=0x7f070053;
         public static final int menu_help=0x7f070049;
         public static final int menu_more_plugins=0x7f07004a;
         public static final int menu_rate=0x7f07004b;

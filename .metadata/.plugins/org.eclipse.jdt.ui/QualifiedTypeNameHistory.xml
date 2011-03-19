@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="android.content.res.Resources"/>
-<fullyQualifiedTypeName name="com.announcify.api.R.array"/>
-<fullyQualifiedTypeName name="android.widget.LinearLayout"/>
-<fullyQualifiedTypeName name="java.lang.StrictMath"/>
-<fullyQualifiedTypeName name="com.announcify.api.background.contact.Contact"/>
-<fullyQualifiedTypeName name="com.announcify.api.background.contact.ContactFilter"/>
 <fullyQualifiedTypeName name="android.text.util.Linkify"/>
 <fullyQualifiedTypeName name="android.os.PatternMatcher"/>
 <fullyQualifiedTypeName name="android.util.Patterns"/>
@@ -37,11 +31,8 @@
 <fullyQualifiedTypeName name="com.announcify.api.R.xml"/>
 <fullyQualifiedTypeName name="android.os.Debug"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.service.PluginService"/>
-<fullyQualifiedTypeName name="android.database.Cursor"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
-<fullyQualifiedTypeName name="com.announcify.api.background.sql.model.PluginModel"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.mail.k9.service.MailService"/>
-<fullyQualifiedTypeName name="android.content.Intent"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.talk.google.service.TalkService"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.voice.mail.service.VoicemailService"/>
 <fullyQualifiedTypeName name="android.os.CountDownTimer"/>
@@ -49,15 +40,24 @@
 <fullyQualifiedTypeName name="java.lang.Runnable"/>
 <fullyQualifiedTypeName name="android.os.Handler"/>
 <fullyQualifiedTypeName name="com.announcify.R.array"/>
-<fullyQualifiedTypeName name="com.announcify.R.string"/>
 <fullyQualifiedTypeName name="com.announcify.api.R"/>
 <fullyQualifiedTypeName name="com.announcify.api.R.string"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.contact.lookup.Group"/>
 <fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="com.google.ads.AdRequest"/>
 <fullyQualifiedTypeName name="com.google.ads.AdListener"/>
-<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
-<fullyQualifiedTypeName name="com.announcify.R.id"/>
 <fullyQualifiedTypeName name="android.view.View"/>
+<fullyQualifiedTypeName name="android.app.AlertDialog"/>
+<fullyQualifiedTypeName name="android.app.AlertDialog.Builder"/>
+<fullyQualifiedTypeName name="android.content.DialogInterface.OnClickListener"/>
+<fullyQualifiedTypeName name="android.content.DialogInterface"/>
+<fullyQualifiedTypeName name="com.announcify.R.string"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="android.content.res.Resources"/>
+<fullyQualifiedTypeName name="com.announcify.R.id"/>
+<fullyQualifiedTypeName name="java.util.HashSet"/>
+<fullyQualifiedTypeName name="android.database.Cursor"/>
+<fullyQualifiedTypeName name="com.announcify.api.background.sql.model.PluginModel"/>
+<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
+<fullyQualifiedTypeName name="android.content.Intent"/>
 </qualifiedTypeNameHistroy>

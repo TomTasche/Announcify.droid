@@ -59,10 +59,10 @@ public class MailService extends Service {
                 String[] projection = new String[] { "conversation_id", "maxMessageId" };
                 // content://gmail-ls/unread/
                 conversations = getContentResolver().query(
-                        Uri.parse("content://gmail-ls/conversations/"
-                                + address), projection,
+//                        Uri.parse("content://gmail-ls/conversations/"
+//                                + address), projection,
+                        Uri.parse("content://gmail-ls/unread/"), projection,
                                 null, null, null);
-                Log.e("smn", "conversation");
                 if (!conversations.moveToFirst()) return;
 
                 final long conversationId = Long

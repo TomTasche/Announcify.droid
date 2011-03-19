@@ -52,9 +52,11 @@ public class AnnouncificationHandler extends Handler {
             case WHAT_PUT_QUEUE:
                 PluginQueue little = msg.getData().getParcelable(PluginService.EXTRA_QUEUE);
 
-                if (!model.known(model.getId(little.getPluginName())) && !model.getActive(model.getId(little.getPluginName()))) {
-                    little = new PluginQueue("Empty", new LinkedList<Object>());
+                if (!model.known(model.getId(little.getPluginName()))) {
+                    little = new PluginQueue("Unknown", new LinkedList<Object>());
                     msg.getData().putInt(PluginService.EXTRA_PRIORITY, 9);
+                } else if (!model.getActive(model.getId(little.getPluginName()))) {
+                    return;
                 }
 
                 switch (msg.getData().getInt(PluginService.EXTRA_PRIORITY, -1)) {

@@ -41,6 +41,8 @@ public class Mail implements LookupMethod {
     }
 
     public void getAddress() {
+        prepareAddress(contact);
+        
         Cursor cursor = null;
 
         try {

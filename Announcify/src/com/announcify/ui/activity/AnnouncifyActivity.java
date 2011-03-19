@@ -102,6 +102,8 @@ public class AnnouncifyActivity extends BaseActivity {
         getListView().setBackgroundColor(Color.WHITE);
         getListView().setCacheColorHint(Color.TRANSPARENT);
         getListView().setFastScrollEnabled(true);
+        
+        sendStickyBroadcast(new Intent("com.announcify.ACTION_PLUGIN_CONTACT"));
 
         registerForContextMenu(getListView());
 
@@ -119,6 +121,8 @@ public class AnnouncifyActivity extends BaseActivity {
         });
 
         model = new PluginModel(this);
+        
+        refreshList();
     }
 
     @Override
@@ -142,9 +146,18 @@ public class AnnouncifyActivity extends BaseActivity {
     public boolean onMenuItemSelected(final int featureId, final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_toggle:
-                model.togglePlugin(model.getId("Announcify++"));
+                final boolean activate = model.getActive(model.getId("Announcify++"));
+                
+                final Cursor cursor = model.getAll();
+                cursor.moveToFirst();
+                
+                final int idIndex = cursor.getColumnIndex(PluginModel._ID);
+                do {
+                    model.setActive(cursor.getLong(idIndex), activate);
+                } while (cursor.moveToNext());
+                cursor.close();
+                
                 adapter.notifyDataSetChanged();
-
                 break;
 
             case R.id.menu_help:
@@ -185,16 +198,6 @@ public class AnnouncifyActivity extends BaseActivity {
         super.onRestart();
         
         sendStickyBroadcast(new Intent("com.announcify.ACTION_PLUGIN_CONTACT"));
-
-        refreshList();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        
-        sendStickyBroadcast(new Intent("com.announcify.ACTION_PLUGIN_CONTACT"));
-
         refreshList();
     }
 

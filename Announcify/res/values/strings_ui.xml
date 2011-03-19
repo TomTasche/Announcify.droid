@@ -54,4 +54,14 @@
 	<string name="context_menu_report">Report</string>
 	
 	<string name="context_menu_uninstall">Uninstall</string>
+	
+	
+	<!-- Dialogs -->
+	<string name="dialog_pro_title">Die ad, die.</string>
+	
+	<string name="dialog_pro_message">Hate ads? Buy Pro, get rid of annoying ads and support the developer. :)</string>
+	
+	<string name="dialog_pro_cancel">Nope.</string>
+	
+	<string name="dialog_pro_ok">Sure!</string>
 </resources>

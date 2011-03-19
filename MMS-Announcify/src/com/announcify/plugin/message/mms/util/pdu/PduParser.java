@@ -25,7 +25,6 @@ import java.util.HashMap;
 
 import android.util.Log;
 
-
 public class PduParser {
 
     /**
@@ -71,15 +70,18 @@ public class PduParser {
      *         otherwise.
      */
     protected static boolean checkMandatoryHeader(final PduHeaders headers) {
-        if (null == headers) return false;
+        if (null == headers) {
+            return false;
+        }
 
         /* get message type */
         final int messageType = headers.getOctet(PduHeaders.MESSAGE_TYPE);
 
         /* check Mms-Version field */
         final int mmsVersion = headers.getOctet(PduHeaders.MMS_VERSION);
-        if (0 == mmsVersion) // Every message should have Mms-Version field.
-        return false;
+        if (0 == mmsVersion) {
+            return false;
+        }
 
         /* check mandatory header fields */
         switch (messageType) {
@@ -87,152 +89,208 @@ public class PduParser {
                 // Content-Type field.
                 final byte[] srContentType = headers
                         .getTextString(PduHeaders.CONTENT_TYPE);
-                if (null == srContentType) return false;
+                if (null == srContentType) {
+                    return false;
+                }
 
                 // From field.
                 final EncodedStringValue srFrom = headers
                         .getEncodedStringValue(PduHeaders.FROM);
-                if (null == srFrom) return false;
+                if (null == srFrom) {
+                    return false;
+                }
 
                 // Transaction-Id field.
                 final byte[] srTransactionId = headers
                         .getTextString(PduHeaders.TRANSACTION_ID);
-                if (null == srTransactionId) return false;
+                if (null == srTransactionId) {
+                    return false;
+                }
 
                 break;
             case PduHeaders.MESSAGE_TYPE_SEND_CONF:
                 // Response-Status field.
                 final int scResponseStatus = headers
                         .getOctet(PduHeaders.RESPONSE_STATUS);
-                if (0 == scResponseStatus) return false;
+                if (0 == scResponseStatus) {
+                    return false;
+                }
 
                 // Transaction-Id field.
                 final byte[] scTransactionId = headers
                         .getTextString(PduHeaders.TRANSACTION_ID);
-                if (null == scTransactionId) return false;
+                if (null == scTransactionId) {
+                    return false;
+                }
 
                 break;
             case PduHeaders.MESSAGE_TYPE_NOTIFICATION_IND:
                 // Content-Location field.
                 final byte[] niContentLocation = headers
                         .getTextString(PduHeaders.CONTENT_LOCATION);
-                if (null == niContentLocation) return false;
+                if (null == niContentLocation) {
+                    return false;
+                }
 
                 // Expiry field.
                 final long niExpiry = headers.getLongInteger(PduHeaders.EXPIRY);
-                if (-1 == niExpiry) return false;
+                if (-1 == niExpiry) {
+                    return false;
+                }
 
                 // Message-Class field.
                 final byte[] niMessageClass = headers
                         .getTextString(PduHeaders.MESSAGE_CLASS);
-                if (null == niMessageClass) return false;
+                if (null == niMessageClass) {
+                    return false;
+                }
 
                 // Message-Size field.
                 final long niMessageSize = headers
                         .getLongInteger(PduHeaders.MESSAGE_SIZE);
-                if (-1 == niMessageSize) return false;
+                if (-1 == niMessageSize) {
+                    return false;
+                }
 
                 // Transaction-Id field.
                 final byte[] niTransactionId = headers
                         .getTextString(PduHeaders.TRANSACTION_ID);
-                if (null == niTransactionId) return false;
+                if (null == niTransactionId) {
+                    return false;
+                }
 
                 break;
             case PduHeaders.MESSAGE_TYPE_NOTIFYRESP_IND:
                 // Status field.
                 final int nriStatus = headers.getOctet(PduHeaders.STATUS);
-                if (0 == nriStatus) return false;
+                if (0 == nriStatus) {
+                    return false;
+                }
 
                 // Transaction-Id field.
                 final byte[] nriTransactionId = headers
                         .getTextString(PduHeaders.TRANSACTION_ID);
-                if (null == nriTransactionId) return false;
+                if (null == nriTransactionId) {
+                    return false;
+                }
 
                 break;
             case PduHeaders.MESSAGE_TYPE_RETRIEVE_CONF:
                 // Content-Type field.
                 final byte[] rcContentType = headers
                         .getTextString(PduHeaders.CONTENT_TYPE);
-                if (null == rcContentType) return false;
+                if (null == rcContentType) {
+                    return false;
+                }
 
                 // Date field.
                 final long rcDate = headers.getLongInteger(PduHeaders.DATE);
-                if (-1 == rcDate) return false;
+                if (-1 == rcDate) {
+                    return false;
+                }
 
                 break;
             case PduHeaders.MESSAGE_TYPE_DELIVERY_IND:
                 // Date field.
                 final long diDate = headers.getLongInteger(PduHeaders.DATE);
-                if (-1 == diDate) return false;
+                if (-1 == diDate) {
+                    return false;
+                }
 
                 // Message-Id field.
                 final byte[] diMessageId = headers
                         .getTextString(PduHeaders.MESSAGE_ID);
-                if (null == diMessageId) return false;
+                if (null == diMessageId) {
+                    return false;
+                }
 
                 // Status field.
                 final int diStatus = headers.getOctet(PduHeaders.STATUS);
-                if (0 == diStatus) return false;
+                if (0 == diStatus) {
+                    return false;
+                }
 
                 // To field.
                 final EncodedStringValue[] diTo = headers
                         .getEncodedStringValues(PduHeaders.TO);
-                if (null == diTo) return false;
+                if (null == diTo) {
+                    return false;
+                }
 
                 break;
             case PduHeaders.MESSAGE_TYPE_ACKNOWLEDGE_IND:
                 // Transaction-Id field.
                 final byte[] aiTransactionId = headers
                         .getTextString(PduHeaders.TRANSACTION_ID);
-                if (null == aiTransactionId) return false;
+                if (null == aiTransactionId) {
+                    return false;
+                }
 
                 break;
             case PduHeaders.MESSAGE_TYPE_READ_ORIG_IND:
                 // Date field.
                 final long roDate = headers.getLongInteger(PduHeaders.DATE);
-                if (-1 == roDate) return false;
+                if (-1 == roDate) {
+                    return false;
+                }
 
                 // From field.
                 final EncodedStringValue roFrom = headers
                         .getEncodedStringValue(PduHeaders.FROM);
-                if (null == roFrom) return false;
+                if (null == roFrom) {
+                    return false;
+                }
 
                 // Message-Id field.
                 final byte[] roMessageId = headers
                         .getTextString(PduHeaders.MESSAGE_ID);
-                if (null == roMessageId) return false;
+                if (null == roMessageId) {
+                    return false;
+                }
 
                 // Read-Status field.
                 final int roReadStatus = headers
                         .getOctet(PduHeaders.READ_STATUS);
-                if (0 == roReadStatus) return false;
+                if (0 == roReadStatus) {
+                    return false;
+                }
 
                 // To field.
                 final EncodedStringValue[] roTo = headers
                         .getEncodedStringValues(PduHeaders.TO);
-                if (null == roTo) return false;
+                if (null == roTo) {
+                    return false;
+                }
 
                 break;
             case PduHeaders.MESSAGE_TYPE_READ_REC_IND:
                 // From field.
                 final EncodedStringValue rrFrom = headers
                         .getEncodedStringValue(PduHeaders.FROM);
-                if (null == rrFrom) return false;
+                if (null == rrFrom) {
+                    return false;
+                }
 
                 // Message-Id field.
                 final byte[] rrMessageId = headers
                         .getTextString(PduHeaders.MESSAGE_ID);
-                if (null == rrMessageId) return false;
+                if (null == rrMessageId) {
+                    return false;
+                }
 
                 // Read-Status field.
                 final int rrReadStatus = headers
                         .getOctet(PduHeaders.READ_STATUS);
-                if (0 == rrReadStatus) return false;
+                if (0 == rrReadStatus) {
+                    return false;
+                }
 
                 // To field.
                 final EncodedStringValue[] rrTo = headers
                         .getEncodedStringValues(PduHeaders.TO);
-                if (null == rrTo) return false;
+                if (null == rrTo) {
+                    return false;
+                }
 
                 break;
             default:
@@ -280,7 +338,9 @@ public class PduParser {
             assert -1 != temp;
         }
 
-        if (out.size() > 0) return out.toByteArray();
+        if (out.size() > 0) {
+            return out.toByteArray();
+        }
 
         return null;
     }
@@ -299,7 +359,9 @@ public class PduParser {
          * | HT ) CRLF = CR LF CR = <US-ASCII CR, carriage return (13)> LF =
          * <US-ASCII LF, linefeed (10)>
          */
-        if (((ch >= 32) && (ch <= 126)) || ((ch >= 128) && (ch <= 255))) return true;
+        if (((ch >= 32) && (ch <= 126)) || ((ch >= 128) && (ch <= 255))) {
+            return true;
+        }
 
         switch (ch) {
             case '\t': /* '\t' */
@@ -331,7 +393,9 @@ public class PduParser {
          * SP         = <US-ASCII SP, space (32)>
          * HT         = <US-ASCII HT, horizontal-tab (9)>
          */
-        if ((ch < 33) || (ch > 126)) return false;
+        if ((ch < 33) || (ch > 126)) {
+            return false;
+        }
 
         switch (ch) {
             case '"': /* '"' */
@@ -683,8 +747,11 @@ public class PduParser {
         final int temp = pduDataStream.read();
         assert -1 != temp;
         pduDataStream.reset();
-        if (temp > SHORT_INTEGER_MAX) return parseShortInteger(pduDataStream);
-        else return parseLongInteger(pduDataStream);
+        if (temp > SHORT_INTEGER_MAX) {
+            return parseShortInteger(pduDataStream);
+        } else {
+            return parseLongInteger(pduDataStream);
+        }
     }
 
     /**
@@ -710,8 +777,10 @@ public class PduParser {
         assert -1 != temp;
         final int count = temp & 0xFF;
 
-        if (count > LONG_INTEGER_LENGTH_MAX) throw new RuntimeException(
-                "Octet count greater than 8 and I can't represent that!");
+        if (count > LONG_INTEGER_LENGTH_MAX) {
+            throw new RuntimeException(
+                    "Octet count greater than 8 and I can't represent that!");
+        }
 
         long result = 0;
 
@@ -762,13 +831,17 @@ public class PduParser {
         assert null != pduDataStream;
         int result = 0;
         int temp = pduDataStream.read();
-        if (temp == -1) return temp;
+        if (temp == -1) {
+            return temp;
+        }
 
         while ((temp & 0x80) != 0) {
             result = result << 7;
             result |= temp & 0x7F;
             temp = pduDataStream.read();
-            if (temp == -1) return temp;
+            if (temp == -1) {
+                return temp;
+            }
         }
 
         result = result << 7;
@@ -796,8 +869,11 @@ public class PduParser {
         assert -1 != temp;
         final int first = temp & 0xFF;
 
-        if (first <= SHORT_LENGTH_MAX) return first;
-        else if (first == LENGTH_QUOTE) return parseUnsignedInt(pduDataStream);
+        if (first <= SHORT_LENGTH_MAX) {
+            return first;
+        } else if (first == LENGTH_QUOTE) {
+            return parseUnsignedInt(pduDataStream);
+        }
 
         throw new RuntimeException("Value length > LENGTH_QUOTE!");
     }
@@ -864,9 +940,11 @@ public class PduParser {
         assert null != pduDataStream;
         final byte[] area = new byte[length];
         final int readLen = pduDataStream.read(area, 0, length);
-        if (readLen < length) // length
-        return -1;
-        else return readLen;
+        if (readLen < length) {
+            return -1;
+        } else {
+            return readLen;
+        }
     }
 
     /**
@@ -881,8 +959,9 @@ public class PduParser {
 
         /* parse headers */
         final PduHeaders headers = parseHeaders(pduDataStream);
-        if (null == headers) // Parse headers failed.
-        return null;
+        if (null == headers) {
+            return null;
+        }
 
         /* check mandatory header fields */
         if (false == checkMandatoryHeader(headers)) {
@@ -901,7 +980,9 @@ public class PduParser {
      * @return headers in PduHeaders structure, null when parse fail
      */
     protected PduHeaders parseHeaders(final ByteArrayInputStream pduDataStream) {
-        if (pduDataStream == null) return null;
+        if (pduDataStream == null) {
+            return null;
+        }
 
         boolean keepParsing = true;
         final PduHeaders headers = new PduHeaders();

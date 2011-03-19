@@ -12,7 +12,6 @@ import com.announcify.api.background.sql.model.GroupModel;
 import com.announcify.api.background.sql.model.PluginModel;
 import com.announcify.api.background.sql.model.TranslationModel;
 
-
 public class AnnouncifyDatabase extends SQLiteOpenHelper {
 
     public AnnouncifyDatabase(final Context context) {
@@ -40,7 +39,7 @@ public class AnnouncifyDatabase extends SQLiteOpenHelper {
                 + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + GroupModel.KEY_GROUP_ID + " INTEGER UNIQUE NOT NULL,"
                 + GroupModel.KEY_GROUP_TITLE + " TEXT NOT NULL);");
-        
+
         db.execSQL("CREATE TABLE " + ContactModel.TABLE_NAME + " ("
                 + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + ContactModel.KEY_CONTACT_ID + " TEXT UNIQUE NOT NULL,"

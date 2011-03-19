@@ -6,7 +6,6 @@ import android.content.Intent;
 
 import com.announcify.plugin.voice.mail.service.VoicemailService;
 
-
 public class BootReceiver extends BroadcastReceiver {
 
     @Override

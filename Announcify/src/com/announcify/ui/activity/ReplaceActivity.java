@@ -18,7 +18,6 @@ import com.announcify.api.background.sql.model.TranslationModel;
 import com.announcify.api.ui.activity.BaseActivity;
 import com.announcify.background.tts.Speaker;
 
-
 public class ReplaceActivity extends BaseActivity {
 
     private SimpleCursorAdapter adapter;

@@ -7,7 +7,6 @@ import android.webkit.WebView;
 import com.announcify.R;
 import com.announcify.api.ui.activity.BaseActivity;
 
-
 public class HelpActivity extends BaseActivity {
 
     @Override

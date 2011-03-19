@@ -11,7 +11,6 @@ import android.util.Log;
 import com.announcify.api.background.queue.PluginQueue;
 import com.announcify.background.handler.AnnouncificationHandler;
 
-
 public class Queue implements OnUtteranceCompletedListener {
 
     public static final String EXTRA_TEXT_SNIPPET = "com.announcify.EXTRA_TEXT_SNIPPET";
@@ -31,7 +30,8 @@ public class Queue implements OnUtteranceCompletedListener {
 
     private void checkNext() {
         if (!queue.isEmpty() && queue.getFirst().isEmpty()) {
-            context.sendBroadcast(new Intent(queue.getFirst().getStopBroadcast()));
+            context.sendBroadcast(new Intent(queue.getFirst()
+                    .getStopBroadcast()));
             queue.removeFirst();
 
             if (queue.isEmpty()) {
@@ -39,7 +39,8 @@ public class Queue implements OnUtteranceCompletedListener {
                 return;
             }
 
-            context.sendBroadcast(new Intent(queue.getFirst().getStartBroadcast()));
+            context.sendBroadcast(new Intent(queue.getFirst()
+                    .getStartBroadcast()));
         }
 
         if (queue.isEmpty()) {
@@ -55,7 +56,9 @@ public class Queue implements OnUtteranceCompletedListener {
     }
 
     public void grant() {
-        if (!started) return;
+        if (!started) {
+            return;
+        }
 
         granted = true;
         WakeLocker.lock(context);
@@ -64,11 +67,15 @@ public class Queue implements OnUtteranceCompletedListener {
     }
 
     public void next() {
-        if (!granted) return;
+        if (!granted) {
+            return;
+        }
 
         checkNext();
 
-        if (!granted) return;
+        if (!granted) {
+            return;
+        }
 
         final Message message = Message.obtain();
         message.what = AnnouncificationHandler.WHAT_NEXT_ITEM;

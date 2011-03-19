@@ -12,32 +12,35 @@ import android.os.IBinder;
 import com.announcify.api.background.error.ExceptionHandler;
 import com.announcify.api.background.service.PluginService;
 
-
 public class TalkService extends Service {
 
     private class TalkObserver extends ContentObserver {
-        
+
         private boolean paused;
-        
-        private Handler handler;
+
+        private final Handler handler;
 
         public TalkObserver(final Handler handler) {
             super(handler);
-            
+
             this.handler = handler;
         }
 
         @Override
         public void onChange(final boolean selfChange) {
-            if (paused) return;
-            
+            if (paused) {
+                return;
+            }
+
             final String[] messageProjection = new String[] { "body", "date" };
             final Cursor message = getContentResolver()
                     .query(Uri.withAppendedPath(
                             Uri.parse("content://com.google.android.providers.talk/"),
                             "messages"), messageProjection, "err_code = 0",
                             null, "date DESC");
-            if (!message.moveToFirst()) return;
+            if (!message.moveToFirst()) {
+                return;
+            }
 
             // body
 
@@ -48,7 +51,9 @@ public class TalkService extends Service {
                             Uri.parse("content://com.google.android.providers.talk/"),
                             "chats"), conversationProjection, null, null,
                             "last_message_date DESC");
-            if (!conversation.moveToFirst()) return;
+            if (!conversation.moveToFirst()) {
+                return;
+            }
 
             // last_unread_message
 
@@ -63,7 +68,9 @@ public class TalkService extends Service {
                                     + conversation.getLong(conversation
                                             .getColumnIndex("last_message_date")),
                             null, null);
-            if (!contact.moveToFirst()) return;
+            if (!contact.moveToFirst()) {
+                return;
+            }
 
             // nickname / username
 
@@ -78,10 +85,10 @@ public class TalkService extends Service {
                         message.getString(message
                                 .getColumnIndex(messageProjection[0])));
                 startService(intent);
-                
+
                 paused = true;
                 handler.postDelayed(new Runnable() {
-                    
+
                     public void run() {
                         paused = false;
                     }
@@ -106,19 +113,21 @@ public class TalkService extends Service {
 
     @Override
     public void onCreate() {
-        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(getBaseContext()));
-        
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(
+                getBaseContext()));
+
         thread = new HandlerThread("TalkThread");
         thread.start();
-        
-        Handler handler = new Handler(thread.getLooper());
+
+        final Handler handler = new Handler(thread.getLooper());
         handler.post(new Runnable() {
-            
+
             public void run() {
-                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(getBaseContext()));
+                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(
+                        getBaseContext()));
             }
         });
-        
+
         observer = new TalkObserver(handler);
 
         getContentResolver().registerContentObserver(

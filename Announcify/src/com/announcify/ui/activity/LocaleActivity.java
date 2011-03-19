@@ -10,16 +10,16 @@ import com.announcify.api.background.util.PluginSettings;
 import com.announcify.api.ui.activity.PluginActivity;
 import com.announcify.background.receiver.LocaleReceiver;
 
-
 public class LocaleActivity extends PluginActivity {
-    
+
     private final boolean isCancelled = false;
-    
+
     private CheckBoxPreference announcifyCheck;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, new PluginSettings(this, "com.announcify.locale") {
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState, new PluginSettings(this,
+                "com.announcify.locale") {
 
             @Override
             public String getSettingsAction() {
@@ -36,19 +36,22 @@ public class LocaleActivity extends PluginActivity {
                 return "Locale";
             }
         }, 0);
-        
-        getPreferenceManager().setSharedPreferencesName("com.announcify.locale");
-        getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
+
+        getPreferenceManager()
+                .setSharedPreferencesName("com.announcify.locale");
+        getPreferenceManager().setSharedPreferencesMode(
+                Context.MODE_WORLD_READABLE);
 
         addPreferencesFromResource(R.xml.preferences_locale_settings);
-        
+
         announcifyCheck = (CheckBoxPreference) findPreference("preference_locale_enabled");
-        
+
         if (savedInstanceState == null) {
-            announcifyCheck.setChecked(getIntent().getBooleanExtra(LocaleReceiver.ANNOUNCIFY_ENABLED, true));
+            announcifyCheck.setChecked(getIntent().getBooleanExtra(
+                    LocaleReceiver.ANNOUNCIFY_ENABLED, true));
         }
     }
-    
+
     @Override
     public void finish() {
         if (isCancelled) {
@@ -59,20 +62,25 @@ public class LocaleActivity extends PluginActivity {
 
             // this extra is the data to ourselves: either for the Activity or
             // the BroadcastReceiver
-            returnIntent.putExtra(LocaleReceiver.ANNOUNCIFY_ENABLED, announcifyCheck.isChecked());
+            returnIntent.putExtra(LocaleReceiver.ANNOUNCIFY_ENABLED,
+                    announcifyCheck.isChecked());
 
             String blurb;
             if (announcifyCheck.isChecked()) {
                 blurb = "Announcify" + " " + getString(R.string.string_enabled);
             } else {
-                blurb = "Announcify" + " " + getString(R.string.string_disabled);
+                blurb = "Announcify" + " "
+                        + getString(R.string.string_disabled);
             }
 
             // this is the blurb shown in the Locale UI
             if (blurb.length() > 40) {
-                returnIntent.putExtra("com.twofortyfouram.locale.intent.extra.BLURB", blurb.substring(0, 40));
+                returnIntent.putExtra(
+                        "com.twofortyfouram.locale.intent.extra.BLURB",
+                        blurb.substring(0, 40));
             } else {
-                returnIntent.putExtra("com.twofortyfouram.locale.intent.extra.BLURB", blurb);
+                returnIntent.putExtra(
+                        "com.twofortyfouram.locale.intent.extra.BLURB", blurb);
             }
 
             setResult(RESULT_OK, returnIntent);

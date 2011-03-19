@@ -5,7 +5,6 @@ import android.content.Context;
 import com.announcify.background.receiver.gravity.motion.Motion;
 import com.announcify.background.receiver.gravity.motion.MotionListener;
 
-
 public class GravityListener {
 
     public interface GravityStateListener {

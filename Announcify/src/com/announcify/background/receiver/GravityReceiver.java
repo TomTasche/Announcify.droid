@@ -8,7 +8,6 @@ import android.util.Log;
 import com.announcify.background.receiver.gravity.GravityListener;
 import com.announcify.ui.control.RemoteControlDialog;
 
-
 public class GravityReceiver extends GravityListener {
 
     public GravityReceiver(final Context context) {
@@ -24,7 +23,8 @@ public class GravityReceiver extends GravityListener {
                 vibrator.vibrate(100);
             }
 
-            public void onDisplayUp() {}
+            public void onDisplayUp() {
+            }
         });
     }
 }

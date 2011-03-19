@@ -15,16 +15,16 @@
 <coolItem id="com.google.gdt.eclipse.suite.actionSet" itemType="typeToolBarContribution" x="124" y="30"/>
 <coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="120" y="30"/>
 <coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
-<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.JavaElementCreationActionSet" itemType="typeToolBarContribution" x="76" y="30"/>
 <coolItem id="org.eclipse.jdt.ui.PropertiesFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="76" y="30"/>
 <coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.ui.browser.editor" itemType="typePlaceholder" x="-1" y="-1"/>
-<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="124" y="30"/>
+<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="68" y="30"/>
 <coolItem id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="68" y="30"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="184" y="30"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
@@ -37,21 +37,10 @@
 <editorArea activeWorkbook="DefaultEditorWorkbook">
 <info part="DefaultEditorWorkbook">
 <folder appearance="1" expanded="2">
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
-<part id="1"/>
-</presentation>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AnnouncifyActivity.java" partName="AnnouncifyActivity.java" path="/home/tom/Programmieren/Android/workspace/Announcify/Announcify/src/com/announcify/ui/activity/AnnouncifyActivity.java" title="AnnouncifyActivity.java" tooltip="Announcify/src/com/announcify/ui/activity/AnnouncifyActivity.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Announcify/src/com/announcify/ui/activity/AnnouncifyActivity.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1993" selectionTopPixel="1322"/>
-</editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SectionedAdapter.java" partName="SectionedAdapter.java" path="/home/tom/Programmieren/Android/workspace/Announcify/Announcify/src/com/announcify/ui/widget/SectionedAdapter.java" title="SectionedAdapter.java" tooltip="Announcify/src/com/announcify/ui/widget/SectionedAdapter.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Announcify/src/com/announcify/ui/widget/SectionedAdapter.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="7966" selectionTopPixel="2499"/>
-</editor>
 </editors>
 <views>
 <view id="com.android.ide.eclipse.ddms.views.DeviceView" partName="Devices">
@@ -136,7 +125,7 @@
 <viewState/>
 </view>
 </views>
-<perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePart="org.eclipse.jdt.ui.PackageExplorer" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.jdt.internal.ui.JavaPerspectiveFactory" id="org.eclipse.jdt.ui.JavaPerspective" label="Java"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
@@ -317,31 +306,43 @@
 <view id="org.eclipse.ui.console.ConsoleView"/>
 <view id="com.android.ide.eclipse.ddms.views.EmulatorControlView"/>
 <fastViewBars/>
-<layout>&#x0A;<mainWindow>&#x0A;<info folder="true" part="devices">&#x0A;<folder activePageID="com.android.ide.eclipse.ddms.views.DeviceView" appearance="2" expanded="2">&#x0A;<page content="com.android.ide.eclipse.ddms.views.DeviceView" label="Devices"/>
+<layout>
+<mainWindow>
+<info folder="true" part="devices">
+<folder activePageID="com.android.ide.eclipse.ddms.views.DeviceView" appearance="2" expanded="2">
+<page content="com.android.ide.eclipse.ddms.views.DeviceView" label="Devices"/>
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="com.android.ide.eclipse.ddms.views.DeviceView:*" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
 <part id="1"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="stickyFolderRight" ratio="0.7496318" ratioLeft="1018" ratioRight="340" relationship="2" relative="devices">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<info folder="true" part="stickyFolderRight" ratio="0.7496318" ratioLeft="1018" ratioRight="340" relationship="2" relative="devices">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
 </folder>
 </info>
-<info folder="true" part="logcat" ratio="0.7986464" ratioLeft="472" ratioRight="119" relationship="4" relative="devices">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="com.android.ide.eclipse.ddms.views.LogCatView:*" label="LabelNotFound"/>
+<info folder="true" part="logcat" ratio="0.7986464" ratioLeft="472" ratioRight="119" relationship="4" relative="devices">
+<folder appearance="2" expanded="2">
+<page content="com.android.ide.eclipse.ddms.views.LogCatView:*" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.29970545" ratioLeft="407" ratioRight="951" relationship="2" relative="devices"/>
-<info folder="true" part="ddms-detail" ratio="0.49947423" ratioLeft="475" ratioRight="476" relationship="2" relative="org.eclipse.ui.editorss">&#x0A;<folder activePageID="com.android.ide.eclipse.ddms.views.LogCatView" appearance="2" expanded="2">&#x0A;<page content="com.android.ide.eclipse.ddms.views.ThreadView" label="Threads"/>
+<info folder="true" part="ddms-detail" ratio="0.49947423" ratioLeft="475" ratioRight="476" relationship="2" relative="org.eclipse.ui.editorss">
+<folder activePageID="com.android.ide.eclipse.ddms.views.LogCatView" appearance="2" expanded="2">
+<page content="com.android.ide.eclipse.ddms.views.ThreadView" label="Threads"/>
 <page content="com.android.ide.eclipse.ddms.views.HeapView" label="Heap"/>
 <page content="com.android.ide.eclipse.ddms.views.AllocTrackerView" label="Allocation Tracker"/>
 <page content="com.android.ide.eclipse.ddms.views.FileExplorerView" label="File Explorer"/>
 <page content="com.android.ide.eclipse.ddms.views.LogCatView" label="LogCat"/>
 <page content="com.android.ide.eclipse.ddms.views.ThreadView:*" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
@@ -349,9 +350,12 @@
 </presentation>
 </folder>
 </info>
-<info folder="true" part="emulator" ratio="0.5" ratioLeft="236" ratioRight="236" relationship="4" relative="devices">&#x0A;<folder activePageID="com.android.ide.eclipse.ddms.views.EmulatorControlView" appearance="2" expanded="2">&#x0A;<page content="com.android.ide.eclipse.ddms.views.EmulatorControlView" label="Emulator Control"/>
+<info folder="true" part="emulator" ratio="0.5" ratioLeft="236" ratioRight="236" relationship="4" relative="devices">
+<folder activePageID="com.android.ide.eclipse.ddms.views.EmulatorControlView" appearance="2" expanded="2">
+<page content="com.android.ide.eclipse.ddms.views.EmulatorControlView" label="Emulator Control"/>
 <page content="com.android.ide.eclipse.ddms.views.EmulatorControlView:*" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
 </presentation>
 </folder>
 </info>
@@ -452,146 +456,18 @@
 </perspective>
 </perspectives>
 <workingSets/>
-<navigationHistory>
-<editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Announcify/src/com/announcify/ui/widget/SectionedAdapter.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" path="/Announcify/res/values/strings_announcify.xml"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" path="/Announcify/res/values/strings_ui.xml"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Announcify/src/com/announcify/ui/activity/AnnouncifyActivity.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.layout.LayoutEditor" path="/Announcify/res/layout/list_item_plugin.xml"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" path="/Announcify/res/values/strings_settings.xml"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Announcify/src/com/announcify/background/service/ManagerService.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Announcify/src/com/announcify/background/handler/AnnouncificationHandler.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Announcify/src/com/announcify/ui/activity/AnnouncifyActivity.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.layout.LayoutEditor" path="/Announcify/res/layout/empty.xml"/>
-<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=Announcify/libs\/GoogleAdMobAdsSDK-4.0.2.jar&lt;com.google.ads(AdView.class"/>
-</editors>
-<item historyLabel="strings_ui.xml" index="2"/>
-<item historyLabel="AnnouncifyActivity.java" index="3">
-<position info="not_deleted" x="6154" y="0"/>
-</item>
-<item historyLabel="strings_ui.xml" index="2"/>
-<item historyLabel="list_item_plugin.xml" index="4"/>
-<item historyLabel="strings_ui.xml" index="2"/>
-<item historyLabel="SectionedAdapter.java" index="0">
-<position/>
-</item>
-<item historyLabel="strings_ui.xml" index="2"/>
-<item historyLabel="strings_settings.xml" index="5"/>
-<item historyLabel="strings_ui.xml" index="2"/>
-<item historyLabel="strings_announcify.xml" index="1"/>
-<item historyLabel="strings_ui.xml" index="2"/>
-<item historyLabel="SectionedAdapter.java" index="0">
-<position/>
-</item>
-<item historyLabel="strings_ui.xml" index="2"/>
-<item historyLabel="SectionedAdapter.java" index="0">
-<position info="not_deleted" x="3495" y="0"/>
-</item>
-<item historyLabel="strings_ui.xml" index="2"/>
-<item historyLabel="SectionedAdapter.java" index="0">
-<position/>
-</item>
-<item historyLabel="strings_ui.xml" index="2"/>
-<item historyLabel="SectionedAdapter.java" index="0">
-<position/>
-</item>
-<item historyLabel="strings_ui.xml" index="2"/>
-<item historyLabel="SectionedAdapter.java" index="0">
-<position/>
-</item>
-<item historyLabel="strings_ui.xml" index="2"/>
-<item historyLabel="SectionedAdapter.java" index="0">
-<position/>
-</item>
-<item historyLabel="ManagerService.java" index="6">
-<position info="not_deleted" x="3748" y="0"/>
-</item>
-<item historyLabel="AnnouncificationHandler.java" index="7">
-<position info="not_deleted" x="1732" y="0"/>
-</item>
-<item historyLabel="ManagerService.java" index="6">
-<position info="not_deleted" x="3748" y="0"/>
-</item>
-<item historyLabel="AnnouncifyActivity.java" index="8">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="AnnouncifyActivity.java" index="8">
-<position info="not_deleted" x="4204" y="0"/>
-</item>
-<item historyLabel="AnnouncifyActivity.java" index="8">
-<position info="not_deleted" x="6892" y="0"/>
-</item>
-<item historyLabel="SectionedAdapter.java" index="0">
-<position info="not_deleted" x="1323" y="16"/>
-</item>
-<item historyLabel="SectionedAdapter.java" index="0">
-<position/>
-</item>
-<item historyLabel="SectionedAdapter.java" index="0">
-<position/>
-</item>
-<item historyLabel="SectionedAdapter.java" index="0">
-<position info="not_deleted" x="6197" y="0"/>
-</item>
-<item historyLabel="SectionedAdapter.java" index="0">
-<position/>
-</item>
-<item historyLabel="SectionedAdapter.java" index="0">
-<position info="not_deleted" x="4884" y="0"/>
-</item>
-<item historyLabel="SectionedAdapter.java" index="0">
-<position/>
-</item>
-<item historyLabel="SectionedAdapter.java" index="0">
-<position info="not_deleted" x="1935" y="0"/>
-</item>
-<item historyLabel="AnnouncifyActivity.java" index="8">
-<position info="not_deleted" x="6584" y="0"/>
-</item>
-<item historyLabel="SectionedAdapter.java" index="0">
-<position info="not_deleted" x="3025" y="0"/>
-</item>
-<item historyLabel="empty.xml" index="9"/>
-<item historyLabel="SectionedAdapter.java" index="0">
-<position info="not_deleted" x="2043" y="0"/>
-</item>
-<item historyLabel="SectionedAdapter.java" index="0">
-<position info="not_deleted" x="5662" y="0"/>
-</item>
-<item historyLabel="AdView.class" index="10">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="SectionedAdapter.java" index="0">
-<position info="not_deleted" x="5690" y="0"/>
-</item>
-<item historyLabel="AnnouncifyActivity.java" index="8">
-<position info="not_deleted" x="6575" y="0"/>
-</item>
-<item historyLabel="SectionedAdapter.java" index="0">
-<position info="not_deleted" x="7499" y="0"/>
-</item>
-<item historyLabel="AnnouncifyActivity.java" index="8">
-<position info="not_deleted" x="6893" y="0"/>
-</item>
-<item historyLabel="SectionedAdapter.java" index="0">
-<position info="not_deleted" x="1323" y="16"/>
-</item>
-<item historyLabel="SectionedAdapter.java" index="0">
-<position info="not_deleted" x="7539" y="0"/>
-</item>
-<item historyLabel="AnnouncifyActivity.java" index="8">
-<position info="not_deleted" x="1993" y="0"/>
-</item>
-<item active="true" historyLabel="SectionedAdapter.java" index="0">
-<position info="not_deleted" x="8404" y="0"/>
-</item>
-</navigationHistory>
+<navigationHistory/>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
 </page>
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
+<trimArea IMemento.internal.id="16384">
+<trimItem IMemento.internal.id="left"/>
+</trimArea>
+<trimArea IMemento.internal.id="131072">
+<trimItem IMemento.internal.id="org.eclipse.ui.editorss"/>
+</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 </trimArea>
@@ -599,54 +475,55 @@
 <trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
 <trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
+<trimItem IMemento.internal.id="org.eclipse.ui.internal.ViewStack@7a84216e"/>
 </trimArea>
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="strings_api.xml" tooltip="API-Announcify/res/values/strings_api.xml">
+<persistable path="/API-Announcify/res/values/strings_api.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="values.xml" tooltip="API-Announcify/res/values/values.xml">
+<persistable path="/API-Announcify/res/values/values.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="themes.xml" tooltip="API-Announcify/res/values/themes.xml">
+<persistable path="/API-Announcify/res/values/themes.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="attrs.xml" tooltip="API-Announcify/res/values/attrs.xml">
+<persistable path="/API-Announcify/res/values/attrs.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Formatter.java" tooltip="API-Announcify/src/com/announcify/api/background/text/Formatter.java">
+<persistable path="/API-Announcify/src/com/announcify/api/background/text/Formatter.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PluginModel.java" tooltip="Announcify/API-Announcify_src/com/announcify/api/background/sql/model/PluginModel.java">
+<persistable path="/Announcify/API-Announcify_src/com/announcify/api/background/sql/model/PluginModel.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SectionedAdapter.java" tooltip="Announcify/src/com/announcify/ui/widget/SectionedAdapter.java">
 <persistable path="/Announcify/src/com/announcify/ui/widget/SectionedAdapter.java"/>
-</file>
-<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="AdView.class" tooltip="com.google.ads.AdView">
-<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=Announcify/libs\/GoogleAdMobAdsSDK-4.0.2.jar&lt;com.google.ads(AdView.class"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.layout.LayoutEditor" name="empty.xml" tooltip="Announcify/res/layout/empty.xml">
-<persistable path="/Announcify/res/layout/empty.xml"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AnnouncifyActivity.java" tooltip="Announcify/src/com/announcify/ui/activity/AnnouncifyActivity.java">
 <persistable path="/Announcify/src/com/announcify/ui/activity/AnnouncifyActivity.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AnnouncificationHandler.java" tooltip="Announcify/src/com/announcify/background/handler/AnnouncificationHandler.java">
-<persistable path="/Announcify/src/com/announcify/background/handler/AnnouncificationHandler.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Mail.java" tooltip="Mail-Announcify/src/com/announcify/plugin/mail/google/contact/Mail.java">
+<persistable path="/Mail-Announcify/src/com/announcify/plugin/mail/google/contact/Mail.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ManagerService.java" tooltip="Announcify/src/com/announcify/background/service/ManagerService.java">
-<persistable path="/Announcify/src/com/announcify/background/service/ManagerService.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Settings.java" tooltip="SMS-Announcify/src/com/announcify/plugin/message/sms/util/Settings.java">
+<persistable path="/SMS-Announcify/src/com/announcify/plugin/message/sms/util/Settings.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="strings_announcify.xml" tooltip="Announcify/res/values/strings_announcify.xml">
-<persistable path="/Announcify/res/values/strings_announcify.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="WorkerService.java" tooltip="SMS-Announcify/src/com/announcify/plugin/message/sms/service/WorkerService.java">
+<persistable path="/SMS-Announcify/src/com/announcify/plugin/message/sms/service/WorkerService.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="strings_settings.xml" tooltip="Announcify/res/values/strings_settings.xml">
-<persistable path="/Announcify/res/values/strings_settings.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="RingtoneReceiver.java" tooltip="SMS-Announcify/src/com/announcify/plugin/message/sms/receiver/RingtoneReceiver.java">
+<persistable path="/SMS-Announcify/src/com/announcify/plugin/message/sms/receiver/RingtoneReceiver.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="strings_ui.xml" tooltip="Announcify/res/values/strings_ui.xml">
-<persistable path="/Announcify/res/values/strings_ui.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AnnouncifyReceiver.java" tooltip="SMS-Announcify/src/com/announcify/plugin/message/sms/receiver/AnnouncifyReceiver.java">
+<persistable path="/SMS-Announcify/src/com/announcify/plugin/message/sms/receiver/AnnouncifyReceiver.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.layout.LayoutEditor" name="list_item_plugin.xml" tooltip="Announcify/res/layout/list_item_plugin.xml">
-<persistable path="/Announcify/res/layout/list_item_plugin.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MessageReceiver.java" tooltip="SMS-Announcify/src/com/announcify/plugin/message/sms/receiver/MessageReceiver.java">
+<persistable path="/SMS-Announcify/src/com/announcify/plugin/message/sms/receiver/MessageReceiver.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Group.java" tooltip="API-Announcify/src/com/announcify/api/background/contact/lookup/Group.java">
-<persistable path="/API-Announcify/src/com/announcify/api/background/contact/lookup/Group.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Contact.java" tooltip="API-Announcify/src/com/announcify/api/background/contact/Contact.java">
-<persistable path="/API-Announcify/src/com/announcify/api/background/contact/Contact.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ContactFilter.java" tooltip="API-Announcify/src/com/announcify/api/background/contact/ContactFilter.java">
-<persistable path="/API-Announcify/src/com/announcify/api/background/contact/ContactFilter.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GroupActivity.java" tooltip="Announcify/src/com/announcify/ui/activity/GroupActivity.java">
-<persistable path="/Announcify/src/com/announcify/ui/activity/GroupActivity.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ContactActivity.java" tooltip="Announcify/src/com/announcify/ui/activity/ContactActivity.java">
-<persistable path="/Announcify/src/com/announcify/ui/activity/ContactActivity.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SettingsActivity.java" tooltip="SMS-Announcify/src/com/announcify/plugin/message/sms/activity/SettingsActivity.java">
+<persistable path="/SMS-Announcify/src/com/announcify/plugin/message/sms/activity/SettingsActivity.java"/>
 </file>
 </mruList>
 </workbench>

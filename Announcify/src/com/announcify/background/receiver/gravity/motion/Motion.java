@@ -6,7 +6,6 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-
 /**
  * Use the Motion to detect the motion of the phone
  * 
@@ -66,8 +65,9 @@ public class Motion implements SensorEventListener {
     public void resume() {
         mSensorMgr = (SensorManager) mContext
                 .getSystemService(Context.SENSOR_SERVICE);
-        if (mSensorMgr == null) throw new UnsupportedOperationException(
-                "Sensors not supported");
+        if (mSensorMgr == null) {
+            throw new UnsupportedOperationException("Sensors not supported");
+        }
         final boolean supported = mSensorMgr.registerListener(this,
                 mSensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
                 SensorManager.SENSOR_DELAY_NORMAL);
@@ -93,7 +93,9 @@ public class Motion implements SensorEventListener {
             if ((y <= DisplayDownY + accuracy)
                     && (y >= DisplayDownY - accuracy)) {
                 if ((z <= DisplayDownZ + accuracy)
-                        && (z >= DisplayDownZ - accuracy)) return true;
+                        && (z >= DisplayDownZ - accuracy)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -103,7 +105,9 @@ public class Motion implements SensorEventListener {
         if ((x <= DisplayUpX + accuracy) && (x >= DisplayUpX - accuracy)) {
             if ((y <= DisplayUpY + accuracy) && (y >= DisplayUpY - accuracy)) {
                 if ((z <= DisplayUpZ + accuracy)
-                        && (z >= DisplayUpZ - accuracy)) return true;
+                        && (z >= DisplayUpZ - accuracy)) {
+                    return true;
+                }
             }
         }
         return false;

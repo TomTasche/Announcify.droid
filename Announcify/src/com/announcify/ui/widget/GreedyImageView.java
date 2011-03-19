@@ -5,7 +5,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
-
 public class GreedyImageView extends ImageView {
 
     public GreedyImageView(final Context context) {

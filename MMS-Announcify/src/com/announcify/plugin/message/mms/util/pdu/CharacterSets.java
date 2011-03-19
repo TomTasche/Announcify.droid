@@ -20,7 +20,6 @@ package com.announcify.plugin.message.mms.util.pdu;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
-
 public class CharacterSets {
 
     /**
@@ -146,10 +145,14 @@ public class CharacterSets {
      */
     public static int getMibEnumValue(final String mimeName)
             throws UnsupportedEncodingException {
-        if (null == mimeName) return -1;
+        if (null == mimeName) {
+            return -1;
+        }
 
         final Integer mibEnumValue = NAME_TO_MIBENUM_MAP.get(mimeName);
-        if (mibEnumValue == null) throw new UnsupportedEncodingException();
+        if (mibEnumValue == null) {
+            throw new UnsupportedEncodingException();
+        }
         return mibEnumValue;
     }
 
@@ -165,9 +168,12 @@ public class CharacterSets {
     public static String getMimeName(final int mibEnumValue)
             throws UnsupportedEncodingException {
         final String name = MIBENUM_TO_NAME_MAP.get(mibEnumValue);
-        if (name == null) throw new UnsupportedEncodingException();
+        if (name == null) {
+            throw new UnsupportedEncodingException();
+        }
         return name;
     }
 
-    private CharacterSets() {} // Non-instantiatable
+    private CharacterSets() {
+    } // Non-instantiatable
 }

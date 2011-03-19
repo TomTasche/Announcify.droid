@@ -9,7 +9,6 @@ import android.provider.ContactsContract.Data;
 import com.announcify.api.background.contact.Contact;
 import com.announcify.api.background.contact.lookup.LookupMethod;
 
-
 public class Chat implements LookupMethod {
 
     private final Context context;
@@ -29,7 +28,9 @@ public class Chat implements LookupMethod {
                     Im.LOOKUP_KEY + " = ? AND " + Im.MIMETYPE + " = ?",
                     new String[] { contact.getLookupString(),
                             Im.CONTENT_ITEM_TYPE }, null);
-            if (!cursor.moveToFirst()) return;
+            if (!cursor.moveToFirst()) {
+                return;
+            }
 
             // TODO: implement?
         } finally {
@@ -45,15 +46,17 @@ public class Chat implements LookupMethod {
         Cursor cursor = null;
 
         try {
-            cursor = context.getContentResolver()
-                    .query(Data.CONTENT_URI,
-                            new String[] { Im.LOOKUP_KEY },
-                            // Im.DATA1 + " = ? AND " + Im.MIMETYPE + " = ?",
-                            Im.DATA1 + " = ?",
-                            new String[] { contact.getAddress() }, null);
-            if (!cursor.moveToFirst()) return;
+            cursor = context.getContentResolver().query(Data.CONTENT_URI,
+                    new String[] { Im.LOOKUP_KEY },
+                    // Im.DATA1 + " = ? AND " + Im.MIMETYPE + " = ?",
+                    Im.DATA1 + " = ?", new String[] { contact.getAddress() },
+                    null);
+            if (!cursor.moveToFirst()) {
+                return;
+            }
 
-            contact.setLookupString(cursor.getString(cursor.getColumnIndex(Im.LOOKUP_KEY)));
+            contact.setLookupString(cursor.getString(cursor
+                    .getColumnIndex(Im.LOOKUP_KEY)));
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -72,7 +75,9 @@ public class Chat implements LookupMethod {
                             + Im.DATA1 + " = ?",
                     new String[] { contact.getLookupString(),
                             Im.CONTENT_ITEM_TYPE, contact.getAddress() }, null);
-            if (!cursor.moveToFirst()) return;
+            if (!cursor.moveToFirst()) {
+                return;
+            }
 
             String label = cursor.getString(cursor.getColumnIndex(Im.LABEL));
             if (label == null) {

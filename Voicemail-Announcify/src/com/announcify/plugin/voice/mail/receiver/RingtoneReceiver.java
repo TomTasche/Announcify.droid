@@ -7,7 +7,6 @@ import android.content.Intent;
 
 import com.announcify.plugin.voice.mail.service.WorkerService;
 
-
 public class RingtoneReceiver extends BroadcastReceiver {
 
     @Override

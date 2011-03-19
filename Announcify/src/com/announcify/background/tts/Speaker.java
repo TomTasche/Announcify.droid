@@ -7,7 +7,6 @@ import android.speech.tts.TextToSpeech;
 
 import com.announcify.api.background.util.AnnouncifySettings;
 
-
 public class Speaker extends TextToSpeech {
 
     private final HashMap<String, String> params;
@@ -16,8 +15,10 @@ public class Speaker extends TextToSpeech {
         super(context, listener);
 
         params = new HashMap<String, String>();
-        params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "com.announcify.UTTERANCE_ID");
-        params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, String.valueOf(new AnnouncifySettings(context).getStream()));
+        params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,
+                "com.announcify.UTTERANCE_ID");
+        params.put(TextToSpeech.Engine.KEY_PARAM_STREAM,
+                String.valueOf(new AnnouncifySettings(context).getStream()));
     }
 
     synchronized public void interrupt() {
@@ -38,7 +39,8 @@ public class Speaker extends TextToSpeech {
     }
 
     @Override
-    public int speak(final String text, final int queueMode, final HashMap<String, String> params) {
+    public int speak(final String text, final int queueMode,
+            final HashMap<String, String> params) {
         if (super.speak(text, queueMode, params) == TextToSpeech.SUCCESS) {
             return TextToSpeech.SUCCESS;
         } else {

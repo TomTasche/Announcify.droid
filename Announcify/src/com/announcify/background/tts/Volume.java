@@ -5,7 +5,6 @@ import android.media.AudioManager;
 
 import com.announcify.api.background.util.AnnouncifySettings;
 
-
 public class Volume {
 
     private final AudioManager manager;
@@ -26,13 +25,17 @@ public class Volume {
     }
 
     public void lowerVolume() {
-        if (isSilent()) return;
+        if (isSilent()) {
+            return;
+        }
         previousVolume = manager.getStreamVolume(STREAM);
         manager.setStreamVolume(STREAM, 5, 0);
     }
 
     public void muteStreams() {
-        if (isSilent()) return;
+        if (isSilent()) {
+            return;
+        }
         manager.setStreamSolo(STREAM, true);
     }
 

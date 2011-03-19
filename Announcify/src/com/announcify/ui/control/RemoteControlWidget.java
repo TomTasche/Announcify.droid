@@ -10,7 +10,6 @@ import android.widget.RemoteViews;
 
 import com.announcify.R;
 
-
 public class RemoteControlWidget extends AppWidgetProvider {
 
     @Override

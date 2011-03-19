@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="android.text.util.Linkify"/>
-<fullyQualifiedTypeName name="android.os.PatternMatcher"/>
-<fullyQualifiedTypeName name="android.util.Patterns"/>
-<fullyQualifiedTypeName name="com.announcify.api.background.text.AndroidPatterns"/>
-<fullyQualifiedTypeName name="com.announcify.R.xml"/>
-<fullyQualifiedTypeName name="android.R"/>
-<fullyQualifiedTypeName name="android.R.xml"/>
-<fullyQualifiedTypeName name="com.announcify.messaging.R"/>
 <fullyQualifiedTypeName name="com.announcify.messaging.R.xml"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.tts.Translator"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="java.lang.NullPointerException"/>
 <fullyQualifiedTypeName name="android.app.PendingIntent"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.error.ExceptionForwarder"/>
@@ -46,18 +37,27 @@
 <fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="com.google.ads.AdRequest"/>
 <fullyQualifiedTypeName name="com.google.ads.AdListener"/>
-<fullyQualifiedTypeName name="android.view.View"/>
 <fullyQualifiedTypeName name="android.app.AlertDialog"/>
 <fullyQualifiedTypeName name="android.app.AlertDialog.Builder"/>
 <fullyQualifiedTypeName name="android.content.DialogInterface.OnClickListener"/>
 <fullyQualifiedTypeName name="android.content.DialogInterface"/>
 <fullyQualifiedTypeName name="com.announcify.R.string"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="android.content.res.Resources"/>
 <fullyQualifiedTypeName name="com.announcify.R.id"/>
 <fullyQualifiedTypeName name="java.util.HashSet"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.mail.google.contact.Mail"/>
 <fullyQualifiedTypeName name="android.database.Cursor"/>
+<fullyQualifiedTypeName name="android.R.bool"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.sql.model.PluginModel"/>
+<fullyQualifiedTypeName name="android.R"/>
+<fullyQualifiedTypeName name="android.widget.SlidingDrawer"/>
+<fullyQualifiedTypeName name="android.R.anim"/>
+<fullyQualifiedTypeName name="java.lang.Long"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
+<fullyQualifiedTypeName name="android.view.View"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="android.os.SystemClock"/>
+<fullyQualifiedTypeName name="android.view.MotionEvent"/>
 <fullyQualifiedTypeName name="android.content.Intent"/>
 </qualifiedTypeNameHistroy>

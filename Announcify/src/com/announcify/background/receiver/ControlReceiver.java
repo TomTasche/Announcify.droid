@@ -8,7 +8,6 @@ import android.os.Message;
 import com.announcify.background.handler.AnnouncificationHandler;
 import com.announcify.ui.control.RemoteControlDialog;
 
-
 public class ControlReceiver extends BroadcastReceiver {
 
     private final AnnouncificationHandler handler;

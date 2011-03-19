@@ -7,7 +7,6 @@ import android.content.Intent;
 
 import com.announcify.plugin.voice.call.service.WorkerService;
 
-
 public class AnnouncifyReceiver extends BroadcastReceiver {
 
     @Override

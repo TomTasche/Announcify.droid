@@ -7,7 +7,6 @@ import android.content.Intent;
 
 import com.announcify.plugin.message.mms.service.WorkerService;
 
-
 public class MessageReceiver extends BroadcastReceiver {
 
     @Override

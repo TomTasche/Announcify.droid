@@ -6,7 +6,6 @@ import android.content.Intent;
 
 import com.announcify.ui.control.RemoteControlDialog;
 
-
 public class NotificationReceiver extends BroadcastReceiver {
 
     public static final String NOTIFICATION_BROADCAST = "com.announcify.NOTIFICATION_CLICKED";

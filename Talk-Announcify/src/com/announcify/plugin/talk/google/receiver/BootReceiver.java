@@ -6,7 +6,6 @@ import android.content.Intent;
 
 import com.announcify.plugin.talk.google.service.TalkService;
 
-
 public class BootReceiver extends BroadcastReceiver {
 
     @Override

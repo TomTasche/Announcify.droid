@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import com.announcify.R;
 
-
 public class RemoteControlDialogInstaller extends Activity {
 
     @Override

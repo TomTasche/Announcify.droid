@@ -10,7 +10,6 @@ import android.provider.ContactsContract.Contacts;
 import com.announcify.api.background.contact.Contact;
 import com.announcify.api.background.contact.lookup.LookupMethod;
 
-
 public class Mail implements LookupMethod {
 
     public static void prepareAddress(final Contact contact) {
@@ -19,10 +18,10 @@ public class Mail implements LookupMethod {
                     contact.getAddress().lastIndexOf("\"")));
 
             contact.setLookupString("com.announcify"); // little hack to avoid
-            // announcing this
-            // contact as unknown, if
-            // he's not in
-            // addressbook!
+                                                       // announcing this
+                                                       // contact as unknown, if
+                                                       // he's not in
+                                                       // addressbook!
         }
 
         if (contact.getAddress().contains("<")) {
@@ -42,14 +41,16 @@ public class Mail implements LookupMethod {
 
     public void getAddress() {
         prepareAddress(contact);
-        
+
         Cursor cursor = null;
 
         try {
             cursor = context.getContentResolver().query(Email.CONTENT_URI,
                     new String[] { Email.DATA1 }, Contacts.LOOKUP_KEY + " = ?",
                     new String[] { contact.getLookupString() }, null);
-            if (!cursor.moveToFirst()) return;
+            if (!cursor.moveToFirst()) {
+                return;
+            }
 
             // TODO: implement?
         } finally {
@@ -69,7 +70,9 @@ public class Mail implements LookupMethod {
                     Uri.withAppendedPath(Email.CONTENT_LOOKUP_URI,
                             contact.getAddress()),
                     new String[] { Email.LOOKUP_KEY }, null, null, null);
-            if (!cursor.moveToFirst()) return;
+            if (!cursor.moveToFirst()) {
+                return;
+            }
 
             contact.setLookupString(cursor.getString(0));
         } finally {
@@ -89,7 +92,9 @@ public class Mail implements LookupMethod {
                     Email.LOOKUP_KEY + " = ? AND " + Email.DATA1 + " = ?",
                     new String[] { contact.getLookupString(),
                             contact.getAddress() }, null);
-            if (!cursor.moveToFirst()) return;
+            if (!cursor.moveToFirst()) {
+                return;
+            }
 
             String label = cursor.getString(cursor.getColumnIndex(Email.LABEL));
             if (label == null) {

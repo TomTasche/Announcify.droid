@@ -8,7 +8,6 @@ import android.content.Intent;
 import com.announcify.api.background.service.PluginService;
 import com.announcify.plugin.message.sms.service.WorkerService;
 
-
 public class MessageReceiver extends BroadcastReceiver {
 
     @Override

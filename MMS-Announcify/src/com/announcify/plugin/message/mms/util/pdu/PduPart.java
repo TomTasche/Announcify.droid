@@ -138,5 +138,6 @@ class PduPart {
 
     public static final int P_DISPOSITION_INLINE = 0x82;
 
-    private PduPart() {}
+    private PduPart() {
+    }
 }

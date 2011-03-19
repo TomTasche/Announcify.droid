@@ -6,7 +6,6 @@ import android.content.Intent;
 
 import com.announcify.plugin.mail.k9.service.MailService;
 
-
 public class BootReceiver extends BroadcastReceiver {
 
     @Override

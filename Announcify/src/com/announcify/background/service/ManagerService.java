@@ -21,7 +21,6 @@ import com.announcify.background.receiver.ControlReceiver;
 import com.announcify.background.tts.Speaker;
 import com.announcify.ui.control.RemoteControlDialog;
 
-
 public class ManagerService extends Service {
 
     private NotificationManager notificationManager;
@@ -39,7 +38,7 @@ public class ManagerService extends Service {
     @Override
     public void onCreate() {
         Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
-        
+
         super.onCreate();
 
         final AnnouncifySettings settings = new AnnouncifySettings(this);
@@ -71,7 +70,8 @@ public class ManagerService extends Service {
         handler.post(new Runnable() {
 
             public void run() {
-                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(ManagerService.this));
+                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(
+                        ManagerService.this));
             }
         });
 
@@ -82,12 +82,16 @@ public class ManagerService extends Service {
         controlFilter.addAction(RemoteControlDialog.ACTION_SKIP);
         registerReceiver(controlReceiver, controlFilter);
     }
-    
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        if ((intent == null) || (intent.getExtras() == null)) return START_NOT_STICKY;
 
-        if ((intent.getExtras().getInt(PluginService.EXTRA_PRIORITY, 9) > 3) && conditionManager.isScreenOn()) {
+    @Override
+    public int onStartCommand(final Intent intent, final int flags,
+            final int startId) {
+        if ((intent == null) || (intent.getExtras() == null)) {
+            return START_NOT_STICKY;
+        }
+
+        if ((intent.getExtras().getInt(PluginService.EXTRA_PRIORITY, 9) > 3)
+                && conditionManager.isScreenOn()) {
             // it's not a screen-on plugin. screen is on. stop.
             return START_NOT_STICKY;
         }
@@ -97,10 +101,11 @@ public class ManagerService extends Service {
             conditionManager.setOnCall(true);
         }
 
-        final Message msg = handler.obtainMessage(AnnouncificationHandler.WHAT_PUT_QUEUE);
+        final Message msg = handler
+                .obtainMessage(AnnouncificationHandler.WHAT_PUT_QUEUE);
         msg.setData(intent.getExtras());
         handler.sendMessage(msg);
-        
+
         // we don't want android to restart the service after killing us
         // (in order to prevent annoying duplicate announcements).
         return START_NOT_STICKY;

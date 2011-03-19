@@ -8,7 +8,6 @@ import android.util.Log;
 import com.announcify.api.background.audio.HeadsetFinder;
 import com.announcify.ui.control.RemoteControlDialog;
 
-
 public class HeadsetReceiver extends BroadcastReceiver {
 
     @Override

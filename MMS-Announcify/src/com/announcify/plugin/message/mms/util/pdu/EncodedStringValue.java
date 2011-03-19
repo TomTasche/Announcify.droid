@@ -24,7 +24,6 @@ import java.util.ArrayList;
 
 import android.util.Log;
 
-
 /**
  * Encoded-string-value = Text-string | Value-length Char-set Text-string
  */
@@ -49,7 +48,9 @@ public class EncodedStringValue implements Cloneable {
     }
 
     public static EncodedStringValue copy(final EncodedStringValue value) {
-        if (value == null) return null;
+        if (value == null) {
+            return null;
+        }
 
         return new EncodedStringValue(value.mCharacterSet, value.mData);
     }
@@ -80,8 +81,11 @@ public class EncodedStringValue implements Cloneable {
         }
 
         final int len = list.size();
-        if (len > 0) return list.toArray(new EncodedStringValue[len]);
-        else return null;
+        if (len > 0) {
+            return list.toArray(new EncodedStringValue[len]);
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -118,8 +122,10 @@ public class EncodedStringValue implements Cloneable {
      */
     public EncodedStringValue(final int charset, final byte[] data) {
         // TODO: CharSet needs to be validated against MIBEnum.
-        if (null == data) throw new NullPointerException(
-                "EncodedStringValue: Text-string is null.");
+        if (null == data) {
+            throw new NullPointerException(
+                    "EncodedStringValue: Text-string is null.");
+        }
 
         mCharacterSet = charset;
         mData = new byte[data.length];
@@ -144,8 +150,9 @@ public class EncodedStringValue implements Cloneable {
      *             if the text String is null or an IOException occured.
      */
     public void appendTextString(final byte[] textString) {
-        if (null == textString) throw new NullPointerException(
-                "Text-string is null.");
+        if (null == textString) {
+            throw new NullPointerException("Text-string is null.");
+        }
 
         if (null == mData) {
             mData = new byte[textString.length];
@@ -203,10 +210,9 @@ public class EncodedStringValue implements Cloneable {
      * @return The decoded String.
      */
     public String getString() {
-        if (CharacterSets.ANY_CHARSET == mCharacterSet) return new String(mData); // system
-                                                                                  // default
-                                                                                  // encoding.
-        else {
+        if (CharacterSets.ANY_CHARSET == mCharacterSet) {
+            return new String(mData); // system
+        } else {
             try {
                 final String name = CharacterSets.getMimeName(mCharacterSet);
                 return new String(mData, name);
@@ -252,8 +258,10 @@ public class EncodedStringValue implements Cloneable {
      *             if Text-string value is null.
      */
     public void setTextString(final byte[] textString) {
-        if (null == textString) throw new NullPointerException(
-                "EncodedStringValue: Text-string is null.");
+        if (null == textString) {
+            throw new NullPointerException(
+                    "EncodedStringValue: Text-string is null.");
+        }
 
         mData = new byte[textString.length];
         System.arraycopy(textString, 0, mData, 0, textString.length);

@@ -19,14 +19,13 @@ import com.announcify.api.background.error.ExceptionHandler;
 import com.announcify.api.background.service.PluginService;
 import com.announcify.plugin.mail.google.util.Settings;
 
-
 public class MailService extends Service {
 
     private class MailObserver extends ContentObserver {
 
         private boolean paused;
         private long maxMessageIdSeen;
-        
+
         private final String address;
         private Handler handler;
 
@@ -37,12 +36,17 @@ public class MailService extends Service {
             this.address = Uri.encode(address);
 
             final String[] projection = new String[] { "maxMessageId" };
-            final Cursor cursor = getContentResolver().query(Uri.parse("content://gmail-ls/conversations/" + address), projection, null, null, null);
+            final Cursor cursor = getContentResolver().query(
+                    Uri.parse("content://gmail-ls/conversations/" + address),
+                    projection, null, null, null);
 
             try {
-                if (!cursor.moveToFirst()) return;
+                if (!cursor.moveToFirst()) {
+                    return;
+                }
 
-                maxMessageIdSeen = Long.valueOf(cursor.getString(cursor.getColumnIndex(projection[0])));
+                maxMessageIdSeen = Long.valueOf(cursor.getString(cursor
+                        .getColumnIndex(projection[0])));
             } finally {
                 cursor.close();
             }
@@ -50,45 +54,56 @@ public class MailService extends Service {
 
         @Override
         public void onChange(final boolean selfChange) {
-            if (paused) return;
-            
+            if (paused) {
+                return;
+            }
+
             Cursor conversations = null;
             Cursor messages = null;
 
             try {
-                String[] projection = new String[] { "conversation_id", "maxMessageId" };
+                String[] projection = new String[] { "conversation_id",
+                        "maxMessageId" };
                 // content://gmail-ls/unread/
                 conversations = getContentResolver().query(
-//                        Uri.parse("content://gmail-ls/conversations/"
-//                                + address), projection,
+                        // Uri.parse("content://gmail-ls/conversations/"
+                        // + address), projection,
                         Uri.parse("content://gmail-ls/unread/"), projection,
-                                null, null, null);
-                if (!conversations.moveToFirst()) return;
+                        null, null, null);
+                if (!conversations.moveToFirst()) {
+                    return;
+                }
 
                 final long conversationId = Long
-                .valueOf(conversations.getString(conversations
-                        .getColumnIndex(projection[0])));
+                        .valueOf(conversations.getString(conversations
+                                .getColumnIndex(projection[0])));
 
-                long maxMessageId = Long
-                .valueOf(conversations.getString(conversations
-                        .getColumnIndex(projection[1])));
+                final long maxMessageId = Long
+                        .valueOf(conversations.getString(conversations
+                                .getColumnIndex(projection[1])));
 
-                if (maxMessageId < maxMessageIdSeen) return;
+                if (maxMessageId < maxMessageIdSeen) {
+                    return;
+                }
                 maxMessageIdSeen = maxMessageId;
 
                 projection = new String[] { "fromAddress", "subject",
                         "snippet", "body" };
 
                 messages = getContentResolver().query(
-                        Uri.parse("content://gmail-ls/conversations/"
-                                + address + "/"
+                        Uri.parse("content://gmail-ls/conversations/" + address
+                                + "/"
                                 + Uri.parse(String.valueOf(conversationId))
                                 + "/messages"), projection, null, null, null);
-                if (!messages.moveToLast()) return;
+                if (!messages.moveToLast()) {
+                    return;
+                }
 
                 if (!settings.getReadOwn()
                         && address.equals(messages.getString(messages
-                                .getColumnIndex(projection[0])))) return;
+                                .getColumnIndex(projection[0])))) {
+                    return;
+                }
 
                 final Intent intent = new Intent(MailService.this,
                         WorkerService.class);
@@ -102,10 +117,10 @@ public class MailService extends Service {
                 intent.putExtra(WorkerService.EXTRA_MESSAGE, messages
                         .getString(messages.getColumnIndex(projection[3])));
                 startService(intent);
-                
+
                 paused = true;
                 handler.postDelayed(new Runnable() {
-                    
+
                     public void run() {
                         paused = false;
                     }
@@ -134,7 +149,8 @@ public class MailService extends Service {
 
     @Override
     public void onCreate() {
-        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(getBaseContext()));
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(
+                getBaseContext()));
 
         observers = new LinkedList<MailService.MailObserver>();
         addresses = new LinkedList<String>();
@@ -178,22 +194,27 @@ public class MailService extends Service {
     }
 
     synchronized private void spawnNewObserver(final String address) {
-        if ("".equals(address)) return;
+        if ("".equals(address)) {
+            return;
+        }
 
         addresses.add(address);
         threads.add(new HandlerThread("MailThread for " + address));
         threads.getLast().start();
 
-        Handler handler = new Handler(threads.getLast().getLooper());
+        final Handler handler = new Handler(threads.getLast().getLooper());
         handler.post(new Runnable() {
 
             public void run() {
-                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(getBaseContext()));
+                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(
+                        getBaseContext()));
             }
         });
 
         observers.add(new MailObserver(handler, address));
 
-        getContentResolver().registerContentObserver(Uri.parse("content://gmail-ls/conversations/" + Uri.encode(address)), true, observers.getLast());
+        getContentResolver().registerContentObserver(
+                Uri.parse("content://gmail-ls/conversations/"
+                        + Uri.encode(address)), true, observers.getLast());
     }
 }

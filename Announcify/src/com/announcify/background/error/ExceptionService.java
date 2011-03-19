@@ -18,7 +18,6 @@ import android.util.Log;
 
 import com.announcify.api.background.error.ExceptionHandler;
 
-
 public class ExceptionService extends IntentService {
 
     public ExceptionService() {
@@ -26,24 +25,31 @@ public class ExceptionService extends IntentService {
     }
 
     @Override
-    protected void onHandleIntent(Intent intent) {
+    protected void onHandleIntent(final Intent intent) {
         Log.e("smn", "logged");
-        
+
         // taken from:
         // http://www.androidsnippets.org/snippets/36/
 
-        HttpClient client = new DefaultHttpClient();  
-        HttpPost post = new HttpPost("http://www.announcify.com/bug/report.php");  
+        final HttpClient client = new DefaultHttpClient();
+        final HttpPost post = new HttpPost(
+                "http://www.announcify.com/bug/report.php");
 
         try {
-            List<NameValuePair> params = new ArrayList<NameValuePair>();  
-            params.add(new BasicNameValuePair(ExceptionHandler.PACKAGE, intent.getStringExtra(ExceptionHandler.PACKAGE)));  
-            params.add(new BasicNameValuePair(ExceptionHandler.ANDROID_VERSION, intent.getStringExtra(ExceptionHandler.ANDROID_VERSION)));
-            params.add(new BasicNameValuePair(ExceptionHandler.VERSION_CODE, intent.getStringExtra(ExceptionHandler.VERSION_CODE)));
-            params.add(new BasicNameValuePair(ExceptionHandler.VERSION_NAME, intent.getStringExtra(ExceptionHandler.VERSION_NAME)));
-            params.add(new BasicNameValuePair(ExceptionHandler.MODEL, intent.getStringExtra(ExceptionHandler.MODEL)));
+            final List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair(ExceptionHandler.PACKAGE, intent
+                    .getStringExtra(ExceptionHandler.PACKAGE)));
+            params.add(new BasicNameValuePair(ExceptionHandler.ANDROID_VERSION,
+                    intent.getStringExtra(ExceptionHandler.ANDROID_VERSION)));
+            params.add(new BasicNameValuePair(ExceptionHandler.VERSION_CODE,
+                    intent.getStringExtra(ExceptionHandler.VERSION_CODE)));
+            params.add(new BasicNameValuePair(ExceptionHandler.VERSION_NAME,
+                    intent.getStringExtra(ExceptionHandler.VERSION_NAME)));
+            params.add(new BasicNameValuePair(ExceptionHandler.MODEL, intent
+                    .getStringExtra(ExceptionHandler.MODEL)));
 
-            final Throwable error = (Throwable)intent.getSerializableExtra(ExceptionHandler.STACKTRACE);
+            final Throwable error = (Throwable) intent
+                    .getSerializableExtra(ExceptionHandler.STACKTRACE);
 
             Log.e("Announcify", "Caught exception", error);
 
@@ -54,14 +60,15 @@ public class ExceptionService extends IntentService {
             stream.close();
             byteOutput.flush();
 
-            params.add(new BasicNameValuePair(ExceptionHandler.STACKTRACE, byteOutput.toString("UTF-8")));
+            params.add(new BasicNameValuePair(ExceptionHandler.STACKTRACE,
+                    byteOutput.toString("UTF-8")));
 
             byteOutput.close();
 
             post.setEntity(new UrlEncodedFormEntity(params));
 
             client.execute(post);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
     }

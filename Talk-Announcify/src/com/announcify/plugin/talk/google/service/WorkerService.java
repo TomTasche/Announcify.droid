@@ -11,7 +11,6 @@ import com.announcify.api.background.text.Formatter;
 import com.announcify.plugin.talk.google.contact.Chat;
 import com.announcify.plugin.talk.google.util.Settings;
 
-
 public class WorkerService extends PluginService {
 
     public static final String ACTION_START_RINGTONE = "com.announcify.plugin.talk.google.ACTION_START_RINGTONE";
@@ -25,18 +24,21 @@ public class WorkerService extends PluginService {
 
     @Override
     protected void onHandleIntent(final Intent intent) {
-        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(getBaseContext()));
-        
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(
+                getBaseContext()));
+
         if (settings == null) {
             settings = new Settings(this);
         }
-        
+
         if (ACTION_ANNOUNCE.equals(intent.getAction())) {
             String address = intent.getStringExtra(EXTRA_FROM);
 
             final Settings settings = new Settings(this);
 
-            if (address == null) address = "";
+            if (address == null) {
+                address = "";
+            }
             final Contact contact = new Contact(this, new Chat(this), address);
 
             if (!ContactFilter.announcableContact(this, contact)) {
@@ -45,16 +47,18 @@ public class WorkerService extends PluginService {
             }
 
             final Formatter formatter = new Formatter(this, contact, settings);
-            
-            final AnnouncifyIntent announcify = new AnnouncifyIntent(this, settings);
+
+            final AnnouncifyIntent announcify = new AnnouncifyIntent(this,
+                    settings);
             announcify.setStopBroadcast(ACTION_START_RINGTONE);
-            announcify.announce(formatter.format(intent.getStringExtra(EXTRA_MESSAGE)));
+            announcify.announce(formatter.format(intent
+                    .getStringExtra(EXTRA_MESSAGE)));
         } else {
             super.onHandleIntent(intent);
-            
+
             startService(new Intent(this, TalkService.class));
         }
-        
+
         stopSelf();
     }
 }

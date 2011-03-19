@@ -5680,3 +5680,6 @@ Caused by: java.lang.UnsatisfiedLinkError: org.eclipse.wb.internal.os.linux.Acti
 
 !ENTRY org.eclipse.wst.common.project.facet.core 4 0 2011-03-19 15:33:11.034
 !MESSAGE Project facet wst.web has not been defined. It is used in plugin org.eclipse.jst.common.project.facet.core.
+
+!ENTRY org.eclipse.ui 4 4 2011-03-19 16:02:15.344
+!MESSAGE Invalid preference page path: CSS Files

@@ -5,7 +5,6 @@ import android.content.Context;
 import com.announcify.api.background.util.PluginSettings;
 import com.announcify.plugin.voice.call.R;
 
-
 public class Settings extends PluginSettings {
 
     public static final String ACTION_SETTINGS = "com.announcify.plugin.voice.call.SETTINGS";

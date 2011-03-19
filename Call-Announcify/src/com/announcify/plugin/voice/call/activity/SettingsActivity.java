@@ -8,18 +8,20 @@ import com.announcify.api.R;
 import com.announcify.api.ui.activity.PluginActivity;
 import com.announcify.plugin.voice.call.util.Settings;
 
-
 public class SettingsActivity extends PluginActivity {
 
     @Override
-    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        parseRingtone(requestCode, resultCode, data, RingtoneManager.TYPE_RINGTONE);
+    protected void onActivityResult(final int requestCode,
+            final int resultCode, final Intent data) {
+        parseRingtone(requestCode, resultCode, data,
+                RingtoneManager.TYPE_RINGTONE);
 
         super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, new Settings(this), R.xml.preferences_settings);
+        super.onCreate(savedInstanceState, new Settings(this),
+                R.xml.preferences_settings);
     }
 }

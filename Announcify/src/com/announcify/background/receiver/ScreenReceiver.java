@@ -9,18 +9,17 @@ import android.util.Log;
 
 import com.announcify.ui.control.RemoteControlDialog;
 
-
 public class ScreenReceiver extends BroadcastReceiver {
-    
-    private Context context;
+
+    private final Context context;
 
     public ScreenReceiver(final Context context) {
         this.context = context;
     }
 
     public boolean isScreenOn() {
-        return ((PowerManager) context
-                .getSystemService(Context.POWER_SERVICE)).isScreenOn();
+        return ((PowerManager) context.getSystemService(Context.POWER_SERVICE))
+                .isScreenOn();
     }
 
     @Override
@@ -28,7 +27,9 @@ public class ScreenReceiver extends BroadcastReceiver {
         if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
             if (((TelephonyManager) context
                     .getSystemService(Context.TELEPHONY_SERVICE))
-                    .getCallState() == TelephonyManager.CALL_STATE_RINGING) return;
+                    .getCallState() == TelephonyManager.CALL_STATE_RINGING) {
+                return;
+            }
 
             context.sendBroadcast(new Intent(RemoteControlDialog.ACTION_PAUSE));
             Log.e("Announcify", "Shutdown because: Screen");

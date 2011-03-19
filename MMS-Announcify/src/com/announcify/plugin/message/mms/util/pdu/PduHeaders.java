@@ -20,7 +20,6 @@ package com.announcify.plugin.message.mms.util.pdu;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 public class PduHeaders {
 
     /**
@@ -496,7 +495,9 @@ public class PduHeaders {
      */
     protected void appendEncodedStringValue(final EncodedStringValue value,
             final int field) {
-        if (null == value) throw new NullPointerException();
+        if (null == value) {
+            throw new NullPointerException();
+        }
 
         switch (field) {
             case BCC:
@@ -507,8 +508,7 @@ public class PduHeaders {
                 throw new RuntimeException("Invalid header field!");
         }
 
-        @SuppressWarnings("unchecked")
-        ArrayList<EncodedStringValue> list = (ArrayList<EncodedStringValue>) mHeaderMap
+        @SuppressWarnings("unchecked") ArrayList<EncodedStringValue> list = (ArrayList<EncodedStringValue>) mHeaderMap
                 .get(field);
         if (null == list) {
             list = new ArrayList<EncodedStringValue>();
@@ -538,10 +538,11 @@ public class PduHeaders {
      *         header field
      */
     protected EncodedStringValue[] getEncodedStringValues(final int field) {
-        @SuppressWarnings("unchecked")
-        final ArrayList<EncodedStringValue> list = (ArrayList<EncodedStringValue>) mHeaderMap
+        @SuppressWarnings("unchecked") final ArrayList<EncodedStringValue> list = (ArrayList<EncodedStringValue>) mHeaderMap
                 .get(field);
-        if (null == list) return null;
+        if (null == list) {
+            return null;
+        }
         final EncodedStringValue[] values = new EncodedStringValue[list.size()];
         return list.toArray(values);
     }
@@ -560,7 +561,9 @@ public class PduHeaders {
      */
     protected long getLongInteger(final int field) {
         final Long longInteger = (Long) mHeaderMap.get(field);
-        if (null == longInteger) return -1;
+        if (null == longInteger) {
+            return -1;
+        }
 
         return longInteger.longValue();
     }
@@ -579,7 +582,9 @@ public class PduHeaders {
      */
     protected int getOctet(final int field) {
         final Integer octet = (Integer) mHeaderMap.get(field);
-        if (null == octet) return 0;
+        if (null == octet) {
+            return 0;
+        }
 
         return octet;
     }
@@ -614,7 +619,9 @@ public class PduHeaders {
          * Check whether this field can be set for specific header and check
          * validity of the field.
          */
-        if (null == value) throw new NullPointerException();
+        if (null == value) {
+            throw new NullPointerException();
+        }
 
         switch (field) {
             case SUBJECT:
@@ -653,7 +660,9 @@ public class PduHeaders {
          * Check whether this field can be set for specific header and check
          * validity of the field.
          */
-        if (null == value) throw new NullPointerException();
+        if (null == value) {
+            throw new NullPointerException();
+        }
 
         switch (field) {
             case BCC:
@@ -732,53 +741,62 @@ public class PduHeaders {
             case STORED:
             case TOTALS:
             case SENDER_VISIBILITY:
-                if ((VALUE_YES != value) && (VALUE_NO != value)) // Invalid
-                                                                 // value.
-                throw new IllegalArgumentException("Invalid Octet value!");
+                if ((VALUE_YES != value) && (VALUE_NO != value)) {
+                    // value.
+                    throw new IllegalArgumentException("Invalid Octet value!");
+                }
                 break;
             case READ_STATUS:
                 if ((READ_STATUS_READ != value)
-                        && (READ_STATUS__DELETED_WITHOUT_BEING_READ != value)) // Invalid
-                                                                               // value.
-                throw new IllegalArgumentException("Invalid Octet value!");
+                        && (READ_STATUS__DELETED_WITHOUT_BEING_READ != value)) {
+                    // value.
+                    throw new IllegalArgumentException("Invalid Octet value!");
+                }
                 break;
             case CANCEL_STATUS:
                 if ((CANCEL_STATUS_REQUEST_SUCCESSFULLY_RECEIVED != value)
-                        && (CANCEL_STATUS_REQUEST_CORRUPTED != value)) // Invalid
-                                                                       // value.
-                throw new IllegalArgumentException("Invalid Octet value!");
+                        && (CANCEL_STATUS_REQUEST_CORRUPTED != value)) {
+                    // value.
+                    throw new IllegalArgumentException("Invalid Octet value!");
+                }
                 break;
             case PRIORITY:
-                if ((value < PRIORITY_LOW) || (value > PRIORITY_HIGH)) // Invalid
-                                                                       // value.
-                throw new IllegalArgumentException("Invalid Octet value!");
+                if ((value < PRIORITY_LOW) || (value > PRIORITY_HIGH)) {
+                    // value.
+                    throw new IllegalArgumentException("Invalid Octet value!");
+                }
                 break;
             case STATUS:
-                if ((value < STATUS_EXPIRED) || (value > STATUS_UNREACHABLE)) // Invalid
-                                                                              // value.
-                throw new IllegalArgumentException("Invalid Octet value!");
+                if ((value < STATUS_EXPIRED) || (value > STATUS_UNREACHABLE)) {
+                    // value.
+                    throw new IllegalArgumentException("Invalid Octet value!");
+                }
                 break;
             case REPLY_CHARGING:
                 if ((value < REPLY_CHARGING_REQUESTED)
-                        || (value > REPLY_CHARGING_ACCEPTED_TEXT_ONLY)) // Invalid
-                                                                        // value.
-                throw new IllegalArgumentException("Invalid Octet value!");
+                        || (value > REPLY_CHARGING_ACCEPTED_TEXT_ONLY)) {
+                    // value.
+                    throw new IllegalArgumentException("Invalid Octet value!");
+                }
                 break;
             case MM_STATE:
-                if ((value < MM_STATE_DRAFT) || (value > MM_STATE_FORWARDED)) // Invalid
-                                                                              // value.
-                throw new IllegalArgumentException("Invalid Octet value!");
+                if ((value < MM_STATE_DRAFT) || (value > MM_STATE_FORWARDED)) {
+                    // value.
+                    throw new IllegalArgumentException("Invalid Octet value!");
+                }
                 break;
             case RECOMMENDED_RETRIEVAL_MODE:
-                if (RECOMMENDED_RETRIEVAL_MODE_MANUAL != value) // Invalid
-                                                                // value.
-                throw new IllegalArgumentException("Invalid Octet value!");
+                if (RECOMMENDED_RETRIEVAL_MODE_MANUAL != value) {
+                    // value.
+                    throw new IllegalArgumentException("Invalid Octet value!");
+                }
                 break;
             case CONTENT_CLASS:
                 if ((value < CONTENT_CLASS_TEXT)
-                        || (value > CONTENT_CLASS_CONTENT_RICH)) // Invalid
-                                                                 // value.
-                throw new IllegalArgumentException("Invalid Octet value!");
+                        || (value > CONTENT_CLASS_CONTENT_RICH)) {
+                    // value.
+                    throw new IllegalArgumentException("Invalid Octet value!");
+                }
                 break;
             case RETRIEVE_STATUS:
                 // According to oma-ts-mms-enc-v1_3, section 7.3.50, we modify
@@ -831,8 +849,9 @@ public class PduHeaders {
                 break;
             case MESSAGE_TYPE:
                 if ((value < MESSAGE_TYPE_SEND_REQ)
-                        || (value > MESSAGE_TYPE_CANCEL_CONF)) // Invalid value.
-                throw new IllegalArgumentException("Invalid Octet value!");
+                        || (value > MESSAGE_TYPE_CANCEL_CONF)) {
+                    throw new IllegalArgumentException("Invalid Octet value!");
+                }
                 break;
             default:
                 // This header value should not be Octect.
@@ -858,7 +877,9 @@ public class PduHeaders {
          * Check whether this field can be set for specific header and check
          * validity of the field.
          */
-        if (null == value) throw new NullPointerException();
+        if (null == value) {
+            throw new NullPointerException();
+        }
 
         switch (field) {
             case TRANSACTION_ID:

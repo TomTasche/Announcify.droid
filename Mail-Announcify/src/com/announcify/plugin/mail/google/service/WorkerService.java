@@ -11,7 +11,6 @@ import com.announcify.api.background.text.Formatter;
 import com.announcify.plugin.mail.google.contact.Mail;
 import com.announcify.plugin.mail.google.util.Settings;
 
-
 public class WorkerService extends PluginService {
 
     public static final String ACTION_START_RINGTONE = "com.announcify.plugin.mail.google.ACTION_START_RINGTONE";
@@ -27,8 +26,9 @@ public class WorkerService extends PluginService {
 
     @Override
     protected void onHandleIntent(final Intent intent) {
-        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(getBaseContext()));
-        
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(
+                getBaseContext()));
+
         if (settings == null) {
             settings = new Settings(this);
         }
@@ -36,7 +36,9 @@ public class WorkerService extends PluginService {
         if (ACTION_ANNOUNCE.equals(intent.getAction())) {
             String address = intent.getStringExtra(EXTRA_FROM);
 
-            if (address == null) address = "";
+            if (address == null) {
+                address = "";
+            }
             final Contact contact = new Contact(this, new Mail(this), address);
 
             if (!ContactFilter.announcableContact(this, contact)) {
@@ -60,16 +62,17 @@ public class WorkerService extends PluginService {
                     message = intent.getStringExtra(EXTRA_MESSAGE);
                     break;
             }
-            
-            final AnnouncifyIntent announcify = new AnnouncifyIntent(this, settings);
+
+            final AnnouncifyIntent announcify = new AnnouncifyIntent(this,
+                    settings);
             announcify.setStopBroadcast(ACTION_START_RINGTONE);
             announcify.announce(formatter.format(message));
         } else {
             super.onHandleIntent(intent);
-            
+
             startService(new Intent(this, MailService.class));
         }
-        
+
         stopSelf();
     }
 }

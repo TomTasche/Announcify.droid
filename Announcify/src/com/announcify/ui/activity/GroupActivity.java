@@ -27,7 +27,6 @@ import com.announcify.api.background.sql.model.GroupModel;
 import com.announcify.api.background.util.AnnouncifySettings;
 import com.announcify.api.ui.activity.BaseActivity;
 
-
 public class GroupActivity extends BaseActivity {
 
     protected CheckedTextView checkBlock;
@@ -39,7 +38,7 @@ public class GroupActivity extends BaseActivity {
     protected Cursor listCursor;
     protected Cursor autoCursor;
     protected AnnouncifySettings settings;
-    
+
     @Override
     protected void onCreate(final Bundle bundle) {
         super.onCreate(bundle, R.layout.activity_chooser);
@@ -49,9 +48,7 @@ public class GroupActivity extends BaseActivity {
         checkBlock = (CheckedTextView) findViewById(R.id.check_block);
 
         listAdapter = new SimpleCursorAdapter(this,
-                android.R.layout.simple_list_item_1, null,
-                null, 
-                null);
+                android.R.layout.simple_list_item_1, null, null, null);
 
         list = (ListView) findViewById(android.R.id.list);
         list.setAdapter(listAdapter);
@@ -62,14 +59,13 @@ public class GroupActivity extends BaseActivity {
         registerForContextMenu(list);
 
         autoAdapter = new SimpleCursorAdapter(this,
-                android.R.layout.simple_list_item_1, null,
-                null, null);
+                android.R.layout.simple_list_item_1, null, null, null);
 
         auto = (AutoCompleteTextView) findViewById(R.id.auto_edit_chooser);
         auto.setSingleLine();
         auto.setThreshold(1);
         auto.setAdapter(autoAdapter);
-        
+
         auto.setOnItemClickListener(new OnItemClickListener() {
 
             public void onItemClick(final AdapterView<?> parent,
@@ -94,8 +90,9 @@ public class GroupActivity extends BaseActivity {
         });
 
         model = new GroupModel(this);
-        
-        listAdapter.changeCursorAndColumns(null, new String[] { GroupModel.KEY_GROUP_TITLE },
+
+        listAdapter.changeCursorAndColumns(null,
+                new String[] { GroupModel.KEY_GROUP_TITLE },
                 new int[] { android.R.id.text1 });
 
         autoAdapter.setCursorToStringConverter(new CursorToStringConverter() {
@@ -106,9 +103,14 @@ public class GroupActivity extends BaseActivity {
         });
         autoAdapter.setFilterQueryProvider(new FilterQueryProvider() {
 
-            public Cursor runQuery(CharSequence constraint) {
-                return getContentResolver().query(Groups.CONTENT_URI,
-                        new String[] { BaseColumns._ID, Groups.TITLE }, "UPPER(" + Groups.TITLE + ") GLOB ?", new String[] {constraint.toString().toUpperCase(Locale.ENGLISH) + "*"}, Groups.TITLE);
+            public Cursor runQuery(final CharSequence constraint) {
+                return getContentResolver().query(
+                        Groups.CONTENT_URI,
+                        new String[] { BaseColumns._ID, Groups.TITLE },
+                        "UPPER(" + Groups.TITLE + ") GLOB ?",
+                        new String[] { constraint.toString().toUpperCase(
+                                Locale.ENGLISH)
+                                + "*" }, Groups.TITLE);
             }
         });
     }
@@ -116,15 +118,18 @@ public class GroupActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        
+
         refreshList();
 
         autoCursor = getContentResolver().query(Groups.CONTENT_URI,
                 new String[] { BaseColumns._ID, Groups.TITLE }, null, null,
                 Groups.TITLE);
-        autoAdapter.changeCursorAndColumns(autoCursor, new String[] { Groups.TITLE }, new int[] { android.R.id.text1 });
+        autoAdapter
+                .changeCursorAndColumns(autoCursor,
+                        new String[] { Groups.TITLE },
+                        new int[] { android.R.id.text1 });
     }
-    
+
     @Override
     public void onCreateContextMenu(final ContextMenu menu, final View v,
             final ContextMenuInfo menuInfo) {
@@ -149,11 +154,11 @@ public class GroupActivity extends BaseActivity {
         listCursor = model.getAll();
         listAdapter.changeCursor(listCursor);
     }
-    
+
     @Override
     public boolean onContextItemSelected(final MenuItem item) {
         final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
-        .getMenuInfo();
+                .getMenuInfo();
 
         if (item.getItemId() == R.id.menu_remove) {
             model.remove(info.id);

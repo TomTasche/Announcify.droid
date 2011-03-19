@@ -7,7 +7,6 @@ import android.telephony.TelephonyManager;
 
 import com.announcify.ui.control.RemoteControlDialog;
 
-
 public class CallReceiver extends PhoneStateListener {
 
     private final Context context;

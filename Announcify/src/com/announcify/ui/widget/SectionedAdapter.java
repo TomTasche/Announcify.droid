@@ -58,8 +58,7 @@ public class SectionedAdapter extends CursorAdapter {
 
         if ("BbAdMob".equals(model.getName(id))) {
             if (view.findViewById(R.id.admob) == null) {
-                ((TextView) view.findViewById(R.id.plugin))
-                .setText("Publisher? Put your ad here!");
+                ((TextView) view.findViewById(R.id.plugin)).setText("Publisher? Put your ad here!");
 
                 view.findViewById(R.id.separator).setVisibility(View.GONE);
                 view.findViewById(R.id.icon).setVisibility(View.GONE);
@@ -125,6 +124,7 @@ public class SectionedAdapter extends CursorAdapter {
 
                     public void onFailedToReceiveAd(final Ad arg0,
                             final ErrorCode arg1) {
+                        // TODO: ...
                     }
 
                     public void onDismissScreen(final Ad arg0) {

@@ -70,7 +70,7 @@ public class TalkService extends Service {
                     public void run() {
                         paused = false;
                     }
-                }, 5000);
+                }, 10000);
             } catch (final Exception e) {
                 e.printStackTrace();
             }

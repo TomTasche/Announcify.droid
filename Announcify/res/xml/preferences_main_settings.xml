@@ -78,7 +78,7 @@
 				android:defaultValue="0" />
 
 			<CheckBoxPreference
-				android:key="preference_filter_by_group"
+				android:key="preference_group_filter"
 				android:title="@string/preference_filter_group_title"
 				android:summary="@string/preference_filter_group_summary"
 				android:defaultValue="false" />
@@ -89,7 +89,7 @@
 				android:summary="@string/preference_choose_group_summary" />
 
 			<CheckBoxPreference
-				android:key="preference_filter_by_contact"
+				android:key="preference_contact_filter"
 				android:title="@string/preference_filter_contact_title"
 				android:summary="@string/preference_filter_contact_summary"
 				android:defaultValue="false" />

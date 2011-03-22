@@ -51,14 +51,12 @@ public class AnnouncifyActivity extends BaseActivity {
     }
 
     @Override
-    protected void onActivityResult(final int requestCode,
-            final int resultCode, final Intent data) {
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode > 2000) {
             try {
-                getPackageManager().getPackageGids(
-                        model.getPackage(requestCode - 2000));
+                getPackageManager().getPackageGids(model.getPackage(requestCode - 2000));
             } catch (final NameNotFoundException e) {
                 model.remove(requestCode - 2000);
             }
@@ -67,15 +65,12 @@ public class AnnouncifyActivity extends BaseActivity {
 
     @Override
     public boolean onContextItemSelected(final MenuItem item) {
-        final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
-                .getMenuInfo();
+        final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 
         switch (item.getItemId()) {
             case R.id.menu_uninstall:
                 startActivityForResult(
-                        new Intent(Intent.ACTION_DELETE, Uri.parse("package:"
-                                + model.getPackage(info.id))),
-                        (int) (2000 + info.id));
+                        new Intent(Intent.ACTION_DELETE, Uri.parse("package:" + model.getPackage(info.id))), (int) (2000 + info.id));
 
                 break;
 
@@ -88,11 +83,9 @@ public class AnnouncifyActivity extends BaseActivity {
 
             case R.id.menu_report:
                 final Intent sendIntent = new Intent(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_SUBJECT,
-                        "Announcify - Problem using " + model.getName(info.id));
+                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Announcify - Problem using " + model.getName(info.id));
                 sendIntent.putExtra(Intent.EXTRA_TEXT, "");
-                sendIntent.putExtra(Intent.EXTRA_EMAIL,
-                        new String[] { "tom@announcify.com" });
+                sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { "tom@announcify.com" });
                 sendIntent.setType("message/rfc822");
                 startActivity(sendIntent);
 
@@ -116,16 +109,13 @@ public class AnnouncifyActivity extends BaseActivity {
 
         getListView().setOnItemClickListener(new OnItemClickListener() {
 
-            public void onItemClick(final AdapterView<?> arg0, final View arg1,
-                    final int arg2, final long arg3) {
+            public void onItemClick(final AdapterView<?> arg0, final View arg1, final int arg2, final long arg3) {
                 try {
                     startActivity(new Intent(model.getAction(arg3)));
                 } catch (final Exception e) {
                     model.remove(arg3);
 
-                    Toast.makeText(AnnouncifyActivity.this,
-                            getString(R.string.toast_plugin_not_found),
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(AnnouncifyActivity.this, getString(R.string.toast_plugin_not_found), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -136,8 +126,7 @@ public class AnnouncifyActivity extends BaseActivity {
     }
 
     @Override
-    public void onCreateContextMenu(final ContextMenu menu, final View v,
-            final ContextMenuInfo menuInfo) {
+    public void onCreateContextMenu(final ContextMenu menu, final View v, final ContextMenuInfo menuInfo) {
         final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
         menu.setHeaderTitle(model.getName(info.id));
 
@@ -157,8 +146,7 @@ public class AnnouncifyActivity extends BaseActivity {
     public boolean onMenuItemSelected(final int featureId, final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_toggle:
-                final boolean activate = model.getActive(model
-                        .getId("Announcify++"));
+                final boolean activate = model.getActive(model.getId("Announcify++"));
 
                 final Cursor cursor = model.getAll();
                 cursor.moveToFirst();
@@ -184,9 +172,7 @@ public class AnnouncifyActivity extends BaseActivity {
 
             case R.id.menu_rate:
                 // TODO: check URL
-                startActivity(new Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("http://www.appbrain.com/app/announcify/com.announcify?install")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.appbrain.com/app/announcify/com.announcify?install")));
 
                 break;
 
@@ -196,8 +182,7 @@ public class AnnouncifyActivity extends BaseActivity {
                 break;
 
             case R.id.menu_translate:
-                startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("http://goo.gl/MmR5D")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://goo.gl/MmR5D")));
 
                 break;
         }
@@ -231,9 +216,7 @@ public class AnnouncifyActivity extends BaseActivity {
         cursor = model.getAll(PluginModel.KEY_PLUGIN_NAME);
 
         observer = new AnnouncifyObserver(new Handler());
-        getContentResolver().registerContentObserver(
-                Uri.withAppendedPath(AnnouncifyProvider.PROVIDER_URI,
-                        PluginModel.TABLE_NAME), false, observer);
+        getContentResolver().registerContentObserver(Uri.withAppendedPath(AnnouncifyProvider.PROVIDER_URI, PluginModel.TABLE_NAME), false, observer);
 
         adapter = new SectionedAdapter(this, model, cursor);
         getListView().setAdapter(adapter);

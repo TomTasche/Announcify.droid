@@ -16,6 +16,7 @@ import android.os.IBinder;
 
 import com.announcify.api.background.error.ExceptionHandler;
 import com.announcify.api.background.service.PluginService;
+import com.announcify.plugin.talk.google.util.Settings;
 
 public class TalkService extends Service {
 
@@ -37,30 +38,39 @@ public class TalkService extends Service {
                 return;
             }
 
-            final String[] messageProjection = new String[] { "body", "date" };
-            final Cursor message = getContentResolver().query(Uri.withAppendedPath(Uri.parse("content://com.google.android.providers.talk/"), "messages"), messageProjection, "err_code = 0", null, "date DESC");
-            if (!message.moveToFirst()) {
-                return;
-            }
-
-            final String[] conversationProjection = new String[] {"last_unread_message", "last_message_date" };
-            final Cursor conversation = getContentResolver().query(Uri.withAppendedPath(Uri.parse("content://com.google.android.providers.talk/"), "chats"), conversationProjection, null, null, "last_message_date DESC");
-            if (!conversation.moveToFirst()) {
-                return;
-            }
-
-            final String[] contactProjection = new String[] { "username" };
-            final Cursor contact = getContentResolver().query(Uri.withAppendedPath(Uri.parse("content://com.google.android.providers.talk/"), "contacts"), contactProjection, "last_message_date = " + conversation.getLong(conversation.getColumnIndex("last_message_date")), null, null);
-            if (!contact.moveToFirst()) {
-                return;
-            }
-
-            // nickname / username
-
+            Cursor message = null;
+            Cursor conversation = null;
+            Cursor contact = null;
             try {
+                final String[] messageProjection = new String[] { "body", "date", "type" };
+                message = getContentResolver().query(Uri.withAppendedPath(Uri.parse("content://com.google.android.providers.talk/"), "messages"), messageProjection, "err_code = 0", null, "date DESC");
+                if (!message.moveToFirst() || message.getInt(message.getColumnIndex(messageProjection[0])) != 1) {
+                    return;
+                }
+
+                final String[] conversationProjection = new String[] { "last_unread_message", "last_message_date" };
+                conversation = getContentResolver().query(Uri.withAppendedPath(Uri.parse("content://com.google.android.providers.talk/"), "chats"), conversationProjection, null, null, "last_message_date DESC");
+                if (!conversation.moveToFirst()) {
+                    return;
+                }
+
+                final String[] contactProjection = new String[] { "username" };
+                contact = getContentResolver().query(Uri.withAppendedPath(Uri.parse("content://com.google.android.providers.talk/"), "contacts"), contactProjection, "last_message_date = " + conversation.getLong(conversation.getColumnIndex("last_message_date")), null, null);
+                if (!contact.moveToFirst()) {
+                    return;
+                }
+
+                final String username = contact.getString(contact.getColumnIndex(contactProjection[0]));
+                // TODO: if !readOwnMails
+                for (final String s : addresses) {
+                    if (s.equals(username)) {
+                        return;
+                    }
+                }
+
                 final Intent intent = new Intent(TalkService.this, WorkerService.class);
                 intent.setAction(PluginService.ACTION_ANNOUNCE);
-                intent.putExtra(WorkerService.EXTRA_FROM, contact.getString(contact.getColumnIndex(contactProjection[0])));
+                intent.putExtra(WorkerService.EXTRA_FROM, username);
                 intent.putExtra(WorkerService.EXTRA_MESSAGE, message.getString(message.getColumnIndex(messageProjection[0])));
                 startService(intent);
 
@@ -70,21 +80,28 @@ public class TalkService extends Service {
                     public void run() {
                         paused = false;
                     }
-                }, 10000);
+                }, settings.getShutUp());
             } catch (final Exception e) {
                 e.printStackTrace();
+            } finally {
+                if (contact != null) {
+                    contact.close();
+                }
+                if (conversation != null) {
+                    conversation.close();
+                }
+                if (message != null) {
+                    message.close();
+                }
             }
-
-            contact.close();
-            conversation.close();
-            message.close();
         }
     }
 
     private LinkedList<String> addresses;
-    
+
     private HandlerThread thread;
     private TalkObserver observer;
+    private Settings settings;
 
     @Override
     public IBinder onBind(final Intent arg0) {
@@ -98,6 +115,8 @@ public class TalkService extends Service {
         thread = new HandlerThread("TalkThread");
         thread.start();
 
+        settings = new Settings(this);
+
         final Handler handler = new Handler(thread.getLooper());
         handler.post(new Runnable() {
 
@@ -105,9 +124,9 @@ public class TalkService extends Service {
                 Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(getBaseContext()));
             }
         });
-        
+
         addresses = new LinkedList<String>();
-        
+
         final AccountManager manager = (AccountManager) getSystemService(Context.ACCOUNT_SERVICE);
         final Account[] accounts = manager.getAccountsByType("com.google");
 

@@ -34,8 +34,7 @@ public class AnnouncificationHandler extends Handler {
 
     private boolean shutUp;
 
-    public AnnouncificationHandler(final Context context, final Looper looper,
-            final Speaker speaker) {
+    public AnnouncificationHandler(final Context context, final Looper looper, final Speaker speaker) {
         super(looper);
         this.context = context;
         this.speaker = speaker;
@@ -50,15 +49,12 @@ public class AnnouncificationHandler extends Handler {
 
         switch (msg.what) {
             case WHAT_PUT_QUEUE:
-                PluginQueue little = msg.getData().getParcelable(
-                        PluginService.EXTRA_QUEUE);
+                PluginQueue little = msg.getData().getParcelable(PluginService.EXTRA_QUEUE);
 
                 if (!model.known(model.getId(little.getPluginName()))) {
-                    little = new PluginQueue("Unknown",
-                            new LinkedList<Object>());
+                    little = new PluginQueue("Unknown", new LinkedList<Object>());
                     msg.getData().putInt(PluginService.EXTRA_PRIORITY, 9);
-                } else if (!model
-                        .getActive(model.getId(little.getPluginName()))) {
+                } else if (!model.getActive(model.getId(little.getPluginName()))) {
                     return;
                 }
 
@@ -107,8 +103,7 @@ public class AnnouncificationHandler extends Handler {
 
             case WHAT_START:
                 if (speaker.setOnUtteranceCompletedListener(queue) != TextToSpeech.SUCCESS) {
-                    quit(new RuntimeException(
-                            "Couldn't set UtteranceListener for TextToSpeech"));
+                    quit(new RuntimeException("Couldn't set UtteranceListener for TextToSpeech"));
                 }
 
                 queue.start();

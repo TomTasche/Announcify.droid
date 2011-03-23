@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<ListPreference
+		android:dialogTitle="Choose Announcement Message"
+		android:entryValues="@array/preference_list_read_message_values"
+		android:entries="@array/preference_list_read_message"
+		android:title="Choose Announcement Message"
+		android:key="preference_read_message"
+		android:defaultValue="0" />
+
+	<ListPreference
+		android:dialogTitle="@string/preference_shut_up_title"
+		android:entryValues="@array/preference_list_shut_up_values"
+		android:entries="@array/preference_list_shut_up"
+		android:title="@string/preference_shut_up_title"
+		android:summary="@string/preference_shut_up_summary"
+		android:key="preference_shut_up"
+		android:defaultValue="10" />
+
+	<CheckBoxPreference
+		android:summaryOn="Could cause annoying Announcifications!"
+		android:key="preference_read_own"
+		android:title="Read your own Mails"
+		android:defaultValue="false" />
+</PreferenceScreen>

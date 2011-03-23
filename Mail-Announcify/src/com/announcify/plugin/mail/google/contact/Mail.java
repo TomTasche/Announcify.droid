@@ -14,8 +14,7 @@ public class Mail implements LookupMethod {
 
     public static void prepareAddress(final Contact contact) {
         if (contact.getAddress().contains("\"")) {
-            contact.setFullname(contact.getAddress().substring(1,
-                    contact.getAddress().lastIndexOf("\"")));
+            contact.setFullname(contact.getAddress().substring(1, contact.getAddress().lastIndexOf("\"")));
 
             contact.setLookupString("com.announcify"); // little hack to avoid
                                                        // announcing this
@@ -25,9 +24,7 @@ public class Mail implements LookupMethod {
         }
 
         if (contact.getAddress().contains("<")) {
-            contact.setAddress(contact.getAddress().substring(
-                    contact.getAddress().indexOf('<') + 1,
-                    contact.getAddress().indexOf('>')));
+            contact.setAddress(contact.getAddress().substring(contact.getAddress().indexOf('<') + 1, contact.getAddress().indexOf('>')));
         }
     }
 
@@ -45,9 +42,7 @@ public class Mail implements LookupMethod {
         Cursor cursor = null;
 
         try {
-            cursor = context.getContentResolver().query(Email.CONTENT_URI,
-                    new String[] { Email.DATA1 }, Contacts.LOOKUP_KEY + " = ?",
-                    new String[] { contact.getLookupString() }, null);
+            cursor = context.getContentResolver().query(Email.CONTENT_URI, new String[] { Email.DATA1 }, Contacts.LOOKUP_KEY + " = ?", new String[] { contact.getLookupString() }, null);
             if (!cursor.moveToFirst()) {
                 return;
             }
@@ -66,10 +61,7 @@ public class Mail implements LookupMethod {
         Cursor cursor = null;
 
         try {
-            cursor = context.getContentResolver().query(
-                    Uri.withAppendedPath(Email.CONTENT_LOOKUP_URI,
-                            contact.getAddress()),
-                    new String[] { Email.LOOKUP_KEY }, null, null, null);
+            cursor = context.getContentResolver().query(Uri.withAppendedPath(Email.CONTENT_LOOKUP_URI, contact.getAddress()), new String[] { Email.LOOKUP_KEY }, null, null, null);
             if (!cursor.moveToFirst()) {
                 return;
             }
@@ -86,21 +78,14 @@ public class Mail implements LookupMethod {
         Cursor cursor = null;
 
         try {
-            cursor = context.getContentResolver().query(
-                    Email.CONTENT_URI,
-                    new String[] { Email.LABEL, Email.TYPE },
-                    Email.LOOKUP_KEY + " = ? AND " + Email.DATA1 + " = ?",
-                    new String[] { contact.getLookupString(),
-                            contact.getAddress() }, null);
+            cursor = context.getContentResolver().query(Email.CONTENT_URI, new String[] { Email.LABEL, Email.TYPE }, Email.LOOKUP_KEY + " = ? AND " + Email.DATA1 + " = ?", new String[] { contact.getLookupString(), contact.getAddress() }, null);
             if (!cursor.moveToFirst()) {
                 return;
             }
 
             String label = cursor.getString(cursor.getColumnIndex(Email.LABEL));
             if (label == null) {
-                label = Resources.getSystem().getStringArray(
-                        android.R.array.emailAddressTypes)[cursor.getInt(cursor
-                        .getColumnIndex(Email.TYPE)) - 1];
+                label = Resources.getSystem().getStringArray(android.R.array.emailAddressTypes)[cursor.getInt(cursor.getColumnIndex(Email.TYPE)) - 1];
             }
             contact.setType(label);
         } finally {

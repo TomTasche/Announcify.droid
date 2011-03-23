@@ -33,8 +33,7 @@ public class GravityListener {
 
     private final Motion motion;
 
-    public GravityListener(final Context context,
-            final GravityStateListener listener) {
+    public GravityListener(final Context context, final GravityStateListener listener) {
         this.listener = listener;
 
         // INITIALIZE MOTION LISTENER

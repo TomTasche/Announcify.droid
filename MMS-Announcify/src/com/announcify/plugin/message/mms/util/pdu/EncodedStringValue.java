@@ -123,8 +123,7 @@ public class EncodedStringValue implements Cloneable {
     public EncodedStringValue(final int charset, final byte[] data) {
         // TODO: CharSet needs to be validated against MIBEnum.
         if (null == data) {
-            throw new NullPointerException(
-                    "EncodedStringValue: Text-string is null.");
+            throw new NullPointerException("EncodedStringValue: Text-string is null.");
         }
 
         mCharacterSet = charset;
@@ -164,8 +163,7 @@ public class EncodedStringValue implements Cloneable {
                 newTextString.write(textString);
             } catch (final IOException e) {
                 e.printStackTrace();
-                throw new NullPointerException(
-                        "appendTextString: failed when write a new Text-string");
+                throw new NullPointerException("appendTextString: failed when write a new Text-string");
             }
 
             mData = newTextString.toByteArray();
@@ -259,8 +257,7 @@ public class EncodedStringValue implements Cloneable {
      */
     public void setTextString(final byte[] textString) {
         if (null == textString) {
-            throw new NullPointerException(
-                    "EncodedStringValue: Text-string is null.");
+            throw new NullPointerException("EncodedStringValue: Text-string is null.");
         }
 
         mData = new byte[textString.length];
@@ -280,8 +277,7 @@ public class EncodedStringValue implements Cloneable {
         final EncodedStringValue[] ret = new EncodedStringValue[temp.length];
         for (int i = 0; i < ret.length; ++i) {
             try {
-                ret[i] = new EncodedStringValue(mCharacterSet,
-                        temp[i].getBytes());
+                ret[i] = new EncodedStringValue(mCharacterSet, temp[i].getBytes());
             } catch (final NullPointerException _) {
                 // Can't arrive here
                 return null;

@@ -14,12 +14,10 @@ public class GravityReceiver extends GravityListener {
         super(context, new GravityStateListener() {
 
             public void onDisplayDown() {
-                context.sendBroadcast(new Intent(
-                        RemoteControlDialog.ACTION_PAUSE));
+                context.sendBroadcast(new Intent(RemoteControlDialog.ACTION_PAUSE));
                 Log.e("Announcify", "Shutdown because: Gravity");
 
-                final Vibrator vibrator = (Vibrator) context
-                        .getSystemService(Context.VIBRATOR_SERVICE);
+                final Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
                 vibrator.vibrate(100);
             }
 

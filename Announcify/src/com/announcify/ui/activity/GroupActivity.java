@@ -47,8 +47,7 @@ public class GroupActivity extends BaseActivity {
 
         checkBlock = (CheckedTextView) findViewById(R.id.check_block);
 
-        listAdapter = new SimpleCursorAdapter(this,
-                android.R.layout.simple_list_item_1, null, null, null);
+        listAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, null, null, null);
 
         list = (ListView) findViewById(android.R.id.list);
         list.setAdapter(listAdapter);
@@ -58,8 +57,7 @@ public class GroupActivity extends BaseActivity {
 
         registerForContextMenu(list);
 
-        autoAdapter = new SimpleCursorAdapter(this,
-                android.R.layout.simple_list_item_1, null, null, null);
+        autoAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, null, null, null);
 
         auto = (AutoCompleteTextView) findViewById(R.id.auto_edit_chooser);
         auto.setSingleLine();
@@ -68,10 +66,8 @@ public class GroupActivity extends BaseActivity {
 
         auto.setOnItemClickListener(new OnItemClickListener() {
 
-            public void onItemClick(final AdapterView<?> parent,
-                    final View view, final int position, final long id) {
-                model.add(autoAdapter.getItemId(position), ((TextView) view)
-                        .getText().toString());
+            public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
+                model.add(autoAdapter.getItemId(position), ((TextView) view).getText().toString());
 
                 refreshList();
 
@@ -91,9 +87,7 @@ public class GroupActivity extends BaseActivity {
 
         model = new GroupModel(this);
 
-        listAdapter.changeCursorAndColumns(null,
-                new String[] { GroupModel.KEY_GROUP_TITLE },
-                new int[] { android.R.id.text1 });
+        listAdapter.changeCursorAndColumns(null, new String[] { GroupModel.KEY_GROUP_TITLE }, new int[] { android.R.id.text1 });
 
         autoAdapter.setCursorToStringConverter(new CursorToStringConverter() {
 
@@ -104,13 +98,7 @@ public class GroupActivity extends BaseActivity {
         autoAdapter.setFilterQueryProvider(new FilterQueryProvider() {
 
             public Cursor runQuery(final CharSequence constraint) {
-                return getContentResolver().query(
-                        Groups.CONTENT_URI,
-                        new String[] { BaseColumns._ID, Groups.TITLE },
-                        "UPPER(" + Groups.TITLE + ") GLOB ?",
-                        new String[] { constraint.toString().toUpperCase(
-                                Locale.ENGLISH)
-                                + "*" }, Groups.TITLE);
+                return getContentResolver().query(Groups.CONTENT_URI, new String[] { BaseColumns._ID, Groups.TITLE }, "UPPER(" + Groups.TITLE + ") GLOB ?", new String[] { constraint.toString().toUpperCase(Locale.ENGLISH) + "*" }, Groups.TITLE);
             }
         });
     }
@@ -121,18 +109,12 @@ public class GroupActivity extends BaseActivity {
 
         refreshList();
 
-        autoCursor = getContentResolver().query(Groups.CONTENT_URI,
-                new String[] { BaseColumns._ID, Groups.TITLE }, null, null,
-                Groups.TITLE);
-        autoAdapter
-                .changeCursorAndColumns(autoCursor,
-                        new String[] { Groups.TITLE },
-                        new int[] { android.R.id.text1 });
+        autoCursor = getContentResolver().query(Groups.CONTENT_URI, new String[] { BaseColumns._ID, Groups.TITLE }, null, null, Groups.TITLE);
+        autoAdapter.changeCursorAndColumns(autoCursor, new String[] { Groups.TITLE }, new int[] { android.R.id.text1 });
     }
 
     @Override
-    public void onCreateContextMenu(final ContextMenu menu, final View v,
-            final ContextMenuInfo menuInfo) {
+    public void onCreateContextMenu(final ContextMenu menu, final View v, final ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
 
         getMenuInflater().inflate(R.menu.context_choose, menu);
@@ -157,8 +139,7 @@ public class GroupActivity extends BaseActivity {
 
     @Override
     public boolean onContextItemSelected(final MenuItem item) {
-        final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
-                .getMenuInfo();
+        final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 
         if (item.getItemId() == R.id.menu_remove) {
             model.remove(info.id);

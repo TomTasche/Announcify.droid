@@ -493,8 +493,7 @@ public class PduHeaders {
      * @throws NullPointerException
      *             if the value is null.
      */
-    protected void appendEncodedStringValue(final EncodedStringValue value,
-            final int field) {
+    protected void appendEncodedStringValue(final EncodedStringValue value, final int field) {
         if (null == value) {
             throw new NullPointerException();
         }
@@ -508,8 +507,7 @@ public class PduHeaders {
                 throw new RuntimeException("Invalid header field!");
         }
 
-        @SuppressWarnings("unchecked") ArrayList<EncodedStringValue> list = (ArrayList<EncodedStringValue>) mHeaderMap
-                .get(field);
+        @SuppressWarnings("unchecked") ArrayList<EncodedStringValue> list = (ArrayList<EncodedStringValue>) mHeaderMap.get(field);
         if (null == list) {
             list = new ArrayList<EncodedStringValue>();
         }
@@ -538,8 +536,7 @@ public class PduHeaders {
      *         header field
      */
     protected EncodedStringValue[] getEncodedStringValues(final int field) {
-        @SuppressWarnings("unchecked") final ArrayList<EncodedStringValue> list = (ArrayList<EncodedStringValue>) mHeaderMap
-                .get(field);
+        @SuppressWarnings("unchecked") final ArrayList<EncodedStringValue> list = (ArrayList<EncodedStringValue>) mHeaderMap.get(field);
         if (null == list) {
             return null;
         }
@@ -613,8 +610,7 @@ public class PduHeaders {
      * @throws NullPointerException
      *             if the value is null.
      */
-    protected void setEncodedStringValue(final EncodedStringValue value,
-            final int field) {
+    protected void setEncodedStringValue(final EncodedStringValue value, final int field) {
         /**
          * Check whether this field can be set for specific header and check
          * validity of the field.
@@ -654,8 +650,7 @@ public class PduHeaders {
      * @throws NullPointerException
      *             if the value is null.
      */
-    protected void setEncodedStringValues(final EncodedStringValue[] value,
-            final int field) {
+    protected void setEncodedStringValues(final EncodedStringValue[] value, final int field) {
         /**
          * Check whether this field can be set for specific header and check
          * validity of the field.
@@ -723,8 +718,7 @@ public class PduHeaders {
      * @throws InvalidHeaderValueException
      *             if the value is invalid.
      */
-    protected void setOctet(int value, final int field)
-            throws IllegalArgumentException {
+    protected void setOctet(int value, final int field) throws IllegalArgumentException {
         /**
          * Check whether this field can be set for specific header and check
          * validity of the field.
@@ -747,15 +741,13 @@ public class PduHeaders {
                 }
                 break;
             case READ_STATUS:
-                if ((READ_STATUS_READ != value)
-                        && (READ_STATUS__DELETED_WITHOUT_BEING_READ != value)) {
+                if ((READ_STATUS_READ != value) && (READ_STATUS__DELETED_WITHOUT_BEING_READ != value)) {
                     // value.
                     throw new IllegalArgumentException("Invalid Octet value!");
                 }
                 break;
             case CANCEL_STATUS:
-                if ((CANCEL_STATUS_REQUEST_SUCCESSFULLY_RECEIVED != value)
-                        && (CANCEL_STATUS_REQUEST_CORRUPTED != value)) {
+                if ((CANCEL_STATUS_REQUEST_SUCCESSFULLY_RECEIVED != value) && (CANCEL_STATUS_REQUEST_CORRUPTED != value)) {
                     // value.
                     throw new IllegalArgumentException("Invalid Octet value!");
                 }
@@ -773,8 +765,7 @@ public class PduHeaders {
                 }
                 break;
             case REPLY_CHARGING:
-                if ((value < REPLY_CHARGING_REQUESTED)
-                        || (value > REPLY_CHARGING_ACCEPTED_TEXT_ONLY)) {
+                if ((value < REPLY_CHARGING_REQUESTED) || (value > REPLY_CHARGING_ACCEPTED_TEXT_ONLY)) {
                     // value.
                     throw new IllegalArgumentException("Invalid Octet value!");
                 }
@@ -792,8 +783,7 @@ public class PduHeaders {
                 }
                 break;
             case CONTENT_CLASS:
-                if ((value < CONTENT_CLASS_TEXT)
-                        || (value > CONTENT_CLASS_CONTENT_RICH)) {
+                if ((value < CONTENT_CLASS_TEXT) || (value > CONTENT_CLASS_CONTENT_RICH)) {
                     // value.
                     throw new IllegalArgumentException("Invalid Octet value!");
                 }
@@ -801,43 +791,31 @@ public class PduHeaders {
             case RETRIEVE_STATUS:
                 // According to oma-ts-mms-enc-v1_3, section 7.3.50, we modify
                 // the invalid value.
-                if ((value > RETRIEVE_STATUS_ERROR_TRANSIENT_NETWORK_PROBLEM)
-                        && (value < RETRIEVE_STATUS_ERROR_PERMANENT_FAILURE)) {
+                if ((value > RETRIEVE_STATUS_ERROR_TRANSIENT_NETWORK_PROBLEM) && (value < RETRIEVE_STATUS_ERROR_PERMANENT_FAILURE)) {
                     value = RETRIEVE_STATUS_ERROR_TRANSIENT_FAILURE;
-                } else if ((value > RETRIEVE_STATUS_ERROR_PERMANENT_CONTENT_UNSUPPORTED)
-                        && (value <= RETRIEVE_STATUS_ERROR_END)) {
+                } else if ((value > RETRIEVE_STATUS_ERROR_PERMANENT_CONTENT_UNSUPPORTED) && (value <= RETRIEVE_STATUS_ERROR_END)) {
                     value = RETRIEVE_STATUS_ERROR_PERMANENT_FAILURE;
-                } else if ((value < RETRIEVE_STATUS_OK)
-                        || ((value > RETRIEVE_STATUS_OK) && (value < RETRIEVE_STATUS_ERROR_TRANSIENT_FAILURE))
-                        || (value > RETRIEVE_STATUS_ERROR_END)) {
+                } else if ((value < RETRIEVE_STATUS_OK) || ((value > RETRIEVE_STATUS_OK) && (value < RETRIEVE_STATUS_ERROR_TRANSIENT_FAILURE)) || (value > RETRIEVE_STATUS_ERROR_END)) {
                     value = RETRIEVE_STATUS_ERROR_PERMANENT_FAILURE;
                 }
                 break;
             case STORE_STATUS:
                 // According to oma-ts-mms-enc-v1_3, section 7.3.58, we modify
                 // the invalid value.
-                if ((value > STORE_STATUS_ERROR_TRANSIENT_NETWORK_PROBLEM)
-                        && (value < STORE_STATUS_ERROR_PERMANENT_FAILURE)) {
+                if ((value > STORE_STATUS_ERROR_TRANSIENT_NETWORK_PROBLEM) && (value < STORE_STATUS_ERROR_PERMANENT_FAILURE)) {
                     value = STORE_STATUS_ERROR_TRANSIENT_FAILURE;
-                } else if ((value > STORE_STATUS_ERROR_PERMANENT_MMBOX_FULL)
-                        && (value <= STORE_STATUS_ERROR_END)) {
+                } else if ((value > STORE_STATUS_ERROR_PERMANENT_MMBOX_FULL) && (value <= STORE_STATUS_ERROR_END)) {
                     value = STORE_STATUS_ERROR_PERMANENT_FAILURE;
-                } else if ((value < STORE_STATUS_SUCCESS)
-                        || ((value > STORE_STATUS_SUCCESS) && (value < STORE_STATUS_ERROR_TRANSIENT_FAILURE))
-                        || (value > STORE_STATUS_ERROR_END)) {
+                } else if ((value < STORE_STATUS_SUCCESS) || ((value > STORE_STATUS_SUCCESS) && (value < STORE_STATUS_ERROR_TRANSIENT_FAILURE)) || (value > STORE_STATUS_ERROR_END)) {
                     value = STORE_STATUS_ERROR_PERMANENT_FAILURE;
                 }
                 break;
             case RESPONSE_STATUS:
                 // According to oma-ts-mms-enc-v1_3, section 7.3.48, we modify
                 // the invalid value.
-                if ((value > RESPONSE_STATUS_ERROR_TRANSIENT_PARTIAL_SUCCESS)
-                        && (value < RESPONSE_STATUS_ERROR_PERMANENT_FAILURE)) {
+                if ((value > RESPONSE_STATUS_ERROR_TRANSIENT_PARTIAL_SUCCESS) && (value < RESPONSE_STATUS_ERROR_PERMANENT_FAILURE)) {
                     value = RESPONSE_STATUS_ERROR_TRANSIENT_FAILURE;
-                } else if (((value > RESPONSE_STATUS_ERROR_PERMANENT_LACK_OF_PREPAID) && (value <= RESPONSE_STATUS_ERROR_PERMANENT_END))
-                        || (value < RESPONSE_STATUS_OK)
-                        || ((value > RESPONSE_STATUS_ERROR_UNSUPPORTED_MESSAGE) && (value < RESPONSE_STATUS_ERROR_TRANSIENT_FAILURE))
-                        || (value > RESPONSE_STATUS_ERROR_PERMANENT_END)) {
+                } else if (((value > RESPONSE_STATUS_ERROR_PERMANENT_LACK_OF_PREPAID) && (value <= RESPONSE_STATUS_ERROR_PERMANENT_END)) || (value < RESPONSE_STATUS_OK) || ((value > RESPONSE_STATUS_ERROR_UNSUPPORTED_MESSAGE) && (value < RESPONSE_STATUS_ERROR_TRANSIENT_FAILURE)) || (value > RESPONSE_STATUS_ERROR_PERMANENT_END)) {
                     value = RESPONSE_STATUS_ERROR_PERMANENT_FAILURE;
                 }
                 break;
@@ -848,8 +826,7 @@ public class PduHeaders {
                 }
                 break;
             case MESSAGE_TYPE:
-                if ((value < MESSAGE_TYPE_SEND_REQ)
-                        || (value > MESSAGE_TYPE_CANCEL_CONF)) {
+                if ((value < MESSAGE_TYPE_SEND_REQ) || (value > MESSAGE_TYPE_CANCEL_CONF)) {
                     throw new IllegalArgumentException("Invalid Octet value!");
                 }
                 break;

@@ -33,6 +33,7 @@ public class Settings extends PluginSettings {
         return 5;
     }
 
+    @Override
     public int getReadMessageMode() {
         return Integer.parseInt(preferences.getString(KEY_MESSAGE, "0"));
     }

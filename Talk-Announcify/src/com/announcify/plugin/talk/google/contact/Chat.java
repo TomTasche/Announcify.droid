@@ -22,12 +22,7 @@ public class Chat implements LookupMethod {
         Cursor cursor = null;
 
         try {
-            cursor = context.getContentResolver().query(
-                    Data.CONTENT_URI,
-                    new String[] { Im.DATA1 },
-                    Im.LOOKUP_KEY + " = ? AND " + Im.MIMETYPE + " = ?",
-                    new String[] { contact.getLookupString(),
-                            Im.CONTENT_ITEM_TYPE }, null);
+            cursor = context.getContentResolver().query(Data.CONTENT_URI, new String[] { Im.DATA1 }, Im.LOOKUP_KEY + " = ? AND " + Im.MIMETYPE + " = ?", new String[] { contact.getLookupString(), Im.CONTENT_ITEM_TYPE }, null);
             if (!cursor.moveToFirst()) {
                 return;
             }
@@ -46,17 +41,14 @@ public class Chat implements LookupMethod {
         Cursor cursor = null;
 
         try {
-            cursor = context.getContentResolver().query(Data.CONTENT_URI,
-                    new String[] { Im.LOOKUP_KEY },
-                    // Im.DATA1 + " = ? AND " + Im.MIMETYPE + " = ?",
-                    Im.DATA1 + " = ?", new String[] { contact.getAddress() },
-                    null);
+            cursor = context.getContentResolver().query(Data.CONTENT_URI, new String[] { Im.LOOKUP_KEY },
+            // Im.DATA1 + " = ? AND " + Im.MIMETYPE + " = ?",
+            Im.DATA1 + " = ?", new String[] { contact.getAddress() }, null);
             if (!cursor.moveToFirst()) {
                 return;
             }
 
-            contact.setLookupString(cursor.getString(cursor
-                    .getColumnIndex(Im.LOOKUP_KEY)));
+            contact.setLookupString(cursor.getString(cursor.getColumnIndex(Im.LOOKUP_KEY)));
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -68,22 +60,14 @@ public class Chat implements LookupMethod {
         Cursor cursor = null;
 
         try {
-            cursor = context.getContentResolver().query(
-                    Data.CONTENT_URI,
-                    new String[] { Im.TYPE },
-                    Im.LOOKUP_KEY + " = ? AND " + Data.MIMETYPE + " = ? AND "
-                            + Im.DATA1 + " = ?",
-                    new String[] { contact.getLookupString(),
-                            Im.CONTENT_ITEM_TYPE, contact.getAddress() }, null);
+            cursor = context.getContentResolver().query(Data.CONTENT_URI, new String[] { Im.TYPE }, Im.LOOKUP_KEY + " = ? AND " + Data.MIMETYPE + " = ? AND " + Im.DATA1 + " = ?", new String[] { contact.getLookupString(), Im.CONTENT_ITEM_TYPE, contact.getAddress() }, null);
             if (!cursor.moveToFirst()) {
                 return;
             }
 
             String label = cursor.getString(cursor.getColumnIndex(Im.LABEL));
             if (label == null) {
-                label = Resources.getSystem().getStringArray(
-                        android.R.array.imProtocols)[cursor.getInt(cursor
-                        .getColumnIndex(Im.TYPE)) - 1];
+                label = Resources.getSystem().getStringArray(android.R.array.imProtocols)[cursor.getInt(cursor.getColumnIndex(Im.TYPE)) - 1];
             }
             contact.setType(label);
         } finally {

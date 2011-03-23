@@ -14,8 +14,7 @@ public class Volume {
     private final int STREAM;
 
     public Volume(final Context context) {
-        manager = (AudioManager) context
-                .getSystemService(Context.AUDIO_SERVICE);
+        manager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
         STREAM = new AnnouncifySettings(context).getStream();
     }

@@ -30,8 +30,7 @@ public class ReplaceActivity extends BaseActivity {
 
     @Override
     public boolean onContextItemSelected(final MenuItem item) {
-        final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
-                .getMenuInfo();
+        final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 
         switch (item.getItemId()) {
             case R.id.menu_edit:
@@ -39,10 +38,8 @@ public class ReplaceActivity extends BaseActivity {
                 final Cursor text = model.get(info.id);
                 text.moveToFirst();
 
-                replace.setText(text.getString(text
-                        .getColumnIndex(TranslationModel.KEY_TRANSLATION_FROM)));
-                with.setText(text.getString(text
-                        .getColumnIndex(TranslationModel.KEY_TRANSLATION_TO)));
+                replace.setText(text.getString(text.getColumnIndex(TranslationModel.KEY_TRANSLATION_FROM)));
+                with.setText(text.getString(text.getColumnIndex(TranslationModel.KEY_TRANSLATION_TO)));
 
                 text.close();
 
@@ -69,11 +66,7 @@ public class ReplaceActivity extends BaseActivity {
         replace = (EditText) findViewById(R.id.edit_replace);
         list = (ListView) findViewById(android.R.id.list);
 
-        adapter = new SimpleCursorAdapter(this,
-                android.R.layout.simple_list_item_2, null, new String[] {
-                        TranslationModel.KEY_TRANSLATION_FROM,
-                        TranslationModel.KEY_TRANSLATION_TO }, new int[] {
-                        android.R.id.text1, android.R.id.text2 });
+        adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, null, new String[] { TranslationModel.KEY_TRANSLATION_FROM, TranslationModel.KEY_TRANSLATION_TO }, new int[] { android.R.id.text1, android.R.id.text2 });
 
         list.setBackgroundColor(Color.WHITE);
         list.setCacheColorHint(Color.TRANSPARENT);
@@ -81,19 +74,17 @@ public class ReplaceActivity extends BaseActivity {
         list.setAdapter(adapter);
         registerForContextMenu(list);
 
-        findViewById(R.id.button_speak).setOnClickListener(
-                new OnClickListener() {
+        findViewById(R.id.button_speak).setOnClickListener(new OnClickListener() {
 
-                    public void onClick(final View v) {
-                        speaker.speak(with.getText().toString());
-                    }
-                });
+            public void onClick(final View v) {
+                speaker.speak(with.getText().toString());
+            }
+        });
 
         findViewById(R.id.button_add).setOnClickListener(new OnClickListener() {
 
             public void onClick(final View v) {
-                model.add(replace.getText().toString(), with.getText()
-                        .toString(), "", "");
+                model.add(replace.getText().toString(), with.getText().toString(), "", "");
 
                 cursor.close();
                 cursor = model.getAll(TranslationModel.KEY_TRANSLATION_FROM);
@@ -104,8 +95,7 @@ public class ReplaceActivity extends BaseActivity {
     }
 
     @Override
-    public void onCreateContextMenu(final ContextMenu menu, final View v,
-            final ContextMenuInfo menuInfo) {
+    public void onCreateContextMenu(final ContextMenu menu, final View v, final ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
 
         getMenuInflater().inflate(R.menu.context_replace, menu);

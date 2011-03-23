@@ -63,18 +63,14 @@ public class Motion implements SensorEventListener {
      * with resume();
      */
     public void resume() {
-        mSensorMgr = (SensorManager) mContext
-                .getSystemService(Context.SENSOR_SERVICE);
+        mSensorMgr = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
         if (mSensorMgr == null) {
             throw new UnsupportedOperationException("Sensors not supported");
         }
-        final boolean supported = mSensorMgr.registerListener(this,
-                mSensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-                SensorManager.SENSOR_DELAY_NORMAL);
+        final boolean supported = mSensorMgr.registerListener(this, mSensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
         if (!supported) {
             mSensorMgr.unregisterListener(this);
-            throw new UnsupportedOperationException(
-                    "Accelerometer not supported");
+            throw new UnsupportedOperationException("Accelerometer not supported");
         }
     }
 
@@ -90,10 +86,8 @@ public class Motion implements SensorEventListener {
 
     private boolean testDisplayDown(final float x, final float y, final float z) {
         if ((x <= DisplayDownX + accuracy) && (x >= DisplayDownX - accuracy)) {
-            if ((y <= DisplayDownY + accuracy)
-                    && (y >= DisplayDownY - accuracy)) {
-                if ((z <= DisplayDownZ + accuracy)
-                        && (z >= DisplayDownZ - accuracy)) {
+            if ((y <= DisplayDownY + accuracy) && (y >= DisplayDownY - accuracy)) {
+                if ((z <= DisplayDownZ + accuracy) && (z >= DisplayDownZ - accuracy)) {
                     return true;
                 }
             }
@@ -104,8 +98,7 @@ public class Motion implements SensorEventListener {
     private boolean testDisplayUp(final float x, final float y, final float z) {
         if ((x <= DisplayUpX + accuracy) && (x >= DisplayUpX - accuracy)) {
             if ((y <= DisplayUpY + accuracy) && (y >= DisplayUpY - accuracy)) {
-                if ((z <= DisplayUpZ + accuracy)
-                        && (z >= DisplayUpZ - accuracy)) {
+                if ((z <= DisplayUpZ + accuracy) && (z >= DisplayUpZ - accuracy)) {
                     return true;
                 }
             }

@@ -13,7 +13,6 @@ public class LocaleReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, final Intent intent) {
         final PluginModel model = new PluginModel(context);
-        model.setActive(model.getId("Announcify++"),
-                intent.getBooleanExtra(ANNOUNCIFY_ENABLED, true));
+        model.setActive(model.getId("Announcify++"), intent.getBooleanExtra(ANNOUNCIFY_ENABLED, true));
     }
 }

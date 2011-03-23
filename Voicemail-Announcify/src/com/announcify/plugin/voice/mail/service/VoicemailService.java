@@ -32,15 +32,13 @@ public class VoicemailService extends Service {
         Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
 
         listener = new VoicemailListener();
-        ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).listen(
-                listener, PhoneStateListener.LISTEN_MESSAGE_WAITING_INDICATOR);
+        ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).listen(listener, PhoneStateListener.LISTEN_MESSAGE_WAITING_INDICATOR);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
 
-        ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).listen(
-                listener, PhoneStateListener.LISTEN_NONE);
+        ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).listen(listener, PhoneStateListener.LISTEN_NONE);
     }
 }

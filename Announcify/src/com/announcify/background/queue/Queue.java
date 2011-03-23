@@ -30,8 +30,7 @@ public class Queue implements OnUtteranceCompletedListener {
 
     private void checkNext() {
         if (!queue.isEmpty() && queue.getFirst().isEmpty()) {
-            context.sendBroadcast(new Intent(queue.getFirst()
-                    .getStopBroadcast()));
+            context.sendBroadcast(new Intent(queue.getFirst().getStopBroadcast()));
             queue.removeFirst();
 
             if (queue.isEmpty()) {
@@ -39,8 +38,7 @@ public class Queue implements OnUtteranceCompletedListener {
                 return;
             }
 
-            context.sendBroadcast(new Intent(queue.getFirst()
-                    .getStartBroadcast()));
+            context.sendBroadcast(new Intent(queue.getFirst().getStartBroadcast()));
         }
 
         if (queue.isEmpty()) {

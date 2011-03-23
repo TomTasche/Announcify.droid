@@ -4,12 +4,5 @@
 		name="app_name">Mail - Announcify</string>
 		
 	<string
-		name="event_mail">Mail</string>	
-
-	<string-array
-		name="preference_list_read_message">
-		<item>Subject</item>
-		<item>Snippet</item>
-		<item>Complete Message</item>
-	</string-array>
+		name="event_mail">Mail</string>
 </resources>

@@ -18,8 +18,7 @@ public class RemoteControlDialog extends Activity {
     public static final String ACTION_PAUSE = "com.announcify.ACTION_PAUSE";
     public static final String ACTION_SKIP = "com.announcify.ACTION_SKIP";
 
-    private final String[] controls = getResources().getStringArray(
-            R.array.control_items);
+    private final String[] controls = getResources().getStringArray(R.array.control_items);
 
     private void fireBroadcast(final String action) {
         sendBroadcast(new Intent(action));
@@ -30,8 +29,7 @@ public class RemoteControlDialog extends Activity {
         super.onCreate(savedInstanceState);
 
         final Builder bob = new AlertDialog.Builder(this);
-        bob.setIcon(R.drawable.launcher_icon).setTitle(
-                getString(R.string.control_title));
+        bob.setIcon(R.drawable.launcher_icon).setTitle(getString(R.string.control_title));
         bob.setItems(controls, new OnClickListener() {
 
             public void onClick(final DialogInterface dialog, final int which) {
@@ -46,10 +44,7 @@ public class RemoteControlDialog extends Activity {
                         fireBroadcast(ACTION_SKIP);
                         break;
                     case 3:
-                        RemoteControlDialog.this
-                                .stopService(new Intent(
-                                        RemoteControlDialog.this,
-                                        ManagerService.class));
+                        RemoteControlDialog.this.stopService(new Intent(RemoteControlDialog.this, ManagerService.class));
                         break;
                 }
 

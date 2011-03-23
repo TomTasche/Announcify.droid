@@ -25,8 +25,7 @@ public class ConditionManager {
 
     private HeadsetReceiver headsetReceiver;
 
-    public ConditionManager(final Context context,
-            final AnnouncifySettings settings) {
+    public ConditionManager(final Context context, final AnnouncifySettings settings) {
         this.context = context;
 
         if (settings.isGravityCondition()) {
@@ -44,13 +43,11 @@ public class ConditionManager {
 
         if (settings.isDiscreetCondition()) {
             headsetReceiver = new HeadsetReceiver();
-            context.registerReceiver(headsetReceiver, new IntentFilter(
-                    Intent.ACTION_HEADSET_PLUG));
+            context.registerReceiver(headsetReceiver, new IntentFilter(Intent.ACTION_HEADSET_PLUG));
         }
 
         callReceiver = new CallReceiver(context);
-        ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE))
-                .listen(callReceiver, PhoneStateListener.LISTEN_CALL_STATE);
+        ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).listen(callReceiver, PhoneStateListener.LISTEN_CALL_STATE);
     }
 
     public boolean isScreenOn() {
@@ -62,10 +59,7 @@ public class ConditionManager {
             context.unregisterReceiver(screenReceiver);
         }
         if (callReceiver != null) {
-            ((TelephonyManager) context
-                    .getSystemService(Context.TELEPHONY_SERVICE)).listen(
-                    callReceiver,
-                    android.telephony.PhoneStateListener.LISTEN_NONE);
+            ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).listen(callReceiver, android.telephony.PhoneStateListener.LISTEN_NONE);
         }
         if (gravityReceiver != null) {
             gravityReceiver.stopAccelerometer();

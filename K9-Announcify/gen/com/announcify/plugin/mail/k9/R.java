@@ -9,21 +9,23 @@ package com.announcify.plugin.mail.k9;
 
 public final class R {
     public static final class array {
-        public static final int dialog_list_formatstring_variables=0x7f08000c;
-        public static final int preference_list_read_message=0x7f08000d;
-        public static final int preference_list_read_message_values=0x7f08000e;
+        public static final int dialog_list_formatstring_variables=0x7f08000e;
+        public static final int preference_list_read_message=0x7f080009;
+        public static final int preference_list_read_message_values=0x7f08000f;
         public static final int preference_list_reading_announcement_ids=0x7f080006;
         public static final int preference_list_reading_announcement_names=0x7f080003;
-        public static final int preference_list_reading_break_ids=0x7f080009;
+        public static final int preference_list_reading_break_ids=0x7f08000b;
         public static final int preference_list_reading_break_names=0x7f080000;
         public static final int preference_list_reading_discreet_ids=0x7f080008;
         public static final int preference_list_reading_discreet_names=0x7f080005;
-        public static final int preference_list_reading_repeat_ids=0x7f08000a;
+        public static final int preference_list_reading_repeat_ids=0x7f08000c;
         public static final int preference_list_reading_repeat_names=0x7f080001;
         public static final int preference_list_reading_unknown_ids=0x7f080007;
         public static final int preference_list_reading_unknown_names=0x7f080004;
-        public static final int preference_list_reading_wait_ids=0x7f08000b;
+        public static final int preference_list_reading_wait_ids=0x7f08000d;
         public static final int preference_list_reading_wait_names=0x7f080002;
+        public static final int preference_list_shut_up=0x7f08000a;
+        public static final int preference_list_shut_up_values=0x7f080010;
     }
     public static final class attr {
         /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
@@ -85,8 +87,8 @@ containing a value of this type.
         public static final int list_header=0x7f030003;
     }
     public static final class string {
-        public static final int app_name=0x7f070017;
-        public static final int event_mail=0x7f070018;
+        public static final int app_name=0x7f07001d;
+        public static final int event_mail=0x7f07001e;
         public static final int preference_break_summary=0x7f07000c;
         public static final int preference_break_title=0x7f07000b;
         public static final int preference_custom_cancel=0x7f070007;
@@ -100,11 +102,17 @@ containing a value of this type.
         public static final int preference_formatstring_input_hint=0x7f070001;
         public static final int preference_known_summary=0x7f070014;
         public static final int preference_known_title=0x7f070013;
+        public static final int preference_read_message_summary=0x7f07001c;
+        public static final int preference_read_message_title=0x7f07001b;
+        public static final int preference_read_own_summary=0x7f07001a;
+        public static final int preference_read_own_title=0x7f070019;
         public static final int preference_repeat_summary=0x7f07000e;
         public static final int preference_repeat_title=0x7f07000d;
         public static final int preference_ringtone_summary=0x7f070009;
         public static final int preference_ringtone_system=0x7f07000a;
         public static final int preference_ringtone_title=0x7f070008;
+        public static final int preference_shut_up_summary=0x7f070018;
+        public static final int preference_shut_up_title=0x7f070017;
         public static final int preference_unknown_summary=0x7f070012;
         public static final int preference_unknown_title=0x7f070011;
         public static final int preference_wait_summary=0x7f070010;
@@ -118,7 +126,7 @@ containing a value of this type.
         public static final int Theme_Light_NoTitleBar_Announcify=0x7f090003;
     }
     public static final class xml {
-        public static final int preferences_mail_settings=0x7f040000;
+        public static final int preferences_extra_settings=0x7f040000;
         public static final int preferences_settings=0x7f040001;
     }
     public static final class styleable {

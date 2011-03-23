@@ -69,8 +69,7 @@ public class AnnouncifyActivity extends BaseActivity {
 
         switch (item.getItemId()) {
             case R.id.menu_uninstall:
-                startActivityForResult(
-                        new Intent(Intent.ACTION_DELETE, Uri.parse("package:" + model.getPackage(info.id))), (int) (2000 + info.id));
+                startActivityForResult(new Intent(Intent.ACTION_DELETE, Uri.parse("package:" + model.getPackage(info.id))), (int) (2000 + info.id));
 
                 break;
 

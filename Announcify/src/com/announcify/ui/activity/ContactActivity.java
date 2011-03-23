@@ -46,8 +46,7 @@ public class ContactActivity extends BaseActivity {
 
         checkBlock = (CheckedTextView) findViewById(R.id.check_block);
 
-        listAdapter = new SimpleCursorAdapter(this,
-                android.R.layout.simple_list_item_1, null, null, null);
+        listAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, null, null, null);
 
         list = (ListView) findViewById(android.R.id.list);
         list.setAdapter(listAdapter);
@@ -57,8 +56,7 @@ public class ContactActivity extends BaseActivity {
 
         registerForContextMenu(list);
 
-        autoAdapter = new SimpleCursorAdapter(this,
-                android.R.layout.simple_list_item_1, null, null, null);
+        autoAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, null, null, null);
 
         auto = (AutoCompleteTextView) findViewById(R.id.auto_edit_chooser);
         auto.setSingleLine();
@@ -67,12 +65,8 @@ public class ContactActivity extends BaseActivity {
 
         auto.setOnItemClickListener(new OnItemClickListener() {
 
-            public void onItemClick(final AdapterView<?> parent,
-                    final View view, final int position, final long id) {
-                model.add(((Cursor) autoAdapter.getItem(position))
-                        .getString(autoCursor
-                                .getColumnIndex(Contacts.LOOKUP_KEY)),
-                        ((TextView) view).getText().toString());
+            public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
+                model.add(((Cursor) autoAdapter.getItem(position)).getString(autoCursor.getColumnIndex(Contacts.LOOKUP_KEY)), ((TextView) view).getText().toString());
 
                 refreshList();
 
@@ -92,28 +86,18 @@ public class ContactActivity extends BaseActivity {
 
         model = new ContactModel(this);
 
-        listAdapter.changeCursorAndColumns(null,
-                new String[] { ContactModel.KEY_CONTACT_TITLE },
-                new int[] { android.R.id.text1 });
+        listAdapter.changeCursorAndColumns(null, new String[] { ContactModel.KEY_CONTACT_TITLE }, new int[] { android.R.id.text1 });
 
         autoAdapter.setCursorToStringConverter(new CursorToStringConverter() {
 
             public CharSequence convertToString(final Cursor cursor) {
-                return cursor.getString(cursor
-                        .getColumnIndex(Contacts.DISPLAY_NAME));
+                return cursor.getString(cursor.getColumnIndex(Contacts.DISPLAY_NAME));
             }
         });
         autoAdapter.setFilterQueryProvider(new FilterQueryProvider() {
 
             public Cursor runQuery(final CharSequence constraint) {
-                return getContentResolver().query(
-                        Contacts.CONTENT_URI,
-                        new String[] { Contacts._ID, Contacts.LOOKUP_KEY,
-                                Contacts.DISPLAY_NAME },
-                        "UPPER(" + Contacts.DISPLAY_NAME + ") GLOB ?",
-                        new String[] { constraint.toString().toUpperCase(
-                                Locale.ENGLISH)
-                                + "*" }, Contacts.DISPLAY_NAME);
+                return getContentResolver().query(Contacts.CONTENT_URI, new String[] { Contacts._ID, Contacts.LOOKUP_KEY, Contacts.DISPLAY_NAME }, "UPPER(" + Contacts.DISPLAY_NAME + ") GLOB ?", new String[] { constraint.toString().toUpperCase(Locale.ENGLISH) + "*" }, Contacts.DISPLAY_NAME);
             }
         });
     }
@@ -124,19 +108,12 @@ public class ContactActivity extends BaseActivity {
 
         refreshList();
 
-        autoCursor = getContentResolver().query(
-                Contacts.CONTENT_URI,
-                new String[] { Contacts._ID, Contacts.LOOKUP_KEY,
-                        Contacts.DISPLAY_NAME }, null, null,
-                Contacts.DISPLAY_NAME);
-        autoAdapter.changeCursorAndColumns(autoCursor,
-                new String[] { Contacts.DISPLAY_NAME },
-                new int[] { android.R.id.text1 });
+        autoCursor = getContentResolver().query(Contacts.CONTENT_URI, new String[] { Contacts._ID, Contacts.LOOKUP_KEY, Contacts.DISPLAY_NAME }, null, null, Contacts.DISPLAY_NAME);
+        autoAdapter.changeCursorAndColumns(autoCursor, new String[] { Contacts.DISPLAY_NAME }, new int[] { android.R.id.text1 });
     }
 
     @Override
-    public void onCreateContextMenu(final ContextMenu menu, final View v,
-            final ContextMenuInfo menuInfo) {
+    public void onCreateContextMenu(final ContextMenu menu, final View v, final ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
 
         getMenuInflater().inflate(R.menu.context_choose, menu);
@@ -161,8 +138,7 @@ public class ContactActivity extends BaseActivity {
 
     @Override
     public boolean onContextItemSelected(final MenuItem item) {
-        final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
-                .getMenuInfo();
+        final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 
         if (item.getItemId() == R.id.menu_remove) {
             model.remove(info.id);

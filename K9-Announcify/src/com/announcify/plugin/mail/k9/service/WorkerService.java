@@ -25,8 +25,7 @@ public class WorkerService extends PluginService {
 
     @Override
     protected void onHandleIntent(final Intent intent) {
-        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(
-                getBaseContext()));
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(getBaseContext()));
 
         if (settings == null) {
             settings = new Settings(this);
@@ -58,8 +57,7 @@ public class WorkerService extends PluginService {
                     break;
             }
 
-            final AnnouncifyIntent announcify = new AnnouncifyIntent(this,
-                    settings);
+            final AnnouncifyIntent announcify = new AnnouncifyIntent(this, settings);
             announcify.setStopBroadcast(ACTION_START_RINGTONE);
             announcify.announce(formatter.format(message));
         } else {

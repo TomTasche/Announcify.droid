@@ -44,12 +44,9 @@ public class ManagerService extends Service {
         final AnnouncifySettings settings = new AnnouncifySettings(this);
 
         if (settings.isShowNotification()) {
-            final PendingIntent pendingIntent = PendingIntent.getActivity(this,
-                    1993, new Intent(this, RemoteControlDialog.class), 0);
-            final Notification notification = new Notification(
-                    R.drawable.notification_icon, null, 0);
-            notification.setLatestEventInfo(this, "Important Announcification",
-                    "Press here to stop it.", pendingIntent);
+            final PendingIntent pendingIntent = PendingIntent.getActivity(this, 1993, new Intent(this, RemoteControlDialog.class), 0);
+            final Notification notification = new Notification(R.drawable.notification_icon, null, 0);
+            notification.setLatestEventInfo(this, "Important Announcification", "Press here to stop it.", pendingIntent);
             startForeground(17, notification);
         }
 
@@ -65,13 +62,11 @@ public class ManagerService extends Service {
             }
         });
 
-        handler = new AnnouncificationHandler(ManagerService.this,
-                thread.getLooper(), speaker);
+        handler = new AnnouncificationHandler(ManagerService.this, thread.getLooper(), speaker);
         handler.post(new Runnable() {
 
             public void run() {
-                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(
-                        ManagerService.this));
+                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(ManagerService.this));
             }
         });
 
@@ -84,14 +79,12 @@ public class ManagerService extends Service {
     }
 
     @Override
-    public int onStartCommand(final Intent intent, final int flags,
-            final int startId) {
+    public int onStartCommand(final Intent intent, final int flags, final int startId) {
         if ((intent == null) || (intent.getExtras() == null)) {
             return START_NOT_STICKY;
         }
 
-        if ((intent.getExtras().getInt(PluginService.EXTRA_PRIORITY, 9) > 3)
-                && conditionManager.isScreenOn()) {
+        if ((intent.getExtras().getInt(PluginService.EXTRA_PRIORITY, 9) > 3) && conditionManager.isScreenOn()) {
             // it's not a screen-on plugin. screen is on. stop.
             return START_NOT_STICKY;
         }
@@ -101,8 +94,7 @@ public class ManagerService extends Service {
             conditionManager.setOnCall(true);
         }
 
-        final Message msg = handler
-                .obtainMessage(AnnouncificationHandler.WHAT_PUT_QUEUE);
+        final Message msg = handler.obtainMessage(AnnouncificationHandler.WHAT_PUT_QUEUE);
         msg.setData(intent.getExtras());
         handler.sendMessage(msg);
 
@@ -116,8 +108,7 @@ public class ManagerService extends Service {
         Log.e("Announcify", "shutdown");
 
         if (handler != null) {
-            final Message msg = handler
-                    .obtainMessage(AnnouncificationHandler.WHAT_SHUTDOWN);
+            final Message msg = handler.obtainMessage(AnnouncificationHandler.WHAT_SHUTDOWN);
             handler.sendMessage(msg);
         }
 

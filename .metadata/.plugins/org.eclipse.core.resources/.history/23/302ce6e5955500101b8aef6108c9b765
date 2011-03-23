@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string
+		name="app_name">K9 - Announcify</string>
+		
+	<string
+		name="event_mail">K9</string>	
+</resources>

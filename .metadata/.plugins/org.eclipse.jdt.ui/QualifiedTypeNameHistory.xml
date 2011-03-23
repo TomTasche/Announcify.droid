@@ -1,22 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.lang.NullPointerException"/>
-<fullyQualifiedTypeName name="android.app.PendingIntent"/>
-<fullyQualifiedTypeName name="com.announcify.api.background.error.ExceptionForwarder"/>
-<fullyQualifiedTypeName name="java.io.File"/>
-<fullyQualifiedTypeName name="java.lang.Thread"/>
-<fullyQualifiedTypeName name="android.os.Parcelable"/>
-<fullyQualifiedTypeName name="com.announcify.api.App"/>
-<fullyQualifiedTypeName name="android.app.Application"/>
-<fullyQualifiedTypeName name="com.announcify.api.ui.activity.PluginActivity"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.tts.Speech"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.queue.PluginQueue"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.util.AnnouncifySettings"/>
 <fullyQualifiedTypeName name="android.util.DebugUtils"/>
-<fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="android.os.HandlerThread"/>
-<fullyQualifiedTypeName name="com.announcify.api.background.util.PluginSettings"/>
-<fullyQualifiedTypeName name="com.announcify.plugin.talk.google.util.Settings"/>
 <fullyQualifiedTypeName name="com.announcify.api.R.xml"/>
 <fullyQualifiedTypeName name="android.os.Debug"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.service.PluginService"/>
@@ -32,7 +20,6 @@
 <fullyQualifiedTypeName name="com.announcify.api.R"/>
 <fullyQualifiedTypeName name="com.announcify.api.R.string"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.contact.lookup.Group"/>
-<fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="com.google.ads.AdRequest"/>
 <fullyQualifiedTypeName name="com.google.ads.AdListener"/>
 <fullyQualifiedTypeName name="android.app.AlertDialog"/>
@@ -43,7 +30,6 @@
 <fullyQualifiedTypeName name="android.content.res.Resources"/>
 <fullyQualifiedTypeName name="com.announcify.R.id"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.mail.google.contact.Mail"/>
-<fullyQualifiedTypeName name="android.database.Cursor"/>
 <fullyQualifiedTypeName name="android.R.bool"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.sql.model.PluginModel"/>
 <fullyQualifiedTypeName name="android.R"/>
@@ -59,5 +45,19 @@
 <fullyQualifiedTypeName name="java.util.HashSet"/>
 <fullyQualifiedTypeName name="java.util.LinkedList"/>
 <fullyQualifiedTypeName name="java.lang.Long"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="android.database.Cursor"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.mail.google.util.Settings"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.talk.google.util.Settings"/>
+<fullyQualifiedTypeName name="com.announcify.api.background.util.PluginSettings"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="android.provider.Settings.SettingNotFoundException"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.mail.k9.util.Settings"/>
+<fullyQualifiedTypeName name="com.announcify.api.background.text.Formatter"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.twitter.twidroyd.R"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.twitter.twidroyd.util.Settings"/>
+<fullyQualifiedTypeName name="android.content.ComponentName"/>
+<fullyQualifiedTypeName name="com.announcify.plugin.twitter.twidroyd.service.WorkerService"/>
 </qualifiedTypeNameHistroy>

@@ -32,24 +32,17 @@ public class ExceptionService extends IntentService {
         // http://www.androidsnippets.org/snippets/36/
 
         final HttpClient client = new DefaultHttpClient();
-        final HttpPost post = new HttpPost(
-                "http://www.announcify.com/bug/report.php");
+        final HttpPost post = new HttpPost("http://www.announcify.com/bug/report.php");
 
         try {
             final List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair(ExceptionHandler.PACKAGE, intent
-                    .getStringExtra(ExceptionHandler.PACKAGE)));
-            params.add(new BasicNameValuePair(ExceptionHandler.ANDROID_VERSION,
-                    intent.getStringExtra(ExceptionHandler.ANDROID_VERSION)));
-            params.add(new BasicNameValuePair(ExceptionHandler.VERSION_CODE,
-                    intent.getStringExtra(ExceptionHandler.VERSION_CODE)));
-            params.add(new BasicNameValuePair(ExceptionHandler.VERSION_NAME,
-                    intent.getStringExtra(ExceptionHandler.VERSION_NAME)));
-            params.add(new BasicNameValuePair(ExceptionHandler.MODEL, intent
-                    .getStringExtra(ExceptionHandler.MODEL)));
+            params.add(new BasicNameValuePair(ExceptionHandler.PACKAGE, intent.getStringExtra(ExceptionHandler.PACKAGE)));
+            params.add(new BasicNameValuePair(ExceptionHandler.ANDROID_VERSION, intent.getStringExtra(ExceptionHandler.ANDROID_VERSION)));
+            params.add(new BasicNameValuePair(ExceptionHandler.VERSION_CODE, intent.getStringExtra(ExceptionHandler.VERSION_CODE)));
+            params.add(new BasicNameValuePair(ExceptionHandler.VERSION_NAME, intent.getStringExtra(ExceptionHandler.VERSION_NAME)));
+            params.add(new BasicNameValuePair(ExceptionHandler.MODEL, intent.getStringExtra(ExceptionHandler.MODEL)));
 
-            final Throwable error = (Throwable) intent
-                    .getSerializableExtra(ExceptionHandler.STACKTRACE);
+            final Throwable error = (Throwable) intent.getSerializableExtra(ExceptionHandler.STACKTRACE);
 
             Log.e("Announcify", "Caught exception", error);
 
@@ -60,8 +53,7 @@ public class ExceptionService extends IntentService {
             stream.close();
             byteOutput.flush();
 
-            params.add(new BasicNameValuePair(ExceptionHandler.STACKTRACE,
-                    byteOutput.toString("UTF-8")));
+            params.add(new BasicNameValuePair(ExceptionHandler.STACKTRACE, byteOutput.toString("UTF-8")));
 
             byteOutput.close();
 

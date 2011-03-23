@@ -67,10 +67,7 @@ public class CharacterSets {
     /**
      * Array of MIB enum numbers.
      */
-    private static final int[] MIBENUM_NUMBERS = { ANY_CHARSET, US_ASCII,
-            ISO_8859_1, ISO_8859_2, ISO_8859_3, ISO_8859_4, ISO_8859_5,
-            ISO_8859_6, ISO_8859_7, ISO_8859_8, ISO_8859_9, SHIFT_JIS, UTF_8,
-            BIG5, UCS2, UTF_16, };
+    private static final int[] MIBENUM_NUMBERS = { ANY_CHARSET, US_ASCII, ISO_8859_1, ISO_8859_2, ISO_8859_3, ISO_8859_4, ISO_8859_5, ISO_8859_6, ISO_8859_7, ISO_8859_8, ISO_8859_9, SHIFT_JIS, UTF_8, BIG5, UCS2, UTF_16, };
 
     /**
      * The Well-known-charset Mime name.
@@ -112,12 +109,7 @@ public class CharacterSets {
     /**
      * Array of the names of character sets.
      */
-    private static final String[] MIME_NAMES = { MIMENAME_ANY_CHARSET,
-            MIMENAME_US_ASCII, MIMENAME_ISO_8859_1, MIMENAME_ISO_8859_2,
-            MIMENAME_ISO_8859_3, MIMENAME_ISO_8859_4, MIMENAME_ISO_8859_5,
-            MIMENAME_ISO_8859_6, MIMENAME_ISO_8859_7, MIMENAME_ISO_8859_8,
-            MIMENAME_ISO_8859_9, MIMENAME_SHIFT_JIS, MIMENAME_UTF_8,
-            MIMENAME_BIG5, MIMENAME_UCS2, MIMENAME_UTF_16, };
+    private static final String[] MIME_NAMES = { MIMENAME_ANY_CHARSET, MIMENAME_US_ASCII, MIMENAME_ISO_8859_1, MIMENAME_ISO_8859_2, MIMENAME_ISO_8859_3, MIMENAME_ISO_8859_4, MIMENAME_ISO_8859_5, MIMENAME_ISO_8859_6, MIMENAME_ISO_8859_7, MIMENAME_ISO_8859_8, MIMENAME_ISO_8859_9, MIMENAME_SHIFT_JIS, MIMENAME_UTF_8, MIMENAME_BIG5, MIMENAME_UCS2, MIMENAME_UTF_16, };
 
     private static final HashMap<Integer, String> MIBENUM_TO_NAME_MAP;
 
@@ -143,8 +135,7 @@ public class CharacterSets {
      * @return The MIBEnum number assigned by IANA for this charset.
      * @throws UnsupportedEncodingException
      */
-    public static int getMibEnumValue(final String mimeName)
-            throws UnsupportedEncodingException {
+    public static int getMibEnumValue(final String mimeName) throws UnsupportedEncodingException {
         if (null == mimeName) {
             return -1;
         }
@@ -165,8 +156,7 @@ public class CharacterSets {
      * @return The name string of the charset.
      * @throws UnsupportedEncodingException
      */
-    public static String getMimeName(final int mibEnumValue)
-            throws UnsupportedEncodingException {
+    public static String getMimeName(final int mibEnumValue) throws UnsupportedEncodingException {
         final String name = MIBENUM_TO_NAME_MAP.get(mibEnumValue);
         if (name == null) {
             throw new UnsupportedEncodingException();

@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
-import android.provider.Settings.SettingNotFoundException;
 
 import com.announcify.api.background.error.ExceptionHandler;
 import com.announcify.api.background.service.PluginService;
@@ -32,13 +31,20 @@ public class MailService extends Service {
             final Cursor cursor = getContentResolver().query(Uri.parse("content://com.fsck.k9.messageprovider/inbox_messages/"), projection, null, null, null);
 
             try {
+                if (cursor == null) {
+                    stopSelf();
+                    return;
+                }
+
                 if (!cursor.moveToFirst()) {
                     return;
                 }
 
                 maxMessageIdSeen = Long.valueOf(cursor.getString(cursor.getColumnIndex(projection[0])));
             } finally {
-                if (cursor != null) cursor.close();
+                if (cursor != null) {
+                    cursor.close();
+                }
             }
         }
 
@@ -101,7 +107,7 @@ public class MailService extends Service {
 
         thread = new HandlerThread("HandlerThread for K9Mail");
         thread.start();
-        
+
         settings = new Settings(this);
 
         final Handler handler = new Handler(thread.getLooper());

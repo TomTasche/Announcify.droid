@@ -165,18 +165,18 @@ public class AnnouncifyActivity extends BaseActivity {
                 break;
 
             case R.id.menu_plugins:
-                ActivityUtils.getPluginsIntent();
+                startActivity(ActivityUtils.getPluginsIntent());
 
                 break;
 
             case R.id.menu_rate:
                 // TODO: check URL
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.appbrain.com/app/announcify/com.announcify?install")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://market.announcify.com/")));
 
                 break;
 
             case R.id.menu_share:
-                ActivityUtils.getShareIntent(this);
+                startActivity(ActivityUtils.getShareIntent(this));
 
                 break;
 

@@ -32,8 +32,6 @@ public class WorkerService extends PluginService {
             announcify.announce(message);
         } else {
             super.onHandleIntent(intent);
-
-            startService(new Intent(this, VoicemailService.class));
         }
 
         stopSelf();

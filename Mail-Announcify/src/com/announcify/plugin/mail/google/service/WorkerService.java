@@ -67,8 +67,6 @@ public class WorkerService extends PluginService {
             announcify.announce(formatter.format(message));
         } else {
             super.onHandleIntent(intent);
-
-            startService(new Intent(this, MailService.class));
         }
 
         stopSelf();

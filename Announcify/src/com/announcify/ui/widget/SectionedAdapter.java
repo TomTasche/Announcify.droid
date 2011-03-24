@@ -206,12 +206,13 @@ public class SectionedAdapter extends CursorAdapter {
             }
         });
 
-//        view.setOnClickListener(new OnClickListener() {
-//
-//            public void onClick(final View v) {
-//                context.startActivity(new Intent(model.getAction((Long) v.getTag())));
-//            }
-//        });
+        // view.setOnClickListener(new OnClickListener() {
+        //
+        // public void onClick(final View v) {
+        // context.startActivity(new Intent(model.getAction((Long)
+        // v.getTag())));
+        // }
+        // });
     }
 
     @Override

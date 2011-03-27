@@ -35,9 +35,11 @@ public class WorkerService extends PluginService {
 
             final Contact contact = new Contact(this, new com.announcify.api.background.contact.lookup.Number(this), number);
 
-            if (!ContactFilter.announcableContact(this, contact)) {
-                playRingtone();
-                return;
+            if (!settings.isChuckNorris()) {
+                if (!ContactFilter.announcableContact(this, contact)) {
+                    playRingtone();
+                    return;
+                }
             }
 
             final AnnouncifyIntent announcify = new AnnouncifyIntent(this, settings);

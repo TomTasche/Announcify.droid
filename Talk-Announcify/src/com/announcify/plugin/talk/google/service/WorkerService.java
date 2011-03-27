@@ -40,9 +40,11 @@ public class WorkerService extends PluginService {
             }
             final Contact contact = new Contact(this, new Chat(this), address);
 
-            if (!ContactFilter.announcableContact(this, contact)) {
-                playRingtone();
-                return;
+            if (!settings.isChuckNorris()) {
+                if (!ContactFilter.announcableContact(this, contact)) {
+                    playRingtone();
+                    return;
+                }
             }
 
             final Formatter formatter = new Formatter(this, contact, settings);

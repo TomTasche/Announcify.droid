@@ -38,11 +38,13 @@ public class WorkerService extends PluginService {
             if (address == null) {
                 address = "";
             }
-            final Contact contact = new Contact(this, new Mail(this), address);
+            final Contact contact = new Contact(this, new Mail(this, settings.isReadMailHeader()), address);
 
-            if (!ContactFilter.announcableContact(this, contact)) {
-                playRingtone();
-                return;
+            if (!settings.isChuckNorris()) {
+                if (!ContactFilter.announcableContact(this, contact)) {
+                    playRingtone();
+                    return;
+                }
             }
 
             final Formatter formatter = new Formatter(this, contact, settings);

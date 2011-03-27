@@ -16,14 +16,10 @@ import com.announcify.background.receiver.gravity.GravityListener;
 public class ConditionManager {
 
     private final Context context;
-
-    private ScreenReceiver screenReceiver;
-
-    private GravityListener gravityReceiver;
-
+    private final ScreenReceiver screenReceiver;
+    private final GravityListener gravityReceiver;
     private final CallReceiver callReceiver;
-
-    private HeadsetReceiver headsetReceiver;
+    private final HeadsetReceiver headsetReceiver;
 
     public ConditionManager(final Context context, final AnnouncifySettings settings) {
         this.context = context;
@@ -31,6 +27,8 @@ public class ConditionManager {
         if (settings.isGravityCondition()) {
             gravityReceiver = new GravityReceiver(context);
             gravityReceiver.setAccuracy(2f);
+        } else {
+            gravityReceiver = null;
         }
 
         if (settings.isScreenCondition()) {
@@ -39,11 +37,15 @@ public class ConditionManager {
             screenFilter.addAction(Intent.ACTION_SCREEN_ON);
             screenFilter.addAction(Intent.ACTION_SCREEN_OFF);
             context.registerReceiver(screenReceiver, screenFilter);
+        } else {
+            screenReceiver = null;
         }
 
         if (settings.isDiscreetCondition()) {
             headsetReceiver = new HeadsetReceiver();
             context.registerReceiver(headsetReceiver, new IntentFilter(Intent.ACTION_HEADSET_PLUG));
+        } else {
+            headsetReceiver = null;
         }
 
         callReceiver = new CallReceiver(context);

@@ -134,13 +134,12 @@ public class SectionedAdapter extends CursorAdapter {
                                 builder.setItems(items, new DialogInterface.OnClickListener() {
 
                                     public void onClick(final android.content.DialogInterface dialog, final int item) {
-                                        // TODO: change links
                                         if (items[0].equals(items[item])) {
                                             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://goo.gl/p4jH2")));
                                         } else if (items[1].equals(items[item])) {
-                                            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://goo.gl/fhecu")));
+                                            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://goo.gl/mdgsY")));
                                         } else {
-                                            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://goo.gl/1e8K9")));
+                                            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://goo.gl/8oto6")));
                                         }
                                     }
                                 });

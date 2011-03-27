@@ -12,15 +12,13 @@ import com.announcify.api.background.contact.lookup.LookupMethod;
 
 public class Mail implements LookupMethod {
 
-    public static void prepareAddress(final Contact contact) {
-        if (contact.getAddress().contains("\"")) {
+    public static void prepareAddress(final Contact contact, final boolean cheat) {
+        if (contact.getAddress().contains("\"") && cheat) {
             contact.setFullname(contact.getAddress().substring(1, contact.getAddress().lastIndexOf("\"")));
 
-            contact.setLookupString("com.announcify"); // little hack to avoid
-                                                       // announcing this
-                                                       // contact as unknown, if
-                                                       // he's not in
-                                                       // addressbook!
+            contact.setLookupString("com.announcify");
+            // little hack to avoid announcing this contact as unknown, if he's
+            // not in addressbook!
         }
 
         if (contact.getAddress().contains("<")) {
@@ -29,16 +27,16 @@ public class Mail implements LookupMethod {
     }
 
     private final Context context;
-
     private Contact contact;
 
-    public Mail(final Context context) {
+    private final boolean cheat;
+
+    public Mail(final Context context, final boolean cheat) {
         this.context = context;
+        this.cheat = cheat;
     }
 
     public void getAddress() {
-        prepareAddress(contact);
-
         Cursor cursor = null;
 
         try {
@@ -57,6 +55,8 @@ public class Mail implements LookupMethod {
 
     public void getLookup(final Contact contact) {
         this.contact = contact;
+
+        prepareAddress(contact, cheat);
 
         Cursor cursor = null;
 

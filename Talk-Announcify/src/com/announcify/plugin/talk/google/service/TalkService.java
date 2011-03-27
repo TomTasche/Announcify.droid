@@ -44,9 +44,16 @@ public class TalkService extends Service {
             try {
                 final String[] messageProjection = new String[] { "body", "date", "type" };
                 message = getContentResolver().query(Uri.withAppendedPath(Uri.parse("content://com.google.android.providers.talk/"), "messages"), messageProjection, "err_code = 0", null, "date DESC");
-                if (!message.moveToFirst() || message.getInt(message.getColumnIndex(messageProjection[0])) != 1) {
+                if (!message.moveToFirst()) {
                     return;
                 }
+
+                // TODO: very unreliable!
+                // if
+                // (message.getInt(message.getColumnIndex(messageProjection[0]))
+                // != 1) {
+                // return;
+                // }
 
                 final String[] conversationProjection = new String[] { "last_unread_message", "last_message_date" };
                 conversation = getContentResolver().query(Uri.withAppendedPath(Uri.parse("content://com.google.android.providers.talk/"), "chats"), conversationProjection, null, null, "last_message_date DESC");
@@ -62,11 +69,11 @@ public class TalkService extends Service {
 
                 final String username = contact.getString(contact.getColumnIndex(contactProjection[0]));
                 // TODO: if !readOwnMails
-                for (final String s : addresses) {
-                    if (s.equals(username)) {
-                        return;
-                    }
-                }
+                // for (final String s : addresses) {
+                // if (s.equals(username)) {
+                // return;
+                // }
+                // }
 
                 final Intent intent = new Intent(TalkService.this, WorkerService.class);
                 intent.setAction(PluginService.ACTION_ANNOUNCE);

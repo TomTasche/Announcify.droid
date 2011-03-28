@@ -54,8 +54,6 @@ public class WorkerService extends PluginService {
             announcify.announce(formatter.format(intent.getStringExtra(EXTRA_MESSAGE)));
         } else {
             super.onHandleIntent(intent);
-
-            startService(new Intent(this, TalkService.class));
         }
 
         stopSelf();

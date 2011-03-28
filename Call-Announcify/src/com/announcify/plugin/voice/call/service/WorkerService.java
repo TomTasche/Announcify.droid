@@ -8,6 +8,7 @@ import com.announcify.api.background.contact.Contact;
 import com.announcify.api.background.contact.ContactFilter;
 import com.announcify.api.background.error.ExceptionHandler;
 import com.announcify.api.background.service.PluginService;
+import com.announcify.api.background.text.Formatter;
 import com.announcify.plugin.voice.call.util.Settings;
 
 public class WorkerService extends PluginService {
@@ -41,12 +42,13 @@ public class WorkerService extends PluginService {
                     return;
                 }
             }
+            
+            Formatter formatter = new Formatter(this, contact, settings);
 
             final AnnouncifyIntent announcify = new AnnouncifyIntent(this, settings);
-            // announcify.setFormatter(new Formatter(this, contact, settings));
             announcify.setStartBroadcast(ACTION_START_RINGTONE);
             announcify.setStopBroadcast(ACTION_STOP_RINGTONE);
-            announcify.announce(null);
+            announcify.announce(formatter.format(""));
         } else {
             super.onHandleIntent(intent);
         }

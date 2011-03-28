@@ -47,8 +47,6 @@ public class WorkerService extends PluginService {
                 }
             }
 
-            final Formatter formatter = new Formatter(this, contact, settings);
-
             String message = "";
             switch (((Settings) settings).getReadMessageMode()) {
                 case 0:
@@ -63,6 +61,8 @@ public class WorkerService extends PluginService {
                     message = intent.getStringExtra(EXTRA_MESSAGE);
                     break;
             }
+            
+            final Formatter formatter = new Formatter(this, contact, settings);
 
             final AnnouncifyIntent announcify = new AnnouncifyIntent(this, settings);
             announcify.setStopBroadcast(ACTION_START_RINGTONE);

@@ -47,7 +47,6 @@
 <fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="android.provider.Settings.SettingNotFoundException"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.mail.k9.util.Settings"/>
-<fullyQualifiedTypeName name="com.announcify.api.background.text.Formatter"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.twitter.twidroyd.R"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.twitter.twidroyd.util.Settings"/>
 <fullyQualifiedTypeName name="android.content.ComponentName"/>
@@ -56,8 +55,9 @@
 <fullyQualifiedTypeName name="com.announcify.plugin.talk.google.service.TalkService"/>
 <fullyQualifiedTypeName name="android.content.Intent"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.voice.mail.service.VoicemailService"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="com.announcify.developers.util.Settings"/>
 <fullyQualifiedTypeName name="com.announcify.developers.sample.R"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.mail.google.util.Settings"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="com.announcify.api.background.text.Formatter"/>
 </qualifiedTypeNameHistroy>

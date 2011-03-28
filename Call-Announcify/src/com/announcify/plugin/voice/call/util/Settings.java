@@ -8,7 +8,6 @@ import com.announcify.plugin.voice.call.R;
 public class Settings extends PluginSettings {
 
     public static final String ACTION_SETTINGS = "com.announcify.plugin.voice.call.SETTINGS";
-
     public static final String PREFERENCES_NAME = "com.announcify.plugin.voice.call";
 
     public Settings(final Context context) {

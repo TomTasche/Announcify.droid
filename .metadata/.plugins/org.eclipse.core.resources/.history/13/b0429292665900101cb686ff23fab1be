@@ -98,6 +98,12 @@
 				android:key="preference_choose_contact"
 				android:title="@string/preference_choose_contact_title"
 				android:summary="@string/preference_choose_contact_summary" />
+
+			<EditTextPreference
+				android:key="preference_special_characters"
+				android:summary="@string/preference_special_summary"
+				android:defaultValue=":/-(@[{&lt;"
+				android:title="@string/preference_special_title" />
 		</PreferenceCategory>
 	</PreferenceScreen>
 
@@ -173,12 +179,6 @@
 
 		<PreferenceCategory
 			android:title="@string/preference_text_title">
-
-			<EditTextPreference
-				android:key="preference_special_characters"
-				android:summary="@string/preference_special_summary"
-				android:defaultValue=":/-(@[{&lt;"
-				android:title="@string/preference_special_title" />
 
 			<CheckBoxPreference
 				android:key="preference_guess_language"

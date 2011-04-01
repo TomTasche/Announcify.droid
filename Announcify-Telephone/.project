@@ -32,11 +32,6 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>API-Announcify_src</name>
-			<type>2</type>
-			<locationURI>_android_API_Announcify_5ca3e3d3/src</locationURI>
-		</link>
-		<link>
 			<name>Call-Announcify_src</name>
 			<type>2</type>
 			<locationURI>_android_Call_Announcify_406838cf/src</locationURI>

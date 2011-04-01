@@ -49,7 +49,9 @@ public class TalkService extends Service {
                 }
 
                 // TODO: very unreliable!
-                if (message.getInt(message.getColumnIndex(messageProjection[0])) != 1) {
+                if
+                (message.getInt(message.getColumnIndex(messageProjection[0]))
+                        != 1) {
                     return;
                 }
 

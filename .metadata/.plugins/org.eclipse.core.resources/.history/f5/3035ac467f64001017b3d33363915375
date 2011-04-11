@@ -69,8 +69,7 @@ public class MailService extends Service {
                 // through the whole cursor
                 final int nameId = unread.getColumnIndex(projection[0]);
                 do {
-                    // final String label = settings.isAnnoyingMode() ? "^u" : "^i";
-                    final String label = "^i";
+                    final String label = settings.isAnnoyingMode() ? "^u" : "^i";
                     if (label.equals(unread.getString(nameId))) {
                         if (unread.getInt(unread.getColumnIndex(projection[1])) <= 0) {
                             return;

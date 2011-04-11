@@ -26,7 +26,7 @@ public class MailService extends Service {
         private long maxMessageIdSeen;
 
         private final String address;
-        private Handler handler;
+        private final Handler handler;
 
         public MailObserver(final Handler handler, final String address) {
             super(handler);
@@ -69,8 +69,8 @@ public class MailService extends Service {
                 // through the whole cursor
                 final int nameId = unread.getColumnIndex(projection[0]);
                 do {
-                    // "^u" for unread messages
-                    if ("^i".equals(unread.getString(nameId))) {
+                    final String label = settings.isAnnoyingMode() ? "^u" : "^i";
+                    if (label.equals(unread.getString(nameId))) {
                         if (unread.getInt(unread.getColumnIndex(projection[1])) <= 0) {
                             return;
                         } else {

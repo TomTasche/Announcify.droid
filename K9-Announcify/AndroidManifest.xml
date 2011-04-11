@@ -29,7 +29,7 @@
 		android:label="@string/app_name">
 
 		<activity
-			android:name=".activity.SettingsActivity"
+			android:name="com.announcify.plugin.mail.k9.activity.SettingsActivity"
 			android:label="@string/app_name">
 
 			<intent-filter>
@@ -41,7 +41,7 @@
 		</activity>
 
 		<receiver
-			android:name=".receiver.BootReceiver"
+			android:name="com.announcify.plugin.mail.k9.receiver.BootReceiver"
 			android:label="@string/app_name">
 
 			<intent-filter>
@@ -51,7 +51,7 @@
 		</receiver>
 
 		<receiver
-			android:name=".receiver.AnnouncifyReceiver"
+			android:name="com.announcify.plugin.mail.k9.receiver.AnnouncifyReceiver"
 			android:label="@string/app_name">
 
 			<intent-filter>
@@ -61,7 +61,7 @@
 		</receiver>
 
 		<receiver
-			android:name=".receiver.RingtoneReceiver"
+			android:name="com.announcify.plugin.mail.k9.receiver.RingtoneReceiver"
 			android:label="@string/app_name">
 
 			<intent-filter>
@@ -76,10 +76,10 @@
 		</receiver>
 
 		<service
-			android:name=".service.WorkerService" />
+			android:name="com.announcify.plugin.mail.k9.service.WorkerService" />
 
 		<service
-			android:name=".service.MailService" />
+			android:name="com.announcify.plugin.mail.k9.service.MailService" />
 	</application>
 
 	<supports-screens

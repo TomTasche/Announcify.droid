@@ -49,7 +49,7 @@ public class TalkService extends Service {
                 }
 
                 // TODO: very unreliable!
-                if (message.getInt(message.getColumnIndex(messageProjection[0])) != 1) {
+                if (settings.isAnnoyingMode() && message.getInt(message.getColumnIndex(messageProjection[0])) != 1) {
                     return;
                 }
 
@@ -86,8 +86,6 @@ public class TalkService extends Service {
                         paused = false;
                     }
                 }, settings.getShutUp());
-            } catch (final Exception e) {
-                e.printStackTrace();
             } finally {
                 if (contact != null) {
                     contact.close();

@@ -20,7 +20,7 @@ public class MailService extends Service {
         private boolean paused;
         private long maxMessageIdSeen;
 
-        private Handler handler;
+        private final Handler handler;
 
         public MailObserver(final Handler handler) {
             super(handler);

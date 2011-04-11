@@ -14,8 +14,8 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AlphabetIndexer;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
@@ -27,9 +27,9 @@ import com.announcify.api.background.sql.model.PluginModel;
 import com.google.ads.Ad;
 import com.google.ads.AdListener;
 import com.google.ads.AdRequest;
-import com.google.ads.AdRequest.ErrorCode;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
+import com.google.ads.AdRequest.ErrorCode;
 
 public class SectionedAdapter extends CursorAdapter {
 

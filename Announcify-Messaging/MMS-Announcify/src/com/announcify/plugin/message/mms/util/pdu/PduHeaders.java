@@ -822,7 +822,7 @@ public class PduHeaders {
             case MMS_VERSION:
                 if ((value < MMS_VERSION_1_0) || (value > MMS_VERSION_1_3)) {
                     value = CURRENT_MMS_VERSION; // Current version is the
-                                                 // default value.
+                    // default value.
                 }
                 break;
             case MESSAGE_TYPE:

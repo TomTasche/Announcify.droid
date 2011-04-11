@@ -5,10 +5,10 @@ import android.content.Intent;
 import com.announcify.api.AnnouncifyIntent;
 import com.announcify.api.background.contact.Contact;
 import com.announcify.api.background.contact.ContactFilter;
+import com.announcify.api.background.contact.lookup.Mail;
 import com.announcify.api.background.error.ExceptionHandler;
 import com.announcify.api.background.service.PluginService;
 import com.announcify.api.background.text.Formatter;
-import com.announcify.plugin.mail.k9.contact.Mail;
 import com.announcify.plugin.mail.k9.util.Settings;
 
 public class WorkerService extends PluginService {
@@ -58,14 +58,12 @@ public class WorkerService extends PluginService {
             }
 
             final Formatter formatter = new Formatter(this, contact, settings);
-            
+
             final AnnouncifyIntent announcify = new AnnouncifyIntent(this, settings);
             announcify.setStopBroadcast(ACTION_START_RINGTONE);
             announcify.announce(formatter.format(message));
         } else {
             super.onHandleIntent(intent);
         }
-
-        stopSelf();
     }
 }

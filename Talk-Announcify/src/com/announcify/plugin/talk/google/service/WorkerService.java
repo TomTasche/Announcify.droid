@@ -5,10 +5,10 @@ import android.content.Intent;
 import com.announcify.api.AnnouncifyIntent;
 import com.announcify.api.background.contact.Contact;
 import com.announcify.api.background.contact.ContactFilter;
+import com.announcify.api.background.contact.lookup.Chat;
 import com.announcify.api.background.error.ExceptionHandler;
 import com.announcify.api.background.service.PluginService;
 import com.announcify.api.background.text.Formatter;
-import com.announcify.plugin.talk.google.contact.Chat;
 import com.announcify.plugin.talk.google.util.Settings;
 
 public class WorkerService extends PluginService {
@@ -55,7 +55,5 @@ public class WorkerService extends PluginService {
         } else {
             super.onHandleIntent(intent);
         }
-
-        stopSelf();
     }
 }

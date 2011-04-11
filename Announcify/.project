@@ -36,5 +36,50 @@
 			<type>2</type>
 			<locationURI>_android_API_Announcify_5ca3e3d3/src</locationURI>
 		</link>
+		<link>
+			<name>Announcify-Messaging_src</name>
+			<type>2</type>
+			<locationURI>_android_Announcify_Messaging_37f2777/src</locationURI>
+		</link>
+		<link>
+			<name>Announcify-Telephone_src</name>
+			<type>2</type>
+			<locationURI>_android_Announcify_Telephone_8802a477/src</locationURI>
+		</link>
+		<link>
+			<name>Call-Announcify_src</name>
+			<type>2</type>
+			<locationURI>_android_Call_Announcify_406838cf/src</locationURI>
+		</link>
+		<link>
+			<name>K9-Announcify_src</name>
+			<type>2</type>
+			<locationURI>_android_K9_Announcify_dfaa3bff/src</locationURI>
+		</link>
+		<link>
+			<name>MMS-Announcify_src</name>
+			<type>2</type>
+			<locationURI>_android_MMS_Announcify_7470b97a/src</locationURI>
+		</link>
+		<link>
+			<name>Mail-Announcify_src</name>
+			<type>2</type>
+			<locationURI>_android_Mail_Announcify_f7714bd6/src</locationURI>
+		</link>
+		<link>
+			<name>SMS-Announcify_src</name>
+			<type>2</type>
+			<locationURI>_android_SMS_Announcify_bfa37334/src</locationURI>
+		</link>
+		<link>
+			<name>Talk-Announcify_src</name>
+			<type>2</type>
+			<locationURI>_android_Talk_Announcify_3048a1c1/src</locationURI>
+		</link>
+		<link>
+			<name>Voicemail-Announcify_src</name>
+			<type>2</type>
+			<locationURI>_android_Voicemail_Announcify_301ca4/src</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>

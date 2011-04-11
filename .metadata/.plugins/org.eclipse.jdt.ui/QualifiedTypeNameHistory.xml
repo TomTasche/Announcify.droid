@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="android.util.DebugUtils"/>
 <fullyQualifiedTypeName name="android.os.HandlerThread"/>
 <fullyQualifiedTypeName name="com.announcify.api.R.xml"/>
 <fullyQualifiedTypeName name="android.os.Debug"/>
@@ -58,6 +57,7 @@
 <fullyQualifiedTypeName name="com.announcify.developers.util.Settings"/>
 <fullyQualifiedTypeName name="com.announcify.developers.sample.R"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.mail.google.util.Settings"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.text.Formatter"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="java.lang.NullPointerException"/>
 </qualifiedTypeNameHistroy>

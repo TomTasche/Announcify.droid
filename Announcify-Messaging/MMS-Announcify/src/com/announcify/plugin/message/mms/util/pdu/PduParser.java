@@ -448,7 +448,7 @@ public class PduParser {
                 final int index = parseShortInteger(pduDataStream);
 
                 if (index < PduContentTypes.contentTypes.length) { // well-known
-                                                                   // type
+                    // type
                     contentType = PduContentTypes.contentTypes[index].getBytes();
                 } else {
                     pduDataStream.reset();

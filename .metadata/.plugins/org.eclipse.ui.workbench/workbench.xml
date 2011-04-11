@@ -24,7 +24,7 @@
 <coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="68" y="30"/>
 <coolItem id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="130" y="30"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="184" y="30"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
@@ -72,9 +72,10 @@
 </view>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
-<expanded>&#x0A;<category IMemento.internal.id="Errors"/>
+<expanded>
+<category IMemento.internal.id="Errors"/>
 </expanded>
-<columnWidths org.eclipse.ui.ide.locationField="73" org.eclipse.ui.ide.markerType="300" org.eclipse.ui.ide.pathField="143" org.eclipse.ui.ide.resourceField="108" org.eclipse.ui.ide.severityAndDescriptionField="610"/>
+<columnWidths org.eclipse.ui.ide.locationField="73" org.eclipse.ui.ide.markerType="316" org.eclipse.ui.ide.pathField="143" org.eclipse.ui.ide.resourceField="108" org.eclipse.ui.ide.severityAndDescriptionField="350"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.pathField"/>
@@ -235,7 +236,7 @@
 </folder>
 </info>
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@7a84216e" ratio="0.4994995" ratioLeft="499" ratioRight="500" relationship="2" relative="bottom">
-<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
+<folder activePageID="org.eclipse.ui.views.ProblemView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.jdt.ui.JavadocView" label="Javadoc"/>
@@ -459,50 +460,50 @@
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="README" tooltip="Announcify/README">
-<persistable path="/Announcify/README"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="WorkerService.java" tooltip="Announcify/Mail-Announcify_src/com/announcify/plugin/mail/google/service/WorkerService.java">
+<persistable path="/Announcify/Mail-Announcify_src/com/announcify/plugin/mail/google/service/WorkerService.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="Announcify/AndroidManifest.xml">
-<persistable path="/Announcify/AndroidManifest.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="WorkerService.java" tooltip="Mail-Announcify/src/com/announcify/plugin/mail/google/service/WorkerService.java">
+<persistable path="/Mail-Announcify/src/com/announcify/plugin/mail/google/service/WorkerService.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AnnouncifyActivity.java" tooltip="Announcify/src/com/announcify/ui/activity/AnnouncifyActivity.java">
-<persistable path="/Announcify/src/com/announcify/ui/activity/AnnouncifyActivity.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="WorkerService.java" tooltip="K9-Announcify/src/com/announcify/plugin/mail/k9/service/WorkerService.java">
+<persistable path="/K9-Announcify/src/com/announcify/plugin/mail/k9/service/WorkerService.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AnnouncifySettings.java" tooltip="API-Announcify/src/com/announcify/api/background/util/AnnouncifySettings.java">
-<persistable path="/API-Announcify/src/com/announcify/api/background/util/AnnouncifySettings.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.xml.XmlEditor" name="preferences_extra_settings.xml" tooltip="API-Announcify/res/xml/preferences_extra_settings.xml">
+<persistable path="/API-Announcify/res/xml/preferences_extra_settings.xml"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PluginSettings.java" tooltip="API-Announcify/src/com/announcify/api/background/util/PluginSettings.java">
 <persistable path="/API-Announcify/src/com/announcify/api/background/util/PluginSettings.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Settings.java" tooltip="SMS-Announcify/src/com/announcify/plugin/message/sms/util/Settings.java">
-<persistable path="/SMS-Announcify/src/com/announcify/plugin/message/sms/util/Settings.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TalkService.java" tooltip="Talk-Announcify/src/com/announcify/plugin/talk/google/service/TalkService.java">
+<persistable path="/Talk-Announcify/src/com/announcify/plugin/talk/google/service/TalkService.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Formatter.java" tooltip="SMS-Announcify/API-Announcify_src/com/announcify/api/background/text/Formatter.java">
-<persistable path="/SMS-Announcify/API-Announcify_src/com/announcify/api/background/text/Formatter.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.xml.XmlEditor" name="preferences_settings.xml" tooltip="API-Announcify/res/xml/preferences_settings.xml">
+<persistable path="/API-Announcify/res/xml/preferences_settings.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AnnouncifySettings.java" tooltip="SMS-Announcify/API-Announcify_src/com/announcify/api/background/util/AnnouncifySettings.java">
-<persistable path="/SMS-Announcify/API-Announcify_src/com/announcify/api/background/util/AnnouncifySettings.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Number.java" tooltip="SMS-Announcify/API-Announcify_src/com/announcify/api/background/contact/lookup/Number.java">
-<persistable path="/SMS-Announcify/API-Announcify_src/com/announcify/api/background/contact/lookup/Number.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="WorkerService.java" tooltip="SMS-Announcify/src/com/announcify/plugin/message/sms/service/WorkerService.java">
-<persistable path="/SMS-Announcify/src/com/announcify/plugin/message/sms/service/WorkerService.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Settings.java" tooltip="Call-Announcify/src/com/announcify/plugin/voice/call/util/Settings.java">
+<persistable path="/Call-Announcify/src/com/announcify/plugin/voice/call/util/Settings.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SettingsActivity.java" tooltip="Call-Announcify/src/com/announcify/plugin/voice/call/activity/SettingsActivity.java">
 <persistable path="/Call-Announcify/src/com/announcify/plugin/voice/call/activity/SettingsActivity.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SettingsActivity.java" tooltip="MMS-Announcify/src/com/announcify/plugin/message/mms/activity/SettingsActivity.java">
-<persistable path="/MMS-Announcify/src/com/announcify/plugin/message/mms/activity/SettingsActivity.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AnnouncifyReceiver.java" tooltip="Mail-Announcify/src/com/announcify/plugin/mail/google/receiver/AnnouncifyReceiver.java">
+<persistable path="/Mail-Announcify/src/com/announcify/plugin/mail/google/receiver/AnnouncifyReceiver.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SettingsActivity.java" tooltip="SMS-Announcify/src/com/announcify/plugin/message/sms/activity/SettingsActivity.java">
-<persistable path="/SMS-Announcify/src/com/announcify/plugin/message/sms/activity/SettingsActivity.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Settings.java" tooltip="K9-Announcify/src/com/announcify/plugin/mail/k9/util/Settings.java">
+<persistable path="/K9-Announcify/src/com/announcify/plugin/mail/k9/util/Settings.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="WorkerService.java" tooltip="Announcify-Messaging/MMS-Announcify_src/com/announcify/plugin/message/mms/service/WorkerService.java">
-<persistable path="/Announcify-Messaging/MMS-Announcify_src/com/announcify/plugin/message/mms/service/WorkerService.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="strings.xml" tooltip="K9-Announcify/res/values/strings.xml">
+<persistable path="/K9-Announcify/res/values/strings.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Formatter.java" tooltip="API-Announcify/src/com/announcify/api/background/text/Formatter.java">
-<persistable path="/API-Announcify/src/com/announcify/api/background/text/Formatter.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="strings.xml" tooltip="Mail-Announcify/res/values/strings.xml">
+<persistable path="/Mail-Announcify/res/values/strings.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="R.java" tooltip="Mail-Announcify/gen/com/announcify/plugin/mail/google/R.java">
+<persistable path="/Mail-Announcify/gen/com/announcify/plugin/mail/google/R.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Settings.java" tooltip="Mail-Announcify/src/com/announcify/plugin/mail/google/util/Settings.java">
+<persistable path="/Mail-Announcify/src/com/announcify/plugin/mail/google/util/Settings.java"/>
 </file>
 </mruList>
 </workbench>

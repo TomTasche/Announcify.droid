@@ -135,6 +135,7 @@ containing a value of this type.
     public static final class xml {
         public static final int preferences_extra_settings=0x7f040000;
         public static final int preferences_settings=0x7f040001;
+        public static final int preferences_settings_call=0x7f040002;
     }
     public static final class styleable {
         /** Attributes that can be used with a ActionBar.

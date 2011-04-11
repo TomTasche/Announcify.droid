@@ -58,6 +58,6 @@
 <fullyQualifiedTypeName name="com.announcify.developers.sample.R"/>
 <fullyQualifiedTypeName name="com.announcify.plugin.mail.google.util.Settings"/>
 <fullyQualifiedTypeName name="com.announcify.api.background.text.Formatter"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="java.lang.NullPointerException"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
 </qualifiedTypeNameHistroy>

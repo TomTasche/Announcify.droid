@@ -4,5 +4,5 @@
 		name="app_name">K9 - Announcify</string>
 		
 	<string
-		name="event_mail">K9</string>
+		name="event_k9">K9</string>
 </resources>

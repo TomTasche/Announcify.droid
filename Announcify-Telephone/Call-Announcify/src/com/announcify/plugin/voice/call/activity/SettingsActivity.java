@@ -19,6 +19,6 @@ public class SettingsActivity extends PluginActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, new Settings(this), R.xml.preferences_settings);
+        super.onCreate(savedInstanceState, new Settings(this), R.xml.preferences_settings_call);
     }
 }

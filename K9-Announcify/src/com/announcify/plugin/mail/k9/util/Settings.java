@@ -16,7 +16,7 @@ public class Settings extends PluginSettings {
 
     @Override
     public String getEventType() {
-        return context.getString(R.string.event_mail);
+        return context.getString(R.string.event_k9);
     }
 
     @Override

@@ -38,7 +38,7 @@ public class WorkerService extends PluginService {
             if (address == null) {
                 address = "";
             }
-            final Contact contact = new Contact(this, new Mail(this, settings.isReadMailHeader()), address);
+            final Contact contact = new Contact(this, new Mail(this, settings.isAnnoyingMode()), address);
 
             if (!settings.isChuckNorris()) {
                 if (!ContactFilter.announcableContact(this, contact)) {

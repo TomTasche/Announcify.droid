@@ -48,8 +48,7 @@ public class TalkService extends Service {
                     return;
                 }
 
-                // TODO: very unreliable!
-                if (settings.isAnnoyingMode() && message.getInt(message.getColumnIndex(messageProjection[0])) != 1) {
+                if (!settings.isAnnoyingMode() && message.getInt(message.getColumnIndex(messageProjection[0])) != 1) {
                     return;
                 }
 

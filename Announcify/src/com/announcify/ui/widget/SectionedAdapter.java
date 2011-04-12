@@ -2,6 +2,8 @@ package com.announcify.ui.widget;
 
 import java.util.HashSet;
 
+import org.mailboxer.saymyname.R;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -22,7 +24,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.announcify.R;
 import com.announcify.api.background.sql.model.PluginModel;
 import com.google.ads.Ad;
 import com.google.ads.AdListener;
@@ -235,7 +236,7 @@ public class SectionedAdapter extends CursorAdapter {
 
     @Override
     public View newView(final Context context, final Cursor cursor, final ViewGroup parent) {
-        return inflater.inflate(com.announcify.R.layout.list_item_plugin, parent, false);
+        return inflater.inflate(R.layout.list_item_plugin, parent, false);
     }
 
     @Override

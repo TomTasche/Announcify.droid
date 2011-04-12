@@ -1,10 +1,11 @@
 package com.announcify.ui.activity;
 
+import org.mailboxer.saymyname.R;
+
 import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
-import com.announcify.R;
 import com.announcify.api.ui.activity.BaseActivity;
 
 public class HelpActivity extends BaseActivity {

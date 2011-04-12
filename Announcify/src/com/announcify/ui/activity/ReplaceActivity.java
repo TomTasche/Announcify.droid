@@ -1,5 +1,7 @@
 package com.announcify.ui.activity;
 
+import org.mailboxer.saymyname.R;
+
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,7 +15,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-import com.announcify.R;
 import com.announcify.api.background.sql.model.TranslationModel;
 import com.announcify.api.ui.activity.BaseActivity;
 import com.announcify.background.tts.Speaker;

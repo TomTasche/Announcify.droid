@@ -1,5 +1,7 @@
 package com.announcify.background.service;
 
+import org.mailboxer.saymyname.R;
+
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -12,7 +14,6 @@ import android.os.Message;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
 
-import com.announcify.R;
 import com.announcify.api.background.error.ExceptionHandler;
 import com.announcify.api.background.service.PluginService;
 import com.announcify.api.background.util.AnnouncifySettings;

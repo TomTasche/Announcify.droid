@@ -1,11 +1,12 @@
 package com.announcify.ui.activity;
 
+import org.mailboxer.saymyname.R;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 
-import com.announcify.R;
 import com.announcify.api.background.util.PluginSettings;
 import com.announcify.api.ui.activity.PluginActivity;
 import com.announcify.background.receiver.LocaleReceiver;

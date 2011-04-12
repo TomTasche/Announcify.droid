@@ -1,5 +1,7 @@
 package com.announcify.ui.activity;
 
+import org.mailboxer.saymyname.R;
+
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.ContentObserver;
@@ -18,7 +20,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-import com.announcify.R;
 import com.announcify.api.background.sql.model.PluginModel;
 import com.announcify.api.ui.activity.ActivityUtils;
 import com.announcify.api.ui.activity.BaseActivity;

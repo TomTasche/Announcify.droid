@@ -277,7 +277,7 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ActionBar_bar_title com.announcify:bar_title}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_bar_title org.mailboxer.saymyname:bar_title}</code></td><td></td></tr>
            </table>
            @see #ActionBar_bar_title
          */
@@ -285,7 +285,7 @@ containing a value of this type.
             0x7f010000
         };
         /**
-          <p>This symbol is the offset where the {@link com.announcify.R.attr#bar_title}
+          <p>This symbol is the offset where the {@link org.mailboxer.saymyname.R.attr#bar_title}
           attribute's value can be found in the {@link #ActionBar} array.
 
 

@@ -1,10 +1,10 @@
 package com.announcify.ui.control;
 
+import org.mailboxer.saymyname.R;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.announcify.R;
 
 public class RemoteControlDialogInstaller extends Activity {
 

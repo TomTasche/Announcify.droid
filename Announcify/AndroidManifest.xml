@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.announcify"
+	package="org.mailboxer.saymyname"
 	android:versionCode="10"
 	android:versionName="0.7.3">
 
@@ -15,7 +15,7 @@
 			android:configChanges="keyboard|keyboardHidden|orientation" />
 
 		<activity
-			android:name=".ui.activity.AnnouncifyActivity"
+			android:name="com.announcify.ui.activity.AnnouncifyActivity"
 			android:label="@string/app_name"
 			android:configChanges="orientation|keyboardHidden">
 
@@ -35,7 +35,7 @@
 		</activity>
 
 		<activity
-			android:name=".ui.activity.HelpActivity"
+			android:name="com.announcify.ui.activity.HelpActivity"
 			android:label="@string/app_name"
 			android:configChanges="orientation|keyboardHidden">
 
@@ -48,7 +48,7 @@
 		</activity>
 
 		<activity
-			android:name=".ui.activity.SettingsActivity"
+			android:name="com.announcify.ui.activity.SettingsActivity"
 			android:label="@string/app_name"
 			android:configChanges="orientation|keyboardHidden">
 
@@ -62,22 +62,22 @@
 		</activity>
 
 		<activity
-			android:name=".ui.activity.GroupActivity"
+			android:name="com.announcify.ui.activity.GroupActivity"
 			android:label="@string/app_name"
 			android:configChanges="orientation|keyboardHidden" />
 
 		<activity
-			android:name=".ui.activity.ContactActivity"
+			android:name="com.announcify.ui.activity.ContactActivity"
 			android:label="@string/app_name"
 			android:configChanges="orientation|keyboardHidden" />
 
 		<activity
-			android:name=".ui.activity.ReplaceActivity"
+			android:name="com.announcify.ui.activity.ReplaceActivity"
 			android:label="@string/app_name"
 			android:configChanges="orientation|keyboardHidden" />
 
 		<activity
-			android:name=".ui.control.RemoteControlDialog"
+			android:name="com.announcify.ui.control.RemoteControlDialog"
 			android:label="@string/app_name"
 			android:theme="@android:style/Theme.Translucent.NoTitleBar"
 			android:configChanges="orientation|keyboardHidden">
@@ -89,7 +89,7 @@
 		</activity>
 
 		<activity
-			android:name=".ui.control.RemoteControlDialogInstaller"
+			android:name="com.announcify.ui.control.RemoteControlDialogInstaller"
 			android:label="@string/app_name"
 			android:theme="@android:style/Theme.Translucent.NoTitleBar"
 			android:configChanges="orientation|keyboardHidden">
@@ -103,7 +103,7 @@
 		</activity>
 
 		<activity
-			android:name=".ui.activity.LocaleActivity"
+			android:name="com.announcify.ui.activity.LocaleActivity"
 			android:label="@string/app_name"
 			android:icon="@drawable/launcher_icon">
 
@@ -114,7 +114,7 @@
 		</activity>
 
 		<receiver
-			android:name=".background.receiver.LocaleReceiver">
+			android:name="com.announcify.background.receiver.LocaleReceiver">
 
 			<intent-filter>
 				<action
@@ -123,7 +123,7 @@
 		</receiver>
 
 		<receiver
-			android:name=".background.error.ExceptionReceiver">
+			android:name="com.announcify.background.error.ExceptionReceiver">
 
 			<intent-filter>
 				<action
@@ -132,7 +132,7 @@
 		</receiver>
 
 		<service
-			android:name=".background.service.ManagerService"
+			android:name="com.announcify.background.service.ManagerService"
 			android:label="@string/app_name"
 			android:permission="com.announcify.PERMISSION_IM_A_PLUGIN">
 
@@ -143,7 +143,7 @@
 		</service>
 
 		<service
-			android:name=".background.error.ExceptionService"
+			android:name="com.announcify.background.error.ExceptionService"
 			android:label="@string/app_name"
 			android:permission="com.announcify.PERMISSION_IM_A_PLUGIN" />
 
@@ -546,6 +546,8 @@
 		android:name="android.permission.BROADCAST_STICKY" />
 	<uses-permission
 		android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission
+		android:name="android.permission.WRITE_SETTINGS" />
 	<uses-permission
 		android:name="android.permission.READ_CONTACTS" />
 	<uses-permission

@@ -1,12 +1,13 @@
 package com.announcify.ui.activity;
 
+import org.mailboxer.saymyname.R;
+
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 
-import com.announcify.R;
 import com.announcify.api.background.util.AnnouncifySettings;
 import com.announcify.api.background.util.PluginSettings;
 import com.announcify.api.ui.activity.PluginActivity;

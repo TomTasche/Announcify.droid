@@ -3,6 +3,7 @@
 <resources>
   <string name="preference_specific_title">Specific Settings</string>
   <string name="preference_speech_title">Voice Settings</string>
+  <string name="preference_more_voices">More Voices</string>
   <string name="preference_stream_title">Choose volumestream</string>
   <string name="preference_stream_summary">What volume to use?</string>
   <string name="preference_tts_title">Change voice, speed, ...</string>
@@ -31,6 +32,8 @@
   <string name="preference_default_title">Default Settings</string>
   <string name="preference_general_title">General Settings</string>
   <string name="preference_text_title">Text Settings</string>
+  <string name="preference_guess_language_title">Guess language</string>
+  <string name="preference_guess_language_summary">ATTENTION: Using internet! Could delay Announcifications!  \nGuesses language using Google Translator and announces it in guessed language.</string>
   <string name="preference_translate_title">Translate Announcifications</string>
   <string name="preference_translate_summary">ATTENTION: Using internet! Could delay Announcifications!  \nTranslate text using Google Translator before announcing it.</string>
   <string name="preference_cache_title">Translation cache</string>

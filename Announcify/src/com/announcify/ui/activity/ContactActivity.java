@@ -67,7 +67,17 @@ public class ContactActivity extends BaseActivity {
         auto.setOnItemClickListener(new OnItemClickListener() {
 
             public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
-                model.add(((Cursor) autoAdapter.getItem(position)).getString(autoCursor.getColumnIndex(Contacts.LOOKUP_KEY)), ((TextView) view).getText().toString());
+                final Cursor cursor = ((Cursor) autoAdapter.getItem(position));
+                if (cursor == null) {
+                    return;
+                }
+
+                final String lookup = cursor.getString(autoCursor.getColumnIndex(Contacts.LOOKUP_KEY));
+                if (lookup == null) {
+                    return;
+                }
+
+                model.add(lookup, ((TextView) view).getText().toString());
 
                 refreshList();
 

@@ -1,0 +1,55 @@
+package com.announcify.engine.gmail;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.swing.text.AsyncBoxView.ChildState;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
+import org.apache.tools.ant.util.XMLFragment.Child;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
+public class GmailParser {
+    
+    private static final String TAG_COUNT = "fullcount";
+    private static final String TAG_ENTRY = "entry";
+    
+
+    private final DocumentBuilder builder;
+
+
+    public GmailParser() throws ParserConfigurationException {
+        builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+    }
+
+    public void parse(InputSource source) throws SAXException, IOException  {
+        Document document = builder.parse(source);
+        
+        NodeList nodes = document.getElementsByTagName(TAG_COUNT);
+        System.out.println(nodes.item(0).getTextContent());
+        
+        nodes = document.getElementsByTagName(TAG_ENTRY);
+        for (int i = 0; i < nodes.getLength(); i++) {
+            NodeList childs = nodes.item(i).getChildNodes();
+            
+            for (int j = 0; j < childs.getLength(); j++) {
+                if (childs.item(j).hasChildNodes()) {
+                    NodeList childchilds = childs.item(j).getChildNodes();
+                    
+                }
+            }
+            System.out.println(nodes.item(0).getChildNodes().item(0).getLocalName());
+            System.out.println(nodes.item(0).getChildNodes().item(0).getTextContent());
+        }
+    }
+}

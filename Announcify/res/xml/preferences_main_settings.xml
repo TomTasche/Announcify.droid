@@ -24,6 +24,10 @@
 				<Preference
 					android:key="preference_tts_settings"
 					android:title="@string/preference_tts_title" />
+
+				<Preference
+					android:key="preference_more_voices"
+					android:title="@string/preference_more_voices" />
 			</PreferenceCategory>
 		</PreferenceScreen>
 

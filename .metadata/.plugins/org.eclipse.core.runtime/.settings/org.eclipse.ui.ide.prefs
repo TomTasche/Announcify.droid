@@ -1,8 +1,10 @@
-#Mon Apr 11 20:06:15 CEST 2011
+#Wed May 04 22:56:41 CEST 2011
+SHOW_PERSPECTIVEBAR=true
 SAVE_ALL_BEFORE_BUILD=true
-eclipse.preferences.version=1
-TASKS_FILTERS_MIGRATE=true
-tipsAndTricks=true
-platformState=1302036133116
-quickStart=false
 PROBLEMS_FILTERS_MIGRATE=true
+quickStart=false
+tipsAndTricks=true
+TASKS_FILTERS_MIGRATE=true
+eclipse.preferences.version=1
+SHOW_COOLBAR=true
+platformState=1304405276542

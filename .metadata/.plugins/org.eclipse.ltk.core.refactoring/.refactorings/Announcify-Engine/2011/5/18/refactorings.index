@@ -1,0 +1,27 @@
+1304409043095	Delete element
+1304417093609	Move compilation units
+1304423011019	Rename package 'storage'
+1304423319072	Rename type 'GMailServlet'
+1304423322258	Rename type 'GMailLogin'
+1304423398954	Rename type 'Login'
+1304423636797	Move compilation unit
+1304423931985	Rename local variable 'things'
+1304424337542	Rename local variable 'service'
+1304424538868	Rename method 'getAccessToken'
+1304424551158	Rename local variable 'temp'
+1304424560149	Rename field 'temp'
+1304424567897	Rename method 'isTemp'
+1304424572366	Rename method 'setTemp'
+1304424578272	Rename local variable 'temp'
+1304424964707	Delete element
+1304424968633	Rename type 'GmailLogin'
+1304440487735	Rename field 'accessToken'
+1304440492925	Rename local variable 'accessToken'
+1304440499988	Rename local variable 'accessToken'
+1304446329717	Delete element
+1304446331647	Delete element
+1304499881156	Rename local variable 'stream'
+1304501225404	Rename local variable 'list'
+1304514115194	Delete element
+1304514209053	Delete element
+1304514305449	Delete element

@@ -4,6 +4,8 @@
 	
 	<string name="preference_speech_title">Voice Settings</string>
 	
+	<string name="preference_more_voices">More Voices</string>
+	
 	<string name="preference_stream_title">Choose volumestream</string>
 	<string name="preference_stream_summary">What volume to use?</string>
 	

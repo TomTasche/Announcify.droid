@@ -59,7 +59,7 @@ public class MailService extends Service {
             try {
                 final String[] projection = new String[] { "_id", "sender", "subject", "preview" };
                 conversations = getContentResolver().query(Uri.parse("content://com.fsck.k9.messageprovider/inbox_messages/"), projection, null, null, null);
-                if (!conversations.moveToFirst()) {
+                if (conversations == null || !conversations.moveToFirst()) {
                     return;
                 }
 

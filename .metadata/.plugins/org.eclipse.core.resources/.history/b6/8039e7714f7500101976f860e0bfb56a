@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<script src="jquery-1.5.2.js"></script>
+		<script src="jquery.jplayer.min.js"></script>
+		
+		<script>
+			function getURLParam(key) {
+				var result = "";
+				var url = window.location.href;
+				
+				if (url.indexOf("?") > -1) {
+					var query = url.substr(url.indexOf("?")).toLowerCase();
+					
+					var parameters = query.split("&");
+					
+					for (var i = 0; i < parameters.length; i++) {
+						if (parameters[i].indexOf(key + "=") > -1) {
+							var aParam = parameters[i].split("=");
+							
+							result = aParam[1];
+							
+							break;
+						}
+					}
+				}
+				
+				return result;
+			}
+			
+			function announcify(text) {
+				alert(text);
+				text = decodeURIComponent(text);
+				alert(text);
+				
+				var voice = document.createElement("audio");
+				voice.setAttribute("controls", "controls");
+				voice.setAttribute("src", text);
+				voice.setAttribute("autoplay", "autoplay");
+				document.getElementById("speech").appendChild(voice);
+			}
+		</script>
+	</head>
+	
+	<!--<body onload="announcify(encodeURIComponent('http://translate.google.com/translate_tts?tl=en&q=new mail from tom'))">-->
+	<body onload="announcify('http://translate.google.com/translate_tts?' + getURLParam('speech'))">
+		<!--tl%3Den%26q%3Dnew%20mail%20from%20tom-->
+		<div id="speech"></div>
+	</body>
+</html>

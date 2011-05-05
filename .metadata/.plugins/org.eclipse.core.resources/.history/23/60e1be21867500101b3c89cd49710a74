@@ -1,0 +1,124 @@
+package com.announcify.engine.model;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import org.scribe.model.Token;
+
+import com.announcify.engine.storage.JSONEngine;
+import com.announcify.engine.storage.JSONable;
+import com.google.gson.Gson;
+
+public class Credential extends JSONable {
+
+
+    public static Credential getCredentialForIdentity(String identity) throws IOException {
+        InputStreamReader reader = null;
+        BufferedReader buffReader = null;
+
+        try {
+            // TODO: 
+            final URL url = new URL(JSONEngine.ADDRESS + "_je/GmailCredential?cond=identity.eq." + identity);
+            final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setReadTimeout(5000);
+            connection.connect();
+
+            connection.disconnect();
+
+            reader = new InputStreamReader(connection.getInputStream());
+            buffReader = new BufferedReader(reader);
+
+            final StringBuilder builder = new StringBuilder();
+            for (String s = buffReader.readLine(); s != null; s = buffReader.readLine()) {
+                builder.append(s);
+            }
+
+            final Gson gson = JSONEngine.getGson();
+
+            final Credential[] credentials = gson.fromJson(builder.toString(), Credential[].class);
+
+            if (credentials != null && credentials.length > 0) {
+                return credentials[0];
+            } else {
+                return null;
+            }
+        } finally {
+            if (buffReader != null) buffReader.close();
+            if (reader != null) reader.close();
+        }
+    }
+    
+    public static String getDocIdForIdentity(String identity) throws IOException {
+        InputStreamReader reader = null;
+        BufferedReader buffReader = null;
+
+        try {
+            final URL url = new URL(JSONEngine.ADDRESS + "_je/GmailCredential?cond=identity.eq." + identity);
+            final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setReadTimeout(5000);
+            connection.connect();
+
+            connection.disconnect();
+
+            reader = new InputStreamReader(connection.getInputStream());
+            buffReader = new BufferedReader(reader);
+
+            for (String s = buffReader.readLine(); s != null; s = buffReader.readLine()) {
+                int index = s.indexOf("\"_docId\":\"");
+                if (index > -1) {
+                    System.out.println(s);
+                    s = s.substring(index + "\"_docId\":\"".length());
+                    s = s.substring(0, s.indexOf("\""));
+                    System.out.println(s);
+                    
+                    return s;
+                }
+            }
+            
+            return null;
+        } finally {
+            if (buffReader != null) buffReader.close();
+            if (reader != null) reader.close();
+        }
+    }
+
+
+    private Token accessToken;
+    private String identity;
+
+
+    public Credential() {
+        // TODO Auto-generated constructor stub
+    }
+
+    public Credential(Token accessToken, String identity) {
+        this.accessToken = accessToken;
+        this.identity = identity;
+    }
+    
+    
+    @Override
+    public String toString() {
+        return "Credential [accessToken=" + accessToken + ", identity=" + identity + "]";
+    }
+
+
+    public Token getToken() {
+        return accessToken;
+    }
+
+    public String getIdentity() {
+        return identity;
+    }
+
+    public void setAccessToken(Token accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public void setIdentity(String identity) {
+        this.identity = identity;
+    }
+}

@@ -87,10 +87,13 @@ containing a value of this type.
         public static final int list_header=0x7f030003;
     }
     public static final class string {
-        public static final int app_name=0x7f07001d;
-        public static final int event_call=0x7f07001e;
+        public static final int event_plume=0x7f070023;
+        public static final int preference_annoying_mode_summary=0x7f070022;
+        public static final int preference_annoying_mode_title=0x7f070021;
         public static final int preference_break_summary=0x7f07000c;
         public static final int preference_break_title=0x7f07000b;
+        public static final int preference_chuck_norris_summary=0x7f070020;
+        public static final int preference_chuck_norris_title=0x7f07001f;
         public static final int preference_custom_cancel=0x7f070007;
         public static final int preference_custom_save=0x7f070006;
         public static final int preference_custom_text_title=0x7f070004;
@@ -102,6 +105,8 @@ containing a value of this type.
         public static final int preference_formatstring_input_hint=0x7f070001;
         public static final int preference_known_summary=0x7f070014;
         public static final int preference_known_title=0x7f070013;
+        public static final int preference_read_mail_header_summary=0x7f07001e;
+        public static final int preference_read_mail_header_title=0x7f07001d;
         public static final int preference_read_message_summary=0x7f07001c;
         public static final int preference_read_message_title=0x7f07001b;
         public static final int preference_read_own_summary=0x7f07001a;
@@ -127,7 +132,8 @@ containing a value of this type.
     }
     public static final class xml {
         public static final int preferences_extra_settings=0x7f040000;
-        public static final int preferences_settings=0x7f040001;
+        public static final int preferences_more_settings=0x7f040001;
+        public static final int preferences_settings=0x7f040002;
     }
     public static final class styleable {
         /** Attributes that can be used with a ActionBar.
@@ -136,7 +142,7 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ActionBar_bar_title com.announcify.plugin.voice.call:bar_title}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_bar_title com.announcify.plugin.twitter.plume:bar_title}</code></td><td></td></tr>
            </table>
            @see #ActionBar_bar_title
          */
@@ -144,7 +150,7 @@ containing a value of this type.
             0x7f010000
         };
         /**
-          <p>This symbol is the offset where the {@link com.announcify.plugin.voice.call.R.attr#bar_title}
+          <p>This symbol is the offset where the {@link com.announcify.plugin.twitter.plume.R.attr#bar_title}
           attribute's value can be found in the {@link #ActionBar} array.
 
 

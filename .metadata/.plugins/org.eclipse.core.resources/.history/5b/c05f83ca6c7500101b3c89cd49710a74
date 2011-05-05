@@ -1,0 +1,43 @@
+package com.announcify.engine;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.scribe.builder.ServiceBuilder;
+import org.scribe.builder.api.GoogleApi;
+import org.scribe.model.Token;
+import org.scribe.oauth.OAuthService;
+
+import com.googlecode.objectify.ObjectifyService;
+import com.joppfm.engine.Authorization;
+import com.joppfm.engine.Servlet;
+
+@SuppressWarnings("serial")
+public class GMailLogin extends Servlet {
+
+	private static final String AUTHORIZE_URL = "https://www.google.com/accounts/OAuthAuthorizeToken?oauth_token=";
+	private static final String SCOPE = "https://mail.google.com/mail/feed/atom/"; 
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		ObjectifyService.register(Authorization.class);
+		
+		OAuthService service = new ServiceBuilder()
+		.provider(GoogleApi.class)
+		.apiKey("966887741266.apps.googleusercontent.com")
+		.apiSecret("CO7G2by/IHRH+j2e/14fVLwA")
+		.scope(SCOPE)
+		.callback(HOST + "gmail/fetch")
+		.build();
+
+		Token requestToken = service.getRequestToken();
+		
+		Authorization auth = new Authorization(requestToken);
+		auth.save();
+
+		resp.sendRedirect(resp.encodeRedirectURL(AUTHORIZE_URL + requestToken.getToken()));
+	}
+}

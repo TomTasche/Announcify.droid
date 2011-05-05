@@ -1,0 +1,48 @@
+package com.announcify.engine;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.google.appengine.api.oauth.OAuthRequestException;
+import com.google.appengine.api.oauth.OAuthService;
+import com.google.appengine.api.oauth.OAuthServiceFactory;
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+
+@SuppressWarnings("serial")
+public class Login extends Servlet {
+
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        OAuthService oauth = OAuthServiceFactory.getOAuthService();
+        try {
+            User user = oauth.getCurrentUser();
+            
+            
+        } catch (OAuthRequestException e) {
+            e.printStackTrace();
+        }
+        
+        UserService service = UserServiceFactory.getUserService();
+
+        String thisURL = request.getRequestURI();
+        if (request.getUserPrincipal() != null) {
+            System.out.println(request.getUserPrincipal());
+            
+            response.getWriter().println("<p>Hello, " +
+                    request.getUserPrincipal().getName() +
+                    "!  You can <a href=\"" +
+                    service.createLogoutURL(thisURL) +
+            "\">sign out</a>.</p>");
+        } else {
+            response.getWriter().println("<p>Please <a href=\"" +
+                    service.createLoginURL(thisURL) +
+            "\">sign in</a>.</p>");
+        }
+    }
+}

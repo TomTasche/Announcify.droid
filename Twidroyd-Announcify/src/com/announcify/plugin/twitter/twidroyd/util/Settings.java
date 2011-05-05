@@ -7,9 +7,8 @@ import com.announcify.plugin.twitter.twidroyd.R;
 
 public class Settings extends PluginSettings {
 
-    public static final String ACTION_SETTINGS = "com.announcify.plugin.voice.call.SETTINGS";
-
-    public static final String PREFERENCES_NAME = "com.announcify.plugin.voice.call";
+    public static final String ACTION_SETTINGS = "com.announcify.plugin.twitter.twidroyd.SETTINGS";
+    public static final String PREFERENCES_NAME = "com.announcify.plugin.twitter.twidroyd";
 
     public Settings(final Context context) {
         super(context, PREFERENCES_NAME);
@@ -22,17 +21,7 @@ public class Settings extends PluginSettings {
 
     @Override
     public int getPriority() {
-        return 0;
-    }
-
-    @Override
-    public int getReadingRepeat() {
-        final String s = preferences.getString(KEY_READING_REPEAT, "5");
-        if (s.equals(DEFAULT_SETTING)) {
-            return defaultSettings.getDefaultReadingRepeat();
-        } else {
-            return Integer.parseInt(s);
-        }
+        return 7;
     }
 
     @Override

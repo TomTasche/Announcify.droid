@@ -67,6 +67,11 @@
 			<locationURI>_android_Mail_Announcify_f7714bd6/src</locationURI>
 		</link>
 		<link>
+			<name>Plume-Announcify_src</name>
+			<type>2</type>
+			<locationURI>_android_Plume_Announcify_801cd43c/src</locationURI>
+		</link>
+		<link>
 			<name>SMS-Announcify_src</name>
 			<type>2</type>
 			<locationURI>_android_SMS_Announcify_bfa37334/src</locationURI>
@@ -75,6 +80,11 @@
 			<name>Talk-Announcify_src</name>
 			<type>2</type>
 			<locationURI>_android_Talk_Announcify_3048a1c1/src</locationURI>
+		</link>
+		<link>
+			<name>Twidroyd-Announcify_src</name>
+			<type>2</type>
+			<locationURI>_android_Twidroyd_Announcify_74ad447/src</locationURI>
 		</link>
 		<link>
 			<name>Voicemail-Announcify_src</name>

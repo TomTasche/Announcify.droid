@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<script src="jquery-1.5.2.js"></script>
+		<script src="jquery.jplayer.min.js"></script>
+		
+		<script>
+			function announcify(text) {
+				alert('<audio controls="controls" src="' + text + '" autoplay="autoplay">Your browser does not support the audio element.</audio>');
+				// document.getElementById("speech").innerHTML('<audio controls="controls" src="' + text + '" autoplay="autoplay">Your browser does not support the audio element.</audio>');
+				// var voice = document.createElement("audio");
+				// voice.setAttribute("controls", "controls");
+				// voice.setAttribute("src", text);
+				// voice.setAttribute("autoplay", "autoplay");
+				// document.getElementById("speech").appendChild(voice);
+				
+				var voice = document.createElement("hr");
+				document.getElementById("speech").appendChild(voice);
+			}
+			
+			announcify("http://translate.google.com/translate_tts?tl=en&q=new%20mail%20from%20tom");
+		</script>
+	</head>
+	
+	<body>
+		<div id="speech">
+			
+		</div>
+	</body>
+</html>

@@ -146,7 +146,7 @@ public class AnnouncifyActivity extends BaseActivity {
     public boolean onMenuItemSelected(final int featureId, final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_toggle:
-                final boolean activate = model.getActive(model.getId("Announcify++"));
+                final boolean activate = !model.getActive(model.getId("Announcify++"));
 
                 final Cursor cursor = model.getAll();
                 cursor.moveToFirst();
@@ -171,7 +171,6 @@ public class AnnouncifyActivity extends BaseActivity {
                 break;
 
             case R.id.menu_rate:
-                // TODO: check URL
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://market.announcify.com/")));
 
                 break;
@@ -207,10 +206,17 @@ public class AnnouncifyActivity extends BaseActivity {
     }
 
     private void refreshList() {
-        // TODO: SectionedAdapter doesn't support lower-case.
-        if (model.getId("BbAdMob") < 0) {
-            // TODO: check if free or pro
-            model.add("BbAdMob", 9, "", "com.google.ad", false);
+        try {
+            createPackageContext("org.mailboxer.saymyname.donate", 0);
+
+            if (model.getId("BbAdMob") >= 0) {
+                model.remove(model.getId("BbAdMob"));
+            }
+        } catch (final Exception e) {
+            // TODO: SectionedAdapter doesn't support lower-case.
+            if (model.getId("BbAdMob") < 0) {
+                model.add("BbAdMob", 9, "", "com.google.ad", false);
+            }
         }
 
         cursor = model.getAll(PluginModel.KEY_PLUGIN_NAME);

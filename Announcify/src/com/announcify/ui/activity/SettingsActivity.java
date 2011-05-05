@@ -4,6 +4,7 @@ import org.mailboxer.saymyname.R;
 
 import android.content.ComponentName;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
@@ -33,6 +34,15 @@ public class SettingsActivity extends PluginActivity {
                 return "Announcify++";
             }
         }, R.xml.preferences_main_settings);
+
+        getPreferenceScreen().findPreference("preference_more_voices").setOnPreferenceClickListener(new OnPreferenceClickListener() {
+
+            public boolean onPreferenceClick(final Preference preference) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://blog.announcify.com/voices")));
+
+                return false;
+            }
+        });
 
         getPreferenceScreen().findPreference("preference_replace_chooser").setOnPreferenceClickListener(new OnPreferenceClickListener() {
 

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 1 elements(s) to &apos;Announcify-Chrome&apos;&#x0A;- Original project: &apos;API-Announcify&apos;&#x0A;- Destination element: &apos;Announcify-Chrome&apos;&#x0A;- Original element: &apos;launcher_icon.png&apos;" description="Copy file" element1="res/drawable/launcher_icon.png" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1304368225239" target="/Announcify-Chrome" units="0" version="1.0"/>
+</session>

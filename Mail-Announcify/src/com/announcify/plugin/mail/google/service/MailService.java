@@ -38,13 +38,15 @@ public class MailService extends Service {
             final Cursor cursor = getContentResolver().query(Uri.parse("content://gmail-ls/conversations/" + address), projection, null, null, null);
 
             try {
-                if (!cursor.moveToFirst()) {
+                if (cursor == null || !cursor.moveToFirst()) {
                     return;
                 }
 
                 maxMessageIdSeen = Long.valueOf(cursor.getString(cursor.getColumnIndex(projection[0])));
             } finally {
-                cursor.close();
+                if (cursor != null) {
+                    cursor.close();
+                }
             }
         }
 
@@ -61,7 +63,7 @@ public class MailService extends Service {
             try {
                 String[] projection = new String[] { "name", "numUnreadConversations" };
                 unread = getContentResolver().query(Uri.parse("content://gmail-ls/labels/" + address), projection, null, null, null);
-                if (!unread.moveToFirst()) {
+                if (unread == null || !unread.moveToFirst()) {
                     return;
                 }
 
@@ -69,7 +71,8 @@ public class MailService extends Service {
                 // through the whole cursor
                 final int nameId = unread.getColumnIndex(projection[0]);
                 do {
-                    // final String label = settings.isAnnoyingMode() ? "^u" : "^i";
+                    // final String label = settings.isAnnoyingMode() ? "^u" :
+                    // "^i";
                     final String label = "^i";
                     if (label.equals(unread.getString(nameId))) {
                         if (unread.getInt(unread.getColumnIndex(projection[1])) <= 0) {
@@ -82,30 +85,28 @@ public class MailService extends Service {
 
                 projection = new String[] { "conversation_id", "maxMessageId" };
                 conversations = getContentResolver().query(Uri.parse("content://gmail-ls/conversations/" + address), projection, null, null, null);
-                if (!conversations.moveToFirst()) {
+                if (conversations == null || !conversations.moveToFirst()) {
                     return;
                 }
 
                 final long conversationId = Long.valueOf(conversations.getString(conversations.getColumnIndex(projection[0])));
 
                 final long maxMessageId = Long.valueOf(conversations.getString(conversations.getColumnIndex(projection[1])));
-                if (maxMessageId < maxMessageIdSeen) {
+                if (maxMessageId <= maxMessageIdSeen) {
                     return;
                 }
                 maxMessageIdSeen = maxMessageId;
 
                 projection = new String[] { "fromAddress", "subject", "snippet", "body" };
                 messages = getContentResolver().query(Uri.parse("content://gmail-ls/conversations/" + address + "/" + Uri.parse(String.valueOf(conversationId)) + "/messages"), projection, null, null, null);
-                if (!messages.moveToLast()) {
+                if (messages == null || !messages.moveToLast()) {
                     return;
                 }
 
                 final String username = messages.getString(messages.getColumnIndex(projection[0]));
                 if (!settings.getReadOwn()) {
-                    for (final String s : addresses) {
-                        if (s.equals(username)) {
-                            return;
-                        }
+                    if (addresses.contains(prepareAddress(username))) {
+                        return;
                     }
                 }
 
@@ -184,8 +185,8 @@ public class MailService extends Service {
         super.onDestroy();
     }
 
-    synchronized private void spawnNewObserver(final String address) {
-        if ("".equals(address)) {
+    private void spawnNewObserver(final String address) {
+        if (address == null || "".equals(address)) {
             return;
         }
 
@@ -204,5 +205,13 @@ public class MailService extends Service {
         observers.add(new MailObserver(handler, address));
 
         getContentResolver().registerContentObserver(Uri.parse("content://gmail-ls/conversations/" + Uri.encode(address)), true, observers.getLast());
+    }
+
+    public static String prepareAddress(String address) {
+        if (address != null && address.contains("<") && address.contains(">")) {
+            address = address.substring(address.indexOf('<') + 1, address.indexOf('>'));
+        }
+
+        return address;
     }
 }

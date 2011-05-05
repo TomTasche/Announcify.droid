@@ -21,8 +21,6 @@ public class SettingsActivity extends PluginActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, new Settings(this), R.xml.preferences_settings);
-        addPreferencesFromResource(R.xml.preferences_extra_settings);
-        setExtraCustomListeners();
     }
 
     @Override

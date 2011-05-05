@@ -3,7 +3,7 @@
 <resources>
   <string name="control_title">Announcify Távirányító</string>
   <string name="chooser_block_chosen">A kiválasztottak blokkolása</string>
-  <string name="chooser_search_input">Itt add meg a neved...</string>
+  <string name="chooser_search_input">Enter name here... (* for all)</string>
   <string name="replacer_replace_hint">Cseréld ki...</string>
   <string name="replacer_replace_with_hint">ezzel.</string>
   <string name="replacer_button_add">Hozzáad</string>
@@ -19,4 +19,8 @@
   <string name="context_menu_toggle">Toggle</string>
   <string name="context_menu_report">Jelentés</string>
   <string name="context_menu_uninstall">Eltávolítás</string>
+  <string name="dialog_pro_title">Die ad, die.</string>
+  <string name="dialog_pro_message">Hate ads? Buy Pro, get rid of annoying ads and support the developer. :)</string>
+  <string name="dialog_pro_cancel">Nope.</string>
+  <string name="dialog_pro_ok">Sure!</string>
 </resources>

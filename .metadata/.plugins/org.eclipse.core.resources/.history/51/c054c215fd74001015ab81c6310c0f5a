@@ -1,0 +1,12 @@
+{
+  "name": "Announcify for Chrome",
+  "version": "0.1",
+  "description": "Announcify your life!",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "popup": "popup.html"
+  },
+  "permissions": [
+    "http://api.flickr.com/"
+  ]
+}

@@ -48,7 +48,7 @@ public class TalkService extends Service {
                     return;
                 }
 
-                if (!settings.isAnnoyingMode() && message.getInt(message.getColumnIndex(messageProjection[0])) != 1) {
+                if (message.getInt(message.getColumnIndex(messageProjection[2])) != 1) {
                     return;
                 }
 
@@ -65,12 +65,6 @@ public class TalkService extends Service {
                 }
 
                 final String username = contact.getString(contact.getColumnIndex(contactProjection[0]));
-                // TODO: if !readOwnMails
-                // for (final String s : addresses) {
-                // if (s.equals(username)) {
-                // return;
-                // }
-                // }
 
                 final Intent intent = new Intent(TalkService.this, WorkerService.class);
                 intent.setAction(PluginService.ACTION_ANNOUNCE);

@@ -1,16 +1,20 @@
-#Mon Apr 11 19:18:44 CEST 2011
-pathvariable._android_SMS_Announcify_bfa37334=/home/tom/Programmieren/Android/workspace/Announcify/Announcify-Messaging/SMS-Announcify
-pathvariable._android_Sample_Announcify_a3e2fe03=/home/tom/Programmieren/Android/workspace/Announcify/API-Announcify/Sample-Announcify
-pathvariable._android_Voicemail_Announcify_301ca4=/home/tom/Programmieren/Android/workspace/Announcify/Announcify-Telephone/Voicemail-Announcify
-pathvariable._android_K9_Announcify_dfaa3bff=/home/tom/Programmieren/Android/workspace/Announcify/K9-Announcify
-pathvariable._android_Announcify_1c861620=/home/tom/Programmieren/Android/workspace/Announcify/Announcify
-pathvariable._android_Announcify_Telephone_8802a477=/home/tom/Programmieren/Android/workspace/Announcify/Announcify-Telephone
-pathvariable._android_Talk_Announcify_3048a1c1=/home/tom/Programmieren/Android/workspace/Announcify/Talk-Announcify
+#Thu May 05 17:03:05 CEST 2011
+pathvariable._android_Voicemail_Announcify_301ca4=/home/tom/Programmieren/Projects/Announcify/Android/Announcify-Telephone/Voicemail-Announcify
+pathvariable._android_K9_Announcify_dfaa3bff=/home/tom/Programmieren/Projects/Announcify/Android/K9-Announcify
+pathvariable._android_Sample_Announcify_a3e2fe03=/home/tom/Programmieren/Projects/Announcify/Android/API-Announcify/Sample-Announcify
+pathvariable._android_Announcify_Messaging_37f2777=/home/tom/Programmieren/Projects/Announcify/Android/Announcify-Messaging
+pathvariable._android_Mail_Announcify_f7714bd6=/home/tom/Programmieren/Projects/Announcify/Android/Mail-Announcify
+encoding=UTF-8
 version=1
-pathvariable._android_Announcify_Messaging_37f2777=/home/tom/Programmieren/Android/workspace/Announcify/Announcify-Messaging
-pathvariable._android_Mail_Announcify_f7714bd6=/home/tom/Programmieren/Android/workspace/Announcify/Mail-Announcify
-pathvariable._android_MMS_Announcify_7470b97a=/home/tom/Programmieren/Android/workspace/Announcify/Announcify-Messaging/MMS-Announcify
+pathvariable._android_SMS_Announcify_bfa37334=/home/tom/Programmieren/Projects/Announcify/Android/Announcify-Messaging/SMS-Announcify
 eclipse.preferences.version=1
+pathvariable._android_API_Announcify_5ca3e3d3=/home/tom/Programmieren/Projects/Announcify/Android/API-Announcify
+pathvariable._android_Twidroyd_Announcify_74ad447=/home/tom/Programmieren/Projects/Announcify/Android/Twidroyd-Announcify
+pathvariable._android_Talk_Announcify_3048a1c1=/home/tom/Programmieren/Projects/Announcify/Android/Talk-Announcify
+pathvariable._android_Call_Announcify_406838cf=/home/tom/Programmieren/Projects/Announcify/Android/Announcify-Telephone/Call-Announcify
+pathvariable._android_Simple_Sample_Announcify_fabbcac8=/home/tom/Programmieren/Projects/Announcify/Android/Simple-Sample-Announcify
+pathvariable._android_Announcify_1c861620=/home/tom/Programmieren/Android/workspace/Announcify/Announcify
+pathvariable._android_MMS_Announcify_7470b97a=/home/tom/Programmieren/Projects/Announcify/Android/Announcify-Messaging/MMS-Announcify
+pathvariable._android_Announcify_Telephone_8802a477=/home/tom/Programmieren/Projects/Announcify/Android/Announcify-Telephone
+pathvariable._android_Plume_Announcify_801cd43c=/home/tom/Programmieren/Projects/Announcify/Android/Plume-Announcify
 refresh.enabled=true
-pathvariable._android_Call_Announcify_406838cf=/home/tom/Programmieren/Android/workspace/Announcify/Announcify-Telephone/Call-Announcify
-pathvariable._android_API_Announcify_5ca3e3d3=/home/tom/Programmieren/Android/workspace/Announcify/API-Announcify

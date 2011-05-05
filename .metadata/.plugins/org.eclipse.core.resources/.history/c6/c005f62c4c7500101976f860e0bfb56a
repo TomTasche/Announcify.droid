@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<script src="jquery-1.5.2.js"></script>
+		<script src="jquery.jplayer.min.js"></script>
+		
+		<script>
+			function announcify(text) {
+				var voice = document.createElement("audio");
+				voice.setAttribute("controls", "controls");
+				voice.setAttribute("src", text);
+				voice.setAttribute("autoplay", "autoplay");
+				document.getElementById("speech").appendChild(voice);
+			}
+		</script>
+	</head>
+	
+	<body onload="announcify('http://translate.google.com/translate_tts?tl=en&q=new%20mail%20from%20tom')">
+		<div id="speech">
+			
+		</div>
+	</body>
+</html>

@@ -1,0 +1,10 @@
+package com.joppfm.engine;
+
+import javax.servlet.http.HttpServlet;
+
+@SuppressWarnings("serial")
+public class Servlet extends HttpServlet {
+	
+	protected static final String HOST = "http://localhost:8888/"; // http://joppfm.appspot.com/
+	
+}

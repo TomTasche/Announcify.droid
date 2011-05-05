@@ -3,7 +3,7 @@
 <resources>
   <string name="control_title">Controle Remoto do Announcify</string>
   <string name="chooser_block_chosen">Bloquear os escolhidos abaixo</string>
-  <string name="chooser_search_input">Digite o nome aqui ...</string>
+  <string name="chooser_search_input">Enter name here... (* for all)</string>
   <string name="replacer_replace_hint">Substitua isso ...</string>
   <string name="replacer_replace_with_hint">com isso.</string>
   <string name="replacer_button_add">Adicionar</string>
@@ -19,4 +19,8 @@
   <string name="context_menu_toggle">Alternar</string>
   <string name="context_menu_report">Relatório</string>
   <string name="context_menu_uninstall">Desinstalar</string>
+  <string name="dialog_pro_title">Die ad, die.</string>
+  <string name="dialog_pro_message">Hate ads? Buy Pro, get rid of annoying ads and support the developer. :)</string>
+  <string name="dialog_pro_cancel">Nope.</string>
+  <string name="dialog_pro_ok">Sure!</string>
 </resources>

@@ -5,13 +5,15 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="src" path="API-Announcify_src"/>
 	<classpathentry kind="lib" path="libs/GoogleAdMobAdsSDK-4.0.2.jar"/>
-	<classpathentry kind="src" path="Announcify-Messaging_src"/>
-	<classpathentry kind="src" path="Announcify-Telephone_src"/>
-	<classpathentry kind="src" path="K9-Announcify_src"/>
-	<classpathentry kind="src" path="Mail-Announcify_src"/>
 	<classpathentry kind="src" path="Talk-Announcify_src"/>
-	<classpathentry kind="src" path="SMS-Announcify_src"/>
+	<classpathentry kind="src" path="Announcify-Telephone_src"/>
+	<classpathentry kind="src" path="Mail-Announcify_src"/>
+	<classpathentry kind="src" path="Announcify-Messaging_src"/>
+	<classpathentry kind="src" path="K9-Announcify_src"/>
+	<classpathentry kind="src" path="Twidroyd-Announcify_src"/>
+	<classpathentry kind="src" path="Plume-Announcify_src"/>
 	<classpathentry kind="src" path="MMS-Announcify_src"/>
+	<classpathentry kind="src" path="SMS-Announcify_src"/>
 	<classpathentry kind="src" path="Call-Announcify_src"/>
 	<classpathentry kind="src" path="Voicemail-Announcify_src"/>
 	<classpathentry kind="output" path="bin"/>

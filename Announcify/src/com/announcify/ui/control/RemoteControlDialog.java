@@ -19,7 +19,7 @@ public class RemoteControlDialog extends Activity {
     public static final String ACTION_PAUSE = "com.announcify.ACTION_PAUSE";
     public static final String ACTION_SKIP = "com.announcify.ACTION_SKIP";
 
-    private final String[] controls = getResources().getStringArray(R.array.control_items);
+    private String[] controls;
 
     private void fireBroadcast(final String action) {
         sendBroadcast(new Intent(action));
@@ -28,6 +28,8 @@ public class RemoteControlDialog extends Activity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        controls = getResources().getStringArray(R.array.control_items);
 
         final Builder bob = new AlertDialog.Builder(this);
         bob.setIcon(R.drawable.launcher_icon).setTitle(getString(R.string.control_title));

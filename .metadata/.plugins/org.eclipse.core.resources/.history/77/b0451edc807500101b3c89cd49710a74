@@ -1,0 +1,7 @@
+package com.announcify.engine.gmail;
+
+import com.announcify.engine.model.Credential;
+
+public class GmailCredential extends Credential {
+
+}

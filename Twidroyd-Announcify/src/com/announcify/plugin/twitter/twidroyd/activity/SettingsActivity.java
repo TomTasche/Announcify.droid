@@ -12,7 +12,7 @@ public class SettingsActivity extends PluginActivity {
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        parseRingtone(requestCode, resultCode, data, RingtoneManager.TYPE_RINGTONE);
+        parseRingtone(requestCode, resultCode, data, RingtoneManager.TYPE_NOTIFICATION);
 
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -20,5 +20,7 @@ public class SettingsActivity extends PluginActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, new Settings(this), R.xml.preferences_settings);
+        addPreferencesFromResource(R.xml.preferences_more_settings);
+        setExtraCustomListeners();
     }
 }

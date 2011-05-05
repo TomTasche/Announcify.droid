@@ -1,0 +1,11 @@
+package be.heppi.engine.storage;
+
+
+
+public abstract class JSONable {
+    
+    
+    public String toJSON() {
+        return JSONEngine.getGson().toJson(this);
+    }
+}

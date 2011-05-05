@@ -1,0 +1,57 @@
+package com.announcify.engine.speech;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLEncoder;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.announcify.engine.Servlet;
+
+@SuppressWarnings("serial")
+public class SpeechServlet extends Servlet {
+    
+    private static final String ADDRESS = "http://translate.google.com/translate_tts?tl=en&q=";
+
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String text = request.getParameter("text");
+        if (text == null) return;
+        
+        HttpURLConnection connection = null;
+
+        OutputStreamWriter writer = null;
+        BufferedWriter buffWriter = null;
+        try {
+            final URL url = new URL(ADDRESS + URLEncoder.encode(text, "UTF-8"));
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setReadTimeout(3000);
+            connection.setDoOutput(true);
+            connection.connect();
+
+            writer = new OutputStreamWriter(connection.getOutputStream());
+            buffWriter = new BufferedWriter(writer);
+            buffWriter.write("_doc=" + object.toJSON());
+        } finally {
+            if (buffWriter != null) {
+                buffWriter.flush();
+                buffWriter.close();
+            }
+
+            if (writer != null) writer.close();
+
+            if (connection != null) {
+                connection.disconnect();
+                return connection.getResponseCode() == 200 ? true : false;
+            }
+        }
+    }
+}

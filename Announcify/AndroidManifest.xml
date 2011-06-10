@@ -25,19 +25,7 @@
 		</receiver>
 
 		<receiver
-			android:name="com.announcify.background.receiver.ControlReceiver">
-
-			<intent-filter>
-				<action
-					android:name="com.announcify.ACTION_CONTINUE" />
-
-				<action
-					android:name="com.announcify.ACTION_PAUSE" />
-
-				<action
-					android:name="com.announcify.ACTION_SKIP" />
-			</intent-filter>
-		</receiver>
+			android:name="com.announcify.background.receiver.ControlReceiver" />
 
 		<activity
 			android:name="com.google.ads.AdActivity"

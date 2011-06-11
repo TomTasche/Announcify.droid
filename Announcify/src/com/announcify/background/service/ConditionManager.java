@@ -43,7 +43,9 @@ public class ConditionManager {
 
         if (settings.isDiscreetCondition()) {
             headsetReceiver = new HeadsetReceiver();
-            context.registerReceiver(headsetReceiver, new IntentFilter(Intent.ACTION_HEADSET_PLUG));
+            Intent headsetReceiverIntent = context.registerReceiver(headsetReceiver, new IntentFilter(Intent.ACTION_HEADSET_PLUG));
+            if(headsetReceiverIntent==null)
+            	headsetReceiver.onReceive(context, headsetReceiverIntent);
         } else {
             headsetReceiver = null;
         }

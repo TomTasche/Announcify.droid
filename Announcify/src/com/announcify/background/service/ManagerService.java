@@ -43,6 +43,31 @@ public class ManagerService extends Service {
         super.onCreate();
 
         final AnnouncifySettings settings = new AnnouncifySettings(this);
+        
+        thread = new HandlerThread("Announcifications");
+        thread.start();
+
+        speaker = new Speaker(ManagerService.this, new OnInitListener() {
+
+            public void onInit(final int status) {
+                handler.sendEmptyMessage(AnnouncificationHandler.WHAT_START);
+            }
+        });
+        
+        handler = new AnnouncificationHandler(ManagerService.this, thread.getLooper(), speaker);
+        handler.post(new Runnable() {
+
+            public void run() {
+                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(ManagerService.this));
+            }
+        });
+        
+        controlReceiver = new ControlReceiver(handler);
+        final IntentFilter controlFilter = new IntentFilter();
+        controlFilter.addAction(RemoteControlDialog.ACTION_CONTINUE);
+        controlFilter.addAction(RemoteControlDialog.ACTION_PAUSE);
+        controlFilter.addAction(RemoteControlDialog.ACTION_SKIP);
+        registerReceiver(controlReceiver, controlFilter);
 
         if (settings.isShowNotification()) {
             final PendingIntent pendingIntent = PendingIntent.getActivity(this, 1993, new Intent(this, RemoteControlDialog.class), 0);
@@ -53,30 +78,6 @@ public class ManagerService extends Service {
 
         conditionManager = new ConditionManager(this, settings);
 
-        thread = new HandlerThread("Announcifications");
-        thread.start();
-
-        speaker = new Speaker(ManagerService.this, new OnInitListener() {
-
-            public void onInit(final int status) {
-                handler.sendEmptyMessage(AnnouncificationHandler.WHAT_START);
-            }
-        });
-
-        handler = new AnnouncificationHandler(ManagerService.this, thread.getLooper(), speaker);
-        handler.post(new Runnable() {
-
-            public void run() {
-                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(ManagerService.this));
-            }
-        });
-
-        controlReceiver = new ControlReceiver(handler);
-        final IntentFilter controlFilter = new IntentFilter();
-        controlFilter.addAction(RemoteControlDialog.ACTION_CONTINUE);
-        controlFilter.addAction(RemoteControlDialog.ACTION_PAUSE);
-        controlFilter.addAction(RemoteControlDialog.ACTION_SKIP);
-        registerReceiver(controlReceiver, controlFilter);
     }
 
     @Override

@@ -23,4 +23,10 @@
   <string name="dialog_pro_message">Hate ads? Buy Pro, get rid of annoying ads and support the developer. :)</string>
   <string name="dialog_pro_cancel">Nope.</string>
   <string name="dialog_pro_ok">Sure!</string>
+  <string-array name="control_items">
+    <item>Pausa</item>
+    <item>Continuar</item>
+    <item>Pular</item>
+    <item>Terminar</item>
+  </string-array>
 </resources>

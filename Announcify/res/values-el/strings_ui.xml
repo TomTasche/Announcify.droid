@@ -3,7 +3,7 @@
 <resources>
   <string name="control_title">Τηλεχειρισμός του Announcify</string>
   <string name="chooser_block_chosen">Αποκλεισμός των παρακάτω επιλεγμένων</string>
-  <string name="chooser_search_input">Εισάγετε όνομα...</string>
+  <string name="chooser_search_input">Enter name here... (* for all)</string>
   <string name="replacer_replace_hint">Αντικατάσταση τού...</string>
   <string name="replacer_replace_with_hint">με αυτό.</string>
   <string name="replacer_button_add">Προσθήκη</string>
@@ -19,4 +19,14 @@
   <string name="context_menu_toggle">Εναλλαγή</string>
   <string name="context_menu_report">Αναφορά</string>
   <string name="context_menu_uninstall">Απεγκατάσταση</string>
+  <string name="dialog_pro_title">Die ad, die.</string>
+  <string name="dialog_pro_message">Hate ads? Buy Pro, get rid of annoying ads and support the developer. :)</string>
+  <string name="dialog_pro_cancel">Nope.</string>
+  <string name="dialog_pro_ok">Sure!</string>
+  <string-array name="control_items">
+    <item>Παύση</item>
+    <item>Συνέχεια</item>
+    <item>παράλειψη βήματος</item>
+    <item>Λήξη</item>
+  </string-array>
 </resources>

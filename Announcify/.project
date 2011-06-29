@@ -37,9 +37,19 @@
 			<locationURI>_android_API_Announcify_5ca3e3d3/src</locationURI>
 		</link>
 		<link>
+			<name>Announcify-Messaging_</name>
+			<type>2</type>
+			<locationURI>_android_Announcify_Messaging_37f2777</locationURI>
+		</link>
+		<link>
 			<name>Announcify-Messaging_src</name>
 			<type>2</type>
 			<locationURI>_android_Announcify_Messaging_37f2777/src</locationURI>
+		</link>
+		<link>
+			<name>Announcify-Telephone_</name>
+			<type>2</type>
+			<locationURI>_android_Announcify_Telephone_8802a477</locationURI>
 		</link>
 		<link>
 			<name>Announcify-Telephone_src</name>

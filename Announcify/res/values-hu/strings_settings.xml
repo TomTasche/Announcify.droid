@@ -3,22 +3,22 @@
 <resources>
   <string name="preference_specific_title">Egyedi beállítások</string>
   <string name="preference_speech_title">Hang beállítások</string>
-  <string name="preference_more_voices">More Voices</string>
-  <string name="preference_stream_title">Choose volumestream</string>
-  <string name="preference_stream_summary">What volume to use?</string>
+  <string name="preference_more_voices">További hangok</string>
+  <string name="preference_stream_title">Válasszon hangerő sémát</string>
+  <string name="preference_stream_summary">Melyik hangerő beállítást használjuk?</string>
   <string name="preference_tts_title">Hang, sebesség, módosítása...</string>
-  <string name="preference_behavior_title">Behavior Settings</string>
+  <string name="preference_behavior_title">Viselkedés beállításai</string>
   <string name="preference_screen_condition_title">Képernyő állapot</string>
-  <string name="preference_screen_condition_summary">Stop speaking if screen is on</string>
-  <string name="preference_discreet_condition_title">Discreet condition</string>
+  <string name="preference_screen_condition_summary">Beszéd félbeszakítása ha a képernyő be van kapcsolva</string>
+  <string name="preference_discreet_condition_title">Diszkrét állapot</string>
   <string name="preference_discreet_condition_summary">A beszéd leállítása fülhallgató csatlakoztatásakor</string>
-  <string name="preference_gravity_condition_title">Gravity condition</string>
+  <string name="preference_gravity_condition_title">Gravitációs állapot</string>
   <string name="preference_gravity_condition_summary">A beszéd leállítása, ha a telefon kijelzővel lefele van lefektetve</string>
   <string name="preference_notification_title">Programüzenetek megjelenítése</string>
-  <string name="preference_notification_summary">Show notification in Notification Bar while speaking</string>
+  <string name="preference_notification_summary">Értesítés megjelenítése az értesítő sávon beszéd közben</string>
   <string name="preference_contact_title">Kapcsolat-beállítások</string>
-  <string name="preference_reading_mode_title">How to announce a contact\'s name?</string>
-  <string name="preference_reading_mode_summary">Firstname, Lastname, Fullname, Nickname, ...</string>
+  <string name="preference_reading_mode_title">Hogyan olvassuk fel a hívó nevét?</string>
+  <string name="preference_reading_mode_summary">Keresztnév, Vezetékné, Teljes név, Becenév, ...</string>
   <string name="preference_filter_group_title">Csoportok szerinti szűrés</string>
   <string name="preference_filter_group_summary">Döntsd el, hogy olvassa a nevet vagy ne, csoporttagság alapján</string>
   <string name="preference_choose_group_title">Válaszd ki a csoportokat</string>
@@ -27,17 +27,17 @@
   <string name="preference_filter_contact_summary">Döntsd el, hogy olvasson egy bizonyos nevet vagy ne</string>
   <string name="preference_choose_contact_title">Válaszd ki a nevet</string>
   <string name="preference_choose_contact_summary">Kívánt kapcsolatok engedélyezése / blokkolása</string>
-  <string name="preference_special_title">Cut after character</string>
-  <string name="preference_special_summary">Cut name after selected characters</string>
+  <string name="preference_special_title">Leállító karakter</string>
+  <string name="preference_special_summary">Felolvasás megszakítása a megadott karakterek után</string>
   <string name="preference_default_title">Alapértelmezett beállítások</string>
   <string name="preference_general_title">Általános beállítások</string>
-  <string name="preference_text_title">Text Settings</string>
-  <string name="preference_guess_language_title">Guess language</string>
-  <string name="preference_guess_language_summary">ATTENTION: Using internet! Could delay Announcifications!  \nGuesses language using Google Translator and announces it in guessed language.</string>
-  <string name="preference_translate_title">Translate Announcifications</string>
-  <string name="preference_translate_summary">ATTENTION: Using internet! Could delay Announcifications!  \nTranslate text using Google Translator before announcing it.</string>
-  <string name="preference_cache_title">Translation cache</string>
-  <string name="preference_cache_summary">Remove, edit and add offline-translations</string>
+  <string name="preference_text_title">Szöveges beállítások</string>
+  <string name="preference_guess_language_title">Nyelv kitalálása</string>
+  <string name="preference_guess_language_summary">VIGYÁZAT: Az internetkapcsolatot használatával! A bejelentéseket késleltetheti! \n Megpróbálja kitalálni a nyelvet a Google Translator segítségével és felolvassa a bejelentést ezen a nyelven.</string>
+  <string name="preference_translate_title">Bejelentések lefordítása</string>
+  <string name="preference_translate_summary">VIGYÁZAT: Internetet használva! A bejelentéseket késleltetheti! \n Szöveg fordítása a Google Translator segítségével bejelentés előtt.</string>
+  <string name="preference_cache_title">Fordítási gyorsítótár</string>
+  <string name="preference_cache_summary">Helyben tárolt fordítások hozzáadása, szerkesztése vagy eltávolítása</string>
   <string name="preference_spam_title">Spam-szűrő</string>
   <string name="preference_spam_summary">Spam-szűrési szabályok megadása</string>
   <string-array name="preference_list_stream_names">
@@ -45,14 +45,14 @@
     <item>Értesítés</item>
     <item>Zene</item>
     <item>Riasztás</item>
-    <item>Text-To-Speech</item>
+    <item>Szöveg-Beszéd átalakítás</item>
     <item>Rendszer</item>
   </string-array>
   <string-array name="preference_list_reading_mode_names">
     <item>Teljes név</item>
     <item>Keresztnév</item>
     <item>Vezetéknév</item>
-    <item>Nickname</item>
+    <item>Becenév</item>
     <item>Telefonszám / Lakcím</item>
   </string-array>
 </resources>

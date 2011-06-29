@@ -3,6 +3,7 @@
 <resources>
   <string name="preference_specific_title">Ειδικές Ρυθμίσεις</string>
   <string name="preference_speech_title">Ρυθμίσεις Φωνής</string>
+  <string name="preference_more_voices">More Voices</string>
   <string name="preference_stream_title">Επιλέξτε ροής έντασης</string>
   <string name="preference_stream_summary">Τι Ένταση να χρησιμοποιηθεί;</string>
   <string name="preference_tts_title">Αλλάξτε φωνή, ταχύτητα, ...</string>
@@ -31,6 +32,8 @@
   <string name="preference_default_title">Προεπιλεγμένες ρυθμίσεις</string>
   <string name="preference_general_title">Γενικές Ρυθμίσεις</string>
   <string name="preference_text_title">Ρυθμίσεις Κειμένου</string>
+  <string name="preference_guess_language_title">Guess language</string>
+  <string name="preference_guess_language_summary">ATTENTION: Using internet! Could delay Announcifications!  \nGuesses language using Google Translator and announces it in guessed language.</string>
   <string name="preference_translate_title">Μετάφραση Announcifications</string>
   <string name="preference_translate_summary">ΠΡΟΣΟΧΗ: χρήση του διαδικτύου! Μπορεί να καθυστερήσει την αναφώνηση! \n Μετάφραση κειμένου χρησιμοποιώντας το μεταφραστή Google πριν από την αναφώνηση.</string>
   <string name="preference_cache_title">Μετάφραση cache</string>

@@ -3,9 +3,9 @@
 <resources>
   <string name="control_title">Announcify Fernbedienung</string>
   <string name="chooser_block_chosen">Unten ausgewählte blockieren</string>
-  <string name="chooser_search_input">Name hier eingeben...</string>
+  <string name="chooser_search_input">Namen hier eingeben... (* für alle)</string>
   <string name="replacer_replace_hint">Ersetze das...</string>
-  <string name="replacer_replace_with_hint">mit diesem.</string>
+  <string name="replacer_replace_with_hint">hiermit.</string>
   <string name="replacer_button_add">Hinzufügen</string>
   <string name="menu_toggle">Plugins ein- / ausschalten</string>
   <string name="menu_help">Hilfe!</string>
@@ -16,7 +16,17 @@
   <string name="context_menu_remove">Entfernen</string>
   <string name="context_menu_edit">Bearbeiten</string>
   <string name="context_menu_uninstall">Deinstallieren</string>
-  <string name="context_menu_toggle">Ein / Aus</string>
+  <string name="context_menu_toggle">Umschalten</string>
   <string name="context_menu_report">Melden</string>
   <string name="context_menu_uninstall">Deinstallieren</string>
+  <string name="dialog_pro_title">Stirb Werbung, stirb.</string>
+  <string name="dialog_pro_message">Sie hassen Werbung? Kaufen Sie die Pro, sie werden die lästige Werbung los und unterstützen den Entwickler. :)</string>
+  <string name="dialog_pro_cancel">Nö.</string>
+  <string name="dialog_pro_ok">Sicher!</string>
+  <string-array name="control_items">
+    <item>Pause</item>
+    <item>Fortsetzen</item>
+    <item>Überspringen</item>
+    <item>Beenden</item>
+  </string-array>
 </resources>

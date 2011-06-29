@@ -3,6 +3,7 @@
 <resources>
   <string name="preference_specific_title">Specifická nastavení</string>
   <string name="preference_speech_title">Nastavení hlasu</string>
+  <string name="preference_more_voices">Více hlasů</string>
   <string name="preference_stream_title">Vyber hlasitost</string>
   <string name="preference_stream_summary">Jakou hlasitost použít?</string>
   <string name="preference_tts_title">Změnit hlas, rychlost, ...</string>
@@ -31,6 +32,8 @@
   <string name="preference_default_title">Výchozí nastavení</string>
   <string name="preference_general_title">Obecná nastavení</string>
   <string name="preference_text_title">Nastavení textu</string>
+  <string name="preference_guess_language_title">Nastavení jazyka</string>
+  <string name="preference_guess_language_summary">UPOZORNĚNÍ: Využívá internet</string>
   <string name="preference_translate_title">Přeložit oznámení</string>
   <string name="preference_translate_summary">POZOR: Používá internet! Může oddálit vyslovení notifikace! \nText je před vyslovením překládán pomocí Google překladače.</string>
   <string name="preference_cache_title">Vyrovnávací paměť překladače</string>

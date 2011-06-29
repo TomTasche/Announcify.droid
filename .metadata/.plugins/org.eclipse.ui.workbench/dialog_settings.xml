@@ -11,6 +11,13 @@
 		<item value="0" key="DIALOG_Y_ORIGIN"/>
 		<item value="306" key="DIALOG_X_ORIGIN"/>
 	</section>
+	<section name="InstallationDialogSettings">
+		<item value="800" key="DIALOG_WIDTH"/>
+		<item value="0" key="DIALOG_Y_ORIGIN"/>
+		<item value="720" key="DIALOG_HEIGHT"/>
+		<item value="52" key="DIALOG_X_ORIGIN"/>
+		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
+	</section>
 	<section name="NewWizardAction">
 		<item value="com.google.gdt.eclipse.suite.wizards.newProjectWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
 		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
@@ -18,13 +25,6 @@
 			<item value="com.google.gwt.eclipse.core.newWizards"/>
 			<item value="org.eclipse.jdt.ui.java"/>
 		</list>
-	</section>
-	<section name="InstallationDialogSettings">
-		<item value="800" key="DIALOG_WIDTH"/>
-		<item value="0" key="DIALOG_Y_ORIGIN"/>
-		<item value="52" key="DIALOG_X_ORIGIN"/>
-		<item value="720" key="DIALOG_HEIGHT"/>
-		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.preferences.keysPreferencePage">
 		<item value="true" key="uncategorizedFilter"/>

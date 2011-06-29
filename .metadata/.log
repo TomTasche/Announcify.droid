@@ -4487,3 +4487,12 @@ Command-line arguments:  -os linux -ws gtk -arch x86_64 -data Programmieren/Andr
 
 !ENTRY com.android.ide.eclipse.adt 2 0 2011-06-29 17:23:30.480
 !MESSAGE AndroidManifest: Ignoring unknown 'MESSAGE' XML element
+!SESSION 2011-06-29 18:01:57.320 -----------------------------------------------
+eclipse.buildId=M20100211-1343
+java.version=1.6.0_22
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=de_AT
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -data Programmieren/Android/workspace/Announcify-Android
+
+!ENTRY org.eclipse.core.resources 2 10035 2011-06-29 18:01:59.583
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.

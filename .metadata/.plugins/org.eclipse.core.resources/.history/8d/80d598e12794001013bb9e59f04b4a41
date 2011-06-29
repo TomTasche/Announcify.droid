@@ -1,0 +1,23 @@
+package com.announcify.engine.storage;
+
+import com.announcify.engine.c2dm.C2DMCredential;
+import com.announcify.engine.gmail.GmailCredential;
+import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.ObjectifyService;
+
+public class Objectifier {
+    
+    private static Objectify objectify;
+    
+    
+    public static Objectify getObjectify() {
+        if (objectify == null) {
+            ObjectifyService.register(GmailCredential.class);
+            ObjectifyService.register(C2DMCredential.class);
+            
+            objectify = ObjectifyService.begin();
+        }
+        
+        return objectify;
+    }
+}

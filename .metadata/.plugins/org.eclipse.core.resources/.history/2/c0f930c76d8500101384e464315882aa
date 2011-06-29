@@ -1,0 +1,8 @@
+package com.announcify.android.net;
+
+public class EventUploader {
+
+    public static boolean upload(String event, String... strings) {
+        
+    }
+}

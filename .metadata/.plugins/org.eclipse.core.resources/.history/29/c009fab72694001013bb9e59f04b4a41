@@ -1,0 +1,21 @@
+package com.announcify.engine.gmail;
+
+import org.scribe.model.Token;
+
+import com.announcify.engine.model.Credential;
+
+public class GmailCredential extends Credential {
+
+    public static GmailCredential getCredentialForIdentity(String userId) {
+        return (GmailCredential) Credential.getCredentialForIdentity(GmailCredential.class, userId);
+    }
+
+
+    public GmailCredential() {
+        // TODO Auto-generated constructor stub
+    }
+    
+    public GmailCredential(Token token, String userId) {
+        super(token, userId);
+    }
+}

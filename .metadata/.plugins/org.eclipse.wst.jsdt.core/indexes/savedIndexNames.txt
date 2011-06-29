@@ -1,6 +1,1 @@
-INDEX VERSION 1.121+/home/tom/Programmieren/Android/workspace/Announcify/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
-3794652240.index
-1469640778.index
-2011362050.index
-4091694475.index
-2244855157.index
+INDEX VERSION 1.121+/home/tom/Programmieren/Projects/Announcify/Android/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes

@@ -1,0 +1,5 @@
+package com.announcify.engine.channel;
+
+public class UserChannel {
+
+}

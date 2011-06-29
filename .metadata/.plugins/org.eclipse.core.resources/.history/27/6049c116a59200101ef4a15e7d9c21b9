@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Announcify for Chrome</title>
+		
+		<script type="text/javascript" src="announcify_credential.js"></script>
+		<script type="text/javascript" src="announcify_gmail.js"></script>
+		<script type="text/javascript" src="channel.js"></script>
+		<script type="text/javascript">
+		
+			function onRequest(request, sender, callback) {
+				saveToken(request);
+				
+				checkMails();
+      		}
+      		
+      		function login() {
+      			if (!isTokenAvailable("appengine")) {
+      				chrome.tabs.create({url: "https://announcify.appspot.com/appengine/login"});
+      			} else if (!isTokenAvailable("gmail")) {
+      				chrome.tabs.create({url: "https://announcify.appspot.com/gmail/login"});
+      			} else {
+      				return true;
+      			}
+      			
+      			return false;
+      		}
+			
+			chrome.extension.onRequest.addListener(onRequest);
+			
+			chrome.browserAction.onClicked.addListener(function (tab) {
+				if (login()) {
+      				// checkMails();
+      				
+      				var req = new XMLHttpRequest();
+    				req.open("GET", appendToken("https://0.announcify.appspot.com/channel"), true);
+    				req.onreadystatechange = function() {
+	        			if (this.readyState == 4) {
+		            		if (req.status == 200) {
+			                	channelData = JSON.parse(req.responseText);
+			                	console.log(channelData.token);
+			
+			                	var channelId = channelData.token;
+				                channel = new goog.appengine.Channel(channelId);
+			                
+			    	            socket = channel.open();
+			        	        socket.onopen = function() {
+			            	        console.log('Browser channel initialized');
+			                	}
+			                
+			                	socket.onclose = function() {
+				                    console.log('Browser channel closed');
+			                    	//setTimeout('initializeBrowserChannel()', 0); 
+			                	}
+			                
+			                	socket.onerror = function(error) {
+				                    if (error.code == 401) {  // token expiry
+			                        	console.log('Browser channel token expired - reconnecting');
+			                    	} else {
+			                        	console.log('Browser channel error');
+			                        	// Automatically reconnects
+			                    	}
+			                	}
+			                
+			                	socket.onmessage = onMessage;
+		            		}
+	        			}
+			    	}
+			    	
+	    			req.send(null);
+      			}
+			});
+      		
+      		// setInterval(checkMails, 600000);
+		</script>
+	</head>
+	
+	<body onload="checkMails();">
+		<audio id="speech" controls="controls" autoplay="autoplay">Your browser does not support the audio element.</audio>
+	</body>
+</html>

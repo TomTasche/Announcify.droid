@@ -1,0 +1,38 @@
+package com.announcify.engine.c2dm;
+
+import org.scribe.model.Token;
+
+import com.announcify.engine.model.Credential;
+import com.announcify.engine.storage.Objectifier;
+
+public class C2DMCredential extends Credential {
+    
+    public static C2DMCredential getCredentialForIdentity(String userId) {
+        return (C2DMCredential) Credential.getCredentialForIdentity(C2DMCredential.class, userId);
+    }
+    
+    
+    String regId;
+    
+    
+    public C2DMCredential() {
+        // TODO Auto-generated constructor stub
+    }
+    
+    public C2DMCredential(Token token, String userId, String regId) {
+        super(token, userId);
+        
+        this.regId = regId;
+    }
+
+    
+    @Override
+    public void objectify() {
+        Objectifier.getObjectify().put(this);
+    }
+    
+
+    public String getRegId() {
+        return regId;
+    }
+}

@@ -1,0 +1,13 @@
+1306766728362	Rename type 'OAuthServlet'
+1306766786580	Rename type 'AnnouncifyApi'
+1306767256245	Copy compilation unit
+1306767261467	Rename type 'GmailCredential'
+1306767265852	Rename type 'AuthenticationServlet'
+1306767368762	Rename local variable 'userId'
+1306767374754	Rename local variable 'userMail'
+1306767385639	Rename local variable 'userMail'
+1306767389663	Rename local variable 'userMail'
+1306767423649	Rename local variable 'userMail'
+1306767428166	Rename local variable 'userMail'
+1306767552549	Rename method 'getCredential'
+1306769953057	Rename package 'com.announcify.engine.oauth'

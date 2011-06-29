@@ -1,0 +1,21 @@
+package com.announcify.engine.channel;
+
+import javax.persistence.Id;
+
+import org.scribe.model.Token;
+
+import com.announcify.engine.model.Credential;
+import com.announcify.engine.storage.Objectable;
+import com.announcify.engine.storage.Objectifier;
+
+public class UserChannel extends Objectable {
+
+    @Id int id;
+    String token;
+    String userId;
+    
+    
+    public static UserChannel getChannelForUser(Class<? extends Credential> clazz, Token token) {
+        return Objectifier.getObjectify().query(clazz).filter("token", token).get();
+    }
+}

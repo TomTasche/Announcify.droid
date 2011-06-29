@@ -1,0 +1,12 @@
+package com.announcify.engine.channel;
+
+import javax.persistence.Id;
+
+import com.announcify.engine.storage.Objectable;
+
+public class UserChannel extends Objectable {
+
+    @Id int id;
+    String token;
+    String userId;
+}

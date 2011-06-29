@@ -1,6 +1,7 @@
-#Mon Apr 11 19:14:01 CEST 2011
+#Thu Jun 09 17:17:52 CEST 2011
 java_doc_default=255,51,204
 java_doc_link=255,51,204
+org.eclipse.wst.jsdt.ui.text.custom_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
 useQuickDiffPrefPage=true
 java_single_line_comment=255,51,204
 semanticHighlighting.localVariableDeclaration.strikethrough=false
@@ -11,6 +12,7 @@ semanticHighlighting.localVariableDeclaration.bold=false
 useAnnotationsPrefPage=true
 java_bracket=51,102,204
 tagName=51,102,204
+org.eclipse.wst.jsdt.ui.text.templates_migrated=true
 semanticHighlighting.localVariable.enabled=true
 semanticHighlighting.localVariableDeclaration.enabled=true
 spelling_locale_initialized=true

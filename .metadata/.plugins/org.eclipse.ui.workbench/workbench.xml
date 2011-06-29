@@ -27,13 +27,14 @@
 <coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="68" y="30"/>
 <coolItem id="org.eclipse.wst.html.core.htmlsource.source" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.wst.jsdt.ui.CompilationUnitEditor" itemType="typePlaceholder" x="-1" y="-1"/>
-<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="306" y="30"/>
 <coolItem id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="s.com.aptana.ide.core.ui.actionSet.ShowAptanaView" itemType="typeToolBarContribution" x="120" y="30"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="184" y="30"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="com.google.gwt.eclipse.core.editors.gwtJavaEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
@@ -50,11 +51,11 @@
 <views>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
-<expanded>&#x0A;<category IMemento.internal.id="Warnings (32 items)"/>
-<category IMemento.internal.id="Errors"/>
+<expanded>
 <category IMemento.internal.id="Warnings"/>
+<category IMemento.internal.id="Errors"/>
 </expanded>
-<columnWidths org.eclipse.ui.ide.locationField="0" org.eclipse.ui.ide.markerType="0" org.eclipse.ui.ide.pathField="0" org.eclipse.ui.ide.resourceField="0" org.eclipse.ui.ide.severityAndDescriptionField="0"/>
+<columnWidths org.eclipse.ui.ide.locationField="73" org.eclipse.ui.ide.markerType="336" org.eclipse.ui.ide.pathField="143" org.eclipse.ui.ide.resourceField="108" org.eclipse.ui.ide.severityAndDescriptionField="350"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.pathField"/>
@@ -104,6 +105,9 @@
 </view>
 <view id="org.eclipse.ui.views.TaskList" partName="Tasks"/>
 <view id="org.eclipse.ui.views.ContentOutline" partName="Outline">
+<viewState/>
+</view>
+<view id="com.google.gwt.eclipse.DevModeView" partName="Development Mode">
 <viewState/>
 </view>
 </views>
@@ -278,6 +282,7 @@
 <view id="org.eclipse.jdt.ui.PackageExplorer"/>
 <view id="org.eclipse.ui.views.ProblemView"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
+<view id="com.google.gwt.eclipse.DevModeView"/>
 <fastViewBars/>
 <layout>
 <mainWindow>
@@ -307,15 +312,16 @@
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
+<page content="com.google.gwt.eclipse.DevModeView" label="Development Mode"/>
 <page content="org.eclipse.jdt.ui.JavadocView" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.ui.SourceView" label="LabelNotFound"/>
 <page content="org.eclipse.search.ui.views.SearchView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ProgressView" label="LabelNotFound"/>
-<page content="com.google.gwt.eclipse.DevModeView" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.internal.presentations.classic.WorkbenchPresentationFactoryClassic">
 <part id="0"/>
 <part id="1"/>
+<part id="2"/>
 </presentation>
 </folder>
 </info>
@@ -350,50 +356,50 @@
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SpeechServlet.java" tooltip="Announcify-Engine/src/com/announcify/engine/speech/SpeechServlet.java">
-<persistable path="/Announcify-Engine/src/com/announcify/engine/speech/SpeechServlet.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SmartPhonePluginHelper.java" tooltip="Announcify/src/at/bartinger/toastplugin/SmartPhonePluginHelper.java">
+<persistable path="/Announcify/src/at/bartinger/toastplugin/SmartPhonePluginHelper.java"/>
 </file>
-<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="UserService.class" tooltip="com.google.appengine.api.users.UserService">
-<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=Announcify-Engine/\/home\/tom\/.eclipse\/org.eclipse.platform_3.5.0_155965261\/plugins\/com.google.appengine.eclipse.sdkbundle_1.4.3.v201103311225\/appengine-java-sdk-1.4.3\/lib\/user\/appengine-api-1.0-sdk-1.4.3.jar&lt;com.google.appengine.api.users(UserService.class"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="Announcify/AndroidManifest.xml">
+<persistable path="/Announcify/AndroidManifest.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GmailServlet.java" tooltip="Announcify-Engine/src/com/announcify/engine/gmail/GmailServlet.java">
-<persistable path="/Announcify-Engine/src/com/announcify/engine/gmail/GmailServlet.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ActionBar.java" tooltip="Plume-Announcify/API-Announcify_src/com/markupartist/android/widget/ActionBar.java">
+<persistable path="/Plume-Announcify/API-Announcify_src/com/markupartist/android/widget/ActionBar.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GmailCredential.java" tooltip="Announcify-Engine/src/com/announcify/engine/gmail/GmailCredential.java">
-<persistable path="/Announcify-Engine/src/com/announcify/engine/gmail/GmailCredential.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="strings_api.xml" tooltip="API-Announcify/res/values-tr/strings_api.xml">
+<persistable path="/API-Announcify/res/values-tr/strings_api.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" name="appengine-web.xml" tooltip="Announcify-Engine/war/WEB-INF/appengine-web.xml">
-<persistable path="/Announcify-Engine/war/WEB-INF/appengine-web.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="strings_api.xml" tooltip="API-Announcify/res/values-pt/strings_api.xml">
+<persistable path="/API-Announcify/res/values-pt/strings_api.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" name="web.xml" tooltip="Announcify-Engine/war/WEB-INF/web.xml">
-<persistable path="/Announcify-Engine/war/WEB-INF/web.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="strings_api.xml" tooltip="API-Announcify/res/values-pl/strings_api.xml">
+<persistable path="/API-Announcify/res/values-pl/strings_api.xml"/>
 </file>
-<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="URLEncoder.class" tooltip="java.net.URLEncoder">
-<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=Announcify-Engine/\/usr\/lib\/jvm\/java-6-openjdk\/jre\/lib\/rt.jar&lt;java.net(URLEncoder.class"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="strings_api.xml" tooltip="API-Announcify/res/values-ja/strings_api.xml">
+<persistable path="/API-Announcify/res/values-ja/strings_api.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Servlet.java" tooltip="Announcify-Engine/src/com/announcify/engine/Servlet.java">
-<persistable path="/Announcify-Engine/src/com/announcify/engine/Servlet.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="strings_api.xml" tooltip="API-Announcify/res/values-it/strings_api.xml">
+<persistable path="/API-Announcify/res/values-it/strings_api.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="JSONEngine.java" tooltip="Announcify-Engine/src/com/announcify/engine/storage/JSONEngine.java">
-<persistable path="/Announcify-Engine/src/com/announcify/engine/storage/JSONEngine.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="strings_api.xml" tooltip="API-Announcify/res/values-hu/strings_api.xml">
+<persistable path="/API-Announcify/res/values-hu/strings_api.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GmailParser.java" tooltip="Announcify-Engine/src/com/announcify/engine/gmail/GmailParser.java">
-<persistable path="/Announcify-Engine/src/com/announcify/engine/gmail/GmailParser.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="strings_api.xml" tooltip="API-Announcify/res/values-fr/strings_api.xml">
+<persistable path="/API-Announcify/res/values-fr/strings_api.xml"/>
 </file>
-<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="Node.class" tooltip="org.w3c.dom.Node">
-<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=Announcify-Engine/\/usr\/lib\/jvm\/java-6-openjdk\/jre\/lib\/rt.jar&lt;org.w3c.dom(Node.class"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="strings_api.xml" tooltip="API-Announcify/res/values-en/strings_api.xml">
+<persistable path="/API-Announcify/res/values-en/strings_api.xml"/>
 </file>
-<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="XMLDocumentScannerImpl.class" tooltip="com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl">
-<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=Announcify-Engine/\/usr\/lib\/jvm\/java-6-openjdk\/jre\/lib\/rt.jar&lt;com.sun.org.apache.xerces.internal.impl(XMLDocumentScannerImpl.class"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="strings_api.xml" tooltip="API-Announcify/res/values-es/strings_api.xml">
+<persistable path="/API-Announcify/res/values-es/strings_api.xml"/>
 </file>
-<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="XMLScanner.class" tooltip="com.sun.org.apache.xerces.internal.impl.XMLScanner">
-<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=Announcify-Engine/\/usr\/lib\/jvm\/java-6-openjdk\/jre\/lib\/rt.jar&lt;com.sun.org.apache.xerces.internal.impl(XMLScanner.class"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="strings_api.xml" tooltip="API-Announcify/res/values-de/strings_api.xml">
+<persistable path="/API-Announcify/res/values-de/strings_api.xml"/>
 </file>
-<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="XMLErrorReporter.class" tooltip="com.sun.org.apache.xerces.internal.impl.XMLErrorReporter">
-<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=Announcify-Engine/\/usr\/lib\/jvm\/java-6-openjdk\/jre\/lib\/rt.jar&lt;com.sun.org.apache.xerces.internal.impl(XMLErrorReporter.class"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="strings_api.xml" tooltip="API-Announcify/res/values-el/strings_api.xml">
+<persistable path="/API-Announcify/res/values-el/strings_api.xml"/>
 </file>
-<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="ErrorHandlerWrapper.class" tooltip="com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper">
-<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=Announcify-Engine/\/usr\/lib\/jvm\/java-6-openjdk\/jre\/lib\/rt.jar&lt;com.sun.org.apache.xerces.internal.util(ErrorHandlerWrapper.class"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="strings_api.xml" tooltip="API-Announcify/res/values/strings_api.xml">
+<persistable path="/API-Announcify/res/values/strings_api.xml"/>
 </file>
 </mruList>
 </workbench>

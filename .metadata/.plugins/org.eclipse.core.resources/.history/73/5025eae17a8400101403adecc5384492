@@ -1,0 +1,89 @@
+package com.announcify.android.auth;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.content.Context;
+import android.os.AsyncTask;
+
+public class C2DMAuthenticator extends Authenticator {
+
+    final static String BASE_URL = "http://joppfm.appspot.com";
+    final static String AUTH_URL = BASE_URL + "/auth";
+
+    final static String TYPE = "ac2dm";
+
+
+    AppEngineAuthenticator appengine;
+
+    String registration;
+
+    AuthenticationCallback callback;
+
+
+    public C2DMAuthenticator(Context context, AccountManager manager, Account account, AppEngineAuthenticator appengine, String registration) {
+        super(context, manager, account, Authenticator.getPreferences(context, TYPE));
+
+        this.appengine = appengine;
+        this.registration = registration;
+    }
+
+
+    @Override
+    public void doGenerate() {
+        generateToken(account, TYPE);
+    }
+
+    @Override
+    public void doSomething(AuthenticationCallback callback) {
+        this.callback = callback;
+
+        new AuthenticationTask().execute(getToken());
+    }
+
+
+    private class AuthenticationTask extends AsyncTask<String, Object, String> {
+
+        protected String doInBackground(String... tokens) {
+            String token = tokens[0];
+
+            try {
+                DefaultHttpClient client = new DefaultHttpClient();
+
+                URI uri = new URI(AUTH_URL);
+                HttpPost post = new HttpPost(uri);
+                post.setHeader("Cookie", appengine.getToken());
+
+                List<NameValuePair> params = new LinkedList<NameValuePair>();
+                params.add(new BasicNameValuePair("regId", registration));
+                params.add(new BasicNameValuePair("token", token));
+
+                UrlEncodedFormEntity entity = new UrlEncodedFormEntity(params, "UTF-8");
+                post.setEntity(entity);
+
+                client.execute(post);
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        protected void onPostExecute(String result) {
+            callback.run();
+        }
+    }
+}

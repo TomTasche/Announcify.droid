@@ -1,0 +1,7 @@
+1305313060968	Delete element
+1305315057034	Rename local variable 'requestToken'
+1305315076723	Rename local variable 'requestToken'
+1305319133229	Delete elements
+1305319425122	Rename method 'setAccessToken'
+1305319478017	Rename local variable 'accessToken'
+1305320093441	Rename method 'wrapJsonInHtml'

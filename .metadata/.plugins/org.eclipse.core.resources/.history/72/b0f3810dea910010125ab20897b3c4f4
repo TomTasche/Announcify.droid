@@ -1,0 +1,31 @@
+package com.announcify.engine.channel;
+
+import java.io.IOException;
+import java.util.Random;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.announcify.engine.servlet.AuthenticatedServlet;
+import com.google.appengine.api.channel.ChannelService;
+import com.google.appengine.api.channel.ChannelServiceFactory;
+import com.google.appengine.api.users.User;
+import com.google.gson.Gson;
+
+@SuppressWarnings("serial")
+public class ChannelServlet extends AuthenticatedServlet {
+
+    @Override
+    protected int doSomething(HttpServletRequest request, HttpServletResponse response, User user) throws IOException {        
+        ChannelService service = ChannelServiceFactory.getChannelService();
+
+        String token = ";" + new Random().nextFloat() + System.currentTimeMillis() + ";";
+        
+        service.createChannel(token);
+        
+        response.setContentType("text/text");
+        response.getWriter().write(token);
+
+        return 0;
+    }
+}

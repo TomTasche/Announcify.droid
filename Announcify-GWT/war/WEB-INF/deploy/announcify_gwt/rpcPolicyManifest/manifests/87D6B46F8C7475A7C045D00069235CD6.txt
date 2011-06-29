@@ -1,0 +1,2 @@
+serviceClass: com.announcify.gwt.client.GreetingService
+path: D35BEB48709C1DCCEA03CD724E7D35C8.gwt.rpc

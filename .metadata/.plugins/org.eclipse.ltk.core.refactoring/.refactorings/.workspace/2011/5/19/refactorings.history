@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;C2DM.engine&apos;" deleteContents="true" description="Delete resource &apos;C2DM.engine&apos;" element1="/C2DM.engine" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1305104375464"/>
+</session>

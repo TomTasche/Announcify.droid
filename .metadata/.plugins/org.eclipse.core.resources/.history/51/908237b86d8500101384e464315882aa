@@ -1,0 +1,5 @@
+package com.announcify.android.net;
+
+public class EventUploader {
+
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete 16 resources" deleteContents="false" description="Delete 16 resources" element1="/Announcify" element10="/Plume-Announcify" element11="/Sample-Announcify" element12="/Simple-Sample-Announcify" element13="/SMS-Announcify" element14="/Talk-Announcify" element15="/Twidroyd-Announcify" element16="/Voicemail-Announcify" element2="/Announcify-Messaging" element3="/Announcify-Telephone" element4="/API-Announcify" element5="/Calendar-Announcify" element6="/Call-Announcify" element7="/K9-Announcify" element8="/Mail-Announcify" element9="/MMS-Announcify" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="16" stamp="1306070355697"/>
+</session>

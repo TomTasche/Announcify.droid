@@ -1,0 +1,779 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	package="org.mailboxer.saymyname"
+	android:versionCode="133"
+	android:versionName="1.0.1">
+
+
+	<application
+		android:icon="@drawable/launcher_icon"
+		android:label="@string/app_name">
+
+		<receiver
+			android:name="com.announcify.ui.ToggleWidget">
+			<intent-filter>
+				<action
+					android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+				<action
+					android:name="com.announcify.WIDGET_ACTION" />
+			</intent-filter>
+
+			<meta-data
+				android:name="android.appwidget.provider"
+				android:resource="@xml/widget_provider" />
+		</receiver>
+
+		<receiver
+			android:name="com.announcify.background.receiver.ControlReceiver">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.ACTION_CONTINUE" />
+
+				<action
+					android:name="com.announcify.ACTION_PAUSE" />
+
+				<action
+					android:name="com.announcify.ACTION_SKIP" />
+			</intent-filter>
+		</receiver>
+
+		<activity
+			android:name="com.google.ads.AdActivity"
+			android:configChanges="keyboard|keyboardHidden|orientation" />
+
+		<activity
+			android:name="com.announcify.ui.activity.AnnouncifyActivity"
+			android:label="@string/app_name"
+			android:configChanges="orientation|keyboardHidden">
+
+			<intent-filter>
+				<action
+					android:name="android.intent.action.MAIN" />
+				<category
+					android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+
+			<intent-filter>
+				<action
+					android:name="com.announcify" />
+				<category
+					android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+
+		<activity
+			android:name="com.announcify.ui.activity.HelpActivity"
+			android:label="@string/app_name"
+			android:configChanges="orientation|keyboardHidden">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.HELP" />
+				<category
+					android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+
+		<activity
+			android:name="com.announcify.ui.activity.SettingsActivity"
+			android:label="@string/app_name"
+			android:configChanges="orientation|keyboardHidden">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.SETTINGS" />
+
+				<category
+					android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+
+		<activity
+			android:name="com.announcify.ui.activity.GroupActivity"
+			android:label="@string/app_name"
+			android:configChanges="orientation|keyboardHidden" />
+
+		<activity
+			android:name="com.announcify.ui.activity.ContactActivity"
+			android:label="@string/app_name"
+			android:configChanges="orientation|keyboardHidden" />
+
+		<activity
+			android:name="com.announcify.ui.activity.ReplaceActivity"
+			android:label="@string/app_name"
+			android:configChanges="orientation|keyboardHidden" />
+
+		<activity
+			android:name="com.announcify.ui.control.RemoteControlDialog"
+			android:label="@string/app_name"
+			android:theme="@android:style/Theme.Translucent.NoTitleBar"
+			android:configChanges="orientation|keyboardHidden">
+
+			<intent-filter>
+				<action
+					android:name="android.intent.action.MAIN" />
+			</intent-filter>
+		</activity>
+
+		<activity
+			android:name="com.announcify.ui.control.RemoteControlDialogInstaller"
+			android:label="@string/app_name"
+			android:theme="@android:style/Theme.Translucent.NoTitleBar"
+			android:configChanges="orientation|keyboardHidden">
+
+			<intent-filter>
+				<action
+					android:name="android.intent.action.CREATE_SHORTCUT" />
+				<category
+					android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+
+		<activity
+			android:name="com.announcify.ui.activity.SmartPhoneActivity"
+			android:label="@string/app_name"
+			android:icon="@drawable/launcher_icon">
+
+			<intent-filter>
+				<action
+					android:name="at.bartinger.smartphone.PLUGIN_CONFIG" />
+			</intent-filter>
+		</activity>
+
+		<receiver
+			android:name="com.announcify.background.receiver.SmartPhoneReceiver">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.ACTION_SERVICE" />
+			</intent-filter>
+		</receiver>
+
+		<activity
+			android:name="com.announcify.ui.activity.LocaleActivity"
+			android:label="@string/app_name"
+			android:icon="@drawable/launcher_icon">
+
+			<intent-filter>
+				<action
+					android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
+			</intent-filter>
+		</activity>
+
+		<receiver
+			android:name="com.announcify.background.receiver.LocaleReceiver">
+
+			<intent-filter>
+				<action
+					android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
+			</intent-filter>
+		</receiver>
+
+		<receiver
+			android:name="com.announcify.background.error.ExceptionReceiver">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.EXCEPTION" />
+			</intent-filter>
+		</receiver>
+
+		<service
+			android:name="com.announcify.background.service.ManagerService"
+			android:label="@string/app_name"
+			android:permission="com.announcify.PERMISSION_IM_A_PLUGIN">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.ANNOUNCE" />
+			</intent-filter>
+		</service>
+
+		<service
+			android:name="com.announcify.background.error.ExceptionService"
+			android:label="@string/app_name"
+			android:permission="com.announcify.PERMISSION_IM_A_PLUGIN" />
+
+		<provider
+			android:name="com.announcify.background.sql.AnnouncifyProvider"
+			android:authorities="com.announcify" />
+
+
+		<!-- Announcify-Messaging -->
+
+		<activity
+			android:name="com.announcify.plugin.message.sms.activity.SettingsActivity"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.message.sms.SETTINGS" />
+				<category
+					android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+
+		<receiver
+			android:name="com.announcify.plugin.message.sms.receiver.AnnouncifyReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.ACTION_PLUGIN_CONTACT" />
+			</intent-filter>
+		</receiver>
+
+		<receiver
+			android:name="com.announcify.plugin.message.sms.receiver.MessageReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="android.provider.Telephony.SMS_RECEIVED" />
+			</intent-filter>
+		</receiver>
+
+		<receiver
+			android:name="com.announcify.plugin.message.sms.receiver.RingtoneReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.message.sms.ACTION_START_RINGTONE" />
+			</intent-filter>
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.message.sms.ACTION_STOP_RINGTONE" />
+			</intent-filter>
+		</receiver>
+
+		<service
+			android:name="com.announcify.plugin.message.sms.service.WorkerService" />
+
+
+		<activity
+			android:name="com.announcify.plugin.message.mms.activity.SettingsActivity"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.message.mms.SETTINGS" />
+				<category
+					android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+
+		<receiver
+			android:name="com.announcify.plugin.message.mms.receiver.AnnouncifyReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.ACTION_PLUGIN_CONTACT" />
+			</intent-filter>
+		</receiver>
+
+		<receiver
+			android:name="com.announcify.plugin.message.mms.receiver.MessageReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="android.provider.Telephony.WAP_PUSH_RECEIVED" />
+				<data
+					android:mimeType="application/vnd.wap.mms-message" />
+			</intent-filter>
+		</receiver>
+
+		<receiver
+			android:name="com.announcify.plugin.message.mms.receiver.RingtoneReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.message.mms.ACTION_START_RINGTONE" />
+			</intent-filter>
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.message.mms.ACTION_STOP_RINGTONE" />
+			</intent-filter>
+		</receiver>
+
+		<service
+			android:name="com.announcify.plugin.message.mms.service.WorkerService" />
+
+
+		<!-- Announcify-Telephone -->
+
+		<activity
+			android:name="com.announcify.plugin.voice.call.activity.SettingsActivity"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.voice.call.SETTINGS" />
+				<category
+					android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+
+		<receiver
+			android:name="com.announcify.plugin.voice.call.receiver.CallReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="android.intent.action.PHONE_STATE" />
+			</intent-filter>
+		</receiver>
+
+		<receiver
+			android:name="com.announcify.plugin.voice.call.receiver.AnnouncifyReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.ACTION_PLUGIN_CONTACT" />
+			</intent-filter>
+		</receiver>
+
+		<receiver
+			android:name="com.announcify.plugin.voice.call.receiver.RingtoneReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.voice.call.ACTION_START_RINGTONE" />
+			</intent-filter>
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.voice.call.ACTION_STOP_RINGTONE" />
+			</intent-filter>
+		</receiver>
+
+		<service
+			android:name="com.announcify.plugin.voice.call.service.WorkerService" />
+
+		<activity
+			android:name="com.announcify.plugin.voice.mail.activity.SettingsActivity"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.voice.mail.SETTINGS" />
+				<category
+					android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+
+		<receiver
+			android:name="com.announcify.plugin.voice.mail.receiver.BootReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="android.intent.action.BOOT_COMPLETED" />
+			</intent-filter>
+		</receiver>
+
+		<receiver
+			android:name="com.announcify.plugin.voice.mail.receiver.AnnouncifyReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.ACTION_PLUGIN_CONTACT" />
+			</intent-filter>
+		</receiver>
+
+		<receiver
+			android:name="com.announcify.plugin.voice.mail.receiver.RingtoneReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.voice.mail.ACTION_START_RINGTONE" />
+			</intent-filter>
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.voice.mail.ACTION_STOP_RINGTONE" />
+			</intent-filter>
+		</receiver>
+
+		<service
+			android:name="com.announcify.plugin.voice.mail.service.VoicemailService" />
+
+		<service
+			android:name="com.announcify.plugin.voice.mail.service.WorkerService" />
+
+
+		<!-- K9-Announcify -->
+
+		<activity
+			android:name="com.announcify.plugin.mail.k9.activity.SettingsActivity"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.mail.k9.SETTINGS" />
+				<category
+					android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+
+		<receiver
+			android:name="com.announcify.plugin.mail.k9.receiver.BootReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="android.intent.action.BOOT_COMPLETED" />
+			</intent-filter>
+		</receiver>
+
+		<receiver
+			android:name="com.announcify.plugin.mail.k9.receiver.AnnouncifyReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.ACTION_PLUGIN_CONTACT" />
+			</intent-filter>
+		</receiver>
+
+		<receiver
+			android:name="com.announcify.plugin.mail.k9.receiver.RingtoneReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.mail.k9.ACTION_START_RINGTONE" />
+			</intent-filter>
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.mail.k9.ACTION_STOP_RINGTONE" />
+			</intent-filter>
+		</receiver>
+
+		<service
+			android:name="com.announcify.plugin.mail.k9.service.WorkerService" />
+
+		<service
+			android:name="com.announcify.plugin.mail.k9.service.MailService" />
+
+
+		<!-- Mail-Announcify -->
+
+		<activity
+			android:name="com.announcify.plugin.mail.google.activity.SettingsActivity"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.mail.google.SETTINGS" />
+				<category
+					android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+
+		<receiver
+			android:name="com.announcify.plugin.mail.google.receiver.BootReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="android.intent.action.BOOT_COMPLETED" />
+			</intent-filter>
+		</receiver>
+
+		<receiver
+			android:name="com.announcify.plugin.mail.google.receiver.AnnouncifyReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.ACTION_PLUGIN_CONTACT" />
+			</intent-filter>
+		</receiver>
+
+		<receiver
+			android:name="com.announcify.plugin.mail.google.receiver.RingtoneReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.mail.google.ACTION_START_RINGTONE" />
+			</intent-filter>
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.mail.google.ACTION_STOP_RINGTONE" />
+			</intent-filter>
+		</receiver>
+
+		<service
+			android:name="com.announcify.plugin.mail.google.service.WorkerService" />
+
+		<service
+			android:name="com.announcify.plugin.mail.google.service.MailService" />
+
+
+		<!-- Talk-Announcify -->
+
+		<activity
+			android:name="com.announcify.plugin.talk.google.activity.SettingsActivity"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.talk.google.SETTINGS" />
+				<category
+					android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+
+		<receiver
+			android:name="com.announcify.plugin.talk.google.receiver.BootReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="android.intent.action.BOOT_COMPLETED" />
+			</intent-filter>
+		</receiver>
+
+		<receiver
+			android:name="com.announcify.plugin.talk.google.receiver.AnnouncifyReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.ACTION_PLUGIN_CONTACT" />
+			</intent-filter>
+		</receiver>
+
+		<receiver
+			android:name="com.announcify.plugin.talk.google.receiver.RingtoneReceiver"
+			android:label="@string/app_name">
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.talk.google.ACTION_START_RINGTONE" />
+			</intent-filter>
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.talk.google.ACTION_STOP_RINGTONE" />
+			</intent-filter>
+		</receiver>
+
+		<service
+			android:name="com.announcify.plugin.talk.google.service.TalkService" />
+
+		<service
+			android:name="com.announcify.plugin.talk.google.service.WorkerService" />
+
+
+		<!-- Twidroyd-Announcify -->
+
+		<activity
+			android:name="com.announcify.plugin.twitter.twidroyd.activity.SettingsActivity"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.twitter.twidroyd.SETTINGS" />
+				<category
+					android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+
+		<receiver
+			android:name="com.announcify.plugin.twitter.twidroyd.receiver.AnnouncifyReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.ACTION_PLUGIN_CONTACT" />
+			</intent-filter>
+		</receiver>
+
+		<receiver
+			android:name="com.announcify.plugin.twitter.twidroyd.receiver.TwidroydReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="twidroid.tweets" />
+				<action
+					android:name="twidroid.replies" />
+				<action
+					android:name="twidroid.directs" />
+			</intent-filter>
+		</receiver>
+
+		<receiver
+			android:name="com.announcify.plugin.twitter.twidroyd.receiver.RingtoneReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.twitter.twidroyd.ACTION_START_RINGTONE" />
+			</intent-filter>
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.twitter.twidroyd.ACTION_STOP_RINGTONE" />
+			</intent-filter>
+		</receiver>
+
+		<service
+			android:name="com.announcify.plugin.twitter.twidroyd.service.WorkerService" />
+
+
+		<!-- Plume-Announcify -->
+
+		<activity
+			android:name="com.announcify.plugin.twitter.plume.activity.SettingsActivity"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.twitter.plume.SETTINGS" />
+				<category
+					android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+
+		<receiver
+			android:name="com.announcify.plugin.twitter.plume.receiver.AnnouncifyReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.ACTION_PLUGIN_CONTACT" />
+			</intent-filter>
+		</receiver>
+
+		<receiver
+			android:name="com.announcify.plugin.twitter.plume.receiver.PlumeReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.levelup.touiteur.action.GLOBALNOTIF" />
+			</intent-filter>
+		</receiver>
+
+		<receiver
+			android:name="com.announcify.plugin.twitter.plume.receiver.RingtoneReceiver"
+			android:label="@string/app_name">
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.twitter.plume.ACTION_START_RINGTONE" />
+			</intent-filter>
+
+			<intent-filter>
+				<action
+					android:name="com.announcify.plugin.twitter.plume.ACTION_STOP_RINGTONE" />
+			</intent-filter>
+		</receiver>
+
+		<service
+			android:name="com.announcify.plugin.twitter.plume.service.WorkerService" />
+	</application>
+
+
+	<!-- Common permissions -->
+
+	<permission
+		android:name="com.announcify.PERMISSION_IM_A_PLUGIN"
+		android:protectionLevel="normal" />
+
+	<uses-permission
+		android:name="com.announcify.PERMISSION_IM_A_PLUGIN" />
+	<uses-permission
+		android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+	<uses-permission
+		android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission
+		android:name="android.permission.BROADCAST_STICKY" />
+	<uses-permission
+		android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission
+		android:name="android.permission.WRITE_SETTINGS" />
+	<uses-permission
+		android:name="android.permission.READ_CONTACTS" />
+	<uses-permission
+		android:name="android.permission.GET_ACCOUNTS" />
+	<uses-permission
+		android:name="android.permission.WAKE_LOCK" />
+	<uses-permission
+		android:name="android.permission.INTERNET" />
+	<uses-permission
+		android:name="android.permission.VIBRATE" />
+
+
+	<!-- Announcify-Messaging -->
+
+	<uses-permission
+		android:name="android.permission.RECEIVE_SMS" />
+	<uses-permission
+		android:name="android.permission.RECEIVE_MMS" />
+
+
+	<!-- Announcify-Telephone -->
+
+	<uses-permission
+		android:name="android.permission.READ_PHONE_STATE" />
+
+
+	<!-- K9-Announcify -->
+
+	<uses-permission
+		android:name="com.fsck.k9.permission.READ_MESSAGES" />
+
+	<!-- Mail-Announcify -->
+
+	<uses-permission
+		android:name="com.google.android.providers.gmail.permission.READ_GMAIL" />
+	<uses-permission
+		android:name="com.google.android.gm.permission.READ_GMAIL" />
+	<uses-permission
+		android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+
+
+	<!-- Talk-Announcify -->
+
+	<uses-permission
+		android:name="com.google.android.providers.talk.permission.READ_ONLY" />
+
+
+	<uses-feature
+		android:name="android.hardware.touchscreen"
+		android:required="false" />
+	<uses-feature
+		android:required="false"
+		android:name="android.hardware.telephony" />
+
+
+	<supports-screens
+		android:normalScreens="true"
+		android:smallScreens="true"
+		android:resizeable="true"
+		android:largeScreens="true"
+		android:xlargeScreens="true"
+		android:anyDensity="true" />
+
+
+	<uses-sdk
+		android:minSdkVersion="7"
+		android:targetSdkVersion="9" />
+</manifest>

@@ -1,0 +1,60 @@
+package com.announcify.engine.model;
+
+import javax.persistence.Id;
+
+import org.scribe.model.Token;
+
+import com.announcify.engine.storage.Objectable;
+import com.announcify.engine.storage.Objectifier;
+
+public abstract class Credential implements Objectable {
+
+    public static Credential getCredentialForIdentity(Class<? extends Credential> clazz, String userId) {
+        return Objectifier.getObjectify().query(clazz).filter("user", userId).get();
+    }
+    
+    public static Credential getCredentialForToken(Class<? extends Credential> clazz, Token token) {
+        return Objectifier.getObjectify().query(clazz).filter("token", token).get();
+    }
+
+
+    @Id String id;
+    Token token;
+    String userId;
+
+    
+    public Credential() {
+        // TODO Auto-generated constructor stub
+    }
+
+    public Credential(Token token, String userId) {
+        this.token = token;
+        this.userId = userId;
+        
+        id = token.toString().hashCode();
+    }
+
+
+    @Override
+    public String toString() {
+        return "Credential [token=" + token + ", userId=" + userId + "]";
+    }
+
+
+    public Token getToken() {
+        return token;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+
+    public void setToken(Token token) {
+        this.token = token;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+}

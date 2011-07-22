@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;Call-Announcify/res/xml/preferences_settings.xml&apos; to &apos;preferences_settings_call.xml&apos;" description="Rename resource &apos;preferences_settings.xml&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="res/xml/preferences_settings.xml" name="preferences_settings_call.xml" stamp="1302547898778" updateReferences="true"/>
-</session>

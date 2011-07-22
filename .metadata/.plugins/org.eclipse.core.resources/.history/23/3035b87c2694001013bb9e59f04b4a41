@@ -1,8 +1,0 @@
-package com.announcify.engine.storage;
-
-public abstract class Objectable {
-
-    public void objectify() {
-        Objectifier.getObjectify().put(this);
-    }
-}

@@ -1,8 +1,0 @@
-package com.announcify.engine;
-
-import javax.servlet.http.HttpServlet;
-
-@SuppressWarnings("serial")
-public class Servlet extends HttpServlet {
-	
-}

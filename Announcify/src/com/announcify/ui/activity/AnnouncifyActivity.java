@@ -10,15 +10,16 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.BaseColumns;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.announcify.api.background.sql.model.PluginModel;
 import com.announcify.api.ui.activity.ActivityUtils;
@@ -151,7 +152,7 @@ public class AnnouncifyActivity extends BaseActivity {
                 final Cursor cursor = model.getAll();
                 cursor.moveToFirst();
 
-                final int idIndex = cursor.getColumnIndex(PluginModel._ID);
+                final int idIndex = cursor.getColumnIndex(BaseColumns._ID);
                 do {
                     model.setActive(cursor.getLong(idIndex), activate);
                 } while (cursor.moveToNext());

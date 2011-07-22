@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename local variable &apos;conversations&apos; in &apos;com.announcify.plugin.mail.google.service.MailService.MailObserver.MailObserver(...)&apos; to &apos;cursor&apos;&#x0A;- Original project: &apos;Mail - Announcify&apos;&#x0A;- Original element: &apos;com.announcify.plugin.mail.google.service.MailService.MailObserver.MailObserver(Handler, String).conversations&apos;&#x0A;- Renamed element: &apos;conversations&apos;&#x0A;- Update references to refactored element" description="Rename local variable &apos;conversations&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;com.announcify.plugin.mail.google.service{MailService.java[MailService[MailObserver~MailObserver~QHandler;~QString;@conversations!2966!3156!2973!2985!QCursor;" name="cursor" references="true" stamp="1296545318062" version="1.0"/>
-</session>

@@ -1,8 +1,0 @@
-package at.tomtasche.contacts.droid;
-
-public class Snippet {
-    public static void main(String[] args) {
-        Contacts.droid
-    }
-}
-

@@ -1,1 +1,0 @@
-INDEX VERSION 1.121+/home/tom/Programmieren/Projects/Announcify/Android/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes

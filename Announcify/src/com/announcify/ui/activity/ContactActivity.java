@@ -7,21 +7,22 @@ import org.mailboxer.saymyname.R;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 import android.provider.ContactsContract.Contacts;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckedTextView;
 import android.widget.FilterQueryProvider;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.SimpleCursorAdapter.CursorToStringConverter;
+import android.widget.TextView;
 
 import com.announcify.api.background.sql.model.ContactModel;
 import com.announcify.api.background.util.AnnouncifySettings;
@@ -108,7 +109,7 @@ public class ContactActivity extends BaseActivity {
         autoAdapter.setFilterQueryProvider(new FilterQueryProvider() {
 
             public Cursor runQuery(final CharSequence constraint) {
-                return getContentResolver().query(Contacts.CONTENT_URI, new String[] { Contacts._ID, Contacts.LOOKUP_KEY, Contacts.DISPLAY_NAME }, "UPPER(" + Contacts.DISPLAY_NAME + ") GLOB ?", new String[] { constraint.toString().toUpperCase(Locale.ENGLISH) + "*" }, Contacts.DISPLAY_NAME);
+                return getContentResolver().query(Contacts.CONTENT_URI, new String[] { BaseColumns._ID, Contacts.LOOKUP_KEY, Contacts.DISPLAY_NAME }, "UPPER(" + Contacts.DISPLAY_NAME + ") GLOB ?", new String[] { constraint.toString().toUpperCase(Locale.ENGLISH) + "*" }, Contacts.DISPLAY_NAME);
             }
         });
     }
@@ -119,7 +120,7 @@ public class ContactActivity extends BaseActivity {
 
         refreshList();
 
-        autoCursor = getContentResolver().query(Contacts.CONTENT_URI, new String[] { Contacts._ID, Contacts.LOOKUP_KEY, Contacts.DISPLAY_NAME }, null, null, Contacts.DISPLAY_NAME);
+        autoCursor = getContentResolver().query(Contacts.CONTENT_URI, new String[] { BaseColumns._ID, Contacts.LOOKUP_KEY, Contacts.DISPLAY_NAME }, null, null, Contacts.DISPLAY_NAME);
         autoAdapter.changeCursorAndColumns(autoCursor, new String[] { Contacts.DISPLAY_NAME }, new int[] { android.R.id.text1 });
     }
 

@@ -1,5 +1,0 @@
-package com.announcify.engine;
-
-public class Login extends Servlet {
-
-}

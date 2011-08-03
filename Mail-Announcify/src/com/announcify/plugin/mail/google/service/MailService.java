@@ -20,198 +20,204 @@ import com.announcify.plugin.mail.google.util.Settings;
 
 public class MailService extends Service {
 
-    private class MailObserver extends ContentObserver {
+	private class MailObserver extends ContentObserver {
 
-        private boolean paused;
-        private long maxMessageIdSeen;
+		private boolean paused;
+		private long maxMessageIdSeen;
 
-        private final String address;
-        private final Handler handler;
+		private final String address;
+		private final Handler handler;
 
-        public MailObserver(final Handler handler, final String address) {
-            super(handler);
+		public MailObserver(final Handler handler, final String address) {
+			super(handler);
 
-            this.handler = handler;
-            this.address = Uri.encode(address);
+			this.handler = handler;
+			this.address = Uri.encode(address);
 
-            final String[] projection = new String[] { "maxMessageId" };
-            final Cursor cursor = getContentResolver().query(Uri.parse("content://gmail-ls/conversations/" + address), projection, null, null, null);
+			try {
+				final String[] projection = new String[] { "maxMessageId" };
+				final Cursor cursor = getContentResolver().query(Uri.parse("content://gmail-ls/conversations/" + address), projection, null, null, null);
 
-            try {
-                if (cursor == null || !cursor.moveToFirst()) {
-                    return;
-                }
+				try {
+					if (cursor == null || !cursor.moveToFirst()) {
+						return;
+					}
 
-                maxMessageIdSeen = Long.valueOf(cursor.getString(cursor.getColumnIndex(projection[0])));
-            } finally {
-                if (cursor != null) {
-                    cursor.close();
-                }
-            }
-        }
+					maxMessageIdSeen = Long.valueOf(cursor.getString(cursor.getColumnIndex(projection[0])));
+				} finally {
+					if (cursor != null) {
+						cursor.close();
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 
-        @Override
-        public void onChange(final boolean selfChange) {
-            if (paused) {
-                return;
-            }
+				return;
+			}
+		}
 
-            Cursor unread = null;
-            Cursor conversations = null;
-            Cursor messages = null;
+		@Override
+		public void onChange(final boolean selfChange) {
+			if (paused) {
+				return;
+			}
 
-            try {
-                String[] projection = new String[] { "name", "numUnreadConversations" };
-                unread = getContentResolver().query(Uri.parse("content://gmail-ls/labels/" + address), projection, null, null, null);
-                if (unread == null || !unread.moveToFirst()) {
-                    return;
-                }
+			Cursor unread = null;
+			Cursor conversations = null;
+			Cursor messages = null;
 
-                // WHERE clause doesn't seem to work, so we have to iterate
-                // through the whole cursor
-                final int nameId = unread.getColumnIndex(projection[0]);
-                do {
-                    // final String label = settings.isAnnoyingMode() ? "^u" :
-                    // "^i";
-                    final String label = "^i";
-                    if (label.equals(unread.getString(nameId))) {
-                        if (unread.getInt(unread.getColumnIndex(projection[1])) <= 0) {
-                            return;
-                        } else {
-                            break;
-                        }
-                    }
-                } while (unread.moveToNext());
+			try {
+				String[] projection = new String[] { "name", "numUnreadConversations" };
+				unread = getContentResolver().query(Uri.parse("content://gmail-ls/labels/" + address), projection, null, null, null);
+				if (unread == null || !unread.moveToFirst()) {
+					return;
+				}
 
-                projection = new String[] { "conversation_id", "maxMessageId" };
-                conversations = getContentResolver().query(Uri.parse("content://gmail-ls/conversations/" + address), projection, null, null, null);
-                if (conversations == null || !conversations.moveToFirst()) {
-                    return;
-                }
+				// WHERE clause doesn't seem to work, so we have to iterate
+				// through the whole cursor
+				final int nameId = unread.getColumnIndex(projection[0]);
+				do {
+					// final String label = settings.isAnnoyingMode() ? "^u" :
+					// "^i";
+					final String label = "^i";
+					if (label.equals(unread.getString(nameId))) {
+						if (unread.getInt(unread.getColumnIndex(projection[1])) <= 0) {
+							return;
+						} else {
+							break;
+						}
+					}
+				} while (unread.moveToNext());
 
-                final long conversationId = Long.valueOf(conversations.getString(conversations.getColumnIndex(projection[0])));
+				projection = new String[] { "conversation_id", "maxMessageId" };
+				conversations = getContentResolver().query(Uri.parse("content://gmail-ls/conversations/" + address), projection, null, null, null);
+				if (conversations == null || !conversations.moveToFirst()) {
+					return;
+				}
 
-                final long maxMessageId = Long.valueOf(conversations.getString(conversations.getColumnIndex(projection[1])));
-                if (maxMessageId <= maxMessageIdSeen) {
-                    return;
-                }
-                maxMessageIdSeen = maxMessageId;
+				final long conversationId = Long.valueOf(conversations.getString(conversations.getColumnIndex(projection[0])));
 
-                projection = new String[] { "fromAddress", "subject", "snippet", "body" };
-                messages = getContentResolver().query(Uri.parse("content://gmail-ls/conversations/" + address + "/" + Uri.parse(String.valueOf(conversationId)) + "/messages"), projection, null, null, null);
-                if (messages == null || !messages.moveToLast()) {
-                    return;
-                }
+				final long maxMessageId = Long.valueOf(conversations.getString(conversations.getColumnIndex(projection[1])));
+				if (maxMessageId <= maxMessageIdSeen) {
+					return;
+				}
+				maxMessageIdSeen = maxMessageId;
 
-                final String username = messages.getString(messages.getColumnIndex(projection[0]));
-                if (!settings.getReadOwn()) {
-                    if (addresses.contains(prepareAddress(username))) {
-                        return;
-                    }
-                }
+				projection = new String[] { "fromAddress", "subject", "snippet", "body" };
+				messages = getContentResolver().query(Uri.parse("content://gmail-ls/conversations/" + address + "/" + Uri.parse(String.valueOf(conversationId)) + "/messages"), projection, null, null, null);
+				if (messages == null || !messages.moveToLast()) {
+					return;
+				}
 
-                final Intent intent = new Intent(MailService.this, WorkerService.class);
-                intent.setAction(PluginService.ACTION_ANNOUNCE);
-                intent.putExtra(WorkerService.EXTRA_FROM, username);
-                intent.putExtra(WorkerService.EXTRA_SUBJECT, messages.getString(messages.getColumnIndex(projection[1])));
-                intent.putExtra(WorkerService.EXTRA_SNIPPET, messages.getString(messages.getColumnIndex(projection[2])));
-                intent.putExtra(WorkerService.EXTRA_MESSAGE, messages.getString(messages.getColumnIndex(projection[3])));
-                startService(intent);
+				final String username = messages.getString(messages.getColumnIndex(projection[0]));
+				if (!settings.getReadOwn()) {
+					if (addresses.contains(prepareAddress(username))) {
+						return;
+					}
+				}
 
-                paused = true;
-                handler.postDelayed(new Runnable() {
+				final Intent intent = new Intent(MailService.this, WorkerService.class);
+				intent.setAction(PluginService.ACTION_ANNOUNCE);
+				intent.putExtra(WorkerService.EXTRA_FROM, username);
+				intent.putExtra(WorkerService.EXTRA_SUBJECT, messages.getString(messages.getColumnIndex(projection[1])));
+				intent.putExtra(WorkerService.EXTRA_SNIPPET, messages.getString(messages.getColumnIndex(projection[2])));
+				intent.putExtra(WorkerService.EXTRA_MESSAGE, messages.getString(messages.getColumnIndex(projection[3])));
+				startService(intent);
 
-                    public void run() {
-                        paused = false;
-                    }
-                }, settings.getShutUp());
-            } finally {
-                if (messages != null) {
-                    messages.close();
-                }
-                if (conversations != null) {
-                    conversations.close();
-                }
-                if (unread != null) {
-                    unread.close();
-                }
-            }
-        }
-    }
+				paused = true;
+				handler.postDelayed(new Runnable() {
 
-    private LinkedList<MailObserver> observers;
-    private LinkedList<String> addresses;
-    private LinkedList<HandlerThread> threads;
+					public void run() {
+						paused = false;
+					}
+				}, settings.getShutUp());
+			} finally {
+				if (messages != null) {
+					messages.close();
+				}
+				if (conversations != null) {
+					conversations.close();
+				}
+				if (unread != null) {
+					unread.close();
+				}
+			}
+		}
+	}
 
-    private Settings settings;
+	private LinkedList<MailObserver> observers;
+	private LinkedList<String> addresses;
+	private LinkedList<HandlerThread> threads;
 
-    @Override
-    public IBinder onBind(final Intent intent) {
-        return null;
-    }
+	private Settings settings;
 
-    @Override
-    public void onCreate() {
-        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(getBaseContext()));
+	@Override
+	public IBinder onBind(final Intent intent) {
+		return null;
+	}
 
-        observers = new LinkedList<MailService.MailObserver>();
-        addresses = new LinkedList<String>();
-        threads = new LinkedList<HandlerThread>();
+	@Override
+	public void onCreate() {
+		Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(getBaseContext()));
 
-        settings = new Settings(this);
+		observers = new LinkedList<MailService.MailObserver>();
+		addresses = new LinkedList<String>();
+		threads = new LinkedList<HandlerThread>();
 
-        final AccountManager manager = (AccountManager) getSystemService(Context.ACCOUNT_SERVICE);
-        final Account[] accounts = manager.getAccountsByType("com.google");
+		settings = new Settings(this);
 
-        if (accounts.length == 0) {
-            stopSelf();
-        }
+		final AccountManager manager = (AccountManager) getSystemService(Context.ACCOUNT_SERVICE);
+		final Account[] accounts = manager.getAccountsByType("com.google");
 
-        for (final Account account : accounts) {
-            spawnNewObserver(account.name);
-        }
-    }
+		if (accounts.length == 0) {
+			stopSelf();
+		}
 
-    @Override
-    public void onDestroy() {
-        for (final MailObserver observer : observers) {
-            getContentResolver().unregisterContentObserver(observer);
-        }
+		for (final Account account : accounts) {
+			spawnNewObserver(account.name);
+		}
+	}
 
-        for (final HandlerThread thread : threads) {
-            thread.getLooper().quit();
-        }
+	@Override
+	public void onDestroy() {
+		for (final MailObserver observer : observers) {
+			getContentResolver().unregisterContentObserver(observer);
+		}
 
-        super.onDestroy();
-    }
+		for (final HandlerThread thread : threads) {
+			thread.getLooper().quit();
+		}
 
-    private void spawnNewObserver(final String address) {
-        if (address == null || "".equals(address)) {
-            return;
-        }
+		super.onDestroy();
+	}
 
-        addresses.add(address);
-        threads.add(new HandlerThread("MailThread for " + address));
-        threads.getLast().start();
+	private void spawnNewObserver(final String address) {
+		if (address == null || "".equals(address)) {
+			return;
+		}
 
-        final Handler handler = new Handler(threads.getLast().getLooper());
-        handler.post(new Runnable() {
+		addresses.add(address);
+		threads.add(new HandlerThread("MailThread for " + address));
+		threads.getLast().start();
 
-            public void run() {
-                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(getBaseContext()));
-            }
-        });
+		final Handler handler = new Handler(threads.getLast().getLooper());
+		handler.post(new Runnable() {
 
-        observers.add(new MailObserver(handler, address));
+			public void run() {
+				Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(getBaseContext()));
+			}
+		});
 
-        getContentResolver().registerContentObserver(Uri.parse("content://gmail-ls/conversations/" + Uri.encode(address)), true, observers.getLast());
-    }
+		observers.add(new MailObserver(handler, address));
 
-    public static String prepareAddress(String address) {
-        if (address != null && address.contains("<") && address.contains(">")) {
-            address = address.substring(address.indexOf('<') + 1, address.indexOf('>'));
-        }
+		getContentResolver().registerContentObserver(Uri.parse("content://gmail-ls/conversations/" + Uri.encode(address)), true, observers.getLast());
+	}
 
-        return address;
-    }
+	public static String prepareAddress(String address) {
+		if (address != null && address.contains("<") && address.contains(">")) {
+			address = address.substring(address.indexOf('<') + 1, address.indexOf('>'));
+		}
+
+		return address;
+	}
 }

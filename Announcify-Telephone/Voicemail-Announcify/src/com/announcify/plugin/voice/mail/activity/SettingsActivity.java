@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.os.Bundle;
 
-import com.announcify.api.R;
 import com.announcify.api.ui.activity.PluginActivity;
+import com.announcify.plugin.voice.mail.R;
 import com.announcify.plugin.voice.mail.service.VoicemailService;
 import com.announcify.plugin.voice.mail.util.Settings;
 

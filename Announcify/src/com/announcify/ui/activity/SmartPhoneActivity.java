@@ -45,6 +45,13 @@ public class SmartPhoneActivity extends PluginActivity {
 
 	@Override
 	public void finish() {
-		SmartPhonePluginHelper.setResultAndFinish(this, "Announcify", "Announcifications " + new Boolean(announcifyCheck.isChecked()).toString(), new Boolean(announcifyCheck.isChecked()).toString());
+		String data = announcifyCheck.isChecked() + "";
+
+        String subtitle = "Announcify gets ";
+        subtitle += announcifyCheck.isChecked() ? "enabled" : "disabled";
+		
+		SmartPhonePluginHelper.setResult(this, "Announcify", subtitle, data);
+		
+		super.finish();
 	}
 }

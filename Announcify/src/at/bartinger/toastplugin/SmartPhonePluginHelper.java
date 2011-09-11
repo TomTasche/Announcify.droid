@@ -20,13 +20,12 @@ public class SmartPhonePluginHelper {
 	public static final String SMART_PHONE_PLUGIN_TOGGLE_BACK = "at.bartinger.smartphone.TOGGLE_BACK";
 
 
-	public static void setResultAndFinish(Activity activity, String title, String info, String data){
+	public static void setResult(Activity activity, String title, String info, String data){
 		final Intent intent = activity.getIntent();
 		intent.putExtra(SMART_PHONE_PLUGIN_TITLE, title);
 		intent.putExtra(SMART_PHONE_PLUGIN_INFO, info);
 		intent.putExtra(SMART_PHONE_PLUGIN_DATA, data);
 		activity.setResult(Activity.RESULT_OK, intent);
-		activity.finish();
 	}
 
 	public static String getTitle(Activity activity){

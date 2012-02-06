@@ -17,5 +17,6 @@
 	<classpathentry kind="src" path="MMS-Announcify_src"/>
 	<classpathentry kind="src" path="Call-Announcify_src"/>
 	<classpathentry kind="src" path="Voicemail-Announcify_src"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -6,5 +6,6 @@
 	<classpathentry kind="src" path="SMS-Announcify_src"/>
 	<classpathentry kind="src" path="MMS-Announcify_src"/>
 	<classpathentry kind="src" path="API-Announcify_src"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

@@ -30,134 +30,156 @@ import com.announcify.api.ui.activity.BaseActivity;
 
 public class ContactActivity extends BaseActivity {
 
-    protected CheckedTextView checkBlock;
-    protected ListView list;
-    protected AutoCompleteTextView auto;
-    protected SimpleCursorAdapter listAdapter;
-    protected SimpleCursorAdapter autoAdapter;
-    protected ContactModel model;
-    protected Cursor listCursor;
-    protected Cursor autoCursor;
-    protected AnnouncifySettings settings;
+	protected CheckedTextView checkBlock;
+	protected ListView list;
+	protected AutoCompleteTextView auto;
+	protected SimpleCursorAdapter listAdapter;
+	protected SimpleCursorAdapter autoAdapter;
+	protected ContactModel model;
+	protected Cursor listCursor;
+	protected Cursor autoCursor;
+	protected AnnouncifySettings settings;
 
-    @Override
-    protected void onCreate(final Bundle bundle) {
-        super.onCreate(bundle, R.layout.activity_chooser);
+	@Override
+	protected void onCreate(final Bundle bundle) {
+		super.onCreate(bundle, R.layout.activity_chooser);
 
-        settings = new AnnouncifySettings(this);
+		settings = new AnnouncifySettings(this);
 
-        checkBlock = (CheckedTextView) findViewById(R.id.check_block);
+		checkBlock = (CheckedTextView) findViewById(R.id.check_block);
 
-        listAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, null, null, null);
+		listAdapter = new SimpleCursorAdapter(this,
+				android.R.layout.simple_list_item_1, null, null, null);
 
-        list = (ListView) findViewById(android.R.id.list);
-        list.setAdapter(listAdapter);
-        list.setBackgroundColor(Color.WHITE);
-        list.setCacheColorHint(Color.TRANSPARENT);
-        list.setFastScrollEnabled(true);
+		list = (ListView) findViewById(android.R.id.list);
+		list.setAdapter(listAdapter);
+		list.setBackgroundColor(Color.WHITE);
+		list.setCacheColorHint(Color.TRANSPARENT);
+		list.setFastScrollEnabled(true);
 
-        registerForContextMenu(list);
+		registerForContextMenu(list);
 
-        autoAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, null, null, null);
+		autoAdapter = new SimpleCursorAdapter(this,
+				android.R.layout.simple_list_item_1, null, null, null);
 
-        auto = (AutoCompleteTextView) findViewById(R.id.auto_edit_chooser);
-        auto.setSingleLine();
-        auto.setThreshold(1);
-        auto.setAdapter(autoAdapter);
+		auto = (AutoCompleteTextView) findViewById(R.id.auto_edit_chooser);
+		auto.setSingleLine();
+		auto.setThreshold(1);
+		auto.setAdapter(autoAdapter);
 
-        auto.setOnItemClickListener(new OnItemClickListener() {
+		auto.setOnItemClickListener(new OnItemClickListener() {
 
-            public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
-                final Cursor cursor = ((Cursor) autoAdapter.getItem(position));
-                if (cursor == null) {
-                    return;
-                }
+			public void onItemClick(final AdapterView<?> parent,
+					final View view, final int position, final long id) {
+				final Cursor cursor = ((Cursor) autoAdapter.getItem(position));
+				if (cursor == null) {
+					return;
+				}
 
-                final String lookup = cursor.getString(autoCursor.getColumnIndex(Contacts.LOOKUP_KEY));
-                if (lookup == null) {
-                    return;
-                }
+				final String lookup = cursor.getString(autoCursor
+						.getColumnIndex(Contacts.LOOKUP_KEY));
+				if (lookup == null) {
+					return;
+				}
 
-                model.add(lookup, ((TextView) view).getText().toString());
+				model.add(lookup, ((TextView) view).getText().toString());
 
-                refreshList();
+				refreshList();
 
-                auto.setText("");
-            }
-        });
+				auto.setText("");
+			}
+		});
 
-        checkBlock.setChecked(settings.getBlockContacts());
-        checkBlock.setOnClickListener(new OnClickListener() {
+		checkBlock.setChecked(settings.getBlockContacts());
+		checkBlock.setOnClickListener(new OnClickListener() {
 
-            public void onClick(final View v) {
-                final boolean enable = !checkBlock.isChecked();
-                settings.setBlockContacts(enable);
-                checkBlock.setChecked(enable);
-            }
-        });
+			public void onClick(final View v) {
+				final boolean enable = !checkBlock.isChecked();
+				settings.setBlockContacts(enable);
+				checkBlock.setChecked(enable);
+			}
+		});
 
-        model = new ContactModel(this);
+		model = new ContactModel(this);
 
-        listAdapter.changeCursorAndColumns(null, new String[] { ContactModel.KEY_CONTACT_TITLE }, new int[] { android.R.id.text1 });
+		listAdapter.changeCursorAndColumns(null,
+				new String[] { ContactModel.KEY_CONTACT_TITLE },
+				new int[] { android.R.id.text1 });
 
-        autoAdapter.setCursorToStringConverter(new CursorToStringConverter() {
+		autoAdapter.setCursorToStringConverter(new CursorToStringConverter() {
 
-            public CharSequence convertToString(final Cursor cursor) {
-                return cursor.getString(cursor.getColumnIndex(Contacts.DISPLAY_NAME));
-            }
-        });
-        autoAdapter.setFilterQueryProvider(new FilterQueryProvider() {
+			public CharSequence convertToString(final Cursor cursor) {
+				return cursor.getString(cursor
+						.getColumnIndex(Contacts.DISPLAY_NAME));
+			}
+		});
+		autoAdapter.setFilterQueryProvider(new FilterQueryProvider() {
 
-            public Cursor runQuery(final CharSequence constraint) {
-                return getContentResolver().query(Contacts.CONTENT_URI, new String[] { BaseColumns._ID, Contacts.LOOKUP_KEY, Contacts.DISPLAY_NAME }, "UPPER(" + Contacts.DISPLAY_NAME + ") GLOB ?", new String[] { constraint.toString().toUpperCase(Locale.ENGLISH) + "*" }, Contacts.DISPLAY_NAME);
-            }
-        });
-    }
+			public Cursor runQuery(final CharSequence constraint) {
+				return getContentResolver().query(
+						Contacts.CONTENT_URI,
+						new String[] { BaseColumns._ID, Contacts.LOOKUP_KEY,
+								Contacts.DISPLAY_NAME },
+						"UPPER(" + Contacts.DISPLAY_NAME + ") GLOB ?",
+						new String[] { constraint.toString().toUpperCase(
+								Locale.ENGLISH)
+								+ "*" }, Contacts.DISPLAY_NAME);
+			}
+		});
+	}
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+	@Override
+	protected void onStart() {
+		super.onStart();
 
-        refreshList();
+		refreshList();
 
-        autoCursor = getContentResolver().query(Contacts.CONTENT_URI, new String[] { BaseColumns._ID, Contacts.LOOKUP_KEY, Contacts.DISPLAY_NAME }, null, null, Contacts.DISPLAY_NAME);
-        autoAdapter.changeCursorAndColumns(autoCursor, new String[] { Contacts.DISPLAY_NAME }, new int[] { android.R.id.text1 });
-    }
+		autoCursor = getContentResolver().query(
+				Contacts.CONTENT_URI,
+				new String[] { BaseColumns._ID, Contacts.LOOKUP_KEY,
+						Contacts.DISPLAY_NAME }, null, null,
+				Contacts.DISPLAY_NAME);
+		autoAdapter.changeCursorAndColumns(autoCursor,
+				new String[] { Contacts.DISPLAY_NAME },
+				new int[] { android.R.id.text1 });
+	}
 
-    @Override
-    public void onCreateContextMenu(final ContextMenu menu, final View v, final ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
+	@Override
+	public void onCreateContextMenu(final ContextMenu menu, final View v,
+			final ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
 
-        getMenuInflater().inflate(R.menu.context_choose, menu);
-    }
+		getMenuInflater().inflate(R.menu.context_choose, menu);
+	}
 
-    @Override
-    protected void onStop() {
-        listCursor.close();
-        autoCursor.close();
+	@Override
+	protected void onStop() {
+		listCursor.close();
+		autoCursor.close();
 
-        super.onStop();
-    }
+		super.onStop();
+	}
 
-    protected void refreshList() {
-        if (listCursor != null) {
-            listCursor.close();
-        }
+	protected void refreshList() {
+		if (listCursor != null) {
+			listCursor.close();
+		}
 
-        listCursor = model.getAll();
-        listAdapter.changeCursor(listCursor);
-    }
+		listCursor = model.getAll();
+		listAdapter.changeCursor(listCursor);
+	}
 
-    @Override
-    public boolean onContextItemSelected(final MenuItem item) {
-        final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+	@Override
+	public boolean onContextItemSelected(final MenuItem item) {
+		final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
+				.getMenuInfo();
 
-        if (item.getItemId() == R.id.menu_remove) {
-            model.remove(info.id);
+		if (item.getItemId() == R.id.menu_remove) {
+			model.remove(info.id);
 
-            refreshList();
-        }
+			refreshList();
+		}
 
-        return super.onContextItemSelected(item);
-    }
+		return super.onContextItemSelected(item);
+	}
 }

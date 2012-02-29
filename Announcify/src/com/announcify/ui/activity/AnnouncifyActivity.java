@@ -29,203 +29,220 @@ import com.announcify.ui.widget.SectionedAdapter;
 
 public class AnnouncifyActivity extends BaseActivity {
 
-    private class AnnouncifyObserver extends ContentObserver {
+	private class AnnouncifyObserver extends ContentObserver {
 
-        public AnnouncifyObserver(final Handler handler) {
-            super(handler);
-        }
+		public AnnouncifyObserver(final Handler handler) {
+			super(handler);
+		}
 
-        @Override
-        public void onChange(final boolean selfChange) {
-            super.onChange(selfChange);
+		@Override
+		public void onChange(final boolean selfChange) {
+			super.onChange(selfChange);
 
-            refreshList();
-        }
-    }
+			refreshList();
+		}
+	}
 
-    private Cursor cursor;
-    private PluginModel model;
-    private ContentObserver observer;
-    private SectionedAdapter adapter;
+	private Cursor cursor;
+	private PluginModel model;
+	private ContentObserver observer;
+	private SectionedAdapter adapter;
 
-    private ListView getListView() {
-        return (ListView) findViewById(android.R.id.list);
-    }
+	private ListView getListView() {
+		return (ListView) findViewById(android.R.id.list);
+	}
 
-    @Override
-    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+	@Override
+	protected void onActivityResult(final int requestCode,
+			final int resultCode, final Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode > 2000) {
-            try {
-                getPackageManager().getPackageGids(model.getPackage(requestCode - 2000));
-            } catch (final NameNotFoundException e) {
-                model.remove(requestCode - 2000);
-            }
-        }
-    }
+		if (requestCode > 2000) {
+			try {
+				getPackageManager().getPackageGids(
+						model.getPackage(requestCode - 2000));
+			} catch (final NameNotFoundException e) {
+				model.remove(requestCode - 2000);
+			}
+		}
+	}
 
-    @Override
-    public boolean onContextItemSelected(final MenuItem item) {
-        final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+	@Override
+	public boolean onContextItemSelected(final MenuItem item) {
+		final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
+				.getMenuInfo();
 
-        switch (item.getItemId()) {
-            case R.id.menu_uninstall:
-                startActivityForResult(new Intent(Intent.ACTION_DELETE, Uri.parse("package:" + model.getPackage(info.id))), (int) (2000 + info.id));
+		switch (item.getItemId()) {
+		case R.id.menu_uninstall:
+			startActivityForResult(
+					new Intent(Intent.ACTION_DELETE, Uri.parse("package:"
+							+ model.getPackage(info.id))),
+					(int) (2000 + info.id));
 
-                break;
+			break;
 
-            case R.id.menu_activate:
-                model.togglePlugin(info.id);
+		case R.id.menu_activate:
+			model.togglePlugin(info.id);
 
-                adapter.notifyDataSetChanged();
+			adapter.notifyDataSetChanged();
 
-                break;
+			break;
 
-            case R.id.menu_report:
-                final Intent sendIntent = new Intent(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Announcify - Problem using " + model.getName(info.id));
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "");
-                sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { "tom@announcify.com" });
-                sendIntent.setType("message/rfc822");
-                startActivity(sendIntent);
+		case R.id.menu_report:
+			final Intent sendIntent = new Intent(Intent.ACTION_SEND);
+			sendIntent.putExtra(Intent.EXTRA_SUBJECT,
+					"Announcify - Problem using " + model.getName(info.id));
+			sendIntent.putExtra(Intent.EXTRA_TEXT, "");
+			sendIntent.putExtra(Intent.EXTRA_EMAIL,
+					new String[] { "tom@announcify.com" });
+			sendIntent.setType("message/rfc822");
+			startActivity(sendIntent);
 
-                break;
-        }
+			break;
+		}
 
-        return true;
-    }
+		return true;
+	}
 
-    @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.actionbar_list);
+	@Override
+	protected void onCreate(final Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState, R.layout.actionbar_list);
 
-        getListView().setBackgroundColor(Color.WHITE);
-        getListView().setCacheColorHint(Color.TRANSPARENT);
-        getListView().setFastScrollEnabled(true);
+		getListView().setBackgroundColor(Color.WHITE);
+		getListView().setCacheColorHint(Color.TRANSPARENT);
+		getListView().setFastScrollEnabled(true);
 
-        sendStickyBroadcast(new Intent("com.announcify.ACTION_PLUGIN_CONTACT"));
+		sendStickyBroadcast(new Intent("com.announcify.ACTION_PLUGIN_CONTACT"));
 
-        registerForContextMenu(getListView());
+		registerForContextMenu(getListView());
 
-        getListView().setOnItemClickListener(new OnItemClickListener() {
+		getListView().setOnItemClickListener(new OnItemClickListener() {
 
-            public void onItemClick(final AdapterView<?> arg0, final View arg1, final int arg2, final long arg3) {
-                try {
-                    startActivity(new Intent(model.getAction(arg3)));
-                } catch (final Exception e) {
-                    model.remove(arg3);
+			public void onItemClick(final AdapterView<?> arg0, final View arg1,
+					final int arg2, final long arg3) {
+				try {
+					startActivity(new Intent(model.getAction(arg3)));
+				} catch (final Exception e) {
+					model.remove(arg3);
 
-                    Toast.makeText(AnnouncifyActivity.this, getString(R.string.toast_plugin_not_found), Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+					Toast.makeText(AnnouncifyActivity.this,
+							getString(R.string.toast_plugin_not_found),
+							Toast.LENGTH_LONG).show();
+				}
+			}
+		});
 
-        model = new PluginModel(this);
+		model = new PluginModel(this);
 
-        refreshList();
-    }
+		refreshList();
+	}
 
-    @Override
-    public void onCreateContextMenu(final ContextMenu menu, final View v, final ContextMenuInfo menuInfo) {
-        final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-        menu.setHeaderTitle(model.getName(info.id));
+	@Override
+	public void onCreateContextMenu(final ContextMenu menu, final View v,
+			final ContextMenuInfo menuInfo) {
+		final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+		menu.setHeaderTitle(model.getName(info.id));
 
-        getMenuInflater().inflate(R.menu.context_main, menu);
-    }
+		getMenuInflater().inflate(R.menu.context_main, menu);
+	}
 
-    @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
-        super.onCreateOptionsMenu(menu);
+	@Override
+	public boolean onCreateOptionsMenu(final Menu menu) {
+		super.onCreateOptionsMenu(menu);
 
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+		getMenuInflater().inflate(R.menu.menu_main, menu);
 
-        return true;
-    }
+		return true;
+	}
 
-    @Override
-    public boolean onMenuItemSelected(final int featureId, final MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_toggle:
-                final boolean activate = !model.getActive(model.getId("Announcify++"));
+	@Override
+	public boolean onMenuItemSelected(final int featureId, final MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.menu_toggle:
+			final boolean activate = !model.getActive(model
+					.getId("Announcify++"));
 
-                final Cursor cursor = model.getAll();
-                cursor.moveToFirst();
+			final Cursor cursor = model.getAll();
+			cursor.moveToFirst();
 
-                final int idIndex = cursor.getColumnIndex(BaseColumns._ID);
-                do {
-                    model.setActive(cursor.getLong(idIndex), activate);
-                } while (cursor.moveToNext());
-                cursor.close();
+			final int idIndex = cursor.getColumnIndex(BaseColumns._ID);
+			do {
+				model.setActive(cursor.getLong(idIndex), activate);
+			} while (cursor.moveToNext());
+			cursor.close();
 
-                adapter.notifyDataSetChanged();
-                break;
+			adapter.notifyDataSetChanged();
+			break;
 
-            case R.id.menu_help:
-                startActivity(new Intent(this, HelpActivity.class));
+		case R.id.menu_help:
+			startActivity(new Intent(this, HelpActivity.class));
 
-                break;
+			break;
 
-            case R.id.menu_plugins:
-                startActivity(ActivityUtils.getPluginsIntent());
+		case R.id.menu_plugins:
+			startActivity(ActivityUtils.getPluginsIntent());
 
-                break;
+			break;
 
-            case R.id.menu_rate:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://market.announcify.com/")));
+		case R.id.menu_rate:
+			startActivity(new Intent(Intent.ACTION_VIEW,
+					Uri.parse("http://market.announcify.com/")));
 
-                break;
+			break;
 
-            case R.id.menu_share:
-                startActivity(ActivityUtils.getShareIntent(this));
+		case R.id.menu_share:
+			startActivity(ActivityUtils.getShareIntent(this));
 
-                break;
+			break;
 
-            case R.id.menu_translate:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://goo.gl/MmR5D")));
+		case R.id.menu_translate:
+			startActivity(new Intent(Intent.ACTION_VIEW,
+					Uri.parse("http://goo.gl/MmR5D")));
 
-                break;
-        }
+			break;
+		}
 
-        return super.onMenuItemSelected(featureId, item);
-    }
+		return super.onMenuItemSelected(featureId, item);
+	}
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
+	@Override
+	protected void onRestart() {
+		super.onRestart();
 
-        sendStickyBroadcast(new Intent("com.announcify.ACTION_PLUGIN_CONTACT"));
-        refreshList();
-    }
+		sendStickyBroadcast(new Intent("com.announcify.ACTION_PLUGIN_CONTACT"));
+		refreshList();
+	}
 
-    @Override
-    protected void onStop() {
-        getContentResolver().unregisterContentObserver(observer);
-        cursor.close();
+	@Override
+	protected void onStop() {
+		getContentResolver().unregisterContentObserver(observer);
+		cursor.close();
 
-        super.onStop();
-    }
+		super.onStop();
+	}
 
-    private void refreshList() {
-        try {
-            createPackageContext("org.mailboxer.saymyname.donate", 0);
+	private void refreshList() {
+		try {
+			createPackageContext("org.mailboxer.saymyname.donate", 0);
 
-            if (model.getId("BbAdMob") >= 0) {
-                model.remove(model.getId("BbAdMob"));
-            }
-        } catch (final Exception e) {
-            // TODO: SectionedAdapter doesn't support lower-case.
-            if (model.getId("BbAdMob") < 0) {
-                model.add("BbAdMob", 9, "", "com.google.ad", false);
-            }
-        }
+			if (model.getId("BbAdMob") >= 0) {
+				model.remove(model.getId("BbAdMob"));
+			}
+		} catch (final Exception e) {
+			// TODO: SectionedAdapter doesn't support lower-case.
+			if (model.getId("BbAdMob") < 0) {
+				model.add("BbAdMob", 9, "", "com.google.ad", false);
+			}
+		}
 
-        cursor = model.getAll(PluginModel.KEY_PLUGIN_NAME);
+		cursor = model.getAll(PluginModel.KEY_PLUGIN_NAME);
 
-        observer = new AnnouncifyObserver(new Handler());
-        getContentResolver().registerContentObserver(Uri.withAppendedPath(AnnouncifyProvider.PROVIDER_URI, PluginModel.TABLE_NAME), false, observer);
+		observer = new AnnouncifyObserver(new Handler());
+		getContentResolver().registerContentObserver(
+				Uri.withAppendedPath(AnnouncifyProvider.PROVIDER_URI,
+						PluginModel.TABLE_NAME), false, observer);
 
-        adapter = new SectionedAdapter(this, model, cursor);
-        getListView().setAdapter(adapter);
-    }
+		adapter = new SectionedAdapter(this, model, cursor);
+		getListView().setAdapter(adapter);
+	}
 }

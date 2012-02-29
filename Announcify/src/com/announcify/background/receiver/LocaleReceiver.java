@@ -8,11 +8,12 @@ import com.announcify.api.background.sql.model.PluginModel;
 
 public class LocaleReceiver extends BroadcastReceiver {
 
-    public static final String ANNOUNCIFY_ENABLED = "com.announcify.locale.ANNOUNCIFY_ENABLED";
+	public static final String ANNOUNCIFY_ENABLED = "com.announcify.locale.ANNOUNCIFY_ENABLED";
 
-    @Override
-    public void onReceive(final Context context, final Intent intent) {
-        final PluginModel model = new PluginModel(context);
-        model.setActive(model.getId("Announcify++"), intent.getBooleanExtra(ANNOUNCIFY_ENABLED, true));
-    }
+	@Override
+	public void onReceive(final Context context, final Intent intent) {
+		final PluginModel model = new PluginModel(context);
+		model.setActive(model.getId("Announcify++"),
+				intent.getBooleanExtra(ANNOUNCIFY_ENABLED, true));
+	}
 }

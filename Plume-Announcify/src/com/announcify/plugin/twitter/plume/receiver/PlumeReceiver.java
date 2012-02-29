@@ -10,10 +10,10 @@ import com.announcify.plugin.twitter.plume.service.WorkerService;
 
 public class PlumeReceiver extends BroadcastReceiver {
 
-    @Override
-    public void onReceive(final Context context, final Intent intent) {
-        intent.setComponent(new ComponentName(context, WorkerService.class));
-        intent.setAction(PluginService.ACTION_ANNOUNCE);
-        context.startService(intent);
-    }
+	@Override
+	public void onReceive(final Context context, final Intent intent) {
+		intent.setComponent(new ComponentName(context, WorkerService.class));
+		intent.setAction(PluginService.ACTION_ANNOUNCE);
+		context.startService(intent);
+	}
 }

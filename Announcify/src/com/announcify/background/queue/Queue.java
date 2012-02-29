@@ -13,104 +13,106 @@ import com.announcify.background.handler.AnnouncificationHandler;
 
 public class Queue implements OnUtteranceCompletedListener {
 
-    public static final String EXTRA_TEXT_SNIPPET = "com.announcify.EXTRA_TEXT_SNIPPET";
+	public static final String EXTRA_TEXT_SNIPPET = "com.announcify.EXTRA_TEXT_SNIPPET";
 
-    private final Context context;
-    private final AnnouncificationHandler handler;
-    private final LinkedList<PluginQueue> queue;
+	private final Context context;
+	private final AnnouncificationHandler handler;
+	private final LinkedList<PluginQueue> queue;
 
-    private boolean started;
-    private boolean granted;
+	private boolean started;
+	private boolean granted;
 
-    public Queue(final Context context, final AnnouncificationHandler handler) {
-        queue = new LinkedList<PluginQueue>();
-        this.context = context;
-        this.handler = handler;
-    }
+	public Queue(final Context context, final AnnouncificationHandler handler) {
+		queue = new LinkedList<PluginQueue>();
+		this.context = context;
+		this.handler = handler;
+	}
 
-    private void checkNext() {
-        if (!queue.isEmpty() && queue.getFirst().isEmpty()) {
-            context.sendBroadcast(new Intent(queue.getFirst().getStopBroadcast()));
-            queue.removeFirst();
+	private void checkNext() {
+		if (!queue.isEmpty() && queue.getFirst().isEmpty()) {
+			context.sendBroadcast(new Intent(queue.getFirst()
+					.getStopBroadcast()));
+			queue.removeFirst();
 
-            if (queue.isEmpty()) {
-                quit();
-                return;
-            }
+			if (queue.isEmpty()) {
+				quit();
+				return;
+			}
 
-            context.sendBroadcast(new Intent(queue.getFirst().getStartBroadcast()));
-        }
+			context.sendBroadcast(new Intent(queue.getFirst()
+					.getStartBroadcast()));
+		}
 
-        if (queue.isEmpty()) {
-            quit();
-            return;
-        }
-    }
+		if (queue.isEmpty()) {
+			quit();
+			return;
+		}
+	}
 
-    public void deny() {
-        granted = false;
+	public void deny() {
+		granted = false;
 
-        WakeLocker.unlock();
-    }
+		WakeLocker.unlock();
+	}
 
-    public void grant() {
-        if (!started) {
-            return;
-        }
+	public void grant() {
+		if (!started) {
+			return;
+		}
 
-        granted = true;
-        WakeLocker.lock(context);
+		granted = true;
+		WakeLocker.lock(context);
 
-        next();
-    }
+		next();
+	}
 
-    public void next() {
-        if (!granted) {
-            return;
-        }
+	public void next() {
+		if (!granted) {
+			return;
+		}
 
-        checkNext();
+		checkNext();
 
-        if (!granted) {
-            return;
-        }
+		if (!granted) {
+			return;
+		}
 
-        final Message message = Message.obtain();
-        message.what = AnnouncificationHandler.WHAT_NEXT_ITEM;
-        message.obj = queue.getFirst().getNext();
-        handler.sendMessage(message);
-    }
+		final Message message = Message.obtain();
+		message.what = AnnouncificationHandler.WHAT_NEXT_ITEM;
+		message.obj = queue.getFirst().getNext();
+		handler.sendMessage(message);
+	}
 
-    public void onUtteranceCompleted(final String utteranceId) {
-        next();
-    }
+	public void onUtteranceCompleted(final String utteranceId) {
+		next();
+	}
 
-    public void putFirst(final PluginQueue little) {
-        queue.add(0, little);
+	public void putFirst(final PluginQueue little) {
+		queue.add(0, little);
 
-        grant();
-    }
+		grant();
+	}
 
-    public void putLast(final PluginQueue little) {
-        Log.d("Announcify", "Size: " + queue.size());
+	public void putLast(final PluginQueue little) {
+		Log.d("Announcify", "Size: " + queue.size());
 
-        queue.add(little);
+		queue.add(little);
 
-        if (queue.size() == 1) {
-            grant();
-        }
-    }
+		if (queue.size() == 1) {
+			grant();
+		}
+	}
 
-    public void quit() {
-        deny();
+	public void quit() {
+		deny();
 
-        handler.sendEmptyMessage(AnnouncificationHandler.WHAT_SHUTDOWN);
+		handler.sendEmptyMessage(AnnouncificationHandler.WHAT_SHUTDOWN);
 
-        WakeLocker.unlock();
-    }
+		WakeLocker.unlock();
+	}
 
-    public void start() {
-        started = true;
-        grant();
-    }
+	public void start() {
+		started = true;
+		grant();
+	}
 }

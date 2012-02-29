@@ -10,19 +10,21 @@ import com.announcify.ui.control.RemoteControlDialog;
 
 public class GravityReceiver extends GravityListener {
 
-    public GravityReceiver(final Context context) {
-        super(context, new GravityStateListener() {
+	public GravityReceiver(final Context context) {
+		super(context, new GravityStateListener() {
 
-            public void onDisplayDown() {
-                context.sendBroadcast(new Intent(RemoteControlDialog.ACTION_PAUSE));
-                Log.e("Announcify", "Shutdown because: Gravity");
+			public void onDisplayDown() {
+				context.sendBroadcast(new Intent(
+						RemoteControlDialog.ACTION_PAUSE));
+				Log.e("Announcify", "Shutdown because: Gravity");
 
-                final Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-                vibrator.vibrate(100);
-            }
+				final Vibrator vibrator = (Vibrator) context
+						.getSystemService(Context.VIBRATOR_SERVICE);
+				vibrator.vibrate(100);
+			}
 
-            public void onDisplayUp() {
-            }
-        });
-    }
+			public void onDisplayUp() {
+			}
+		});
+	}
 }

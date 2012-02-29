@@ -9,27 +9,27 @@ import com.announcify.ui.control.RemoteControlDialog;
 
 public class CallReceiver extends PhoneStateListener {
 
-    private final Context context;
+	private final Context context;
 
-    private boolean stickyBroadcastReceived;
+	private boolean stickyBroadcastReceived;
 
-    public CallReceiver(final Context context) {
-        this.context = context;
-    }
+	public CallReceiver(final Context context) {
+		this.context = context;
+	}
 
-    @Override
-    public void onCallStateChanged(final int state, final String incomingNumber) {
-        if (state != TelephonyManager.CALL_STATE_RINGING) {
-            if (!stickyBroadcastReceived) {
-                stickyBroadcastReceived = true;
-                return;
-            }
+	@Override
+	public void onCallStateChanged(final int state, final String incomingNumber) {
+		if (state != TelephonyManager.CALL_STATE_RINGING) {
+			if (!stickyBroadcastReceived) {
+				stickyBroadcastReceived = true;
+				return;
+			}
 
-            context.sendBroadcast(new Intent(RemoteControlDialog.ACTION_PAUSE));
-        }
-    }
+			context.sendBroadcast(new Intent(RemoteControlDialog.ACTION_PAUSE));
+		}
+	}
 
-    public void setOnCall(final boolean onCall) {
-        stickyBroadcastReceived = onCall;
-    }
+	public void setOnCall(final boolean onCall) {
+		stickyBroadcastReceived = onCall;
+	}
 }

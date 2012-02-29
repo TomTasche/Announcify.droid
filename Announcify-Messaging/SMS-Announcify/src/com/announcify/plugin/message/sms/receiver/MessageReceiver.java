@@ -10,10 +10,10 @@ import com.announcify.plugin.message.sms.service.WorkerService;
 
 public class MessageReceiver extends BroadcastReceiver {
 
-    @Override
-    public void onReceive(final Context context, final Intent intent) {
-        intent.setComponent(new ComponentName(context, WorkerService.class));
-        intent.setAction(PluginService.ACTION_ANNOUNCE);
-        context.startService(intent);
-    }
+	@Override
+	public void onReceive(final Context context, final Intent intent) {
+		intent.setComponent(new ComponentName(context, WorkerService.class));
+		intent.setAction(PluginService.ACTION_ANNOUNCE);
+		context.startService(intent);
+	}
 }

@@ -16,7 +16,8 @@ public class SmartPhoneActivity extends PluginActivity {
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState, new PluginSettings(this, "com.announcify.locale") {
+		super.onCreate(savedInstanceState, new PluginSettings(this,
+				"com.announcify.locale") {
 
 			@Override
 			public String getSettingsAction() {
@@ -34,8 +35,10 @@ public class SmartPhoneActivity extends PluginActivity {
 			}
 		}, R.xml.preferences_locale_settings);
 
-		getPreferenceManager().setSharedPreferencesName("com.announcify.locale");
-		getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
+		getPreferenceManager()
+				.setSharedPreferencesName("com.announcify.locale");
+		getPreferenceManager().setSharedPreferencesMode(
+				Context.MODE_WORLD_READABLE);
 
 		announcifyCheck = (CheckBoxPreference) findPreference("preference_locale_enabled");
 
@@ -47,11 +50,11 @@ public class SmartPhoneActivity extends PluginActivity {
 	public void finish() {
 		String data = announcifyCheck.isChecked() + "";
 
-        String subtitle = "Announcify gets ";
-        subtitle += announcifyCheck.isChecked() ? "enabled" : "disabled";
-		
+		String subtitle = "Announcify gets ";
+		subtitle += announcifyCheck.isChecked() ? "enabled" : "disabled";
+
 		SmartPhonePluginHelper.setResult(this, "Announcify", subtitle, data);
-		
+
 		super.finish();
 	}
 }

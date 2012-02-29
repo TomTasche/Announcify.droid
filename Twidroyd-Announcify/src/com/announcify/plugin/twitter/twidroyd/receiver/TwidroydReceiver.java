@@ -10,10 +10,10 @@ import com.announcify.plugin.twitter.twidroyd.service.WorkerService;
 
 public class TwidroydReceiver extends BroadcastReceiver {
 
-    @Override
-    public void onReceive(final Context context, final Intent intent) {
-        intent.setComponent(new ComponentName(context, WorkerService.class));
-        intent.setAction(PluginService.ACTION_ANNOUNCE);
-        context.startService(intent);
-    }
+	@Override
+	public void onReceive(final Context context, final Intent intent) {
+		intent.setComponent(new ComponentName(context, WorkerService.class));
+		intent.setAction(PluginService.ACTION_ANNOUNCE);
+		context.startService(intent);
+	}
 }

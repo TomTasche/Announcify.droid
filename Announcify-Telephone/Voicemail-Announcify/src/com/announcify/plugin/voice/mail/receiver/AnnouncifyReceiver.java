@@ -10,11 +10,11 @@ import com.announcify.plugin.voice.mail.service.WorkerService;
 
 public class AnnouncifyReceiver extends BroadcastReceiver {
 
-    @Override
-    public void onReceive(final Context context, final Intent intent) {
-        intent.setComponent(new ComponentName(context, WorkerService.class));
-        context.startService(intent);
+	@Override
+	public void onReceive(final Context context, final Intent intent) {
+		intent.setComponent(new ComponentName(context, WorkerService.class));
+		context.startService(intent);
 
-        context.startService(new Intent(context, VoicemailService.class));
-    }
+		context.startService(new Intent(context, VoicemailService.class));
+	}
 }

@@ -30,18 +30,22 @@ public class SectionedAdapter extends CursorAdapter {
 
 	private final int idIndex;
 
-	public SectionedAdapter(final Context context, final PluginModel model, final Cursor cursor) {
+	public SectionedAdapter(final Context context, final PluginModel model,
+			final Cursor cursor) {
 		super(context, cursor);
 
 		this.model = model;
 		inflater = LayoutInflater.from(context);
-		indexer = new AlphabetIndexer(getCursor(), cursor.getColumnIndexOrThrow(PluginModel.KEY_PLUGIN_NAME), SECTIONS);
+		indexer = new AlphabetIndexer(getCursor(),
+				cursor.getColumnIndexOrThrow(PluginModel.KEY_PLUGIN_NAME),
+				SECTIONS);
 
 		idIndex = cursor.getColumnIndexOrThrow(BaseColumns._ID);
 	}
 
 	@Override
-	public void bindView(final View view, final Context context, final Cursor cursor) {
+	public void bindView(final View view, final Context context,
+			final Cursor cursor) {
 		final long id = cursor.getLong(idIndex);
 		view.setTag(id);
 
@@ -57,7 +61,8 @@ public class SectionedAdapter extends CursorAdapter {
 				boolean includeLocation = false;
 				Mode mode = Mode.LIVE;
 				boolean animation = true;
-				MobFoxView mobfoxView = new MobFoxView(context, publisherId, mode, includeLocation, animation);
+				MobFoxView mobfoxView = new MobFoxView(context, publisherId,
+						mode, includeLocation, animation);
 				mobfoxView.setId(R.id.admob);
 
 				((LinearLayout) view).addView(mobfoxView);
@@ -86,19 +91,26 @@ public class SectionedAdapter extends CursorAdapter {
 		}
 		view.findViewById(R.id.plugin_info).setVisibility(View.VISIBLE);
 
-		((ImageView) view.findViewById(R.id.icon)).setImageDrawable(context.getResources().getDrawable(R.drawable.launcher_icon));
+		((ImageView) view.findViewById(R.id.icon)).setImageDrawable(context
+				.getResources().getDrawable(R.drawable.launcher_icon));
 
 		((TextView) view.findViewById(R.id.plugin)).setText(model.getName(id));
 
 		final ImageView check = (ImageView) view.findViewById(R.id.check);
 		check.setTag(id);
-		check.setImageDrawable(context.getResources().getDrawable(model.getActive(id) ? R.drawable.btn_check_buttonless_on : R.drawable.btn_check_buttonless_off));
+		check.setImageDrawable(context.getResources().getDrawable(
+				model.getActive(id) ? R.drawable.btn_check_buttonless_on
+						: R.drawable.btn_check_buttonless_off));
 		check.setOnClickListener(new OnClickListener() {
 
 			public void onClick(final View v) {
 				model.togglePlugin((Long) v.getTag());
 
-				check.setImageDrawable(context.getResources().getDrawable(model.getActive(id) ? R.drawable.btn_check_buttonless_on : R.drawable.btn_check_buttonless_off));
+				check.setImageDrawable(context
+						.getResources()
+						.getDrawable(
+								model.getActive(id) ? R.drawable.btn_check_buttonless_on
+										: R.drawable.btn_check_buttonless_off));
 			}
 		});
 
@@ -112,15 +124,18 @@ public class SectionedAdapter extends CursorAdapter {
 	}
 
 	@Override
-	public View getView(final int position, View convertView, final ViewGroup parent) {
+	public View getView(final int position, View convertView,
+			final ViewGroup parent) {
 		convertView = super.getView(position, convertView, parent);
 
 		final int section = indexer.getSectionForPosition(position);
 
-		final TextView sectionView = (TextView) convertView.findViewById(R.id.section);
+		final TextView sectionView = (TextView) convertView
+				.findViewById(R.id.section);
 		if (indexer.getPositionForSection(section) == position) {
 			sectionView.setBackgroundColor(Color.parseColor("#AD0000"));
-			sectionView.setText(indexer.getSections()[section].toString().trim());
+			sectionView.setText(indexer.getSections()[section].toString()
+					.trim());
 			sectionView.setVisibility(View.VISIBLE);
 		} else {
 			sectionView.setVisibility(View.GONE);
@@ -131,7 +146,8 @@ public class SectionedAdapter extends CursorAdapter {
 	}
 
 	@Override
-	public View newView(final Context context, final Cursor cursor, final ViewGroup parent) {
+	public View newView(final Context context, final Cursor cursor,
+			final ViewGroup parent) {
 		return inflater.inflate(R.layout.list_item_plugin, parent, false);
 	}
 

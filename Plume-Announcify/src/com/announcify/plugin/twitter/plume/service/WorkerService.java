@@ -14,70 +14,77 @@ import com.announcify.plugin.twitter.plume.util.Settings;
 
 public class WorkerService extends PluginService {
 
-    public final static String ACTION_START_RINGTONE = "com.announcify.plugin.twitter.plume.ACTION_START_RINGTONE";
-    public final static String ACTION_STOP_RINGTONE = "com.announcify.plugin.twitter.plume.ACTION_STOP_RINGTONE";
+	public final static String ACTION_START_RINGTONE = "com.announcify.plugin.twitter.plume.ACTION_START_RINGTONE";
+	public final static String ACTION_STOP_RINGTONE = "com.announcify.plugin.twitter.plume.ACTION_STOP_RINGTONE";
 
-    private boolean paused;
+	private boolean paused;
 
-    public WorkerService() {
-        super("Announcify - Plume", ACTION_START_RINGTONE, ACTION_STOP_RINGTONE);
-    }
+	public WorkerService() {
+		super("Announcify - Plume", ACTION_START_RINGTONE, ACTION_STOP_RINGTONE);
+	}
 
-    @Override
-    protected void onHandleIntent(final Intent intent) {
-	// TODO: use ContentProvider?
-	// content://com.levelup.touiteur.provider/timeline/ - content://com.levelup.touiteur.provider/mentions/ - content://com.levelup.touiteur.provider/messages/
+	@Override
+	protected void onHandleIntent(final Intent intent) {
+		// TODO: use ContentProvider?
+		// content://com.levelup.touiteur.provider/timeline/ -
+		// content://com.levelup.touiteur.provider/mentions/ -
+		// content://com.levelup.touiteur.provider/messages/
 
-        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(getBaseContext()));
+		Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(
+				getBaseContext()));
 
-        if (settings == null) {
-            settings = new Settings(this);
-        }
+		if (settings == null) {
+			settings = new Settings(this);
+		}
 
-        if (ACTION_ANNOUNCE.equals(intent.getAction())) {
-            if (paused) {
-                return;
-            }
-            
-            if (intent.getIntExtra("UnreadM", 0) < 1 && intent.getIntExtra("UnreadD", 0) < 1) return;
+		if (ACTION_ANNOUNCE.equals(intent.getAction())) {
+			if (paused) {
+				return;
+			}
 
-            final String message = intent.getStringExtra("UnreadText");
-            String number = intent.getStringExtra("User");
+			if (intent.getIntExtra("UnreadM", 0) < 1
+					&& intent.getIntExtra("UnreadD", 0) < 1)
+				return;
 
-            final Settings settings = new Settings(this);
+			final String message = intent.getStringExtra("UnreadText");
+			String number = intent.getStringExtra("User");
 
-            if (number == null) {
-                number = "";
-            }
-            final Contact contact = new Contact(this, new Twitter(this), number);
+			final Settings settings = new Settings(this);
 
-            if (contact.getLookupString() == null || contact.getLookupString().equals("")) {
-                contact.setFullname(number);
-                contact.setLookupString("com.announcify.CHEAT");
-            }
+			if (number == null) {
+				number = "";
+			}
+			final Contact contact = new Contact(this, new Twitter(this), number);
 
-            if (!settings.isChuckNorris()) {
-                if (!ContactFilter.announcableContact(this, contact)) {
-                    playRingtone();
-                    return;
-                }
-            }
+			if (contact.getLookupString() == null
+					|| contact.getLookupString().equals("")) {
+				contact.setFullname(number);
+				contact.setLookupString("com.announcify.CHEAT");
+			}
 
-            final Formatter formatter = new Formatter(this, contact, settings);
+			if (!settings.isChuckNorris()) {
+				if (!ContactFilter.announcableContact(this, contact)) {
+					playRingtone();
+					return;
+				}
+			}
 
-            final AnnouncifyIntent announcify = new AnnouncifyIntent(this, settings);
-            announcify.setStopBroadcast(ACTION_START_RINGTONE);
-            announcify.announce(formatter.format(message));
+			final Formatter formatter = new Formatter(this, contact, settings);
 
-            paused = true;
-            new Handler().postDelayed(new Runnable() {
+			final AnnouncifyIntent announcify = new AnnouncifyIntent(this,
+					settings);
+			announcify.setStopBroadcast(ACTION_START_RINGTONE);
+			announcify.announce(formatter.format(message));
 
-                public void run() {
-                    paused = false;
-                }
-            }, settings.getShutUp());
-        } else {
-            super.onHandleIntent(intent);
-        }
-    }
+			paused = true;
+			new Handler().postDelayed(new Runnable() {
+
+				public void run() {
+					paused = false;
+				}
+			}, settings.getShutUp());
+		} else {
+			super.onHandleIntent(intent);
+		}
+	}
 }

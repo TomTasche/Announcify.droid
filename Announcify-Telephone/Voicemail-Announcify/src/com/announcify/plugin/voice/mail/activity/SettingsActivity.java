@@ -11,24 +11,27 @@ import com.announcify.plugin.voice.mail.util.Settings;
 
 public class SettingsActivity extends PluginActivity {
 
-    @Override
-    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        parseRingtone(requestCode, resultCode, data, RingtoneManager.TYPE_NOTIFICATION);
+	@Override
+	protected void onActivityResult(final int requestCode,
+			final int resultCode, final Intent data) {
+		parseRingtone(requestCode, resultCode, data,
+				RingtoneManager.TYPE_NOTIFICATION);
 
-        super.onActivityResult(requestCode, resultCode, data);
-    }
+		super.onActivityResult(requestCode, resultCode, data);
+	}
 
-    @Override
-    public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, new Settings(this), R.xml.preferences_settings);
-    }
+	@Override
+	public void onCreate(final Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState, new Settings(this),
+				R.xml.preferences_settings);
+	}
 
-    @Override
-    protected void onPause() {
-        final Intent serviceIntent = new Intent(this, VoicemailService.class);
-        stopService(serviceIntent);
-        startService(serviceIntent);
+	@Override
+	protected void onPause() {
+		final Intent serviceIntent = new Intent(this, VoicemailService.class);
+		stopService(serviceIntent);
+		startService(serviceIntent);
 
-        super.onPause();
-    }
+		super.onPause();
+	}
 }

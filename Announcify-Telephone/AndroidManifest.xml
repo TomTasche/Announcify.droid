@@ -142,5 +142,5 @@
 
 	<uses-sdk
 		android:minSdkVersion="7"
-		android:targetSdkVersion="9" />
+		android:targetSdkVersion="10" />
 </manifest> 

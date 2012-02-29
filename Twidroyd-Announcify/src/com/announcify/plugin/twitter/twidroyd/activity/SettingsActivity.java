@@ -10,17 +10,20 @@ import com.announcify.plugin.twitter.twidroyd.util.Settings;
 
 public class SettingsActivity extends PluginActivity {
 
-    @Override
-    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        parseRingtone(requestCode, resultCode, data, RingtoneManager.TYPE_NOTIFICATION);
+	@Override
+	protected void onActivityResult(final int requestCode,
+			final int resultCode, final Intent data) {
+		parseRingtone(requestCode, resultCode, data,
+				RingtoneManager.TYPE_NOTIFICATION);
 
-        super.onActivityResult(requestCode, resultCode, data);
-    }
+		super.onActivityResult(requestCode, resultCode, data);
+	}
 
-    @Override
-    public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, new Settings(this), R.xml.preferences_settings);
-        addPreferencesFromResource(R.xml.preferences_more_settings);
-        setExtraCustomListeners();
-    }
+	@Override
+	public void onCreate(final Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState, new Settings(this),
+				R.xml.preferences_settings);
+		addPreferencesFromResource(R.xml.preferences_more_settings);
+		setExtraCustomListeners();
+	}
 }

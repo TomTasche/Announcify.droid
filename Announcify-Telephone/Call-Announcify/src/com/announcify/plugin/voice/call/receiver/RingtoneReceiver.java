@@ -9,9 +9,9 @@ import com.announcify.plugin.voice.call.service.WorkerService;
 
 public class RingtoneReceiver extends BroadcastReceiver {
 
-    @Override
-    public void onReceive(final Context context, final Intent intent) {
-        intent.setComponent(new ComponentName(context, WorkerService.class));
-        context.startService(intent);
-    }
+	@Override
+	public void onReceive(final Context context, final Intent intent) {
+		intent.setComponent(new ComponentName(context, WorkerService.class));
+		context.startService(intent);
+	}
 }

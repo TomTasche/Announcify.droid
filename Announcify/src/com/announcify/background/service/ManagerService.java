@@ -24,115 +24,124 @@ import com.announcify.ui.control.RemoteControlDialog;
 
 public class ManagerService extends Service {
 
-    private NotificationManager notificationManager;
-    private ConditionManager conditionManager;
-    private ControlReceiver controlReceiver;
-    private AnnouncificationHandler handler;
-    private HandlerThread thread;
-    private Speaker speaker;
+	private NotificationManager notificationManager;
+	private ConditionManager conditionManager;
+	private ControlReceiver controlReceiver;
+	private AnnouncificationHandler handler;
+	private HandlerThread thread;
+	private Speaker speaker;
 
-    @Override
-    public IBinder onBind(final Intent arg0) {
-        return null;
-    }
+	@Override
+	public IBinder onBind(final Intent arg0) {
+		return null;
+	}
 
-    @Override
-    public void onCreate() {
-        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
+	@Override
+	public void onCreate() {
+		Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
 
-        super.onCreate();
+		super.onCreate();
 
-        final AnnouncifySettings settings = new AnnouncifySettings(this);
-        
-        thread = new HandlerThread("Announcifications");
-        thread.start();
+		final AnnouncifySettings settings = new AnnouncifySettings(this);
 
-        speaker = new Speaker(ManagerService.this, new OnInitListener() {
+		thread = new HandlerThread("Announcifications");
+		thread.start();
 
-            public void onInit(final int status) {
-                handler.sendEmptyMessage(AnnouncificationHandler.WHAT_START);
-            }
-        });
-        
-        handler = new AnnouncificationHandler(ManagerService.this, thread.getLooper(), speaker);
-        handler.post(new Runnable() {
+		speaker = new Speaker(ManagerService.this, new OnInitListener() {
 
-            public void run() {
-                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(ManagerService.this));
-            }
-        });
-        
-        controlReceiver = new ControlReceiver(handler);
-        final IntentFilter controlFilter = new IntentFilter();
-        controlFilter.addAction(RemoteControlDialog.ACTION_CONTINUE);
-        controlFilter.addAction(RemoteControlDialog.ACTION_PAUSE);
-        controlFilter.addAction(RemoteControlDialog.ACTION_SKIP);
-        registerReceiver(controlReceiver, controlFilter);
+			public void onInit(final int status) {
+				handler.sendEmptyMessage(AnnouncificationHandler.WHAT_START);
+			}
+		});
 
-        if (settings.isShowNotification()) {
-            final PendingIntent pendingIntent = PendingIntent.getActivity(this, 1993, new Intent(this, RemoteControlDialog.class), 0);
-            final Notification notification = new Notification(R.drawable.notification_icon, null, 0);
-            notification.setLatestEventInfo(this, "Important Announcification", "Press here to stop it.", pendingIntent);
-            startForeground(17, notification);
-        }
+		handler = new AnnouncificationHandler(ManagerService.this,
+				thread.getLooper(), speaker);
+		handler.post(new Runnable() {
 
-        conditionManager = new ConditionManager(this, settings);
+			public void run() {
+				Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(
+						ManagerService.this));
+			}
+		});
 
-    }
+		controlReceiver = new ControlReceiver(handler);
+		final IntentFilter controlFilter = new IntentFilter();
+		controlFilter.addAction(RemoteControlDialog.ACTION_CONTINUE);
+		controlFilter.addAction(RemoteControlDialog.ACTION_PAUSE);
+		controlFilter.addAction(RemoteControlDialog.ACTION_SKIP);
+		registerReceiver(controlReceiver, controlFilter);
 
-    @Override
-    public int onStartCommand(final Intent intent, final int flags, final int startId) {
-        if ((intent == null) || (intent.getExtras() == null)) {
-            return START_NOT_STICKY;
-        }
+		if (settings.isShowNotification()) {
+			final PendingIntent pendingIntent = PendingIntent.getActivity(this,
+					1993, new Intent(this, RemoteControlDialog.class), 0);
+			final Notification notification = new Notification(
+					R.drawable.notification_icon, null, 0);
+			notification.setLatestEventInfo(this, "Important Announcification",
+					"Press here to stop it.", pendingIntent);
+			startForeground(17, notification);
+		}
 
-        if ((intent.getExtras().getInt(PluginService.EXTRA_PRIORITY, 9) > 3) && conditionManager.isScreenOn()) {
-            // it's not a screen-on plugin. screen is on. stop.
-            return START_NOT_STICKY;
-        }
+		conditionManager = new ConditionManager(this, settings);
 
-        if (intent.getExtras().getInt(PluginService.EXTRA_PRIORITY, 9) <= 3) {
-            // it's a screen-on plugin. disable screen-on condition temporarily.
-            conditionManager.setOnCall(true);
-        }
+	}
 
-        final Message msg = handler.obtainMessage(AnnouncificationHandler.WHAT_PUT_QUEUE);
-        msg.setData(intent.getExtras());
-        handler.sendMessage(msg);
+	@Override
+	public int onStartCommand(final Intent intent, final int flags,
+			final int startId) {
+		if ((intent == null) || (intent.getExtras() == null)) {
+			return START_NOT_STICKY;
+		}
 
-        // we don't want android to restart the service after killing us
-        // (in order to prevent annoying duplicate announcements).
-        return START_NOT_STICKY;
-    }
+		if ((intent.getExtras().getInt(PluginService.EXTRA_PRIORITY, 9) > 3)
+				&& conditionManager.isScreenOn()) {
+			// it's not a screen-on plugin. screen is on. stop.
+			return START_NOT_STICKY;
+		}
 
-    @Override
-    public void onDestroy() {
-        Log.e("Announcify", "shutdown");
+		if (intent.getExtras().getInt(PluginService.EXTRA_PRIORITY, 9) <= 3) {
+			// it's a screen-on plugin. disable screen-on condition temporarily.
+			conditionManager.setOnCall(true);
+		}
 
-        if (handler != null) {
-            final Message msg = handler.obtainMessage(AnnouncificationHandler.WHAT_SHUTDOWN);
-            handler.sendMessage(msg);
-        }
+		final Message msg = handler
+				.obtainMessage(AnnouncificationHandler.WHAT_PUT_QUEUE);
+		msg.setData(intent.getExtras());
+		handler.sendMessage(msg);
 
-        if (controlReceiver != null) {
-            unregisterReceiver(controlReceiver);
-        }
+		// we don't want android to restart the service after killing us
+		// (in order to prevent annoying duplicate announcements).
+		return START_NOT_STICKY;
+	}
 
-        conditionManager.quit();
+	@Override
+	public void onDestroy() {
+		Log.e("Announcify", "shutdown");
 
-        if (speaker != null) {
-            speaker.shutdown();
-        }
+		if (handler != null) {
+			final Message msg = handler
+					.obtainMessage(AnnouncificationHandler.WHAT_SHUTDOWN);
+			handler.sendMessage(msg);
+		}
 
-        if ((thread != null) && thread.isAlive()) {
-            thread.interrupt();
-            thread.getLooper().quit();
-        }
+		if (controlReceiver != null) {
+			unregisterReceiver(controlReceiver);
+		}
 
-        if (notificationManager != null) {
-            notificationManager.cancel(17);
-        }
+		conditionManager.quit();
 
-        super.onDestroy();
-    }
+		if (speaker != null) {
+			speaker.shutdown();
+		}
+
+		if ((thread != null) && thread.isAlive()) {
+			thread.interrupt();
+			thread.getLooper().quit();
+		}
+
+		if (notificationManager != null) {
+			notificationManager.cancel(17);
+		}
+
+		super.onDestroy();
+	}
 }

@@ -15,65 +15,72 @@ import com.announcify.background.receiver.gravity.GravityListener;
 
 public class ConditionManager {
 
-    private final Context context;
-    private final ScreenReceiver screenReceiver;
-    private final GravityListener gravityReceiver;
-    private final CallReceiver callReceiver;
-    private final HeadsetReceiver headsetReceiver;
+	private final Context context;
+	private final ScreenReceiver screenReceiver;
+	private final GravityListener gravityReceiver;
+	private final CallReceiver callReceiver;
+	private final HeadsetReceiver headsetReceiver;
 
-    public ConditionManager(final Context context, final AnnouncifySettings settings) {
-        this.context = context;
+	public ConditionManager(final Context context,
+			final AnnouncifySettings settings) {
+		this.context = context;
 
-        if (settings.isGravityCondition()) {
-            gravityReceiver = new GravityReceiver(context);
-            gravityReceiver.setAccuracy(2f);
-        } else {
-            gravityReceiver = null;
-        }
+		if (settings.isGravityCondition()) {
+			gravityReceiver = new GravityReceiver(context);
+			gravityReceiver.setAccuracy(2f);
+		} else {
+			gravityReceiver = null;
+		}
 
-        if (settings.isScreenCondition()) {
-            screenReceiver = new ScreenReceiver(context);
-            final IntentFilter screenFilter = new IntentFilter();
-            screenFilter.addAction(Intent.ACTION_SCREEN_ON);
-            screenFilter.addAction(Intent.ACTION_SCREEN_OFF);
-            context.registerReceiver(screenReceiver, screenFilter);
-        } else {
-            screenReceiver = null;
-        }
+		if (settings.isScreenCondition()) {
+			screenReceiver = new ScreenReceiver(context);
+			final IntentFilter screenFilter = new IntentFilter();
+			screenFilter.addAction(Intent.ACTION_SCREEN_ON);
+			screenFilter.addAction(Intent.ACTION_SCREEN_OFF);
+			context.registerReceiver(screenReceiver, screenFilter);
+		} else {
+			screenReceiver = null;
+		}
 
-        if (settings.isDiscreetCondition()) {
-            headsetReceiver = new HeadsetReceiver();
-            Intent headsetReceiverIntent = context.registerReceiver(headsetReceiver, new IntentFilter(Intent.ACTION_HEADSET_PLUG));
-            if(headsetReceiverIntent==null)
-            	headsetReceiver.onReceive(context, headsetReceiverIntent);
-        } else {
-            headsetReceiver = null;
-        }
+		if (settings.isDiscreetCondition()) {
+			headsetReceiver = new HeadsetReceiver();
+			Intent headsetReceiverIntent = context.registerReceiver(
+					headsetReceiver, new IntentFilter(
+							Intent.ACTION_HEADSET_PLUG));
+			if (headsetReceiverIntent == null)
+				headsetReceiver.onReceive(context, headsetReceiverIntent);
+		} else {
+			headsetReceiver = null;
+		}
 
-        callReceiver = new CallReceiver(context);
-        ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).listen(callReceiver, PhoneStateListener.LISTEN_CALL_STATE);
-    }
+		callReceiver = new CallReceiver(context);
+		((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE))
+				.listen(callReceiver, PhoneStateListener.LISTEN_CALL_STATE);
+	}
 
-    public boolean isScreenOn() {
-        return screenReceiver != null ? screenReceiver.isScreenOn() : false;
-    }
+	public boolean isScreenOn() {
+		return screenReceiver != null ? screenReceiver.isScreenOn() : false;
+	}
 
-    public void quit() {
-        if (screenReceiver != null) {
-            context.unregisterReceiver(screenReceiver);
-        }
-        if (callReceiver != null) {
-            ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).listen(callReceiver, android.telephony.PhoneStateListener.LISTEN_NONE);
-        }
-        if (gravityReceiver != null) {
-            gravityReceiver.stopAccelerometer();
-        }
-        if (headsetReceiver != null) {
-            context.unregisterReceiver(headsetReceiver);
-        }
-    }
+	public void quit() {
+		if (screenReceiver != null) {
+			context.unregisterReceiver(screenReceiver);
+		}
+		if (callReceiver != null) {
+			((TelephonyManager) context
+					.getSystemService(Context.TELEPHONY_SERVICE)).listen(
+					callReceiver,
+					android.telephony.PhoneStateListener.LISTEN_NONE);
+		}
+		if (gravityReceiver != null) {
+			gravityReceiver.stopAccelerometer();
+		}
+		if (headsetReceiver != null) {
+			context.unregisterReceiver(headsetReceiver);
+		}
+	}
 
-    public void setOnCall(final boolean onCall) {
-        callReceiver.setOnCall(onCall);
-    }
+	public void setOnCall(final boolean onCall) {
+		callReceiver.setOnCall(onCall);
+	}
 }

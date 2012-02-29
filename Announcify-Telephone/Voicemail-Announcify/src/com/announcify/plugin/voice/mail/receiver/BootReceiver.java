@@ -8,8 +8,8 @@ import com.announcify.plugin.voice.mail.service.VoicemailService;
 
 public class BootReceiver extends BroadcastReceiver {
 
-    @Override
-    public void onReceive(final Context context, final Intent intent) {
-        context.startService(new Intent(context, VoicemailService.class));
-    }
+	@Override
+	public void onReceive(final Context context, final Intent intent) {
+		context.startService(new Intent(context, VoicemailService.class));
+	}
 }

@@ -30,21 +30,4 @@
 		<nature>com.android.ide.eclipse.adt.AndroidNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>API-Announcify_src</name>
-			<type>2</type>
-			<locationURI>_android_API_Announcify_5ca3e3d3/src</locationURI>
-		</link>
-		<link>
-			<name>MMS-Announcify_src</name>
-			<type>2</type>
-			<locationURI>_android_MMS_Announcify_7470b97a/src</locationURI>
-		</link>
-		<link>
-			<name>SMS-Announcify_src</name>
-			<type>2</type>
-			<locationURI>_android_SMS_Announcify_bfa37334/src</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>

@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.announcify.telephone;
+package com.announcify.developers.sample;
 
 public final class R {
     public static final class array {
@@ -88,8 +88,7 @@ containing a value of this type.
     }
     public static final class string {
         public static int app_name=0x7f070023;
-        public static int event_call=0x7f070024;
-        public static int event_voicemail=0x7f070025;
+        public static int event=0x7f070024;
         public static int preference_annoying_mode_summary=0x7f070022;
         public static int preference_annoying_mode_title=0x7f070021;
         public static int preference_break_summary=0x7f07000c;
@@ -134,8 +133,8 @@ containing a value of this type.
     }
     public static final class xml {
         public static int preferences_extra_settings=0x7f040000;
-        public static int preferences_settings=0x7f040001;
-        public static int preferences_settings_call=0x7f040002;
+        public static int preferences_more_settings=0x7f040001;
+        public static int preferences_settings=0x7f040002;
     }
     public static final class styleable {
         /** Attributes that can be used with a ActionBar.
@@ -144,7 +143,7 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ActionBar_bar_title com.announcify.telephone:bar_title}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_bar_title com.announcify.developers.sample:bar_title}</code></td><td></td></tr>
            </table>
            @see #ActionBar_bar_title
          */
@@ -152,7 +151,7 @@ containing a value of this type.
             0x7f010000
         };
         /**
-          <p>This symbol is the offset where the {@link com.announcify.telephone.R.attr#bar_title}
+          <p>This symbol is the offset where the {@link com.announcify.developers.sample.R.attr#bar_title}
           attribute's value can be found in the {@link #ActionBar} array.
 
 

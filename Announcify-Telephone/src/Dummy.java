@@ -3,4 +3,10 @@
  */
 public class Dummy {
 
+	private Dummy() {
+		if (com.announcify.plugin.voice.call.activity.SettingsActivity.class != null) {
+		}
+		if (com.announcify.plugin.voice.mail.activity.SettingsActivity.class != null) {
+		}
+	}
 }

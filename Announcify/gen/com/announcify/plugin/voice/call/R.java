@@ -19,16 +19,16 @@ public final class R {
 		public static final int actionbar_item = 0x7f0b0007;
 	}
 	public static final class style {
-		public static final int ActionBarItem = 0x7f090001;
 		public static final int ActionBar = 0x7f090000;
 		public static final int Theme_Light_NoTitleBar_Announcify = 0x7f090003;
+		public static final int ActionBarItem = 0x7f090001;
 		public static final int ActionBarHomeItem = 0x7f090002;
 	}
 	public static final class color {
 		public static final int actionbar_title = 0x7f050001;
 		public static final int actionbar_background_item_pressed_end = 0x7f050005;
-		public static final int actionbar_background_start = 0x7f050002;
 		public static final int actionbar_background_item_pressed_start = 0x7f050004;
+		public static final int actionbar_background_start = 0x7f050002;
 		public static final int actionbar_separator = 0x7f050000;
 		public static final int actionbar_background_end = 0x7f050003;
 	}
@@ -68,8 +68,8 @@ public final class R {
 		public static final int preference_break_title = 0x7f07000b;
 		public static final int preference_custom_text_title = 0x7f070004;
 		public static final int preference_shut_up_title = 0x7f070017;
-		public static final int preference_read_own_title = 0x7f070019;
 		public static final int preference_formatstring_add_variable = 0x7f070002;
+		public static final int preference_read_own_title = 0x7f070019;
 	}
 	public static final class layout {
 		public static final int actionbar = 0x7f030000;
@@ -95,15 +95,15 @@ public final class R {
 		public static final int gd_action_bar_sort_by_size_normal = 0x7f02000e;
 		public static final int gd_action_bar_compose_normal = 0x7f020009;
 		public static final int gd_action_bar_talk_normal = 0x7f020010;
-		public static final int gd_action_bar_add_normal = 0x7f020008;
 		public static final int gd_action_bar_edit_normal = 0x7f02000a;
+		public static final int gd_action_bar_add_normal = 0x7f020008;
 		public static final int gd_action_bar_refresh_normal = 0x7f02000c;
 		public static final int gd_segment_divider = 0x7f020011;
 	}
 	public static final class xml {
+		public static final int preferences_extra_settings = 0x7f040000;
 		public static final int preferences_settings_call = 0x7f040005;
 		public static final int preferences_settings = 0x7f040004;
-		public static final int preferences_extra_settings = 0x7f040000;
 	}
 	public static final class attr {
 		public static final int bar_title = 0x7f010000;

@@ -19,16 +19,16 @@ public final class R {
 		public static final int actionbar_item = 0x7f0b0007;
 	}
 	public static final class style {
-		public static final int ActionBarItem = 0x7f090001;
 		public static final int ActionBar = 0x7f090000;
 		public static final int Theme_Light_NoTitleBar_Announcify = 0x7f090003;
+		public static final int ActionBarItem = 0x7f090001;
 		public static final int ActionBarHomeItem = 0x7f090002;
 	}
 	public static final class color {
 		public static final int actionbar_title = 0x7f050001;
 		public static final int actionbar_background_item_pressed_end = 0x7f050005;
-		public static final int actionbar_background_start = 0x7f050002;
 		public static final int actionbar_background_item_pressed_start = 0x7f050004;
+		public static final int actionbar_background_start = 0x7f050002;
 		public static final int actionbar_separator = 0x7f050000;
 		public static final int actionbar_background_end = 0x7f050003;
 	}
@@ -40,8 +40,8 @@ public final class R {
 		public static final int preference_break_summary = 0x7f07000c;
 		public static final int preference_custom_save = 0x7f070006;
 		public static final int preference_repeat_title = 0x7f07000d;
-		public static final int preference_repeat_summary = 0x7f07000e;
 		public static final int preference_chuck_norris_title = 0x7f07001f;
+		public static final int preference_repeat_summary = 0x7f07000e;
 		public static final int preference_discreet_summary = 0x7f070016;
 		public static final int preference_known_summary = 0x7f070014;
 		public static final int preference_read_mail_header_summary = 0x7f07001e;
@@ -94,8 +94,8 @@ public final class R {
 		public static final int gd_action_bar_sort_by_size_normal = 0x7f02000e;
 		public static final int gd_action_bar_compose_normal = 0x7f020009;
 		public static final int gd_action_bar_talk_normal = 0x7f020010;
-		public static final int gd_action_bar_add_normal = 0x7f020008;
 		public static final int gd_action_bar_edit_normal = 0x7f02000a;
+		public static final int gd_action_bar_add_normal = 0x7f020008;
 		public static final int gd_action_bar_refresh_normal = 0x7f02000c;
 		public static final int gd_segment_divider = 0x7f020011;
 	}

@@ -955,11 +955,12 @@ containing a value of this type.
         public static final int gd_action_bar_star_normal=0x7f020079;
         public static final int gd_segment_divider=0x7f02007a;
         public static final int ic_menu_preferences=0x7f02007b;
-        public static final int icon=0x7f02007c;
-        public static final int launcher_icon=0x7f02007d;
-        public static final int list_vertical_divider=0x7f02007e;
-        public static final int notification_icon=0x7f02007f;
-        public static final int widget_off=0x7f020080;
+        public static final int ic_toggle=0x7f02007c;
+        public static final int icon=0x7f02007d;
+        public static final int launcher_icon=0x7f02007e;
+        public static final int list_vertical_divider=0x7f02007f;
+        public static final int notification_icon=0x7f020080;
+        public static final int widget_off=0x7f020081;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f050020;
@@ -1019,14 +1020,11 @@ containing a value of this type.
         public static final int listMode=0x7f050002;
         public static final int menu_activate=0x7f050045;
         public static final int menu_edit=0x7f050047;
-        public static final int menu_help=0x7f05004a;
-        public static final int menu_plugins=0x7f05004b;
-        public static final int menu_rate=0x7f05004c;
+        public static final int menu_rate=0x7f05004a;
         public static final int menu_remove=0x7f050043;
         public static final int menu_report=0x7f050046;
-        public static final int menu_share=0x7f05004d;
+        public static final int menu_share=0x7f05004b;
         public static final int menu_toggle=0x7f050049;
-        public static final int menu_translate=0x7f05004e;
         public static final int menu_uninstall=0x7f050044;
         public static final int normal=0x7f050001;
         public static final int plugin=0x7f05003c;

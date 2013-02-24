@@ -101,11 +101,12 @@ public final class R {
 		public static final int abs__ic_commit_search_api_holo_dark = 0x7f020028;
 		public static final int abs__btn_cab_done_holo_light = 0x7f020017;
 		public static final int abs__list_pressed_holo_light = 0x7f02003e;
-		public static final int launcher_icon = 0x7f02007d;
+		public static final int launcher_icon = 0x7f02007e;
 		public static final int abs__textfield_search_right_default_holo_light = 0x7f020066;
 		public static final int abs__ic_ab_back_holo_light = 0x7f02001f;
 		public static final int abs__list_selector_background_transition_holo_dark = 0x7f02003f;
 		public static final int abs__spinner_ab_disabled_holo_light = 0x7f020057;
+		public static final int ic_toggle = 0x7f02007c;
 		public static final int abs__ic_cab_done_holo_light = 0x7f020021;
 		public static final int abs__ic_menu_share_holo_light = 0x7f020031;
 		public static final int abs__spinner_ab_default_holo_dark = 0x7f020054;

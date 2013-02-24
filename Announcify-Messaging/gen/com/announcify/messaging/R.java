@@ -943,8 +943,9 @@ containing a value of this type.
         public static int gd_action_bar_sort_by_size_normal=0x7f020074;
         public static int gd_action_bar_star_normal=0x7f020075;
         public static int gd_segment_divider=0x7f020076;
-        public static int icon=0x7f020077;
-        public static int launcher_icon=0x7f020078;
+        public static int ic_toggle=0x7f020077;
+        public static int icon=0x7f020078;
+        public static int launcher_icon=0x7f020079;
     }
     public static final class id {
         public static int abs__action_bar=0x7f050020;

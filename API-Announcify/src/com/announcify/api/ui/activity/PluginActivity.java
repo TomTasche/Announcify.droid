@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.announcify.api.R;
 import com.announcify.api.background.util.PluginSettings;
 
@@ -59,23 +60,6 @@ public class PluginActivity extends SherlockPreferenceActivity {
 		getListView().setFastScrollEnabled(true);
 
 		this.settings = settings;
-
-		// TODO: ASC - implement ABS
-		// final ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
-		// actionBar.setTitle(settings.getEventType());
-		//
-		// actionBar.setHomeAction(new ActionBar.IntentAction(this,
-		// ActivityUtils.getHomeIntent(), R.drawable.launcher_icon));
-		//
-		// actionBar.addAction(new ActionBar.IntentAction(this,
-		// ActivityUtils.getHelpIntent(),
-		// R.drawable.gd_action_bar_talk_normal));
-		// actionBar.addAction(new ActionBar.IntentAction(this,
-		// ActivityUtils.getPluginsIntent(),
-		// R.drawable.gd_action_bar_add_normal));
-		// actionBar.addAction(new ActionBar.IntentAction(this,
-		// ActivityUtils.getShareIntent(this),
-		// R.drawable.gd_action_bar_share_normal));
 
 		getPreferenceManager().setSharedPreferencesName(
 				settings.getSharedPreferencesName());
@@ -330,5 +314,17 @@ public class PluginActivity extends SherlockPreferenceActivity {
 								return true;
 							}
 						});
+	}
+	
+		public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+			Intent intent = ActivityUtils.getHomeIntent();
+			startActivity(intent);
+			return true;
+		default:
+			return (super.onOptionsItemSelected(item));
+		}
 	}
 }

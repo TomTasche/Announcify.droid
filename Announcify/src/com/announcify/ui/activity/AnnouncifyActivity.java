@@ -166,16 +166,6 @@ public class AnnouncifyActivity extends BaseActivity implements
 	@Override
 	public boolean onOptionsItemSelected(
 			com.actionbarsherlock.view.MenuItem item) {
-		if (R.id.itemMainmenuShare == item.getItemId()) {
-			startActivity(ActivityUtils.getShareIntent(this.getBaseContext()));
-		} else {
-			return false;
-		}
-		return true;
-	}
-
-	@Override
-	public boolean onMenuItemSelected(final int featureId, final MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_toggle:
 			final boolean activate = !model.getActive(model
@@ -194,8 +184,9 @@ public class AnnouncifyActivity extends BaseActivity implements
 			break;
 
 		case R.id.menu_rate:
-			startActivity(new Intent(Intent.ACTION_VIEW,
-					Uri.parse("http://market.announcify.com/")));
+			startActivity(new Intent(
+					Intent.ACTION_VIEW,
+					Uri.parse("https://play.google.com/store/apps/details?id=org.mailboxer.saymyname")));
 
 			break;
 
@@ -204,20 +195,15 @@ public class AnnouncifyActivity extends BaseActivity implements
 
 			break;
 
-		case R.id.menu_translate:
-			startActivity(new Intent(Intent.ACTION_VIEW,
-					Uri.parse("http://goo.gl/MmR5D")));
-
-			break;
 		}
 
-		return super.onMenuItemSelected(featureId, item);
+		return true;
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.clear();
-		getSupportMenuInflater().inflate(R.menu.main_menu, menu);
+		getSupportMenuInflater().inflate(R.menu.menu_main, menu);
 		return true;
 	}
 

@@ -4,7 +4,6 @@ import org.mailboxer.saymyname.R;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.provider.BaseColumns;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
@@ -19,10 +18,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.announcify.api.background.sql.model.PluginModel;
+import com.emilsjolander.components.stickylistheaders.StickyListHeadersAdapter;
 import com.mobfox.sdk.MobFoxView;
 import com.mobfox.sdk.Mode;
 
-public class SectionedAdapter extends CursorAdapter {
+public class StickyListBaseAdapter extends CursorAdapter implements
+		StickyListHeadersAdapter {
 
 	private static final String SECTIONS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -32,8 +33,8 @@ public class SectionedAdapter extends CursorAdapter {
 
 	private final int idIndex;
 
-	public SectionedAdapter(final Context context, final PluginModel model,
-			final Cursor cursor) {
+	public StickyListBaseAdapter(final Context context,
+			final PluginModel model, final Cursor cursor) {
 		super(context, cursor);
 
 		this.model = model;
@@ -129,24 +130,6 @@ public class SectionedAdapter extends CursorAdapter {
 	public View getView(final int position, View convertView,
 			final ViewGroup parent) {
 		convertView = super.getView(position, convertView, parent);
-
-		final int section = indexer.getSectionForPosition(position);
-
-		final TextView sectionView = (TextView) convertView
-				.findViewById(R.id.section);
-		if (indexer.getPositionForSection(section) == position) {
-			SpannableString content = new SpannableString(
-					indexer.getSections()[section].toString().trim());
-			content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
-			sectionView.setText(content);
-			sectionView.setTextColor(convertView.getResources().getColor(
-					R.color.highlight_color));
-			sectionView.setVisibility(View.VISIBLE);
-		} else {
-			sectionView.setVisibility(View.GONE);
-			sectionView.setText(null);
-		}
-
 		return convertView;
 	}
 
@@ -161,5 +144,34 @@ public class SectionedAdapter extends CursorAdapter {
 		super.notifyDataSetChanged();
 
 		indexer.onChanged();
+	}
+
+	public View getHeaderView(int position, View convertView, ViewGroup parent) {
+		HeaderViewHolder holder;
+		if (convertView == null) {
+			holder = new HeaderViewHolder();
+			convertView = inflater.inflate(R.layout.list_row_header, parent,
+					false);
+			holder.text = (TextView) convertView.findViewById(R.id.headerText);
+			convertView.setTag(holder);
+		} else {
+			holder = (HeaderViewHolder) convertView.getTag();
+		}
+		// set header text as first char in name
+		char headerChar = indexer.getSections()[indexer
+				.getSectionForPosition(position)].toString().trim().charAt(0);
+		String headerText = Character.toString(headerChar);
+		holder.text.setText(headerText);
+		return convertView;
+	}
+
+	class HeaderViewHolder {
+		TextView text;
+	}
+
+	public long getHeaderId(int position) {
+		final int section = indexer.getSectionForPosition(position);
+
+		return indexer.getSections()[section].toString().trim().charAt(0);
 	}
 }

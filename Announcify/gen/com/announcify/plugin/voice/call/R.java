@@ -101,7 +101,7 @@ public final class R {
 		public static final int abs__ic_commit_search_api_holo_dark = 0x7f020028;
 		public static final int abs__btn_cab_done_holo_light = 0x7f020017;
 		public static final int abs__list_pressed_holo_light = 0x7f02003e;
-		public static final int launcher_icon = 0x7f02007c;
+		public static final int launcher_icon = 0x7f02007d;
 		public static final int abs__textfield_search_right_default_holo_light = 0x7f020066;
 		public static final int abs__ic_ab_back_holo_light = 0x7f02001f;
 		public static final int abs__list_selector_background_transition_holo_dark = 0x7f02003f;
@@ -112,7 +112,7 @@ public final class R {
 		public static final int abs__tab_unselected_pressed_holo = 0x7f020062;
 		public static final int abs__ic_menu_moreoverflow_normal_holo_light = 0x7f02002f;
 		public static final int abs__progress_horizontal_holo_dark = 0x7f020049;
-		public static final int icon = 0x7f02007b;
+		public static final int icon = 0x7f02007c;
 		public static final int abs__ic_voice_search_api_holo_light = 0x7f020035;
 		public static final int abs__progress_bg_holo_dark = 0x7f020047;
 		public static final int abs__btn_cab_done_default_holo_light = 0x7f020013;
@@ -562,21 +562,21 @@ public final class R {
 		public static final int Widget_Sherlock_SearchAutoCompleteTextView = 0x7f0b0034;
 	}
 	public static final class color {
-		public static final int abs__primary_text_disable_only_holo_light = 0x7f070008;
+		public static final int abs__primary_text_disable_only_holo_light = 0x7f070009;
 		public static final int abs__bright_foreground_holo_dark = 0x7f070002;
 		public static final int abs__bright_foreground_holo_light = 0x7f070003;
-		public static final int abs__primary_text_holo_dark = 0x7f070009;
+		public static final int abs__primary_text_holo_dark = 0x7f07000a;
 		public static final int abs__bright_foreground_disabled_holo_light = 0x7f070005;
 		public static final int abs__bright_foreground_disabled_holo_dark = 0x7f070004;
 		public static final int abs__background_holo_light = 0x7f070001;
-		public static final int abs__primary_text_disable_only_holo_dark = 0x7f070007;
-		public static final int abs__primary_text_holo_light = 0x7f07000a;
+		public static final int abs__primary_text_disable_only_holo_dark = 0x7f070008;
+		public static final int abs__primary_text_holo_light = 0x7f07000b;
 		public static final int abs__background_holo_dark = 0x7f070000;
 	}
 	public static final class layout {
 		public static final int abs__action_menu_layout = 0x7f030005;
 		public static final int abs__action_mode_bar = 0x7f030006;
-		public static final int sherlock_spinner_item = 0x7f03001c;
+		public static final int sherlock_spinner_item = 0x7f03001e;
 		public static final int abs__activity_chooser_view = 0x7f030008;
 		public static final int abs__search_view = 0x7f030014;
 		public static final int abs__popup_menu_item_layout = 0x7f03000e;
@@ -589,7 +589,7 @@ public final class R {
 		public static final int abs__activity_chooser_view_list_item = 0x7f030009;
 		public static final int abs__screen_simple_overlay_action_mode = 0x7f030012;
 		public static final int abs__screen_action_bar = 0x7f03000f;
-		public static final int sherlock_spinner_dropdown_item = 0x7f03001b;
+		public static final int sherlock_spinner_dropdown_item = 0x7f03001d;
 		public static final int abs__search_dropdown_item_icons_2line = 0x7f030013;
 		public static final int abs__action_bar_title_item = 0x7f030003;
 		public static final int abs__screen_action_bar_overlay = 0x7f030010;

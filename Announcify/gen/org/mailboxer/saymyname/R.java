@@ -714,10 +714,11 @@ containing a value of this type.
         public static final int abs__bright_foreground_disabled_holo_light=0x7f070005;
         public static final int abs__bright_foreground_holo_dark=0x7f070002;
         public static final int abs__bright_foreground_holo_light=0x7f070003;
-        public static final int abs__primary_text_disable_only_holo_dark=0x7f070007;
-        public static final int abs__primary_text_disable_only_holo_light=0x7f070008;
-        public static final int abs__primary_text_holo_dark=0x7f070009;
-        public static final int abs__primary_text_holo_light=0x7f07000a;
+        public static final int abs__primary_text_disable_only_holo_dark=0x7f070008;
+        public static final int abs__primary_text_disable_only_holo_light=0x7f070009;
+        public static final int abs__primary_text_holo_dark=0x7f07000a;
+        public static final int abs__primary_text_holo_light=0x7f07000b;
+        public static final int background=0x7f070007;
         public static final int highlight_color=0x7f070006;
     }
     public static final class dimen {
@@ -953,11 +954,12 @@ containing a value of this type.
         public static final int gd_action_bar_sort_by_size_normal=0x7f020078;
         public static final int gd_action_bar_star_normal=0x7f020079;
         public static final int gd_segment_divider=0x7f02007a;
-        public static final int icon=0x7f02007b;
-        public static final int launcher_icon=0x7f02007c;
-        public static final int list_vertical_divider=0x7f02007d;
-        public static final int notification_icon=0x7f02007e;
-        public static final int widget_off=0x7f02007f;
+        public static final int ic_menu_preferences=0x7f02007b;
+        public static final int icon=0x7f02007c;
+        public static final int launcher_icon=0x7f02007d;
+        public static final int list_vertical_divider=0x7f02007e;
+        public static final int notification_icon=0x7f02007f;
+        public static final int widget_off=0x7f020080;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f050020;
@@ -1004,14 +1006,15 @@ containing a value of this type.
         public static final int auto_edit_chooser=0x7f050033;
         public static final int button_add=0x7f050037;
         public static final int button_speak=0x7f050036;
-        public static final int check=0x7f050040;
+        public static final int check=0x7f05003f;
         public static final int check_block=0x7f050032;
         public static final int disableHome=0x7f050009;
         public static final int edit_query=0x7f050026;
         public static final int edit_replace=0x7f050034;
         public static final int edit_with=0x7f050035;
+        public static final int headerText=0x7f050040;
         public static final int homeAsUp=0x7f050006;
-        public static final int icon=0x7f05003c;
+        public static final int icon=0x7f05003b;
         public static final int itemMainmenuShare=0x7f050048;
         public static final int listMode=0x7f050002;
         public static final int menu_activate=0x7f050045;
@@ -1026,11 +1029,10 @@ containing a value of this type.
         public static final int menu_translate=0x7f05004e;
         public static final int menu_uninstall=0x7f050044;
         public static final int normal=0x7f050001;
-        public static final int plugin=0x7f05003d;
-        public static final int plugin_info=0x7f05003b;
-        public static final int section=0x7f05003a;
-        public static final int separator=0x7f05003f;
-        public static final int settings=0x7f05003e;
+        public static final int plugin=0x7f05003c;
+        public static final int plugin_info=0x7f05003a;
+        public static final int separator=0x7f05003e;
+        public static final int settings=0x7f05003d;
         public static final int showCustom=0x7f050008;
         public static final int showHome=0x7f050005;
         public static final int showTitle=0x7f050007;
@@ -1071,10 +1073,12 @@ containing a value of this type.
         public static final int activity_replace=0x7f030018;
         public static final int empty=0x7f030019;
         public static final int list_item_plugin=0x7f03001a;
-        public static final int sherlock_spinner_dropdown_item=0x7f03001b;
-        public static final int sherlock_spinner_item=0x7f03001c;
-        public static final int widget=0x7f03001d;
-        public static final int widget_control=0x7f03001e;
+        public static final int list_row_header=0x7f03001b;
+        public static final int main_list=0x7f03001c;
+        public static final int sherlock_spinner_dropdown_item=0x7f03001d;
+        public static final int sherlock_spinner_item=0x7f03001e;
+        public static final int widget=0x7f03001f;
+        public static final int widget_control=0x7f030020;
     }
     public static final class menu {
         public static final int context_choose=0x7f0d0000;

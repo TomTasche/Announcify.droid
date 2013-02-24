@@ -25,7 +25,7 @@ import com.announcify.api.background.sql.model.PluginModel;
 import com.announcify.api.ui.activity.ActivityUtils;
 import com.announcify.api.ui.activity.BaseActivity;
 import com.announcify.background.sql.AnnouncifyProvider;
-import com.announcify.ui.widget.SectionedAdapter;
+import com.announcify.ui.widget.StickyListBaseAdapter;
 
 public class AnnouncifyActivity extends BaseActivity {
 
@@ -46,7 +46,7 @@ public class AnnouncifyActivity extends BaseActivity {
 	private Cursor cursor;
 	private PluginModel model;
 	private ContentObserver observer;
-	private SectionedAdapter adapter;
+	private StickyListBaseAdapter adapter;
 
 	private ListView getListView() {
 		return (ListView) findViewById(android.R.id.list);
@@ -106,10 +106,8 @@ public class AnnouncifyActivity extends BaseActivity {
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState, R.layout.actionbar_list);
-
-		getListView().setBackgroundColor(Color.WHITE);
-		getListView().setCacheColorHint(Color.TRANSPARENT);
+		super.onCreate(savedInstanceState, R.layout.main_list);
+		
 		getListView().setFastScrollEnabled(true);
 
 		sendStickyBroadcast(new Intent("com.announcify.ACTION_PLUGIN_CONTACT"));
@@ -248,7 +246,7 @@ public class AnnouncifyActivity extends BaseActivity {
 				Uri.withAppendedPath(AnnouncifyProvider.PROVIDER_URI,
 						PluginModel.TABLE_NAME), false, observer);
 
-		adapter = new SectionedAdapter(this, model, cursor);
+		adapter = new StickyListBaseAdapter(this, model, cursor);
 		getListView().setAdapter(adapter);
 	}
 }

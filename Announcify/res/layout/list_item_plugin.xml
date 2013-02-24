@@ -38,6 +38,8 @@
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
         android:src="@drawable/list_vertical_divider" />
 
     <com.announcify.ui.widget.GreedyImageView

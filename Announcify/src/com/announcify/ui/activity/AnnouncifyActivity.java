@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.ContentObserver;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,8 +14,10 @@ import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -27,7 +28,11 @@ import com.announcify.api.ui.activity.BaseActivity;
 import com.announcify.background.sql.AnnouncifyProvider;
 import com.announcify.ui.widget.StickyListBaseAdapter;
 
-public class AnnouncifyActivity extends BaseActivity {
+public class AnnouncifyActivity extends BaseActivity implements
+		OnScrollListener {
+
+	private static final String KEY_LIST_POSITION = "KEY_LIST_POSITION";
+	private int firstVisible;
 
 	private class AnnouncifyObserver extends ContentObserver {
 
@@ -107,7 +112,7 @@ public class AnnouncifyActivity extends BaseActivity {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState, R.layout.main_list);
-		
+
 		getListView().setFastScrollEnabled(true);
 
 		sendStickyBroadcast(new Intent("com.announcify.ACTION_PLUGIN_CONTACT"));
@@ -133,6 +138,13 @@ public class AnnouncifyActivity extends BaseActivity {
 		model = new PluginModel(this);
 
 		refreshList();
+		getListView().setSelection(firstVisible);
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putInt(KEY_LIST_POSITION, firstVisible);
 	}
 
 	@Override
@@ -248,5 +260,13 @@ public class AnnouncifyActivity extends BaseActivity {
 
 		adapter = new StickyListBaseAdapter(this, model, cursor);
 		getListView().setAdapter(adapter);
+	}
+
+	public void onScrollStateChanged(AbsListView view, int scrollState) {
+	}
+
+	public void onScroll(AbsListView view, int firstVisibleItem,
+			int visibleItemCount, int totalItemCount) {
+		this.firstVisible = firstVisibleItem;
 	}
 }

@@ -1,3 +1,6 @@
 [submodule "ActionBarSherlock"]
 	path = ActionBarSherlock
 	url = https://github.com/JakeWharton/ActionBarSherlock.git
+[submodule "StickyListHeaders"]
+	path = StickyListHeaders
+	url = https://github.com/emilsjolander/StickyListHeaders.git

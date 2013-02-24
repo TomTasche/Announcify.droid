@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="Theme.Announcify" parent="Theme.Sherlock.Light.DarkActionBar">
+        <item name="actionBarStyle">@style/Widget.Announcify.ActionBar</item>
+    </style>
+
+    <style name="Widget.Announcify.ActionBar" parent="@style/Widget.Sherlock.Light.ActionBar.Solid.Inverse">
+        <item name="subtitleTextStyle">@style/TextAppearance.Announcify.Widget.ActionBar.Subtitle</item>
+    </style>
+
+    <style name="TextAppearance.Announcify.Widget.ActionBar.Subtitle" parent="Widget">
+        <item name="android:textSize">@dimen/abs__action_bar_subtitle_text_size</item>
+        <item name="android:textColor">@android:color/secondary_text_dark</item>
+    </style>
+
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="AlwaysShowAction" >
+
+    <item
+        android:id="@+id/itemMainmenuShare"
+        android:icon="@drawable/gd_action_bar_share_normal"
+        android:showAsAction="ifRoom"
+        android:title="Share">
+    </item>
+
+</menu>

@@ -2,25 +2,14 @@ package com.announcify.api.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 
 import com.announcify.api.R;
 
 public class ActivityUtils {
-
-    public static Intent getPluginsIntent() {
-        return new Intent(Intent.ACTION_VIEW, Uri.parse("http://plugins.announcify.com/"));
-        // market://search?q=Announcify
-    }
-
     public static Intent getHomeIntent() {
         final Intent intent = new Intent("com.announcify");
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         return intent;
-    }
-
-    public static Intent getHelpIntent() {
-        return new Intent("com.announcify.HELP");
     }
 
     public static Intent getShareIntent(final Context context) {

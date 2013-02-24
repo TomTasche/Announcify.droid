@@ -1,52 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	android:orientation="vertical">
-	
-	<com.markupartist.android.widget.ActionBar
-		android:id="@+id/actionbar"
-		style="@style/ActionBar" />
+    <EditText
+        android:id="@+id/edit_replace"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/replacer_replace_hint" />
 
-	<EditText
-		android:id="@+id/edit_replace"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:hint="@string/replacer_replace_hint" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
-	<LinearLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:orientation="horizontal">
+        <EditText
+            android:id="@+id/edit_with"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            android:hint="@string/replacer_replace_with_hint" />
 
-		<EditText
-			android:id="@+id/edit_with"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:layout_weight="0.9"
-			android:hint="@string/replacer_replace_with_hint" />
+        <ImageButton
+            android:id="@+id/button_speak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:src="@android:drawable/ic_btn_speak_now" />
 
-		<ImageButton
-			android:id="@+id/button_speak"
-			android:src="@android:drawable/ic_btn_speak_now"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_weight="0.1" />
+        <Button
+            android:id="@+id/button_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/replacer_button_add" />
+    </LinearLayout>
 
-		<Button
-			android:text="@string/replacer_button_add"
-			android:id="@+id/button_add"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
-	</LinearLayout>
+    <ListView
+        android:id="@+id/android:list"
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="1" >
 
-	<ListView
-		android:id="@+id/android:list"
-		android:layout_width="fill_parent"
-		android:layout_height="0px"
-		android:layout_weight="1">
-		<requestFocus />
-	</ListView>
+        <requestFocus />
+    </ListView>
+
 </LinearLayout>

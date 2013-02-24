@@ -13,7 +13,6 @@ import android.os.Handler;
 import android.provider.BaseColumns;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,6 +20,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.view.Menu;
 import com.announcify.api.background.sql.model.PluginModel;
 import com.announcify.api.ui.activity.ActivityUtils;
 import com.announcify.api.ui.activity.BaseActivity;
@@ -146,12 +146,21 @@ public class AnnouncifyActivity extends BaseActivity {
 		getMenuInflater().inflate(R.menu.context_main, menu);
 	}
 
+	/**
+	 * Called if item in option menu is selected.
+	 * 
+	 * @param item
+	 *            The chosen menu item
+	 * @return boolean true/false
+	 */
 	@Override
-	public boolean onCreateOptionsMenu(final Menu menu) {
-		super.onCreateOptionsMenu(menu);
-
-		getMenuInflater().inflate(R.menu.menu_main, menu);
-
+	public boolean onOptionsItemSelected(
+			com.actionbarsherlock.view.MenuItem item) {
+		if (R.id.itemMainmenuShare == item.getItemId()) {
+			startActivity(ActivityUtils.getShareIntent(this.getBaseContext()));
+		} else {
+			return false;
+		}
 		return true;
 	}
 
@@ -174,16 +183,6 @@ public class AnnouncifyActivity extends BaseActivity {
 			adapter.notifyDataSetChanged();
 			break;
 
-		case R.id.menu_help:
-			startActivity(new Intent(this, HelpActivity.class));
-
-			break;
-
-		case R.id.menu_plugins:
-			startActivity(ActivityUtils.getPluginsIntent());
-
-			break;
-
 		case R.id.menu_rate:
 			startActivity(new Intent(Intent.ACTION_VIEW,
 					Uri.parse("http://market.announcify.com/")));
@@ -203,6 +202,13 @@ public class AnnouncifyActivity extends BaseActivity {
 		}
 
 		return super.onMenuItemSelected(featureId, item);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.clear();
+		getSupportMenuInflater().inflate(R.menu.main_menu, menu);
+		return true;
 	}
 
 	@Override

@@ -2,8 +2,8 @@
 <manifest
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.announcify.developers.sample"
-	android:versionCode="1"
-	android:versionName="0.1">
+	android:versionCode="2"
+	android:versionName="0.2">
 
 	<!-- We need to declare the permission here if Announcify isn't installed yet. -->
 	<permission
@@ -75,5 +75,5 @@
 	<!-- Everything below 7 doesn't make any sense... Announcify doesn't work on <7 -->
 	<uses-sdk
 		android:minSdkVersion="7"
-		android:targetSdkVersion="9" />
+		android:targetSdkVersion="17" />
 </manifest> 

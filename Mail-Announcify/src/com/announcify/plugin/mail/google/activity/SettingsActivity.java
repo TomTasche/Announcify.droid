@@ -23,6 +23,8 @@ public class SettingsActivity extends PluginActivity {
         super.onCreate(savedInstanceState, new Settings(this), R.xml.preferences_settings);
         addPreferencesFromResource(R.xml.preferences_extra_settings);
         setExtraCustomListeners();
+        
+        getSupportActionBar().setSubtitle(R.string.event_mail);
     }
 
     @Override

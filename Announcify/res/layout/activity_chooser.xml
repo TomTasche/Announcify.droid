@@ -1,32 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	android:orientation="vertical">
-	
-	<com.markupartist.android.widget.ActionBar
-		android:id="@+id/actionbar"
-		style="@style/ActionBar" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
-	<CheckedTextView
-		android:text="@string/chooser_block_chosen"
-		android:id="@+id/check_block"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-		android:textColor="@android:color/black" />
+    <CheckedTextView
+        android:id="@+id/check_block"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:text="@string/chooser_block_chosen"
+        android:textColor="@android:color/black" />
 
-	<AutoCompleteTextView
-		android:hint="@string/chooser_search_input"
-		android:id="@+id/auto_edit_chooser"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:textColor="@android:color/black" />
+    <AutoCompleteTextView
+        android:id="@+id/auto_edit_chooser"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/chooser_search_input"
+        android:textColor="@android:color/black" />
 
-	<ListView
-		android:id="@android:id/list"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:textColor="@android:color/black" />
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black" />
+
 </LinearLayout>

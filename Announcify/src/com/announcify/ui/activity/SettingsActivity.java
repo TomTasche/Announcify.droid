@@ -35,6 +35,9 @@ public class SettingsActivity extends PluginActivity {
 				return "Announcify++";
 			}
 		}, R.xml.preferences_main_settings);
+		
+		getSupportActionBar().setTitle(R.string.preferences);
+		getSupportActionBar().setSubtitle("Announcify++");
 
 		getPreferenceScreen().findPreference("preference_more_voices")
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {

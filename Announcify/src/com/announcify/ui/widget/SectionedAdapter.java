@@ -6,6 +6,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.provider.BaseColumns;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -133,9 +135,12 @@ public class SectionedAdapter extends CursorAdapter {
 		final TextView sectionView = (TextView) convertView
 				.findViewById(R.id.section);
 		if (indexer.getPositionForSection(section) == position) {
-			sectionView.setBackgroundColor(Color.parseColor("#AD0000"));
-			sectionView.setText(indexer.getSections()[section].toString()
-					.trim());
+			SpannableString content = new SpannableString(
+					indexer.getSections()[section].toString().trim());
+			content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+			sectionView.setText(content);
+			sectionView.setTextColor(convertView.getResources().getColor(
+					R.color.highlight_color));
 			sectionView.setVisibility(View.VISIBLE);
 		} else {
 			sectionView.setVisibility(View.GONE);

@@ -1146,15 +1146,15 @@ containing a value of this type.
         /**  Dialogs 
          */
         public static final int dialog_pro_title=0x7f0a0077;
-        public static final int event_call=0x7f0a003a;
-        public static final int event_chat=0x7f0a0036;
-        public static final int event_k9=0x7f0a0032;
-        public static final int event_mail=0x7f0a0033;
-        public static final int event_mms=0x7f0a0038;
-        public static final int event_plume=0x7f0a0034;
-        public static final int event_sms=0x7f0a0037;
-        public static final int event_twidroyd=0x7f0a0035;
-        public static final int event_voicemail=0x7f0a0039;
+        public static final int event_call=0x7f0a0032;
+        public static final int event_chat=0x7f0a003a;
+        public static final int event_k9=0x7f0a0036;
+        public static final int event_mail=0x7f0a0037;
+        public static final int event_mms=0x7f0a0034;
+        public static final int event_plume=0x7f0a0038;
+        public static final int event_sms=0x7f0a0035;
+        public static final int event_twidroyd=0x7f0a0039;
+        public static final int event_voicemail=0x7f0a0033;
         public static final int menu_help=0x7f0a006d;
         public static final int menu_more_plugins=0x7f0a006e;
         public static final int menu_rate=0x7f0a006f;
@@ -2402,7 +2402,7 @@ containing a value of this type.
          */
         public static final int[] SherlockSpinner = {
             0x010100af, 0x01010175, 0x01010176, 0x0101017b,
-            0x01010262, 0x010102ac, 0x010102ad, 0x01010411
+            0x01010262, 0x010102ac, 0x010102ad, 0x010103fd
         };
         /**
           <p>

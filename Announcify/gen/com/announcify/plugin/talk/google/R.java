@@ -288,7 +288,7 @@ public final class R {
 		public static final int SherlockMenuItem_android_onClick = 12;
 		public static final int SherlockMenuItem_android_actionLayout = 14;
 		public static final int SherlockTheme_searchViewVoiceIcon = 35;
-		public static final int[] SherlockSpinner = { 0x010100af, 0x01010175, 0x01010176, 0x0101017b, 0x01010262, 0x010102ac, 0x010102ad, 0x01010411 };
+		public static final int[] SherlockSpinner = { 0x010100af, 0x01010175, 0x01010176, 0x0101017b, 0x01010262, 0x010102ac, 0x010102ad, 0x010103fd };
 		public static final int SherlockTheme_windowActionBarOverlay = 60;
 	}
 	public static final class xml {
@@ -628,7 +628,7 @@ public final class R {
 		public static final int abs__activity_chooser_view_see_all = 0x7f0a0004;
 		public static final int preference_read_mail_header_title = 0x7f0a002b;
 		public static final int preference_wait_summary = 0x7f0a001d;
-		public static final int event_chat = 0x7f0a0036;
+		public static final int event_chat = 0x7f0a003a;
 		public static final int preference_custom_value_title = 0x7f0a0012;
 		public static final int preference_custom_text_title = 0x7f0a0011;
 		public static final int preference_shut_up_title = 0x7f0a0025;

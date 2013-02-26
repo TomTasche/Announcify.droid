@@ -1007,39 +1007,39 @@ containing a value of this type.
         public static final int auto_edit_chooser=0x7f050033;
         public static final int button_add=0x7f050037;
         public static final int button_speak=0x7f050036;
-        public static final int check=0x7f05003f;
+        public static final int check=0x7f05003e;
         public static final int check_block=0x7f050032;
         public static final int disableHome=0x7f050009;
         public static final int edit_query=0x7f050026;
         public static final int edit_replace=0x7f050034;
         public static final int edit_with=0x7f050035;
-        public static final int headerText=0x7f050040;
+        public static final int headerText=0x7f05003f;
         public static final int homeAsUp=0x7f050006;
-        public static final int icon=0x7f05003b;
-        public static final int itemMainmenuShare=0x7f050048;
+        public static final int itemMainmenuShare=0x7f050047;
         public static final int listMode=0x7f050002;
         public static final int menu_about=0x7f05004d;
-        public static final int menu_activate=0x7f050045;
-        public static final int menu_edit=0x7f050047;
-        public static final int menu_help=0x7f05004c;
-        public static final int menu_rate=0x7f05004a;
-        public static final int menu_remove=0x7f050043;
-        public static final int menu_report=0x7f050046;
-        public static final int menu_share=0x7f05004b;
-        public static final int menu_toggle=0x7f050049;
-        public static final int menu_uninstall=0x7f050044;
+        public static final int menu_activate=0x7f050044;
+        public static final int menu_edit=0x7f050046;
+        public static final int menu_help=0x7f05004b;
+        public static final int menu_rate=0x7f050049;
+        public static final int menu_remove=0x7f050042;
+        public static final int menu_report=0x7f050045;
+        public static final int menu_share=0x7f05004a;
+        public static final int menu_toggle=0x7f050048;
+        public static final int menu_translate=0x7f05004c;
+        public static final int menu_uninstall=0x7f050043;
         public static final int normal=0x7f050001;
-        public static final int plugin=0x7f05003c;
+        public static final int plugin=0x7f05003b;
         public static final int plugin_info=0x7f05003a;
-        public static final int separator=0x7f05003e;
-        public static final int settings=0x7f05003d;
+        public static final int separator=0x7f05003d;
+        public static final int settings=0x7f05003c;
         public static final int showCustom=0x7f050008;
         public static final int showHome=0x7f050005;
         public static final int showTitle=0x7f050007;
         public static final int tabMode=0x7f050003;
         public static final int useLogo=0x7f050004;
-        public static final int widget_button=0x7f050041;
-        public static final int widget_control_button=0x7f050042;
+        public static final int widget_button=0x7f050040;
+        public static final int widget_control_button=0x7f050041;
         public static final int wrap_content=0x7f050000;
     }
     public static final class integer {
@@ -2404,7 +2404,7 @@ containing a value of this type.
          */
         public static final int[] SherlockSpinner = {
             0x010100af, 0x01010175, 0x01010176, 0x0101017b,
-            0x01010262, 0x010102ac, 0x010102ad, 0x01010411
+            0x01010262, 0x010102ac, 0x010102ad, 0x010103fd
         };
         /**
           <p>

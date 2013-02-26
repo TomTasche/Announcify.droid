@@ -13,7 +13,6 @@
         android:layout_height="fill_parent"
         android:drawSelectorOnTop="false"
         android:fadeScrollbars="true"
-        android:fastScrollEnabled="true"
         android:scrollbarAlwaysDrawVerticalTrack="false" />
 
 </LinearLayout>

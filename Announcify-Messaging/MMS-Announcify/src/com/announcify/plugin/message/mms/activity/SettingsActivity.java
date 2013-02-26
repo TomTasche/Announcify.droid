@@ -23,5 +23,7 @@ public class SettingsActivity extends PluginActivity {
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState, new Settings(this),
 				R.xml.preferences_settings);
+		
+		getSupportActionBar().setSubtitle(R.string.event_mms);
 	}
 }

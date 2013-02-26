@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.text.InputType;
 import android.view.View;
@@ -23,217 +22,309 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.actionbarsherlock.app.SherlockPreferenceActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.announcify.api.R;
 import com.announcify.api.background.util.PluginSettings;
-import com.markupartist.android.widget.ActionBar;
 
-public class PluginActivity extends PreferenceActivity {
+public class PluginActivity extends SherlockPreferenceActivity {
 
-    protected static final String CUSTOM_VALUE = "com.announcify.CUSTOM";
+	protected static final String CUSTOM_VALUE = "com.announcify.CUSTOM";
 
-    protected PluginSettings settings;
+	protected PluginSettings settings;
 
-    protected void applyThemeProtection(final String key) {
-        getPreferenceScreen().findPreference(key).setOnPreferenceClickListener(new OnPreferenceClickListener() {
+	protected void applyThemeProtection(final String key) {
+		getPreferenceScreen().findPreference(key).setOnPreferenceClickListener(
+				new OnPreferenceClickListener() {
 
-			public boolean onPreferenceClick(final Preference preference) {
-                ((PreferenceScreen) preference).getDialog().getWindow().setTitle("");
-                ((PreferenceScreen) preference).getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+					public boolean onPreferenceClick(final Preference preference) {
+						((PreferenceScreen) preference)
+								.getDialog()
+								.getWindow()
+								.setBackgroundDrawable(
+										new ColorDrawable(Color.WHITE));
 
-                return false;
-            }
-        });
-    }
+						return false;
+					}
+				});
+	}
 
-    protected void onCreate(final Bundle savedInstanceState, final PluginSettings settings, final int xml) {
-        setTheme(android.R.style.Theme_Light_NoTitleBar);
+	protected void onCreate(final Bundle savedInstanceState,
+			final PluginSettings settings, final int xml) {
+		super.onCreate(savedInstanceState);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setTitle(R.string.preferences);
 
-        super.onCreate(savedInstanceState);
+		setContentView(R.layout.actionbar_list);
 
-        setContentView(R.layout.actionbar_list);
+		getListView().setFastScrollEnabled(true);
 
-        getListView().setBackgroundColor(Color.WHITE);
-        getListView().setCacheColorHint(Color.TRANSPARENT);
-        getListView().setFastScrollEnabled(true);
+		this.settings = settings;
 
-        this.settings = settings;
+		getPreferenceManager().setSharedPreferencesName(
+				settings.getSharedPreferencesName());
+		getPreferenceManager().setSharedPreferencesMode(
+				Context.MODE_WORLD_READABLE);
 
-        final ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
-        actionBar.setTitle(settings.getEventType());
+		addPreferencesFromResource(xml);
 
-        actionBar.setHomeAction(new ActionBar.IntentAction(this, ActivityUtils.getHomeIntent(), R.drawable.launcher_icon));
+		setCustomListeners();
+	}
 
-        actionBar.addAction(new ActionBar.IntentAction(this, ActivityUtils.getHelpIntent(), R.drawable.gd_action_bar_talk_normal));
-        actionBar.addAction(new ActionBar.IntentAction(this, ActivityUtils.getPluginsIntent(), R.drawable.gd_action_bar_add_normal));
-        actionBar.addAction(new ActionBar.IntentAction(this, ActivityUtils.getShareIntent(this), R.drawable.gd_action_bar_share_normal));
+	protected void parseRingtone(final int requestCode, final int resultCode,
+			final Intent data, final int type) {
+		if ((requestCode == 100) && (resultCode == RESULT_OK)) {
+			final Editor editor = getPreferenceManager().getSharedPreferences()
+					.edit();
 
-        getPreferenceManager().setSharedPreferencesName(settings.getSharedPreferencesName());
-        getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
+			if ((data != null)
+					&& (data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI) != null)) {
+				editor.putString(
+						PluginSettings.KEY_RINGTONE,
+						data.getParcelableExtra(
+								RingtoneManager.EXTRA_RINGTONE_PICKED_URI)
+								.toString());
 
-        addPreferencesFromResource(xml);
+				RingtoneManager.setActualDefaultRingtoneUri(this, type, null);
+			} else {
+				editor.putString(PluginSettings.KEY_RINGTONE, "");
 
-        setCustomListeners();
-    }
+				final Intent intent = new Intent(
+						RingtoneManager.ACTION_RINGTONE_PICKER);
+				intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT,
+						false);
+				intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT,
+						false);
+				intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, type);
+				intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE,
+						getString(R.string.preference_ringtone_system));
 
-    protected void parseRingtone(final int requestCode, final int resultCode, final Intent data, final int type) {
-        if ((requestCode == 100) && (resultCode == RESULT_OK)) {
-            final Editor editor = getPreferenceManager().getSharedPreferences().edit();
+				startActivityForResult(intent, 101);
+			}
 
-            if ((data != null) && (data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI) != null)) {
-                editor.putString(PluginSettings.KEY_RINGTONE, data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI).toString());
+			editor.commit();
+		} else if ((requestCode == 101)
+				&& (resultCode == RESULT_OK)
+				&& (data != null)
+				&& (data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI) != null)) {
+			RingtoneManager
+					.setActualDefaultRingtoneUri(
+							this,
+							type,
+							(Uri) data
+									.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI));
+		}
+	}
 
-                RingtoneManager.setActualDefaultRingtoneUri(this, type, null);
-            } else {
-                editor.putString(PluginSettings.KEY_RINGTONE, "");
+	protected void setCustomAnnouncementListener(final String key,
+			final PluginSettings settings, final String value) {
+		final String oldValue = getPreferenceManager().getSharedPreferences()
+				.getString(key, "");
 
-                final Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
-                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, false);
-                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
-                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, type);
-                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, getString(R.string.preference_ringtone_system));
+		getPreferenceScreen().findPreference(key)
+				.setOnPreferenceChangeListener(
+						new OnPreferenceChangeListener() {
 
-                startActivityForResult(intent, 101);
-            }
+							public boolean onPreferenceChange(
+									final Preference preference,
+									final Object newValue) {
+								if (!((String) newValue).equals(value)) {
+									return true;
+								}
 
-            editor.commit();
-        } else if ((requestCode == 101) && (resultCode == RESULT_OK) && (data != null) && (data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI) != null)) {
-            RingtoneManager.setActualDefaultRingtoneUri(this, type, (Uri) data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI));
-        }
-    }
+								final LinearLayout layout = new LinearLayout(
+										PluginActivity.this);
+								layout.setOrientation(LinearLayout.VERTICAL);
 
-    protected void setCustomAnnouncementListener(final String key, final PluginSettings settings, final String value) {
-        final String oldValue = getPreferenceManager().getSharedPreferences().getString(key, "");
+								final EditText edit = new EditText(
+										PluginActivity.this);
+								edit.setInputType(InputType.TYPE_CLASS_TEXT);
+								edit.setHint(getString(R.string.preference_formatstring_input_hint));
+								edit.setText(getPreferenceManager()
+										.getSharedPreferences().getString(
+												preference.getKey(), ""));
 
-        getPreferenceScreen().findPreference(key).setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+								final Button button = new Button(
+										PluginActivity.this);
+								button.setText(getString(R.string.preference_formatstring_add_variable));
+								button.setOnClickListener(new View.OnClickListener() {
 
-			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-                if (!((String) newValue).equals(value)) {
-                    return true;
-                }
+									public void onClick(final View v) {
+										final String[] items = getResources()
+												.getStringArray(
+														R.array.dialog_list_formatstring_variables);
 
-                final LinearLayout layout = new LinearLayout(PluginActivity.this);
-                layout.setOrientation(LinearLayout.VERTICAL);
+										final AlertDialog.Builder builder = new AlertDialog.Builder(
+												PluginActivity.this);
+										builder.setTitle(getString(R.string.preference_formatstring_add_variable));
+										builder.setItems(
+												items,
+												new DialogInterface.OnClickListener() {
 
-                final EditText edit = new EditText(PluginActivity.this);
-                edit.setInputType(InputType.TYPE_CLASS_TEXT);
-                edit.setHint(getString(R.string.preference_formatstring_input_hint));
-                edit.setText(getPreferenceManager().getSharedPreferences().getString(preference.getKey(), ""));
+													public void onClick(
+															final DialogInterface dialog,
+															final int item) {
+														edit.append(items[item]);
 
-                final Button button = new Button(PluginActivity.this);
-                button.setText(getString(R.string.preference_formatstring_add_variable));
-                button.setOnClickListener(new View.OnClickListener() {
+														dialog.dismiss();
+													}
+												});
+										builder.create().show();
+									}
+								});
 
-					public void onClick(final View v) {
-                        final String[] items = getResources().getStringArray(R.array.dialog_list_formatstring_variables);
+								layout.addView(edit);
+								layout.addView(button);
 
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(PluginActivity.this);
-                        builder.setTitle(getString(R.string.preference_formatstring_add_variable));
-                        builder.setItems(items, new DialogInterface.OnClickListener() {
+								final Builder builder = new AlertDialog.Builder(
+										PluginActivity.this);
+								builder.setTitle(getString(R.string.preference_custom_text_title));
+								builder.setView(layout);
+								builder.setPositiveButton(
+										getString(R.string.preference_custom_save),
+										new OnClickListener() {
 
-							public void onClick(final DialogInterface dialog, final int item) {
-                                edit.append(items[item]);
+											public void onClick(
+													final DialogInterface dialog,
+													final int which) {
+												final Editor editor = getPreferenceManager()
+														.getSharedPreferences()
+														.edit();
+												editor.putString(key, edit
+														.getText().toString());
+												editor.commit();
+											}
+										});
+								builder.setCancelable(false);
+								builder.setNegativeButton(
+										getString(R.string.preference_custom_cancel),
+										new OnClickListener() {
 
-                                dialog.dismiss();
-                            }
-                        });
-                        builder.create().show();
-                    }
-                });
+											public void onClick(
+													final DialogInterface dialog,
+													final int which) {
+												final Editor editor = getPreferenceManager()
+														.getSharedPreferences()
+														.edit();
+												editor.putString(key, oldValue);
+												editor.commit();
+											}
+										});
+								builder.create().show();
 
-                layout.addView(edit);
-                layout.addView(button);
+								return true;
+							}
+						});
+	}
 
-                final Builder builder = new AlertDialog.Builder(PluginActivity.this);
-                builder.setTitle(getString(R.string.preference_custom_text_title));
-                builder.setView(layout);
-                builder.setPositiveButton(getString(R.string.preference_custom_save), new OnClickListener() {
+	protected void setCustomListeners() {
+		if (findPreference(PluginSettings.KEY_READING_WAIT) == null) {
+			return;
+		}
 
-					public void onClick(final DialogInterface dialog, final int which) {
-                        final Editor editor = getPreferenceManager().getSharedPreferences().edit();
-                        editor.putString(key, edit.getText().toString());
-                        editor.commit();
-                    }
-                });
-                builder.setCancelable(false);
-                builder.setNegativeButton(getString(R.string.preference_custom_cancel), new OnClickListener() {
+		setCustomNumberListener(PluginSettings.KEY_READING_WAIT, settings,
+				CUSTOM_VALUE);
+		setCustomNumberListener(PluginSettings.KEY_READING_BREAK, settings,
+				CUSTOM_VALUE);
+		setCustomNumberListener(PluginSettings.KEY_READING_REPEAT, settings,
+				CUSTOM_VALUE);
 
-					public void onClick(final DialogInterface dialog, final int which) {
-                        final Editor editor = getPreferenceManager().getSharedPreferences().edit();
-                        editor.putString(key, oldValue);
-                        editor.commit();
-                    }
-                });
-                builder.create().show();
+		setCustomAnnouncementListener(PluginSettings.KEY_READING_ANNOUNCEMENT,
+				settings, CUSTOM_VALUE);
+		setCustomAnnouncementListener(PluginSettings.KEY_READING_DISCREET,
+				settings, CUSTOM_VALUE);
+		setCustomAnnouncementListener(PluginSettings.KEY_READING_UNKNOWN,
+				settings, CUSTOM_VALUE);
+	}
 
-                return true;
-            }
-        });
-    }
+	protected void setExtraCustomListeners() {
+		setCustomNumberListener(PluginSettings.KEY_SHUT_UP, settings,
+				CUSTOM_VALUE);
+	}
 
-    protected void setCustomListeners() {
-        if (findPreference(PluginSettings.KEY_READING_WAIT) == null) {
-            return;
-        }
+	protected void setCustomNumberListener(final String key,
+			final PluginSettings settings, final String customValue) {
+		final String oldValue = getPreferenceManager().getSharedPreferences()
+				.getString(key, "");
 
-        setCustomNumberListener(PluginSettings.KEY_READING_WAIT, settings, CUSTOM_VALUE);
-        setCustomNumberListener(PluginSettings.KEY_READING_BREAK, settings, CUSTOM_VALUE);
-        setCustomNumberListener(PluginSettings.KEY_READING_REPEAT, settings, CUSTOM_VALUE);
+		getPreferenceScreen().findPreference(key)
+				.setOnPreferenceChangeListener(
+						new OnPreferenceChangeListener() {
 
-        setCustomAnnouncementListener(PluginSettings.KEY_READING_ANNOUNCEMENT, settings, CUSTOM_VALUE);
-        setCustomAnnouncementListener(PluginSettings.KEY_READING_DISCREET, settings, CUSTOM_VALUE);
-        setCustomAnnouncementListener(PluginSettings.KEY_READING_UNKNOWN, settings, CUSTOM_VALUE);
-    }
+							public boolean onPreferenceChange(
+									final Preference preference,
+									final Object newValue) {
+								if (!((String) newValue).equals(customValue)) {
+									return true;
+								}
 
-    protected void setExtraCustomListeners() {
-        setCustomNumberListener(PluginSettings.KEY_SHUT_UP, settings, CUSTOM_VALUE);
-    }
+								final EditText edit = new EditText(
+										PluginActivity.this);
+								edit.setInputType(InputType.TYPE_CLASS_NUMBER);
+								edit.setHint(getString(R.string.preference_custom_value_input_hint));
 
-    protected void setCustomNumberListener(final String key, final PluginSettings settings, final String customValue) {
-        final String oldValue = getPreferenceManager().getSharedPreferences().getString(key, "");
+								final Builder builder = new AlertDialog.Builder(
+										PluginActivity.this);
+								builder.setTitle(getString(R.string.preference_custom_value_title));
+								builder.setView(edit);
+								builder.setPositiveButton(
+										getString(R.string.preference_custom_save),
+										new OnClickListener() {
 
-        getPreferenceScreen().findPreference(key).setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+											public void onClick(
+													final DialogInterface dialog,
+													final int which) {
+												final Editor editor = getPreferenceManager()
+														.getSharedPreferences()
+														.edit();
 
-			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-                if (!((String) newValue).equals(customValue)) {
-                    return true;
-                }
+												try {
+													Integer.parseInt(edit
+															.getText()
+															.toString());
 
-                final EditText edit = new EditText(PluginActivity.this);
-                edit.setInputType(InputType.TYPE_CLASS_NUMBER);
-                edit.setHint(getString(R.string.preference_custom_value_input_hint));
+													editor.putString(key, edit
+															.getText()
+															.toString());
+												} catch (final NumberFormatException e) {
+													editor.putString(key,
+															oldValue);
+												}
 
-                final Builder builder = new AlertDialog.Builder(PluginActivity.this);
-                builder.setTitle(getString(R.string.preference_custom_value_title));
-                builder.setView(edit);
-                builder.setPositiveButton(getString(R.string.preference_custom_save), new OnClickListener() {
+												editor.commit();
+											}
+										});
+								builder.setCancelable(false);
+								builder.setNegativeButton(
+										getString(R.string.preference_custom_cancel),
+										new OnClickListener() {
 
-					public void onClick(final DialogInterface dialog, final int which) {
-                        final Editor editor = getPreferenceManager().getSharedPreferences().edit();
+											public void onClick(
+													final DialogInterface dialog,
+													final int which) {
+												final Editor editor = getPreferenceManager()
+														.getSharedPreferences()
+														.edit();
+												editor.putString(key, oldValue);
+												editor.commit();
+											}
+										});
+								builder.create().show();
 
-                        try {
-                            Integer.parseInt(edit.getText().toString());
-
-                            editor.putString(key, edit.getText().toString());
-                        } catch (final NumberFormatException e) {
-                            editor.putString(key, oldValue);
-                        }
-
-                        editor.commit();
-                    }
-                });
-                builder.setCancelable(false);
-                builder.setNegativeButton(getString(R.string.preference_custom_cancel), new OnClickListener() {
-
-					public void onClick(final DialogInterface dialog, final int which) {
-                        final Editor editor = getPreferenceManager().getSharedPreferences().edit();
-                        editor.putString(key, oldValue);
-                        editor.commit();
-                    }
-                });
-                builder.create().show();
-
-                return true;
-            }
-        });
-    }
+								return true;
+							}
+						});
+	}
+	
+		public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+			Intent intent = ActivityUtils.getHomeIntent();
+			startActivity(intent);
+			return true;
+		default:
+			return (super.onOptionsItemSelected(item));
+		}
+	}
 }

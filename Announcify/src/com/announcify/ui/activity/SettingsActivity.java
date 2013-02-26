@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 
+import com.actionbarsherlock.view.MenuItem;
 import com.announcify.api.background.util.AnnouncifySettings;
 import com.announcify.api.background.util.PluginSettings;
 import com.announcify.api.ui.activity.PluginActivity;
@@ -35,6 +36,9 @@ public class SettingsActivity extends PluginActivity {
 				return "Announcify++";
 			}
 		}, R.xml.preferences_main_settings);
+
+		getSupportActionBar().setTitle(R.string.preferences);
+		getSupportActionBar().setSubtitle("Announcify++");
 
 		getPreferenceScreen().findPreference("preference_more_voices")
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {

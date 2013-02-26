@@ -6,28 +6,33 @@ import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.ContentObserver;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.BaseColumns;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.view.Menu;
 import com.announcify.api.background.sql.model.PluginModel;
 import com.announcify.api.ui.activity.ActivityUtils;
 import com.announcify.api.ui.activity.BaseActivity;
 import com.announcify.background.sql.AnnouncifyProvider;
-import com.announcify.ui.widget.SectionedAdapter;
+import com.announcify.ui.widget.StickyListBaseAdapter;
 
-public class AnnouncifyActivity extends BaseActivity {
+public class AnnouncifyActivity extends BaseActivity implements
+		OnScrollListener {
+
+	private static final String KEY_LIST_POSITION = "KEY_LIST_POSITION";
+	private int firstVisible;
 
 	private class AnnouncifyObserver extends ContentObserver {
 
@@ -46,7 +51,7 @@ public class AnnouncifyActivity extends BaseActivity {
 	private Cursor cursor;
 	private PluginModel model;
 	private ContentObserver observer;
-	private SectionedAdapter adapter;
+	private StickyListBaseAdapter adapter;
 
 	private ListView getListView() {
 		return (ListView) findViewById(android.R.id.list);
@@ -106,10 +111,8 @@ public class AnnouncifyActivity extends BaseActivity {
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState, R.layout.actionbar_list);
+		super.onCreate(savedInstanceState, R.layout.main_list);
 
-		getListView().setBackgroundColor(Color.WHITE);
-		getListView().setCacheColorHint(Color.TRANSPARENT);
 		getListView().setFastScrollEnabled(true);
 
 		sendStickyBroadcast(new Intent("com.announcify.ACTION_PLUGIN_CONTACT"));
@@ -135,6 +138,13 @@ public class AnnouncifyActivity extends BaseActivity {
 		model = new PluginModel(this);
 
 		refreshList();
+		getListView().setSelection(firstVisible);
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putInt(KEY_LIST_POSITION, firstVisible);
 	}
 
 	@Override
@@ -146,17 +156,16 @@ public class AnnouncifyActivity extends BaseActivity {
 		getMenuInflater().inflate(R.menu.context_main, menu);
 	}
 
+	/**
+	 * Called if item in option menu is selected.
+	 * 
+	 * @param item
+	 *            The chosen menu item
+	 * @return boolean true/false
+	 */
 	@Override
-	public boolean onCreateOptionsMenu(final Menu menu) {
-		super.onCreateOptionsMenu(menu);
-
-		getMenuInflater().inflate(R.menu.menu_main, menu);
-
-		return true;
-	}
-
-	@Override
-	public boolean onMenuItemSelected(final int featureId, final MenuItem item) {
+	public boolean onOptionsItemSelected(
+			com.actionbarsherlock.view.MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_toggle:
 			final boolean activate = !model.getActive(model
@@ -174,19 +183,10 @@ public class AnnouncifyActivity extends BaseActivity {
 			adapter.notifyDataSetChanged();
 			break;
 
-		case R.id.menu_help:
-			startActivity(new Intent(this, HelpActivity.class));
-
-			break;
-
-		case R.id.menu_plugins:
-			startActivity(ActivityUtils.getPluginsIntent());
-
-			break;
-
 		case R.id.menu_rate:
-			startActivity(new Intent(Intent.ACTION_VIEW,
-					Uri.parse("http://market.announcify.com/")));
+			startActivity(new Intent(
+					Intent.ACTION_VIEW,
+					Uri.parse("https://play.google.com/store/apps/details?id=org.mailboxer.saymyname")));
 
 			break;
 
@@ -195,14 +195,16 @@ public class AnnouncifyActivity extends BaseActivity {
 
 			break;
 
-		case R.id.menu_translate:
-			startActivity(new Intent(Intent.ACTION_VIEW,
-					Uri.parse("http://goo.gl/MmR5D")));
-
-			break;
 		}
 
-		return super.onMenuItemSelected(featureId, item);
+		return true;
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.clear();
+		getSupportMenuInflater().inflate(R.menu.menu_main, menu);
+		return true;
 	}
 
 	@Override
@@ -242,7 +244,15 @@ public class AnnouncifyActivity extends BaseActivity {
 				Uri.withAppendedPath(AnnouncifyProvider.PROVIDER_URI,
 						PluginModel.TABLE_NAME), false, observer);
 
-		adapter = new SectionedAdapter(this, model, cursor);
+		adapter = new StickyListBaseAdapter(this, model, cursor);
 		getListView().setAdapter(adapter);
+	}
+
+	public void onScrollStateChanged(AbsListView view, int scrollState) {
+	}
+
+	public void onScroll(AbsListView view, int firstVisibleItem,
+			int visibleItemCount, int totalItemCount) {
+		this.firstVisible = firstVisibleItem;
 	}
 }

@@ -25,5 +25,7 @@ public class SettingsActivity extends PluginActivity {
 				R.xml.preferences_settings);
 		addPreferencesFromResource(R.xml.preferences_more_settings);
 		setExtraCustomListeners();
+		
+		getSupportActionBar().setSubtitle(R.string.event_twidroyd);
 	}
 }

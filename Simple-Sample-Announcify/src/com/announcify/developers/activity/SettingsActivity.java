@@ -1,17 +1,13 @@
 package com.announcify.developers.activity;
 
-import android.content.Intent;
-import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.Preference.OnPreferenceClickListener;
 
 import com.announcify.api.ui.activity.PluginActivity;
 import com.announcify.developers.sample.R;
-import com.announcify.developers.util.Settings;
 
-public class SettingsActivity extends PreferenceActivity {
+public class SettingsActivity extends PluginActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -32,5 +28,7 @@ public class SettingsActivity extends PreferenceActivity {
                 return false;
             }
         });
+        
+        getSupportActionBar().setSubtitle(R.string.event);
     }
 }

@@ -4,13 +4,9 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:orientation="horizontal" >
-
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical" />
+    android:orientation="horizontal"
+    android:paddingRight="15dp"
+    android:paddingLeft="15dip" >
 
     <TextView
         android:id="@+id/plugin"
@@ -18,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
-        android:paddingLeft="6dip"
+        android:paddingLeft="2dip"
         android:singleLine="true"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#545454" />
@@ -29,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="5dp"
+        android:paddingRight="6dp"
         android:src="@drawable/ic_menu_preferences" />
 
     <ImageView
@@ -36,10 +33,10 @@
         android:layout_width="1dp"
         android:layout_height="fill_parent"
         android:layout_gravity="center_vertical"
+        android:layout_marginBottom="12dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
         android:src="@drawable/list_vertical_divider" />
 
     <com.announcify.ui.widget.GreedyImageView
@@ -47,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:padding="6dp"
-        android:layout_marginRight="10dp" />
+        android:paddingRight="30dp"        
+        android:padding="6dp" />
 
 </LinearLayout>

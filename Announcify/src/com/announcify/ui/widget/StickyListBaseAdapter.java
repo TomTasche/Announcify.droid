@@ -5,8 +5,6 @@ import org.mailboxer.saymyname.R;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.BaseColumns;
-import android.text.SpannableString;
-import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -54,8 +52,7 @@ public class StickyListBaseAdapter extends CursorAdapter implements
 
 		if ("BbAdMob".equals(model.getName(id))) {
 			if (view.findViewById(R.id.admob) == null) {
-				view.findViewById(R.id.separator).setVisibility(View.GONE);
-				view.findViewById(R.id.icon).setVisibility(View.GONE);
+				view.findViewById(R.id.separator).setVisibility(View.GONE);				
 				view.findViewById(R.id.settings).setVisibility(View.GONE);
 				view.findViewById(R.id.check).setVisibility(View.GONE);
 				view.findViewById(R.id.plugin_info).setVisibility(View.GONE);
@@ -72,7 +69,6 @@ public class StickyListBaseAdapter extends CursorAdapter implements
 			} else {
 				view.findViewById(R.id.plugin_info).setVisibility(View.GONE);
 				view.findViewById(R.id.separator).setVisibility(View.GONE);
-				view.findViewById(R.id.icon).setVisibility(View.GONE);
 				view.findViewById(R.id.admob).setVisibility(View.VISIBLE);
 				view.findViewById(R.id.settings).setVisibility(View.GONE);
 				view.findViewById(R.id.plugin).setVisibility(View.GONE);
@@ -82,7 +78,6 @@ public class StickyListBaseAdapter extends CursorAdapter implements
 			return;
 		}
 
-		view.findViewById(R.id.icon).setVisibility(View.VISIBLE);
 		view.findViewById(R.id.separator).setVisibility(View.VISIBLE);
 		view.findViewById(R.id.settings).setVisibility(View.VISIBLE);
 		view.findViewById(R.id.check).setVisibility(View.VISIBLE);
@@ -93,9 +88,6 @@ public class StickyListBaseAdapter extends CursorAdapter implements
 			mobfox = null;
 		}
 		view.findViewById(R.id.plugin_info).setVisibility(View.VISIBLE);
-
-		((ImageView) view.findViewById(R.id.icon)).setImageDrawable(context
-				.getResources().getDrawable(R.drawable.launcher_icon));
 
 		((TextView) view.findViewById(R.id.plugin)).setText(model.getName(id));
 

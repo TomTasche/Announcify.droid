@@ -23,6 +23,11 @@
         android:title="Help">
     </item>
     <item
+        android:id="@+id/menu_translate"
+        android:showAsAction="never"
+        android:title="Translate">
+    </item>
+    <item
         android:id="@+id/menu_about"
         android:showAsAction="never"
         android:title="About">

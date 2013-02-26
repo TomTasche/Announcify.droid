@@ -187,24 +187,25 @@ public class AnnouncifyActivity extends BaseActivity implements
 			startActivity(new Intent(
 					Intent.ACTION_VIEW,
 					Uri.parse("https://play.google.com/store/apps/details?id=org.mailboxer.saymyname")));
-
 			break;
 
 		case R.id.menu_share:
 			startActivity(ActivityUtils.getShareIntent(this));
-
 			break;
 
 		case R.id.menu_help:
 			startActivity(new Intent(Intent.ACTION_VIEW,
 					Uri.parse("https://announcify.uservoice.com/")));
+			break;
 
+		case R.id.menu_translate:
+			startActivity(new Intent(Intent.ACTION_VIEW,
+					Uri.parse("http://crowdin.net/project/announcify")));
 			break;
 
 		case R.id.menu_about:
 			startActivity(new Intent(Intent.ACTION_VIEW,
 					Uri.parse("http://www.announcify.com/")));
-
 			break;
 		}
 

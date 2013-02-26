@@ -10,7 +10,7 @@ import android.os.Message;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 
-import com.announcify.api.background.error.ExceptionParser;
+import com.announcify.api.background.error.ReportUtil;
 import com.announcify.api.background.queue.PluginQueue;
 import com.announcify.api.background.service.PluginService;
 import com.announcify.api.background.sql.model.PluginModel;
@@ -126,7 +126,10 @@ public class AnnouncificationHandler extends Handler {
 		queue.quit();
 
 		if (exception != null) {
-			new ExceptionParser(context, exception).sendException();
+			Intent intent = ReportUtil.createFeedbackIntent(context, exception);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+			context.startActivity(intent);
 		}
 
 		context.stopService(new Intent(context, ManagerService.class));

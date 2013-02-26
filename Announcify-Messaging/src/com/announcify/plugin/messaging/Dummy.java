@@ -1,3 +1,4 @@
+package com.announcify.plugin.messaging;
 /*
  * In order to prevent errors after cloning the repository from git
  */

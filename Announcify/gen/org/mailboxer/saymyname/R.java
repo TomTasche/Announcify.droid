@@ -1018,8 +1018,10 @@ containing a value of this type.
         public static final int icon=0x7f05003b;
         public static final int itemMainmenuShare=0x7f050048;
         public static final int listMode=0x7f050002;
+        public static final int menu_about=0x7f05004d;
         public static final int menu_activate=0x7f050045;
         public static final int menu_edit=0x7f050047;
+        public static final int menu_help=0x7f05004c;
         public static final int menu_rate=0x7f05004a;
         public static final int menu_remove=0x7f050043;
         public static final int menu_report=0x7f050046;
@@ -1125,7 +1127,7 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abs__shareactionprovider_share_with_application=0x7f0a0007;
-        public static final int app_name=0x7f0a0031;
+        public static final int app_name=0x7f0a0032;
         /**  Chooser Activities 
          */
         public static final int chooser_block_chosen=0x7f0a0067;
@@ -1146,15 +1148,15 @@ containing a value of this type.
         /**  Dialogs 
          */
         public static final int dialog_pro_title=0x7f0a0077;
-        public static final int event_call=0x7f0a003a;
-        public static final int event_chat=0x7f0a0036;
-        public static final int event_k9=0x7f0a0032;
-        public static final int event_mail=0x7f0a0033;
-        public static final int event_mms=0x7f0a0038;
+        public static final int event_call=0x7f0a0037;
+        public static final int event_chat=0x7f0a0033;
+        public static final int event_k9=0x7f0a0036;
+        public static final int event_mail=0x7f0a0035;
+        public static final int event_mms=0x7f0a0039;
         public static final int event_plume=0x7f0a0034;
-        public static final int event_sms=0x7f0a0037;
-        public static final int event_twidroyd=0x7f0a0035;
-        public static final int event_voicemail=0x7f0a0039;
+        public static final int event_sms=0x7f0a003a;
+        public static final int event_twidroyd=0x7f0a0031;
+        public static final int event_voicemail=0x7f0a0038;
         public static final int menu_help=0x7f0a006d;
         public static final int menu_more_plugins=0x7f0a006e;
         public static final int menu_rate=0x7f0a006f;

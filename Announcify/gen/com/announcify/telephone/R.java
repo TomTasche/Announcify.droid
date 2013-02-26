@@ -4,7 +4,7 @@
  * aapt tool from the resource data it found.  It
  * should not be modified by hand.
  */
-package com.announcify.plugin.twitter.plume;
+package com.announcify.telephone;
 
 public final class R {
 	public static final class integer {
@@ -292,9 +292,9 @@ public final class R {
 		public static final int abs__tab_indicator_ab_holo = 0x7f02005e;
 	}
 	public static final class xml {
-		public static final int preferences_extra_settings = 0x7f040000;
-		public static final int preferences_more_settings = 0x7f040003;
+		public static final int preferences_settings_call = 0x7f040005;
 		public static final int preferences_settings = 0x7f040004;
+		public static final int preferences_extra_settings = 0x7f040000;
 	}
 	public static final class attr {
 		public static final int textAppearanceSmall = 0x7f01001e;
@@ -633,13 +633,14 @@ public final class R {
 		public static final int preference_custom_text_title = 0x7f0a0011;
 		public static final int preference_shut_up_title = 0x7f0a0025;
 		public static final int preference_read_own_title = 0x7f0a0027;
-		public static final int event_plume = 0x7f0a0034;
 		public static final int abs__searchview_description_clear = 0x7f0a000a;
 		public static final int preference_shut_up_summary = 0x7f0a0026;
 		public static final int preference_break_summary = 0x7f0a0019;
 		public static final int preference_custom_save = 0x7f0a0013;
 		public static final int preference_chuck_norris_title = 0x7f0a002d;
 		public static final int preference_repeat_summary = 0x7f0a001b;
+		public static final int event_voicemail = 0x7f0a0038;
+		public static final int app_name = 0x7f0a0032;
 		public static final int preference_discreet_summary = 0x7f0a0023;
 		public static final int preference_known_summary = 0x7f0a0021;
 		public static final int preference_read_mail_header_summary = 0x7f0a002c;
@@ -648,6 +649,7 @@ public final class R {
 		public static final int preference_known_title = 0x7f0a0020;
 		public static final int preference_formatstring_input_hint = 0x7f0a000e;
 		public static final int preference_ringtone_system = 0x7f0a0017;
+		public static final int event_call = 0x7f0a0037;
 		public static final int preference_break_title = 0x7f0a0018;
 		public static final int preference_ringtone_summary = 0x7f0a0016;
 		public static final int abs__shareactionprovider_share_with_application = 0x7f0a0007;

@@ -62,6 +62,10 @@ public class ConditionManager {
 		return screenReceiver != null ? screenReceiver.isScreenOn() : false;
 	}
 
+	public boolean isOnCall() {
+		return callReceiver.isOnCall();
+	}
+
 	public void quit() {
 		if (screenReceiver != null) {
 			context.unregisterReceiver(screenReceiver);
@@ -78,9 +82,5 @@ public class ConditionManager {
 		if (headsetReceiver != null) {
 			context.unregisterReceiver(headsetReceiver);
 		}
-	}
-
-	public void setOnCall(final boolean onCall) {
-		callReceiver.setOnCall(onCall);
 	}
 }

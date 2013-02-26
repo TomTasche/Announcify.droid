@@ -82,7 +82,6 @@ public class ManagerService extends Service {
 		}
 
 		conditionManager = new ConditionManager(this, settings);
-
 	}
 
 	@Override
@@ -100,8 +99,13 @@ public class ManagerService extends Service {
 
 		if (intent.getExtras().getInt(PluginService.EXTRA_PRIORITY, 9) <= 3) {
 			// it's a screen-on plugin. disable screen-on condition temporarily.
-			conditionManager.setOnCall(true);
+
+			// TODO: deprecated.
+			// conditionManager.setOnCall(true);
 		}
+
+		if (conditionManager.isOnCall())
+			return START_NOT_STICKY;
 
 		final Message msg = handler
 				.obtainMessage(AnnouncificationHandler.WHAT_PUT_QUEUE);

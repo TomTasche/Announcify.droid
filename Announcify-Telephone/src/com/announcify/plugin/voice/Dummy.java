@@ -1,3 +1,4 @@
+package com.announcify.plugin.voice;
 /*
  * In order to prevent errors after cloning the repository from git
  */

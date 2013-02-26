@@ -195,6 +195,17 @@ public class AnnouncifyActivity extends BaseActivity implements
 
 			break;
 
+		case R.id.menu_help:
+			startActivity(new Intent(Intent.ACTION_VIEW,
+					Uri.parse("https://announcify.uservoice.com/")));
+
+			break;
+
+		case R.id.menu_about:
+			startActivity(new Intent(Intent.ACTION_VIEW,
+					Uri.parse("http://www.announcify.com/")));
+
+			break;
 		}
 
 		return true;
@@ -226,15 +237,8 @@ public class AnnouncifyActivity extends BaseActivity implements
 	private void refreshList() {
 		try {
 			createPackageContext("org.mailboxer.saymyname.donate", 0);
-
-			if (model.getId("BbAdMob") >= 0) {
-				model.remove(model.getId("BbAdMob"));
-			}
-		} catch (final Exception e) {
-			// TODO: SectionedAdapter doesn't support lower-case.
-			if (model.getId("BbAdMob") < 0) {
-				model.add("BbAdMob", 9, "", "com.google.ad", false);
-			}
+		} catch (Exception e) {
+			// TODO: add ads
 		}
 
 		cursor = model.getAll(PluginModel.KEY_PLUGIN_NAME);

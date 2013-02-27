@@ -12,13 +12,10 @@ import android.view.ViewGroup;
 import android.widget.AlphabetIndexer;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.announcify.api.background.sql.model.PluginModel;
 import com.emilsjolander.components.stickylistheaders.StickyListHeadersAdapter;
-import com.mobfox.sdk.MobFoxView;
-import com.mobfox.sdk.Mode;
 
 public class StickyListBaseAdapter extends CursorAdapter implements
 		StickyListHeadersAdapter {
@@ -49,34 +46,6 @@ public class StickyListBaseAdapter extends CursorAdapter implements
 			final Cursor cursor) {
 		final long id = cursor.getLong(idIndex);
 		view.setTag(id);
-
-		if ("BbAdMob".equals(model.getName(id))) {
-			if (view.findViewById(R.id.admob) == null) {
-				view.findViewById(R.id.separator).setVisibility(View.GONE);				
-				view.findViewById(R.id.settings).setVisibility(View.GONE);
-				view.findViewById(R.id.check).setVisibility(View.GONE);
-				view.findViewById(R.id.plugin_info).setVisibility(View.GONE);
-
-				String publisherId = "301e9eaa45fe169aa3dbd5125b6b827a";
-				boolean includeLocation = false;
-				Mode mode = Mode.LIVE;
-				boolean animation = true;
-				MobFoxView mobfoxView = new MobFoxView(context, publisherId,
-						mode, includeLocation, animation);
-				mobfoxView.setId(R.id.admob);
-
-				((LinearLayout) view).addView(mobfoxView);
-			} else {
-				view.findViewById(R.id.plugin_info).setVisibility(View.GONE);
-				view.findViewById(R.id.separator).setVisibility(View.GONE);
-				view.findViewById(R.id.admob).setVisibility(View.VISIBLE);
-				view.findViewById(R.id.settings).setVisibility(View.GONE);
-				view.findViewById(R.id.plugin).setVisibility(View.GONE);
-				view.findViewById(R.id.check).setVisibility(View.GONE);
-			}
-
-			return;
-		}
 
 		view.findViewById(R.id.separator).setVisibility(View.VISIBLE);
 		view.findViewById(R.id.settings).setVisibility(View.VISIBLE);

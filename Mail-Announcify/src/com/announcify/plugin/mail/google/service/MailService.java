@@ -16,6 +16,7 @@ import android.os.IBinder;
 
 import com.announcify.api.background.error.ExceptionHandler;
 import com.announcify.api.background.service.PluginService;
+import com.announcify.plugin.mail.google.R;
 import com.announcify.plugin.mail.google.util.Settings;
 import com.google.android.gm.contentprovider.GmailContract;
 
@@ -86,8 +87,8 @@ public class MailService extends Service {
 			final Intent intent = new Intent(MailService.this,
 					WorkerService.class);
 			intent.setAction(PluginService.ACTION_ANNOUNCE);
-			intent.putExtra(WorkerService.EXTRA_MESSAGE, unreadMails
-					+ " unread mails");
+			intent.putExtra(WorkerService.EXTRA_MESSAGE, unreadMails + " "
+					+ getString(R.string.unread_mails));
 			startService(intent);
 
 			paused = true;

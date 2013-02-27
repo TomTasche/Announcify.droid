@@ -145,4 +145,6 @@
     <string name="preference_annoying_mode_title">Annoying Mode</string>
     <string name="preference_annoying_mode_summary">Could cause the plugin reading unnecessary messages</string>
 
+    <string name="unread_mails">unread mails</string>
+
 </resources>

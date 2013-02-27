@@ -141,4 +141,7 @@
     <item>Gleiche wie Standard in Announcify + +</item>
     <item>Benutzerdefiniert...</item>
   </string-array>
+  
+  <string name="unread_mails">ungelesene Mails</string>
+
 </resources>

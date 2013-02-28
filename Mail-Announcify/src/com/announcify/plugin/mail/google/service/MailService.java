@@ -40,7 +40,7 @@ public class MailService extends Service {
 				return;
 			}
 
-			int unreadMails = 0;
+			int numberUnreadMails = 0;
 			for (String address : addresses) {
 				Cursor labelsCursor = null;
 				try {
@@ -64,7 +64,7 @@ public class MailService extends Service {
 									inboxCursor = getContentResolver().query(
 											inboxUri, null, null, null, null);
 									if (inboxCursor.moveToFirst()) {
-										unreadMails += inboxCursor
+										numberUnreadMails += inboxCursor
 												.getInt(inboxCursor
 														.getColumnIndex(GmailContract.Labels.NUM_UNREAD_CONVERSATIONS));
 									}
@@ -81,14 +81,20 @@ public class MailService extends Service {
 				}
 			}
 
-			if (unreadMails <= 0)
+			if (numberUnreadMails <= 0)
 				return;
+
+			String message = numberUnreadMails + " ";
+			if (numberUnreadMails == 1) {
+				message += getString(R.string.unread_mail);
+			} else {
+				message += getString(R.string.unread_mails);
+			}
 
 			final Intent intent = new Intent(MailService.this,
 					WorkerService.class);
 			intent.setAction(PluginService.ACTION_ANNOUNCE);
-			intent.putExtra(WorkerService.EXTRA_MESSAGE, unreadMails + " "
-					+ getString(R.string.unread_mails));
+			intent.putExtra(WorkerService.EXTRA_MESSAGE, message);
 			startService(intent);
 
 			paused = true;

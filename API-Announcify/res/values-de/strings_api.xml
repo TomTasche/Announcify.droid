@@ -142,6 +142,6 @@
     <item>Benutzerdefiniert...</item>
   </string-array>
   
-  <string name="unread_mails">ungelesene Mails</string>
+  <string name="unread_mails">ungelesene Mail</string>
 
 </resources>

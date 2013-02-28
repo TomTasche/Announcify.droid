@@ -84,18 +84,6 @@ public class SettingsActivity extends PluginActivity {
 					}
 				});
 
-		// getPreferenceScreen().findPreference("preference_spam_filter")
-		// .setOnPreferenceClickListener(new OnPreferenceClickListener() {
-		//
-		// public boolean onPreferenceClick(final Preference preference) {
-		// Toast.makeText(SettingsActivity.this,
-		// getString(R.string.toast_plugin_not_implemented),
-		// Toast.LENGTH_LONG).show();
-		//
-		// return false;
-		// }
-		// });
-
 		getPreferenceScreen().findPreference("preference_tts_settings")
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 

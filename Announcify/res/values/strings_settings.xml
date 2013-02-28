@@ -63,6 +63,9 @@
 	<string name="preference_spam_title">Spam filter</string>
 	<string name="preference_spam_summary">Add rules for spam detection</string>
 	
+	<string name="preference_automatic_error_reporting_title">Report errors</string>
+	<string name="preference_automatic_error_reporting_summary">Opens a feedback form when an error occurs</string>
+	
 	<string-array name="preference_list_stream_names">
 		<item>Ringtone</item>
 		
@@ -88,4 +91,6 @@
 		
 		<item>Number / Address</item>
 	</string-array>
+	
+	
 </resources>

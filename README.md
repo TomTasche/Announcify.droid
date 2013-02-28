@@ -4,6 +4,7 @@ Announcify your life!
 
 Please see the [issues](https://github.com/TomTasche/Announcify.droid/issues) section 
 to report any bugs or feature requests and to see the list of known issues.
+
 Help translate the app at [crowdin.net](http://crowdin.net/project/announcify)!
 
 ## Acknowledgements

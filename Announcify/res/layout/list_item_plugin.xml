@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:orientation="horizontal"
-    android:paddingRight="15dp"
+    android:paddingRight="15dip"
     android:paddingLeft="15dip" >
 
     <TextView

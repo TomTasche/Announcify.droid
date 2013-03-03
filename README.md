@@ -31,6 +31,11 @@ It uses some open source libraries:
     
     Author: Thomas Taschauer <tomtasche at gmail dot com>
 
+## Contributors
+
+* [Andy Scherzinger](https://github.com/AndyScherzinger)
+* [Erwin Verdonk](https://github.com/erwinverdonk)
+
 ## Contributing
 Please fork this repository and contribute back using
 [pull requests](https://github.com/TomTasche/Announcify.droid/pulls).

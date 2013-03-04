@@ -12,6 +12,7 @@
         android:background="@color/background"
         android:drawSelectorOnTop="false"
         android:fadeScrollbars="true"
-        android:scrollbarAlwaysDrawVerticalTrack="false" />
+        android:scrollbarAlwaysDrawVerticalTrack="false"
+        android:divider="@drawable/list_devider" />
 
 </LinearLayout>

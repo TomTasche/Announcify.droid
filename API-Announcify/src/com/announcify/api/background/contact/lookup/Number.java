@@ -22,6 +22,11 @@ public class Number implements LookupMethod {
 	}
 
 	public void getAddress() {
+		if (contact == null || contact.getAddress() == null
+				|| contact.getLookupString() == null) {
+			return;
+		}
+
 		Cursor cursor = null;
 
 		try {
@@ -68,7 +73,8 @@ public class Number implements LookupMethod {
 	}
 
 	public void getType() {
-		if (contact.getAddress() == null || contact.getLookupString() == null) {
+		if (contact == null || contact.getAddress() == null
+				|| contact.getLookupString() == null) {
 			return;
 		}
 

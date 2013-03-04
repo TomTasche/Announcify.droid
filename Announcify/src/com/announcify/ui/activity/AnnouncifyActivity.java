@@ -205,7 +205,7 @@ public class AnnouncifyActivity extends BaseActivity implements
 
 		case R.id.menu_about:
 			startActivity(new Intent(Intent.ACTION_VIEW,
-					Uri.parse("http://www.announcify.com/")));
+					Uri.parse("https://plus.google.com/113909915559103636406")));
 			break;
 		}
 

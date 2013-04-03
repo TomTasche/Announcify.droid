@@ -5,11 +5,11 @@ import org.mailboxer.saymyname.R;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 
-import com.actionbarsherlock.view.MenuItem;
 import com.announcify.api.background.util.AnnouncifySettings;
 import com.announcify.api.background.util.PluginSettings;
 import com.announcify.api.ui.activity.PluginActivity;
@@ -89,9 +89,14 @@ public class SettingsActivity extends PluginActivity {
 
 					public boolean onPreferenceClick(final Preference preference) {
 						final Intent intent = new Intent();
-						intent.setComponent(new ComponentName(
-								"com.android.settings",
-								"com.android.settings.TextToSpeechSettings"));
+						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+							intent.setAction("com.android.settings.TTS_SETTINGS");
+							intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						} else {
+							intent.setComponent(new ComponentName(
+									"com.android.settings",
+									"com.android.settings.TextToSpeechSettings"));
+						}
 						startActivity(intent);
 
 						return false;
